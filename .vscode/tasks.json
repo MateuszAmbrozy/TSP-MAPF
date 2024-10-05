@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\Program Files\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",                                  // Debugging
+                "-std=c++17",                          // Standard C++17
+                "${workspaceFolder}/main.cpp",         // Main file
+                "${workspaceFolder}/src/*.cpp",        // All .cpp files in src
+                "${workspaceFolder}/src/Space-Time-AStar/*.cpp", // Specific directory
+                "${workspaceFolder}/src/AStar/*.cpp",    
+                "-I", "${workspaceFolder}/lib",        // Include directory for headers
+                "-o", "${workspaceFolder}/main.exe"    // Output executable
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"  // Current working directory
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Task to build the entire project"
+        }
+    ]
+}
