@@ -37,11 +37,13 @@ namespace SpaceTimeCell
         }
     };
 
-    class Node : public A::Node  // Referencing Node from the A namespace
+    class Node : public A::Node
     {
     public:
 
         int t;
+        Node() = default;
+
         Node(int t, int x, int y, bool isObstacle = false,
              A::Node* parent = nullptr, float gCost = 0,
              float hCost = 0, float fCost = 0)
@@ -55,11 +57,11 @@ namespace SpaceTimeCell
         {}
 
         Node& operator=(const A::Node* other) {
-            if (this == other) return *this;  // Self-assignment check
-            A::Node::operator=(*other);  // Assign the base class properties
-            t = 0;  // Set t to default or based on other logic
+            if (this == other) return *this;
+            A::Node::operator=(*other);
+            t = 0;
             return *this;
         }
     };
 
-}  // End of namespace SpaceTimeCell
+}

@@ -76,7 +76,7 @@ void testSTA()
     TaskGroup* tasks, *tasks2, *tasks3;
     std::vector<map::Cell> pickup_points= {map::Cell(3,0)};
     std::vector<map::Cell> pickup_points2= {map::Cell(0,0)};
-    std::vector<map::Cell> pickup_points3= {map::Cell(0,0), map::Cell(2,2)};
+    std::vector<map::Cell> pickup_points3= {map::Cell(1,1), map::Cell(3,3)};
 
     Reservation resTable;
 
@@ -86,32 +86,32 @@ void testSTA()
     int currentTime = 0;
 
     sta = new SpaceTimeAStar(graph);
-    tasks = new TaskGroup(4, pickup_points, map::Cell(1,1), {0}, 0);
-    tasks2 = new TaskGroup(4, pickup_points2, map::Cell(3, 2), {0}, 0);
-    tasks3 = new TaskGroup(4, pickup_points3, map::Cell(3, 2), {0, 0}, 0);
+    tasks = new TaskGroup(4, pickup_points, map::Cell(1,1), {3}, 2);
+    tasks2 = new TaskGroup(4, pickup_points2, map::Cell(3, 3), {3}, 2);
+    tasks3 = new TaskGroup(4, pickup_points3, map::Cell(2, 3), {3, 3}, 2);
 
-     //resTable.reserve(0, 1, 1);
-    //resTable.reserve(1, 0, 1);
+    resTable.reserve(0, 1, 1);
+    resTable.reserve(1, 0, 1);
 
-    // resTable.reserve(3, 0, 4);
-    // resTable.reserve(3, 1, 5);
 
     std::vector<SpaceTimeCell::Cell> result, result2, result3;
 
     result = sta->findPath(a1,currentTime, *tasks, taskOrder, resTable);
     result2 = sta->findPath(a2,currentTime, *tasks2, taskOrder, resTable);
-    result3 = sta->findPath(a3,currentTime, *tasks3, taskOrder, resTable);
+    result3 = sta->findPath(a3,currentTime, *tasks3, taskOrder2, resTable);
 
     std::cout<<std::endl<<"RESULT 1\n";
     for(int i=0; i<result.size(); i++)
     {
        std::cout<<"(" << result[i].x << "," << result[i].y << ") -> ";
     }
+    
     std::cout<<std::endl<<"RESULT 2\n";
     for(int i=0; i<result2.size(); i++)
     {
        std::cout<<"(" << result2[i].x << "," << result2[i].y << ") -> ";
     }
+
     std::cout<<std::endl<<"RESULT 3\n";
     for(int i=0; i<result3.size(); i++)
     {
