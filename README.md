@@ -10,5 +10,6 @@ The program was written based on this article
 [spaceTimeAstar](docs/spaceTimeAstar.pdf)
 
 <br>
+
 [TSP](docs/traditional_tsp.pdf)
 
