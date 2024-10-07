@@ -90,8 +90,15 @@ void testSTA()
     tasks2 = new TaskGroup(4, pickup_points2, map::Cell(3, 3), {3}, 2);
     tasks3 = new TaskGroup(4, pickup_points3, map::Cell(2, 3), {3, 3}, 2);
 
-    resTable.reserve(0, 1, 1);
-    resTable.reserve(1, 0, 1);
+    // resTable.reserve(0, 1, 1);
+    // resTable.reserve(1, 0, 1);
+    //  resTable.reserve(2, 3, 12);
+    //  resTable.reserve(2, 3, 13);
+    //  resTable.reserve(1, 3, 13);
+    //  resTable.reserve(1, 3, 14);
+    //  resTable.reserve(0, 3, 14);
+    // resTable.reserve(2, 3, 14);
+    // resTable.reserve(2, 3, 15);
 
 
     std::vector<SpaceTimeCell::Cell> result, result2, result3;
