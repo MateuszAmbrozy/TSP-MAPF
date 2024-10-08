@@ -81,10 +81,20 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const map::Cell& s
                     recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
                 }
 
+                
+                // TO może spowodować kolejną kolizję w target bo jest opóźnienie
+                // ręczne usuwanie tego może powodować duże opóźnienia
+                
+                /*
+                    Jakie pomysły
+                    a) prioretyzacja agentów i ustępowanie w ten sposób aby makespan był min
+                    b) przy takich sytuacjach replanowanie ścieżek (wszystkich????)
+                    c)
+                */
                 SpaceTimeCell::Cell buf = path.back();
                 if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y, waitT))
                 {
-                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT-1); 
+                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT); 
                     recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
                 }
                 
@@ -167,7 +177,8 @@ bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, Sp
         if (recursiveWaitAndReturn(&alternative, currentCell, waitT, path, table)) {
 
             return recursiveWaitAndReturn(currentCell, parentCell, waitT, path, table);
-        } else {
+        }
+        else {
             return false;
         }
     } else {
@@ -177,7 +188,7 @@ bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, Sp
 }
 
 SpaceTimeCell::Cell SpaceTimeAStar::findAlternativeWaitingCell(const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table) {
-
+    currentTime--;
     for (auto dir : setup::moves) {
         SpaceTimeCell::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
         if (isValid(neighbor.x, neighbor.y) &&
