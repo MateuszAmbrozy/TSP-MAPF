@@ -9,10 +9,10 @@
 class TaskGroup {
 private:
     int capacity;
-    std::vector<map::Cell> pickup_points;  // Pickup locations for tasks
+    std::vector<map::Cell> pickup_points; 
     std::vector<int> stop_times;
-    map::Cell dropoff;  // Fixed drop-off location for all agents
-    int dropoff_stop_time;  // Stop time at the dropoff point
+    map::Cell dropoff; 
+    int dropoff_stop_time;  
 
 public:
     TaskGroup() = default;
@@ -20,16 +20,16 @@ public:
 
 
     int getCapacity() const;
-    map::Cell getPickupLocation(int index) const;  // Get a specific pickup point by index
-    map::Cell getDropoffLocation() const;  // Get the fixed dropoff location
+    map::Cell getPickupLocation(int index) const; 
+    map::Cell getDropoffLocation() const;  
 
-    int getPickupStopTime(int index) const;  // Get the stop time for a specific pickup point
-    int getDropoffStopTime() const;  // Get the stop time for the dropoff point
+    int getPickupStopTime(int index) const;  
+    int getDropoffStopTime() const; 
 
 
     void setPickupPoints(std::vector<map::Cell> pickup_points);
     void setStopTimes(std::vector<int> stop_times, int dropoff_stop_time);
-    int getNumTasks() const;  // Return the number of pickup points
+    int getNumTasks() const;  
 
     map::Cell& operator [](int idx);
     bool operator==(const TaskGroup& other) const;

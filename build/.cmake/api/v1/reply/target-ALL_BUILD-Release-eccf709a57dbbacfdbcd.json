@@ -17,6 +17,9 @@
 	"dependencies" : 
 	[
 		{
+			"id" : "gmock::@d68da25237a7ca2351af"
+		},
+		{
 			"id" : "gmock_main::@d68da25237a7ca2351af"
 		},
 		{
@@ -27,9 +30,6 @@
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
-		},
-		{
-			"id" : "gmock::@d68da25237a7ca2351af"
 		}
 	],
 	"id" : "ALL_BUILD::@d68da25237a7ca2351af",

@@ -60,8 +60,9 @@ std::ostream& operator<<(std::ostream& os, const TaskGroup& task)
 {
     for(int i=0; i<task.pickup_points.size(); i++)
     {
-        os << "(" << task.pickup_points[i].x << ", " << task.pickup_points[i].y << "), dropoffPoint:  (" << task.getDropoffLocation().x << ", "<< task.getDropoffLocation().y << "), t: " << task.getDropoffStopTime() <<", "; 
+        os << "(" << task.pickup_points[i].x << ", " << task.pickup_points[i].y  << "), " << task.getPickupStopTime(i) << " -> ";
     }
+    std::cout << "\n, dropoffPoint:  (" << task.getDropoffLocation().x << ", "<< task.getDropoffLocation().y << "), tDP: " << task.getDropoffStopTime() <<", "; 
     os << std::endl;
     return os;
     

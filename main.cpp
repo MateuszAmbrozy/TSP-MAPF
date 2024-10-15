@@ -104,8 +104,6 @@ void testSTA()
     std::vector<SpaceTimeCell::Cell> result, result2, result3;
 
     result = sta->findPath(a1,currentTime, *tasks, taskOrder, resTable);
-    // result2 = sta->findPath(a2,currentTime, *tasks2, taskOrder, resTable);
-    // result3 = sta->findPath(a3,currentTime, *tasks3, taskOrder2, resTable);
 
     std::cout<<std::endl<<"RESULT 1\n";
     for(int i=0; i<result.size(); i++)

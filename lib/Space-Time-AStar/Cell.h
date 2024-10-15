@@ -17,6 +17,7 @@ namespace SpaceTimeCell
         Cell(map::Cell other, int t)
             : t{t}, map::Cell(other)
         {}
+        Cell() = default;
 
         bool operator == (const Cell& other) const
         {

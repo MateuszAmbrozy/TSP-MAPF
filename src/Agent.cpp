@@ -3,7 +3,7 @@
 
 Agent::Agent(int id, int capacity, map::Cell position)
     : id(id), capacity(capacity), accessibleCapacity(capacity),
-         position(position), startPos(position) 
+         position(position), startPos(position) , idle(true)
          {
             
          }
@@ -41,12 +41,25 @@ std::vector<map::Cell> Agent::getIllicits() const
 void Agent::assignTask(TaskGroup taskGroup) {
         tasks = taskGroup;
 }
+void Agent::clearTask()
+{
+    assignTask(TaskGroup{});
+    setIdle(true);
+}
 
 void Agent::assignPath(std::vector<SpaceTimeCell::Cell> path)
 {
     this->path = path;
 }
+void Agent::clearPath()
+{
+    assignPath(std::vector<SpaceTimeCell::Cell>{});
+}
 
+void Agent::setIdle(bool state)
+{
+    this->idle = state;
+}
 void Agent::move(map::Cell new_position) {
     position = new_position;
 }

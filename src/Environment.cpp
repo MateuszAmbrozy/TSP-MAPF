@@ -71,39 +71,46 @@ void Environment::addTaskGroup(const TaskGroup& taskGroup)
 }
 void Environment::MOVEAGENTS(int timestep)
 {
-    for(auto agent: agents)
+    for(auto& agent: agents)
     {
         if (!agent.isIdle()) {
 
             std::vector<SpaceTimeCell::Cell> path = agent.getPath();
 
-            if (timestep < path.size()) {
+            if (timestep < path.size() + path.front().t) 
+            {
 
-                SpaceTimeCell::Cell nextPosition = path[timestep];
-                
+                SpaceTimeCell::Cell nextPosition;
+
+                for (const auto& cell : path) 
+                {
+                    if (cell.t == timestep) 
+                    {
+                        nextPosition = cell;
+                        break;
+                    }
+                }
                 map::Cell newPosition(nextPosition.x, nextPosition.y);
                 agent.move(newPosition);
-                std::cout<<agent.getId() << ": (" << newPosition.x << ", " << newPosition.y << "), t = " << timestep << "\n";
+
+                std::cout<<agent.getId() << ": (" << agent.getPosition().x << ", " << agent.getPosition().y << "), t = " << timestep << "\n";
             } 
             else
             {
                 std::cout << "Agent " << agent.getId() << " has completed its path." << std::endl;
-                task_list.erase(std::remove(task_list.begin(), task_list.end(), agent.getTask()), task_list.end());
-                
-
-
-                agent.assignPath({});
-                agent.assignTask({});
-
-                for (const auto& cell : agent.getPath()) {
+                for (const auto& cell : agent.getPath()) 
+                {
                     table.removeReservation(cell.x, cell.y, cell.t);  // Remove cell reservations
 
-                    // If the path contains more than one point, remove edge reservations too
                     const auto& nextCell = agent.getPath().back();
-                    if (&cell != &nextCell) {
+                    if (&cell != &nextCell) 
+                    {
                         table.removeEdgeReservation(cell.x, cell.y, nextCell.x, nextCell.y, cell.t);
                     }
                 }
+                agent.clearPath();
+                agent.clearTask();
+
                 vacant_agents.push_back(agent);
                 
             }
@@ -160,7 +167,7 @@ void Environment::mainAlgorithm() {
     std::vector<int> avaliableDropofY={3};
 
     for (int timestep = 0; timestep <= setup::max_time; ++timestep) {  // Step 5
-        if(timestep%10==0)
+        if(timestep%7==0)
             task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));  // Step 6
         
         for (int l = 0; l < task_list.size(); ++l) {  // Step 7
@@ -186,9 +193,8 @@ void Environment::mainAlgorithm() {
 
             it->assignPath(path);
             it->assignTask(taskGroup);
+            it->setIdle(false);
 
-            // selectedAgent.assignPath(path);  // Step 14, 15
-            // selectedAgent.assignTask(taskGroup);
             
             // Usuwanie agenta z vacant_agents
             vacant_agents.erase(

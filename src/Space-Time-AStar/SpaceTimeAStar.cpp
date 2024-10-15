@@ -337,11 +337,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         currentTime = fullPath.back().t;
         currentAgentPosition = currentTaskPosition;
     }
-    std::cout<<std::endl;
-    for(auto c : fullPath)
-    {
-        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    }
+    // std::cout<<std::endl;
+    // for(auto c : fullPath)
+    // {
+    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
+    // }
 
     ///////////////// Dropoff handling
     {
@@ -363,11 +363,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         
         currentAgentPosition = dropoffPath.back();
     }
-        std::cout<<std::endl;
-    for(auto c : fullPath)
-    {
-        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    }
+    //     std::cout<<std::endl;
+    // for(auto c : fullPath)
+    // {
+    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
+    // }
 
     //////////////// Return to start position
     {
@@ -388,11 +388,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         currentTime = fullPath.back().t;
 
     }
-    std::cout<<std::endl;
-    for(auto c : fullPath)
-    {
-        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    }
+    // std::cout<<std::endl;
+    // for(auto c : fullPath)
+    // {
+    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
+    // }
     
     //std::cout<<"CALA SCIEZKA PRZED SOLVE COLLISION\n";
     // for(int i=0; i<fullPath.size(); i++)
