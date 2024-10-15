@@ -47,11 +47,20 @@ map::Cell &TaskGroup::operator[](int idx)
     }
     throw std::out_of_range("Invalid pickup point index");
 }
+bool TaskGroup::operator==(const TaskGroup& other) const {
+        return pickup_points == other.pickup_points &&
+               dropoff == other.dropoff && 
+               capacity == other.capacity &&
+               stop_times == other.stop_times &&
+               dropoff_stop_time == other.dropoff_stop_time;
+
+    }
+
 std::ostream& operator<<(std::ostream& os, const TaskGroup& task)
 {
     for(int i=0; i<task.pickup_points.size(); i++)
     {
-        os << "(" << task.pickup_points[i].x << ", " << task.pickup_points[i].y << ") -> "; 
+        os << "(" << task.pickup_points[i].x << ", " << task.pickup_points[i].y << "), dropoffPoint:  (" << task.getDropoffLocation().x << ", "<< task.getDropoffLocation().y << "), t: " << task.getDropoffStopTime() <<", "; 
     }
     os << std::endl;
     return os;

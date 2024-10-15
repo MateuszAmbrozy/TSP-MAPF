@@ -3,7 +3,10 @@
 
 Agent::Agent(int id, int capacity, map::Cell position)
     : id(id), capacity(capacity), accessibleCapacity(capacity),
-         position(position) {}
+         position(position), startPos(position) 
+         {
+            
+         }
 
 int Agent::getId() const {
     return id;
@@ -31,12 +34,15 @@ TaskGroup Agent::getTask() const
     return this->tasks;
 }
 
-
+std::vector<map::Cell> Agent::getIllicits() const
+{
+    return illicits;
+}
 void Agent::assignTask(TaskGroup taskGroup) {
         tasks = taskGroup;
 }
 
-void Agent::assignPath(const std::vector<SpaceTimeCell::Cell>& path)
+void Agent::assignPath(std::vector<SpaceTimeCell::Cell> path)
 {
     this->path = path;
 }
@@ -49,3 +55,19 @@ bool Agent::isIdle() const {
     return tasks.getNumTasks() == 0;
 }
 
+void Agent::addIllicitCell(const map::Cell& cell)
+{
+    illicits.push_back(cell);
+}
+
+bool Agent::operator ==(const Agent& other) const
+{
+    return id==other.id &&
+           capacity == other.capacity &&
+           accessibleCapacity == other.accessibleCapacity &&
+           position == other.position &&
+           tasks == other.tasks &&
+           startPos == other.startPos && 
+           path == other.path&&
+           illicits == other.illicits;
+}

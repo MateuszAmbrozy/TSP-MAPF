@@ -1,0 +1,25 @@
+# CMake generation dependency list for this directory.
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeCInformation.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeRCInformation.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Compiler/MSVC-C.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Compiler/MSVC-CXX.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Compiler/MSVC.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/Windows-MSVC-C.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/Windows-MSVC-CXX.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/Windows-MSVC.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/Windows.cmake
+D:/All/Aplikacje/cmake-3.28.1-windows-x86_64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake
+D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/CMakeLists.txt
+D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/build/CMakeFiles/3.28.1/CMakeCCompiler.cmake
+D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/build/CMakeFiles/3.28.1/CMakeCXXCompiler.cmake
+D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/build/CMakeFiles/3.28.1/CMakeRCCompiler.cmake
+D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/build/CMakeFiles/3.28.1/CMakeSystem.cmake

@@ -18,6 +18,7 @@ public:
     TaskGroup() = default;
     TaskGroup(int capacity, std::vector<map::Cell> pickup_points, map::Cell dropoff, std::vector<int> stop_times, int dropoff_stop_time);
 
+
     int getCapacity() const;
     map::Cell getPickupLocation(int index) const;  // Get a specific pickup point by index
     map::Cell getDropoffLocation() const;  // Get the fixed dropoff location
@@ -31,6 +32,7 @@ public:
     int getNumTasks() const;  // Return the number of pickup points
 
     map::Cell& operator [](int idx);
+    bool operator==(const TaskGroup& other) const;
 
     friend  std::ostream& operator<<(std::ostream& os, const TaskGroup& task);  
 };

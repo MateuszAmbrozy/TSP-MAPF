@@ -1,7 +1,7 @@
 #pragma once
-#include "Graph.h"
-#include "TaskGroup.h"
-#include "Agent.h"
+#include "../Graph.h"
+#include "../TaskGroup.h"
+#include "../Agent.h"
 #include "Node.h"
 
 

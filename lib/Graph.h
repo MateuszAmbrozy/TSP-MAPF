@@ -22,7 +22,7 @@ namespace map{
             this->isObstacle = other.isObstacle;
         }
         
-
+        
         bool operator == (const Cell& other) const
         {
             return (x==other.x && y==other.y && isObstacle == other.isObstacle);

@@ -4,13 +4,17 @@ SpaceTimeAStar::SpaceTimeAStar(map::Graph graph)
 : A::Astar(graph)
 {}
 
-std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(SpaceTimeCell::Node &current, const Reservation &table) {
+std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, SpaceTimeCell::Node &current, const Reservation &table) {
     std::vector<SpaceTimeCell::Cell> neighbors;
+    std::vector<map::Cell> illictis = agent.getIllicits();
+    
     for (auto dir : setup::moves) {
         SpaceTimeCell::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
+        bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
         if (isValid(neighbor.x, neighbor.y) &&
              !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y, neighbor.t))
+             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y, neighbor.t) &&
+             !containtsIllicits)
         {
             neighbors.push_back(neighbor);
         }
@@ -18,7 +22,8 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(SpaceTimeCell::Nod
     return neighbors;
 }
 
-std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
+//czasem agent wchodzi tutaj w nieskończoną petlę. Dlaczego?
+std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
 {
     std::vector<SpaceTimeCell::Cell> path;
 
@@ -31,7 +36,8 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const map::Cell& s
     if (isDestination(start.x, start.y, target.x, target.y)) 
     {
         std::cout << "Already at the destination." << std::endl;
-        return path;
+        SpaceTimeCell::Cell buf(target, currentTime);
+        return {buf};
     }
 
     std::vector<std::vector<bool>> closedList(aStarGraph.size(), std::vector<bool>(aStarGraph[0].size(), false));
@@ -115,7 +121,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const map::Cell& s
     
 
         closedList[currentCell.x][currentCell.y] = true;
-        std::vector<SpaceTimeCell::Cell> neighbors = getNeighbors(currentCell, table);
+        std::vector<SpaceTimeCell::Cell> neighbors = getNeighbors(unit, currentCell, table);
 
         if (neighbors.empty() && maxWaitTime > 0) 
         {
@@ -129,6 +135,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const map::Cell& s
         else if(!neighbors.empty())
         {
             waiting = false;
+            maxWaitTime = 10;
             for (const auto& neighbor : neighbors) {
                 if (!closedList[neighbor.x][neighbor.y]) {
                     double gNew = currentCell.gCost + 1;
@@ -312,8 +319,13 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         waypoints.push_back(groupTask[taskIdx]);
         stopTime = groupTask.getPickupStopTime(taskIdx);
 
-        std::vector<SpaceTimeCell::Cell> path = pathToTarget(currentAgentPosition, stopTime, currentTime, currentTaskPosition, table);
-        
+        std::vector<SpaceTimeCell::Cell> path = pathToTarget(unit, currentAgentPosition, stopTime, currentTime, currentTaskPosition, table);
+        if(path.size() == 0)
+        {
+            std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
+            return {};
+
+        }
         // Ensure no duplication of cells when appending the path
         if (!fullPath.empty() && fullPath.back().x == path.front().x &&
             fullPath.back().y == path.front().y && fullPath.back().t == path.front().t) {
@@ -322,22 +334,24 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
 
 
         fullPath.insert(fullPath.end(), path.begin(), path.end());
-        try
-        {
-            currentTime = fullPath.back().t;
-        }
-        catch(std::exception& e)
-        {
-            std::cerr<<"Not found path, " << e.what() << "\n";
-            return {};
-        }
+        currentTime = fullPath.back().t;
         currentAgentPosition = currentTaskPosition;
+    }
+    std::cout<<std::endl;
+    for(auto c : fullPath)
+    {
+        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
     }
 
     ///////////////// Dropoff handling
     {
-        std::vector<SpaceTimeCell::Cell> dropoffPath = pathToTarget(currentAgentPosition, groupTask.getDropoffStopTime(), currentTime, groupTask.getDropoffLocation(), table);
-        
+        std::vector<SpaceTimeCell::Cell> dropoffPath = pathToTarget(unit, currentAgentPosition, groupTask.getDropoffStopTime(), currentTime, groupTask.getDropoffLocation(), table);
+        if(dropoffPath.size() == 0)
+        {
+            std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
+            return {};
+
+        }
         if (!fullPath.empty() && fullPath.back().x == dropoffPath.front().x &&
             fullPath.back().y == dropoffPath.front().y && fullPath.back().t == dropoffPath.front().t) 
             {
@@ -349,11 +363,21 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         
         currentAgentPosition = dropoffPath.back();
     }
+        std::cout<<std::endl;
+    for(auto c : fullPath)
+    {
+        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
+    }
 
     //////////////// Return to start position
     {
-        std::vector<SpaceTimeCell::Cell> returnPath = pathToTarget(currentAgentPosition, 0, currentTime, startPos, table);
+        std::vector<SpaceTimeCell::Cell> returnPath = pathToTarget(unit, currentAgentPosition, 0, currentTime, startPos, table);
+        if(returnPath.size() == 0)
+        {
+            std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
+            return {};
 
+        }
         if (!fullPath.empty() && fullPath.back().x == returnPath.front().x &&
             fullPath.back().y == returnPath.front().y && fullPath.back().t == returnPath.front().t) 
         {
@@ -363,6 +387,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         fullPath.insert(fullPath.end(), returnPath.begin(), returnPath.end());
         currentTime = fullPath.back().t;
 
+    }
+    std::cout<<std::endl;
+    for(auto c : fullPath)
+    {
+        std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
     }
     
     //std::cout<<"CALA SCIEZKA PRZED SOLVE COLLISION\n";

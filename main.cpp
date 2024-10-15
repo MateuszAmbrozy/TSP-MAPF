@@ -1,4 +1,4 @@
-//#include "lib/Environment.h"
+#include "lib/Environment.h"
 #include "lib/Agent.h"
 #include "lib/TaskGroup.h"
 #include "lib/AStar/Astar.h" 
@@ -67,14 +67,14 @@ void testAstarClass(map::Graph graph)
 void testSTA()
 {
     SpaceTimeAStar* sta;
-    map::Graph graph(4, 4);
+    map::Graph graph(5, 5);
 
-    Agent a1(0, 20, map::Cell(0, 0));
+    Agent a1(0, 20, map::Cell(4, 4));
     Agent a2(0, 20, map::Cell(3, 0));
     Agent a3(0, 20, map::Cell(3, 3));
 
     TaskGroup* tasks, *tasks2, *tasks3;
-    std::vector<map::Cell> pickup_points= {map::Cell(3,0)};
+    std::vector<map::Cell> pickup_points= {map::Cell(1,1)};
     std::vector<map::Cell> pickup_points2= {map::Cell(0,0)};
     std::vector<map::Cell> pickup_points3= {map::Cell(1,1), map::Cell(3,3)};
 
@@ -86,17 +86,17 @@ void testSTA()
     int currentTime = 0;
 
     sta = new SpaceTimeAStar(graph);
-    tasks = new TaskGroup(4, pickup_points, map::Cell(1,1), {3}, 2);
-    tasks2 = new TaskGroup(4, pickup_points2, map::Cell(3, 3), {3}, 2);
-    tasks3 = new TaskGroup(4, pickup_points3, map::Cell(2, 3), {3, 3}, 2);
+    tasks = new TaskGroup(1, pickup_points, map::Cell(3,0), {0}, 5);
+    // tasks2 = new TaskGroup(4, pickup_points2, map::Cell(3, 3), {3}, 2);
+    // tasks3 = new TaskGroup(4, pickup_points3, map::Cell(2, 3), {3, 3}, 2);
 
-    resTable.reserve(0, 1, 1);
-    resTable.reserve(1, 0, 1);
-     resTable.reserve(2, 3, 12);
-     resTable.reserve(2, 3, 13);
-     resTable.reserve(1, 3, 13);
-     resTable.reserve(1, 3, 14);
-     resTable.reserve(0, 3, 14);
+    // resTable.reserve(0, 1, 1);
+    // resTable.reserve(1, 0, 1);
+    //  resTable.reserve(2, 3, 12);
+    //  resTable.reserve(2, 3, 13);
+    //  resTable.reserve(1, 3, 13);
+    //  resTable.reserve(1, 3, 14);
+    //  resTable.reserve(0, 3, 14);
     // resTable.reserve(2, 3, 14);
     // resTable.reserve(2, 3, 15);
 
@@ -104,8 +104,8 @@ void testSTA()
     std::vector<SpaceTimeCell::Cell> result, result2, result3;
 
     result = sta->findPath(a1,currentTime, *tasks, taskOrder, resTable);
-    result2 = sta->findPath(a2,currentTime, *tasks2, taskOrder, resTable);
-    result3 = sta->findPath(a3,currentTime, *tasks3, taskOrder2, resTable);
+    // result2 = sta->findPath(a2,currentTime, *tasks2, taskOrder, resTable);
+    // result3 = sta->findPath(a3,currentTime, *tasks3, taskOrder2, resTable);
 
     std::cout<<std::endl<<"RESULT 1\n";
     for(int i=0; i<result.size(); i++)
@@ -151,12 +151,22 @@ void testSTA()
     delete tasks;
 }
 
-// void testEnvi()
-// {
-//     Environment e();
-// }
+void testEnvi()
+{
+    //sprawdzić agent: (4, 4)
+    // odbiór : (1, 1), 
+    map::Graph graph(10, 7);
+
+    std::vector<Agent> agents;
+
+    Environment e(agents, graph);
+    e.addAgent(Agent(0, 10, {1, 0}));
+    e.addAgent(Agent(1, 10, {4, 4}));
+    e.addAgent(Agent(2, 10, {0, 0}));
+    e.mainAlgorithm();
+}
 int main() {
-    map::Graph g(5, 5);
+   // map::Graph g(5, 5);
 
 
 
@@ -164,6 +174,7 @@ int main() {
 
     //testTSP2(g);
 
-    testSTA();
+    //testSTA();
+    testEnvi();
     return 0;
 }

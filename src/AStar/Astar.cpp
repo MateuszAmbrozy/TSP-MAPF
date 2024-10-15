@@ -69,7 +69,7 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
    }
 
    if (isDestination(start.x, start.y, dest.x, dest.y)) {
-       std::cout << "You are the destination" << std::endl;
+       //std::cout << "You are the destination" << std::endl;
        return 0;
    }
 
