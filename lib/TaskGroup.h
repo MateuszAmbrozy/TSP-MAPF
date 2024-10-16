@@ -23,6 +23,7 @@ public:
     map::Cell getPickupLocation(int index) const; 
     map::Cell getDropoffLocation() const;  
 
+    std::vector<map::Cell> getPickupPoints() const;
     int getPickupStopTime(int index) const;  
     int getDropoffStopTime() const; 
 

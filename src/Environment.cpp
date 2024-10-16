@@ -12,23 +12,12 @@ Environment::Environment(std::vector<Agent> agents, map::Graph graph)
 
 
 void Environment::addAgent(Agent&& newAgent) {
-    // Add the new agent to the list of agents
-    agents.push_back(newAgent);
 
-    // Notify all other agents to add the new agent's startPos to their illicit cells
     for (Agent& agent : agents) {
-        if (agent.getId() != newAgent.getId()) {
-            agent.addIllicitCell(newAgent.getPosition());  // Add newAgent's startPos to other agents
+            agent.addIllicitCell(newAgent.getStartPosition());  // Add newAgent's startPos to other agents
+            newAgent.addIllicitCell(agent.getStartPosition());  // Add existing agents' start positions to newAgent
         }
-    }
-
-    // Also make sure the new agent knows about all the other agents' start positions
-    for (const Agent& agent : agents) {
-        if (agent.getId() != newAgent.getId()) {
-            const map::Cell& otherAgentStartPos = agent.getPosition();
-            const_cast<Agent&>(newAgent).addIllicitCell(otherAgentStartPos);  // Add existing agents' start positions to newAgent
-        }
-    }
+    agents.push_back(newAgent);
 }
 
 void Environment::assignVacanAgents()
@@ -213,4 +202,48 @@ void Environment::mainAlgorithm() {
 
         MOVEAGENTS(timestep);  // Step 20
     }
+}
+
+void Environment::runTimestep(int timestep)
+{
+    //assignVacanAgents();  // Make sure agents are assigned
+
+    std::vector<int> avaliablePickupX={1, 2};
+    std::vector<int> avaliablePickupY={1, 2};
+    std::vector<int> avaliableDropofX={1, 2, 3};
+    std::vector<int> avaliableDropofY={3};
+    // Simulate task assignment and agent movements per timestep
+    if(timestep % 7 == 0) {
+        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
+    }
+
+    // Iterate over tasks and assign to agents if possible
+    for (int l = 0; l < task_list.size(); ++l) {
+        const TaskGroup& taskGroup = task_list[l];
+        std::vector<Agent> capableAgents = capacity(taskGroup);
+
+        if (!capableAgents.empty()) {
+            auto selectedAgentOpt = random(capableAgents);
+            if (selectedAgentOpt.has_value()) {
+                Agent& selectedAgent = *selectedAgentOpt;
+                std::cout << "agent: (" << selectedAgent.getPosition().x << ", " << selectedAgent.getPosition().y << ")\n";
+                std::cout << taskGroup << std::endl;
+                std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);
+                std::vector<SpaceTimeCell::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
+
+                auto it = std::find(agents.begin(), agents.end(), selectedAgent);
+
+                it->assignPath(path);
+                it->assignTask(taskGroup);
+                it->setIdle(false);
+
+                vacant_agents.erase(
+                    std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent), vacant_agents.end());
+
+                task_list.erase(std::remove(task_list.begin(), task_list.end(), taskGroup), task_list.end());
+            }
+        }
+    }
+
+    MOVEAGENTS(timestep);  // Move agents based on the timestep
 }

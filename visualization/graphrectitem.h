@@ -1,3 +1,4 @@
+// graphrectitem.h
 #ifndef GRAPHRECTITEM_H
 #define GRAPHRECTITEM_H
 
@@ -9,13 +10,11 @@
 
 class GraphRectItem: public QGraphicsRectItem
 {
-
 private:
     map::Graph graph;
 
 public:
     GraphRectItem(map::Graph graph, QWidget* parent = nullptr);
-
     void drawGraph(QGraphicsScene* scene);
 };
 

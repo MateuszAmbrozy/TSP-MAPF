@@ -26,6 +26,7 @@ public:
     int getAccessibleCapacity() const;
     std::vector<SpaceTimeCell::Cell> getPath() const;
     map::Cell getPosition() const;
+    map::Cell getStartPosition() const;
     TaskGroup getTask() const;
     std::vector<map::Cell> getIllicits() const;
 

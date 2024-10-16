@@ -219,84 +219,6 @@ bool SpaceTimeAStar::isTargetFreeForEntireWaitTime(const map::Cell& target, int 
     return true;
 }
 
-// std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::solveCollision(std::vector<SpaceTimeCell::Cell>& path,
-//                                                                 Reservation& table,
-//                                                                 const std::vector<map::Cell>& waypoints)
-// {
-//     std::vector<SpaceTimeCell::Cell> adjustedPath;
-//     int additionalTime = 0;
-//     size_t waypointIndex = 0;
-    
-//     for(size_t i = 0; i<path.size(); ++i) {
-//         SpaceTimeCell::Cell currentCell = path[i];
-
-//         // Sprawdź, czy kolejna komórka jest zarezerwowana
-//         if(i + 1 < path.size() && table.isReserved(path[i + 1].x, path[i + 1].y, path[i + 1].t)) {
-//             std::cout<<"\nNORMAL COLISION x: " << path[i].x << ", y: " << path[i].y << " - t:" <<  path[i].t <<"\n";
-            
-//             adjustedPath.push_back(currentCell);
-
-//             for (size_t j = i; j < path.size(); ++j) 
-//             {
-//                 path[j].t++;  // Zwiększ czas dla każdej kolejnej komórki
-//             }
-//             currentCell = path[i];
-//         }
-
-//         if (i + 1 < path.size() && table.wouldCauseEdgeCollision(currentCell.x, currentCell.y, currentCell.t, path[i + 1].x, path[i + 1].y, path[i + 1].t)) {
-//             std::cout << "\nIMPAS " << path[i].x << ", " << path[i].y << " - t: " << path[i].t << "\n";
-            
-//             auto waitCell = path.front();
-//             path.insert(path.begin(), waitCell);
-//             for (size_t j = 1; j < path.size(); ++j) 
-//             {
-//                 path[j].t++;  // Zwiększ czas dla każdej kolejnej komórki
-//             }
-
-
-//             std::vector<SpaceTimeCell::Cell> remainingPath = pathFromWaypoints(waitCell, waitCell.t, waypoints, waypointIndex, table);
-            
-//             adjustedPath.clear();
-//             adjustedPath = remainingPath;
-//             solveCollision(adjustedPath, table, waypoints);
-
-//             break;
-//         }
-        
-//         adjustedPath.push_back(currentCell);
-
-
-
-//         if (waypointIndex < waypoints.size() && path[i].x == waypoints[waypointIndex].x && path[i].y == waypoints[waypointIndex].y) {
-//             waypointIndex++;
-//         }
-//     }
-
-//     return adjustedPath;
-// }
-
-// std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathFromWaypoints(const SpaceTimeCell::Cell& start, int startTime, const std::vector<map::Cell>& waypoints, size_t waypointIndex, Reservation& table) {
-//     std::vector<SpaceTimeCell::Cell> fullPath;
-//     SpaceTimeCell::Cell currentPosition = start;
-//     int currentTime = startTime;
-
-//     // Przejdź przez wszystkie nieodwiedzone punkty pośrednie
-//     for (size_t i = waypointIndex; i < waypoints.size(); ++i) {
-//         std::vector<SpaceTimeCell::Cell> partialPath = pathToTarget(currentPosition,0, currentTime, waypoints[i], table);
-//         fullPath.insert(fullPath.end(), partialPath.begin(), partialPath.end());
-
-//         if (!partialPath.empty()) {
-//             currentPosition = partialPath.back();
-//             currentTime = currentPosition.t;
-//         }
-//     }
-//     std::vector<SpaceTimeCell::Cell> partialPath = pathToTarget(currentPosition, 0, currentTime, start, table);
-//     fullPath.insert(fullPath.end(), partialPath.begin(), partialPath.end());
-
-    
-
-//     return fullPath;
-// }
 
 
 
@@ -410,7 +332,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         {            
             table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t);
             if(i<fullPath.size() - 1)
+            {
                 table.reserveEdge(fullPath[i].x, fullPath[i].y, fullPath[i + 1].x, fullPath[i + 1].y, fullPath[i].t);
+                table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t+1);
+            }
             std::cout<<"(" << fullPath[i].x << "," << fullPath[i].y << ", t: " <<  fullPath[i].t << ") -> ";
         }
         std::cout<<std::endl;

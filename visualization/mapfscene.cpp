@@ -1,19 +1,37 @@
 #include "mapfscene.h"
 
-MapfScene::MapfScene(QObject* parent)
-    : QGraphicsScene(parent), graph(10, 10)
+MapfScene::MapfScene(Environment* env, QObject* parent)
+    : QGraphicsScene(parent), environment(env), graph(env->getGraph())
 {
-    // Create and draw the graph
     vis_graph = new GraphRectItem(graph);
     vis_graph->drawGraph(this);
 
-    // Create and draw the agent
-    vis_agent = new AgentRectItem(0, 10, map::Cell(2, 2));
-    vis_agent->draw(this);
+    const std::vector<Agent>& agents = environment->getAgents();
+    for (const auto& agent : agents)
+    {
+        std::vector<map::Cell> pickups = agent.getTask().getPickupPoints();
+        map::Cell dropoff = agent.getTask().getDropoffLocation();
+
+        AgentRectItem* vis_agent = new AgentRectItem(agent.getId(), agent.getCapacity(), agent.getPosition());
+        vis_agent->draw(this);
+        vis_agents.push_back(vis_agent);
+    }
 }
 
 void MapfScene::updateScene(int timestep)
 {
-    // Move agent based on the current timestep
-    vis_agent->moveAgent(this, timestep);
+    clear();  // Clear the scene before redrawing
+
+    // Redraw the grid (graph)
+    vis_graph->drawGraph(this);
+
+    // Redraw the agents with their colors and IDs
+    for (auto& agent : environment->getAgents())
+    {
+        AgentRectItem* agentItem = new AgentRectItem(agent.getId(), agent.getCapacity(), agent.getPosition());
+        agentItem->draw(this);  // Draw agent and its ID in the assigned color
+    }
+
+    update();  // Refresh the scene
 }
+

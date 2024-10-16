@@ -29,6 +29,9 @@ std::vector<SpaceTimeCell::Cell> Agent::getPath() const
 map::Cell Agent::getPosition() const {
     return position;
 }
+map::Cell Agent::getStartPosition() const {
+    return startPos;
+}
 TaskGroup Agent::getTask() const
 {
     return this->tasks;

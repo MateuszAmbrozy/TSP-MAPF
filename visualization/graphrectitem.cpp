@@ -22,9 +22,12 @@ void GraphRectItem::drawGraph(QGraphicsScene* scene)
             QRectF rect(i * cellSize, j * cellSize, cellSize, cellSize);
             QGraphicsRectItem* rectItem = scene->addRect(rect, pen);
 
-            if (cell.isObstacle) {
+            if (cell.isObstacle)
+            {
                 rectItem->setBrush(obstacleBrush);
-            } else {
+            }
+            else
+            {
                 rectItem->setBrush(normalBrush);
             }
         }

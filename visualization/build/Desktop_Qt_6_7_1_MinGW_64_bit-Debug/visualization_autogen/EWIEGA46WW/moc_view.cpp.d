@@ -121,6 +121,7 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qxptype_traits.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qyieldcpu.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/QBrush \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/QColor \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/QPen \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qaction.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qbitmap.h \
@@ -153,6 +154,7 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsRectItem \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsScene \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsTextItem \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsView \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QWidget \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
