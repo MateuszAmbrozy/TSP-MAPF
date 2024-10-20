@@ -1,10 +1,13 @@
 D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/visualization_autogen/EWIEGA46WW/moc_view.cpp: D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/view.h \
   D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug/visualization_autogen/moc_predefs.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/QPropertyAnimation \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/QRandomGenerator \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/QTimer \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/q20functional.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/q20memory.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/q20type_traits.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/q23utility.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qabstractanimation.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qalgorithms.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qanystringview.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qarraydata.h \
@@ -34,6 +37,7 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qdatastream.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qdebug.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qeasingcurve.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qendian.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qflags.h \
@@ -70,6 +74,8 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qpair.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qpoint.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qprocessordetection.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qpropertyanimation.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qrandom.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qrect.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qrefcount.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qscopedpointer.h \
@@ -116,6 +122,7 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qtypes.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qutf8stringview.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qvariant.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qvariantanimation.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qvarlengtharray.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qversiontagging.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtCore/qxptype_traits.h \
@@ -152,16 +159,26 @@ D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/build/Des
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qtransform.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qwindowdefs.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsEllipseItem \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsObject \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsRectItem \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsScene \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsTextItem \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QGraphicsView \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QPushButton \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QVBoxLayout \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/QWidget \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qabstractbutton.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qboxlayout.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qframe.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qgridlayout.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qlayout.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qlayoutitem.h \
+  D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qpushbutton.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qscrollarea.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qsizepolicy.h \
   D:/All/Aplikacje/QT/6.7.1/mingw_64/include/QtWidgets/qtwidgets-config.h \

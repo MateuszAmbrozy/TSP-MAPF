@@ -12,26 +12,29 @@ MapfScene::MapfScene(Environment* env, QObject* parent)
         std::vector<map::Cell> pickups = agent.getTask().getPickupPoints();
         map::Cell dropoff = agent.getTask().getDropoffLocation();
 
-        AgentRectItem* vis_agent = new AgentRectItem(agent.getId(), agent.getCapacity(), agent.getPosition());
-        vis_agent->draw(this);
+        AgentRectItem* vis_agent = new AgentRectItem();
+        vis_agent->drawAgent(this, agent);
+
         vis_agents.push_back(vis_agent);
     }
 }
 
 void MapfScene::updateScene(int timestep)
 {
-    clear();  // Clear the scene before redrawing
+    const std::vector<Agent>& agents = environment->getAgents();
 
-    // Redraw the grid (graph)
-    vis_graph->drawGraph(this);
 
-    // Redraw the agents with their colors and IDs
-    for (auto& agent : environment->getAgents())
+    for (int i = 0; i < vis_agents.size(); ++i)
     {
-        AgentRectItem* agentItem = new AgentRectItem(agent.getId(), agent.getCapacity(), agent.getPosition());
-        agentItem->draw(this);  // Draw agent and its ID in the assigned color
+        const Agent& backendAgent = agents[i];
+
+        // vis_agents[i]->setPosition(backendAgent.getPosition());
+        // vis_agents[i]->setPath();
+        // vis_agents[i]->setPickupPoints(backendAgent.getTask().getPickupPoints());
+        // vis_agents[i]->setDropoffPoint(backendAgent.getTask().getDropoffLocation());
+
+        vis_agents[i]->draw(this, timestep, backendAgent);
     }
 
-    update();  // Refresh the scene
+    update();
 }
-

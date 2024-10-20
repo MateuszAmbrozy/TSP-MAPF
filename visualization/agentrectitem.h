@@ -1,59 +1,50 @@
-// #ifndef AGENTRECTITEM_H
-// #define AGENTRECTITEM_H
-
-// #include "../lib/Agent.h"
-// #include <QGraphicsRectItem>
-// #include <QGraphicsTextItem>
-// #include <QColor>
-// #include <QGraphicsEllipseItem>
-// #include <QRandomGenerator>
-// class AgentRectItem : public QGraphicsRectItem
-// {
-// private:
-//     Agent agent;
-//     QColor agentColor;  // Persistent color for each agent
-//     std::vector<map::Cell> pickupPoints;
-//     map::Cell dropoffPoint;
-//     bool taskCompleted = false;
-
-//     // Store the QGraphicsItems so they can be removed later
-//     QGraphicsRectItem* agentRectItem = nullptr;
-//     std::vector<QGraphicsEllipseItem*> pickupGraphicsItems;
-//     QGraphicsEllipseItem* dropoffGraphicsItem = nullptr;
-
-// public:
-//     AgentRectItem(int id, int capacity, map::Cell position, const std::vector<map::Cell>& pickups, const map::Cell& dropoff, QWidget* parent = nullptr);
-
-//     void draw(QGraphicsScene* scene);
-//     void moveAgent(QGraphicsScene* scene, int timestep);
-//     void drawPickupPoints(QGraphicsScene* scene);
-//     void drawDropoffPoint(QGraphicsScene* scene);
-//     QColor assignRandomColor();
-//     void completeTask(QGraphicsScene* scene);
-// };
-
-// #endif
 #ifndef AGENTRECTITEM_H
 #define AGENTRECTITEM_H
 
 #include "../lib/Agent.h"
 #include <QGraphicsRectItem>
+#include <QGraphicsObject>
 #include <QGraphicsTextItem>
 #include <QColor>
+#include <QTimer>
+#include <QRandomGenerator>
+#include <QGraphicsEllipseItem>
+#include <QPropertyAnimation>
 
-class AgentRectItem : public QGraphicsRectItem
+class AgentRectItem
 {
 private:
-    Agent agent;
     QGraphicsTextItem* idLabel;
-    QColor agentColor;  // Color for each agent
+    QColor agentColor;
 
+
+    // To keep track of items for removal
+    QGraphicsRectItem* agentRectItem = nullptr;
+
+    std::vector<QGraphicsEllipseItem*> pickupGraphicsItems;
+    QGraphicsRectItem* dropoffGraphicsItem = nullptr;
+    QGraphicsEllipseItem* startGraphicsItem = nullptr;
+
+
+    QColor assignRandomColor();
+    void drawPickupPoints(QGraphicsScene* scene, const Agent& agent);
+    void drawDropoffPoint(QGraphicsScene* scene, const Agent& agent);
+
+    void clearPickupDropoff(QGraphicsScene* scene);
+    void animateMoveAgent(QGraphicsScene* scene, const QPointF& newPosition);
 public:
-    AgentRectItem(int id, int capacity, map::Cell position, QWidget* parent = nullptr);
+    AgentRectItem(QWidget* parent = nullptr);
 
-    void draw(QGraphicsScene* scene);
-    void moveAgent(QGraphicsScene* scene, int timestep);
-    QColor assignColorBasedOnId(int id);  // Assign color based on the agent's ID
+    // void setPosition(const map::Cell& newPosition);
+    // void setPickupPoints(std::vector<map::Cell> points);
+    // void setDropoffPoint(map::Cell point);
+
+    void drawAgent(QGraphicsScene* scene, const Agent& agent);
+    void drawStartPoint(QGraphicsScene* scene, const Agent& agent);
+
+    void draw(QGraphicsScene* scene, int timestep, const Agent& agent);
+
+
 };
 
 #endif // AGENTRECTITEM_H

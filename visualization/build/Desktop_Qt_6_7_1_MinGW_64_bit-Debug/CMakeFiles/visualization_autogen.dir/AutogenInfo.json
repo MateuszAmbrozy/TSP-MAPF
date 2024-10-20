@@ -335,6 +335,12 @@
 			null
 		],
 		[
+			"D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/main_window_menu.h",
+			"MU",
+			"EWIEGA46WW/moc_main_window_menu.cpp",
+			null
+		],
+		[
 			"D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/mapfscene.h",
 			"MU",
 			"EWIEGA46WW/moc_mapfscene.cpp",
@@ -470,6 +476,11 @@
 		],
 		[
 			"D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/main.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/All/Studia/Zajecia/Semestr_7/Inzynierka/TEST/TSP-MAPD/visualization/main_window_menu.cpp",
 			"MU",
 			null
 		],

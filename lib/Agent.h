@@ -28,6 +28,7 @@ public:
     map::Cell getPosition() const;
     map::Cell getStartPosition() const;
     TaskGroup getTask() const;
+
     std::vector<map::Cell> getIllicits() const;
 
     void assignTask(const TaskGroup taskGroup);

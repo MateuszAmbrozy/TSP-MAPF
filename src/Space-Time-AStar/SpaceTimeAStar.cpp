@@ -331,10 +331,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         for(int i=0; i<fullPath.size(); i++)
         {            
             table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t);
+            table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t + 1);
             if(i<fullPath.size() - 1)
             {
                 table.reserveEdge(fullPath[i].x, fullPath[i].y, fullPath[i + 1].x, fullPath[i + 1].y, fullPath[i].t);
-                table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t+1);
             }
             std::cout<<"(" << fullPath[i].x << "," << fullPath[i].y << ", t: " <<  fullPath[i].t << ") -> ";
         }

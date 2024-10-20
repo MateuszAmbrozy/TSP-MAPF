@@ -11,11 +11,11 @@ namespace SpaceTimeCell
         int t;
 
         Cell(int x, int y, int t, bool isObstacle = false)
-            : t{t}, map::Cell(x, y, isObstacle)
+            : map::Cell(x, y, isObstacle), t{t}
         {}
 
         Cell(map::Cell other, int t)
-            : t{t}, map::Cell(other)
+            : map::Cell(other), t{t}
         {}
         Cell() = default;
 

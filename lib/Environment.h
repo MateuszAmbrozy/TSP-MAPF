@@ -64,6 +64,6 @@ public:
     void MOVEAGENTS(int timestep);
     void addAgent(Agent&& newAgent);
     void mainAlgorithm();
-    void runTimestep(int timestep);
+    void runTimestep(int timestep, TaskGroup* task = nullptr);
 };
 

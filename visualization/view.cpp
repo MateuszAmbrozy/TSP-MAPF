@@ -12,8 +12,21 @@ View::View(Environment* env)
 
     timer = new QTimer(this);
     e->assignVacanAgents();
+
+    // Przycisk powrotu do menu
+    QWidget* container = new QWidget(this);
+    QVBoxLayout* layout = new QVBoxLayout(container);
+
+    backButton = new QPushButton("Powrót do menu", container);
+    layout->addWidget(backButton);
+    container->setLayout(layout);
+    connect(backButton, &QPushButton::clicked, this, &View::backToMenu);
+}
+
+void View::start()
+{
     connect(timer, &QTimer::timeout, this, &View::updateTimestep);
-    timer->start(1000);  // Update every 1 second (1000 ms)
+    timer->start(700);  // Update every 1 second (1000 ms)
 }
 void View::updateTimestep()
 {

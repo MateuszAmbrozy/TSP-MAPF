@@ -66,7 +66,7 @@ void Environment::MOVEAGENTS(int timestep)
 
             std::vector<SpaceTimeCell::Cell> path = agent.getPath();
 
-            if (timestep < path.size() + path.front().t) 
+            if (path.size() > 0 && timestep < path.size() + path.front().t)
             {
 
                 SpaceTimeCell::Cell nextPosition;
@@ -94,7 +94,7 @@ void Environment::MOVEAGENTS(int timestep)
                     const auto& nextCell = agent.getPath().back();
                     if (&cell != &nextCell) 
                     {
-                        table.removeEdgeReservation(cell.x, cell.y, nextCell.x, nextCell.y, cell.t);
+                        table.removeEdgeReservation(cell.x, cell.y, cell.t);
                     }
                 }
                 agent.clearPath();
@@ -204,18 +204,24 @@ void Environment::mainAlgorithm() {
     }
 }
 
-void Environment::runTimestep(int timestep)
+void Environment::runTimestep(int timestep, TaskGroup* task)
 {
     //assignVacanAgents();  // Make sure agents are assigned
 
-    std::vector<int> avaliablePickupX={1, 2};
-    std::vector<int> avaliablePickupY={1, 2};
-    std::vector<int> avaliableDropofX={1, 2, 3};
-    std::vector<int> avaliableDropofY={3};
+    std::vector<int> avaliablePickupX={1, 2, 3, 4, 5, 6, 7, 8};
+    std::vector<int> avaliablePickupY={2, 4, 6, 8};
+    std::vector<int> avaliableDropofX={3, 4, 5, 6, 7};
+    std::vector<int> avaliableDropofY={9};
     // Simulate task assignment and agent movements per timestep
-    if(timestep % 7 == 0) {
+    if(task)
+    {
+        task_list.push_back(*task);
+    }
+    else if(timestep % 7 == 0)
+    {
         task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
     }
+
 
     // Iterate over tasks and assign to agents if possible
     for (int l = 0; l < task_list.size(); ++l) {
@@ -224,7 +230,8 @@ void Environment::runTimestep(int timestep)
 
         if (!capableAgents.empty()) {
             auto selectedAgentOpt = random(capableAgents);
-            if (selectedAgentOpt.has_value()) {
+            if (selectedAgentOpt.has_value())
+            {
                 Agent& selectedAgent = *selectedAgentOpt;
                 std::cout << "agent: (" << selectedAgent.getPosition().x << ", " << selectedAgent.getPosition().y << ")\n";
                 std::cout << taskGroup << std::endl;

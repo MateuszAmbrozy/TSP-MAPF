@@ -33,6 +33,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         graphrectitem.h graphrectitem.cpp
         view.h view.cpp
         agentrectitem.h agentrectitem.cpp
+        main_window_menu.h main_window_menu.cpp
+
+
     )
 else()
     if(ANDROID)
