@@ -17,13 +17,13 @@
 	"dependencies" : 
 	[
 		{
+			"id" : "gtest::@f95b5c00bd49b3b4698d"
+		},
+		{
 			"id" : "gmock::@d68da25237a7ca2351af"
 		},
 		{
 			"id" : "gmock_main::@d68da25237a7ca2351af"
-		},
-		{
-			"id" : "gtest::@f95b5c00bd49b3b4698d"
 		},
 		{
 			"id" : "gtest_main::@f95b5c00bd49b3b4698d"

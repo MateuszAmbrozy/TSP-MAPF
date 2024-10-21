@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "gtest/Debug/ExampleTest.exe"
+			"path" : "gtest/Release/ExampleTest.exe"
 		},
 		{
-			"path" : "gtest/Debug/ExampleTest.pdb"
+			"path" : "gtest/Release/ExampleTest.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -55,7 +55,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd -std:c++17"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG /MT -std:c++17"
 				}
 			],
 			"includes" : 
@@ -90,11 +90,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "Example::@6890427a1f51a3e7e1df"
+			"id" : "gtest::@f95b5c00bd49b3b4698d"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "gtest::@f95b5c00bd49b3b4698d"
+			"id" : "Example::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
@@ -110,26 +110,26 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG /MT",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
 				"role" : "flags"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\lib\\Debug\\gtest_main.lib",
+				"fragment" : "..\\lib\\Release\\gtest_main.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\Debug\\Example.lib",
+				"fragment" : "..\\Release\\Example.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "..\\lib\\Debug\\gtest.lib",
+				"fragment" : "..\\lib\\Release\\gtest.lib",
 				"role" : "libraries"
 			},
 			{

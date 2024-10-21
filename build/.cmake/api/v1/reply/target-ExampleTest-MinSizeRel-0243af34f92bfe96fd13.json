@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "gtest/Release/ExampleTest.exe"
+			"path" : "gtest/MinSizeRel/ExampleTest.exe"
 		},
 		{
-			"path" : "gtest/Release/ExampleTest.pdb"
+			"path" : "gtest/MinSizeRel/ExampleTest.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -55,7 +55,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG /MT -std:c++17"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG -std:c++17"
 				}
 			],
 			"includes" : 
@@ -90,11 +90,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "Example::@6890427a1f51a3e7e1df"
+			"id" : "gtest::@f95b5c00bd49b3b4698d"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "gtest::@f95b5c00bd49b3b4698d"
+			"id" : "Example::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
@@ -110,7 +110,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG /MT",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
 				"role" : "flags"
 			},
 			{
@@ -119,17 +119,17 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\lib\\Release\\gtest_main.lib",
+				"fragment" : "..\\lib\\MinSizeRel\\gtest_main.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "..\\Release\\Example.lib",
+				"fragment" : "..\\MinSizeRel\\Example.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "..\\lib\\Release\\gtest.lib",
+				"fragment" : "..\\lib\\MinSizeRel\\gtest.lib",
 				"role" : "libraries"
 			},
 			{
