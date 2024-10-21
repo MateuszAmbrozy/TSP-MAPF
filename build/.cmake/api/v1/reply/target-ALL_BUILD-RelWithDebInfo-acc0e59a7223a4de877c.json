@@ -20,13 +20,13 @@
 			"id" : "gmock::@d68da25237a7ca2351af"
 		},
 		{
-			"id" : "gmock_main::@d68da25237a7ca2351af"
+			"id" : "Example::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "Example_app::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "Example::@6890427a1f51a3e7e1df"
+			"id" : "gmock_main::@d68da25237a7ca2351af"
 		},
 		{
 			"id" : "gtest::@f95b5c00bd49b3b4698d"
