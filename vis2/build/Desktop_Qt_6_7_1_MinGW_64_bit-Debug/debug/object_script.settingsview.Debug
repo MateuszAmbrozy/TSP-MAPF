@@ -1,0 +1,12 @@
+debug/main.o
+debug/animationview.o
+debug/borderlayout.o
+debug/editorview.o
+debug/sidebaritem.o
+debug/settingsview.o
+debug/generalview.o
+debug/qrc_default.o
+debug/moc_animationview.o
+debug/moc_sidebaritem.o
+debug/moc_settingsview.o
+debug/moc_generalview.o

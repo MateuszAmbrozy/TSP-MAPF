@@ -1,0 +1,12 @@
+release/main.o
+release/animationview.o
+release/borderlayout.o
+release/editorview.o
+release/sidebaritem.o
+release/settingsview.o
+release/generalview.o
+release/qrc_default.o
+release/moc_animationview.o
+release/moc_sidebaritem.o
+release/moc_settingsview.o
+release/moc_generalview.o
