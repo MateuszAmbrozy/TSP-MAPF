@@ -33,16 +33,6 @@ public:
         edgeReservations[{x1, y1}][t] = {x2, y2};
     }
 
-    // // Sprawdza, czy krawędź z (x1, y1) do (x2, y2) w czasie t powoduje kolizję krawędziową (impas na krawędzi)
-    // bool wouldCauseEdgeCollision(int x1, int y1, int t1, int x2, int y2, int t2) const {
-    //     if (edgeReservations.count({x2, y2}) && edgeReservations.at({x2, y2}).count(t1)) {
-    //         auto reservedMove = edgeReservations.at({x2, y2}).at(t1);
-    //         if (reservedMove.first == x1 && reservedMove.second == y1) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
     bool wouldCauseEdgeCollision(int x1, int y1, int t1, int x2, int y2, int t2) const {
         // Klucz do rezerwacji dla (x2, y2) - sprawdzamy rezerwacje w tym punkcie w czasie t1
         auto reverseEdgeKey = std::make_pair(x2, y2);
@@ -70,7 +60,7 @@ public:
     }
 
     bool wouldCauseCollision(int x1, int y1, int t1, int x2, int y2, int t2) const {
-        return isReserved(x2, y2, t1) && isReserved(x1, x1, t2);
+        return isReserved(x2, y2, t1) && isReserved(x1, y1, t2);
     }
 
     void removeReservation(int x, int y, int t) {

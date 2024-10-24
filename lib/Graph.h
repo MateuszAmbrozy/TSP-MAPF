@@ -70,6 +70,21 @@ namespace map{
                 for (int j = 0; j < height; ++j) 
                     cells[i][j] = Cell(i, j, false);
         }
+
+        Graph(int width, int height, std::vector<Cell> obstacles)
+        {
+            cells.resize(width, std::vector<Cell>(height, Cell(0, 0)));
+            for (int i = 0; i < width; ++i)
+                for (int j = 0; j < height; ++j)
+                    cells[i][j] = Cell(i, j, false);
+
+            for (const auto& obstacle : obstacles) {
+                if (obstacle.x >= 0 && obstacle.x < width && obstacle.y >= 0 && obstacle.y < height)
+                {
+                    cells[obstacle.x][obstacle.y].isObstacle = true;
+                }
+            }
+        }
     };
 
 };

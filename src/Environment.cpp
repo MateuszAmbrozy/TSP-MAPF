@@ -217,10 +217,10 @@ void Environment::runTimestep(int timestep, TaskGroup* task)
     {
         task_list.push_back(*task);
     }
-    else if(timestep % 7 == 0)
-    {
-        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
-    }
+    // else if(timestep % 7 == 0)
+    // {
+    //     task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
+    // }
 
 
     // Iterate over tasks and assign to agents if possible
@@ -228,7 +228,8 @@ void Environment::runTimestep(int timestep, TaskGroup* task)
         const TaskGroup& taskGroup = task_list[l];
         std::vector<Agent> capableAgents = capacity(taskGroup);
 
-        if (!capableAgents.empty()) {
+        if (!capableAgents.empty())
+        {
             auto selectedAgentOpt = random(capableAgents);
             if (selectedAgentOpt.has_value())
             {
