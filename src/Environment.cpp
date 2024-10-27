@@ -3,15 +3,19 @@
 
 
 Environment::Environment(std::vector<Agent> agents, map::Graph graph)
-    : graph(graph), agents(agents),
+    : graph(graph),
      tsp(graph), sta(graph)
     {
        srand(time(0));
+        for(auto& agent: agents)
+       {
+           this->addAgent(agent);
+       }
     }
 
 
 
-void Environment::addAgent(Agent&& newAgent) {
+void Environment::addAgent(Agent& newAgent) {
 
     for (Agent& agent : agents) {
             agent.addIllicitCell(newAgent.getStartPosition());  // Add newAgent's startPos to other agents

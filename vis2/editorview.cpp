@@ -28,7 +28,7 @@ EditorView::EditorView(QWidget *parent) :
     _activeButton->setChecked(true);
     sidebarLayout->addWidget(_activeButton);
 
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/dolar.svg", tr("Save"), [this]() { saveMap(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/dollar.svg", tr("Save"), [this]() { saveMap(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", tr("Load"), [this]() { loadMap(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/crop.svg", tr("Clear"), [this]() { clearAgents(); }));
 
@@ -89,7 +89,7 @@ EditorView::EditorView(QWidget *parent) :
 
     QPushButton *toggleButton = new QPushButton(this);
     toggleButton->setFixedSize(40, 40);
-    toggleButton->setText("☰");          // Ustawienie tekstu (lub ikony menu, np. "☰")
+    toggleButton->setText("☰");
     toggleButton->setStyleSheet("QPushButton { border: 1px solid black; }");
 
     mainLayout->addWidget(toggleButton, 0, Qt::AlignLeft | Qt::AlignTop);  // Przycisk w lewym górnym rogu

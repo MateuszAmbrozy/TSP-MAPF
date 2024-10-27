@@ -62,7 +62,7 @@ public:
     void assignVacanAgents();
     TaskGroup TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std::vector<int> avaliablePickupY, std::vector<int> avaliableDropofX, std::vector<int> avaliableDropofY );
     void MOVEAGENTS(int timestep);
-    void addAgent(Agent&& newAgent);
+    void addAgent(Agent& newAgent);
     void mainAlgorithm();
     void runTimestep(int timestep, TaskGroup* task = nullptr);
 };

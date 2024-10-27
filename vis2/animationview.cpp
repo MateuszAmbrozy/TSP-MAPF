@@ -1,66 +1,115 @@
 #include "animationview.h"
-
-
-AnimationView::AnimationView(map::Graph graph, QWidget *parent)
-    : QWidget(parent), inputWidget(nullptr), timestep(0), graph(graph)
+#include "qtoolbutton.h"
+#include <QFileDialog>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QFile>
+#include <QTextStream>
+AnimationView::AnimationView(QWidget *parent)
+    : QWidget(parent), inputWidget(nullptr), timestep(0), sidebarVisible(true)
 {
-    this->initEnvironment();
-    this->interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
+    mainLayout = new QHBoxLayout(this);
+
+    // Create sidebar layout and add buttons
+    QVBoxLayout *sidebarLayout = new QVBoxLayout();
+    sidebar = new QWidget(this);
+
     timer = new QTimer(this);
 
-    // Tworzymy layout dla przycisków
-    topLayout = new QHBoxLayout();
-    mainLayout = new QVBoxLayout(this);  // Używamy mainLayout jako główny layout
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/visa.svg", "Start", [this]() { start(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/amex.svg", "Stop", [this]() { stop(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/add.svg", "Add Task", [this]() { showTaskGroupScene(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload map", [this]() { loadMap(); }));
+    //sidebarLayout->addSpacerItem(new QSpacerItem(0, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    sidebar->setLayout(sidebarLayout);
+    sidebar->setObjectName("sidebar");
+    sidebar->setMinimumHeight(sidebarLayout->count() * 76);
 
-    startAnimation = new QPushButton("Start Animation", this);
-    stopAnimation = new QPushButton("Stop Animation", this);
-    taskGroupBtn = new QPushButton("Add task", this);
+    // Sidebar animation setup
+    sidebarAnimation = new QPropertyAnimation(sidebar, "maximumWidth");
+    sidebarAnimation->setDuration(300);
+    sidebarAnimation->setStartValue(200);
+    sidebarAnimation->setEndValue(0);
 
+    connect(sidebarAnimation, &QPropertyAnimation::finished, this, [this]() {
+        sidebar->setVisible(sidebarVisible);
+    });
 
-    topLayout->addWidget(startAnimation);
-    topLayout->addWidget(stopAnimation);
-    topLayout->addWidget(taskGroupBtn);
+    // Create the toggle button
+    QPushButton *toggleButton = new QPushButton();
+    toggleButton->setFixedSize(40, 40);
+    toggleButton->setText("☰");
+    toggleButton->setStyleSheet("QPushButton { border: 1px solid black; }");
+    connect(toggleButton, &QPushButton::clicked, this, &AnimationView::toggleSidebar);
 
-    mainLayout->addLayout(topLayout);
-    mainLayout->setAlignment(topLayout, Qt::AlignTop);
+    // Container for sidebar and toggle button
+    QWidget *sidebarContainer = new QWidget(this);
+    QVBoxLayout *sidebarContainerLayout = new QVBoxLayout(sidebarContainer);
 
-    mainLayout->addWidget(mapfView);
+    sidebarContainerLayout->addWidget(sidebar);
+    //sidebarContainerLayout->addSpacerItem(new QSpacerItem(0, 50, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    sidebarContainerLayout->addWidget(toggleButton,0, Qt::AlignLeft | Qt::AlignBottom);
 
-    mainLayout->addStretch();
+    sidebarContainerLayout->setSpacing(5);
+    sidebarContainerLayout->setContentsMargins(0, 0, 0, 0);
 
+    // Add sidebarContainer to main layout on the left
+    mainLayout->addWidget(sidebarContainer, 0, Qt::AlignLeft);
+    //mainLayout->addWidget(mapfView);
     setLayout(mainLayout);
-
-
+    setWindowTitle(tr("Animation"));
+    setGeometry(0, 0, 700, sidebar->minimumHeight());
     connect(timer, &QTimer::timeout, this, &AnimationView::updateTimestep);
-    connect(startAnimation, &QPushButton::clicked, this, &AnimationView::start);
-    connect(stopAnimation, &QPushButton::clicked, this, &AnimationView::stop);
-    connect(taskGroupBtn,  &QPushButton::clicked, this, &AnimationView::showTaskGroupScene);
-
 }
+
 
 AnimationView::~AnimationView() {
     delete timer;
-    delete mapfScene;
-    delete mapfView;
+    if(mapfScene)
+        delete mapfScene;
+    if(mapfView)
+        delete mapfView;
 }
 
+QToolButton *AnimationView::createSidebarButton(const QString &iconPath, const QString &title, std::function<void()> onClickFunction)
+{
+    QIcon icon(iconPath);
+    QToolButton *btn = new QToolButton;
+    btn->setIcon(icon);
+    btn->setIconSize(QSize(42, 42));
+    btn->setText(title);
+    btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    btn->setFixedSize(76, 76);
+    btn->setObjectName(title);
+    btn->setCheckable(true);
+
+    if (onClickFunction) {
+        QObject::connect(btn, &QToolButton::clicked, this, [onClickFunction]() {
+            onClickFunction();
+        });
+    }
+
+    return btn;
+}
+
+
+void AnimationView::toggleSidebar()
+{
+    if (sidebarVisible) {
+        sidebarAnimation->setStartValue(sidebar->width());
+        sidebarAnimation->setEndValue(0);
+    } else {
+        sidebar->setVisible(true);
+        sidebarAnimation->setStartValue(0);
+        sidebarAnimation->setEndValue(200);
+    }
+    sidebarAnimation->start();
+    sidebarVisible = !sidebarVisible;
+}
 void AnimationView::initEnvironment()
 {
-    e = new Environment(agents, graph);
-    e->addAgent(Agent(0, 1, {0, 0}));
-    e->addAgent(Agent(1, 10, {9, 9}));
-    e->addAgent(Agent(3, 1, {0, 9}));
-    e->addAgent(Agent(4, 1, {1, 9}));
-    e->addAgent(Agent(5, 1, {9, 3}));
 
-    e->assignVacanAgents();
-
-    mapfScene = new MapfScene(e);
-    mapfView = new QGraphicsView(mapfScene, this);
-
-    mapfView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mapfView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    mapfView->setMinimumSize(400, 400);
 }
 
 void AnimationView::setTaskGroup(std::shared_ptr<TaskGroup> taskGroup)
@@ -116,6 +165,85 @@ void AnimationView::showTaskGroupScene()
     // Show the newly created window
     taskGroupWindow->show();
 }
+
+void AnimationView::loadMap()
+{
+    agents.clear();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Map"), "", tr("Map Files (*.json)"));
+    if (!fileName.isEmpty())
+    {
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly))
+        {
+            qWarning() << "Could not open file:" << fileName;
+            return;
+        }
+
+        QByteArray jsonData = file.readAll();
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+        if (jsonDoc.isNull() || !jsonDoc.isObject())
+        {
+            qWarning() << "Invalid JSON format in file:" << fileName;
+            return;
+        }
+
+        QJsonObject mapData = jsonDoc.object();
+
+        // Extract map dimensions
+        int width = mapData["width"].toInt();
+        int height = mapData["height"].toInt();
+
+        // Extract obstacles as a vector of QPoint
+        QJsonArray obstaclesArray = mapData["obstacles"].toArray();
+        std::vector<map::Cell> obstacles;
+        for (const QJsonValue &obstacleVal : obstaclesArray)
+        {
+            QJsonObject obstacleObj = obstacleVal.toObject();
+            int x = obstacleObj["x"].toInt();
+            int y = obstacleObj["y"].toInt();
+            obstacles.push_back(map::Cell(x, y));
+        }
+
+        // Extract agents as a vector of AgentData
+        QJsonArray agentsArray = mapData["agents"].toArray();
+
+        for (int i=0; i<agentsArray.size(); i++)
+        {
+            QJsonObject agentObj = agentsArray[i].toObject();
+            int x = agentObj["x"].toInt();
+            int y = agentObj["y"].toInt();
+            int capacity = agentObj["capacity"].toInt();
+            agents.push_back({i, capacity, {x, y}});
+        }
+
+
+        file.close();
+        qDebug() << "Map data loaded from" << fileName;
+
+        graph = map::Graph(width, height, obstacles);
+
+
+        //delete e;
+        //if(e) delete e;
+        e = new Environment(agents, graph);
+
+        e->assignVacanAgents();
+        interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
+
+
+        //if(mapfScene) delete mapfScene;
+        if(mapfScene) mapfScene->clear();
+        mapfScene = new MapfScene(e);
+
+        //if(mapfView) delete mapfView;
+
+        mapfView = new QGraphicsView(mapfScene, this);
+
+        mainLayout->addWidget(mapfView);
+
+    }
+}
 void AnimationView::stop()
 {
     timer->stop();
@@ -124,11 +252,11 @@ void AnimationView::stop()
 void AnimationView::updateTimestep()
 {
     if (currentTaskGroup) {
-        e->runTimestep(timestep, currentTaskGroup.get());  // Use .get() to pass raw pointer
-        currentTaskGroup.reset();  // Release ownership after use
+        e->runTimestep(timestep, currentTaskGroup.get());
+        currentTaskGroup.reset();
     } else {
         e->runTimestep(timestep);
     }
-    mapfScene->updateScene(timestep);     // Update the scene visually
+    mapfScene->updateScene(timestep);
     timestep++;
 }

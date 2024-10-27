@@ -15,7 +15,7 @@ class AnimationView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AnimationView(map::Graph graph, QWidget *parent = 0);
+    explicit AnimationView(QWidget *parent = 0);
     ~AnimationView();
 
 private:
@@ -30,24 +30,31 @@ private:
     int timestep;
     Environment* e;
     QPushButton* backButton;
-    QHBoxLayout *topLayout;
-    QVBoxLayout *mainLayout;
+    QHBoxLayout *mainLayout;
     QPushButton *startAnimation;
     QPushButton *stopAnimation;
     QPushButton *taskGroupBtn;
+
+    QWidget *sidebar;
+    QPropertyAnimation *sidebarAnimation;
+    bool sidebarVisible;
+
 
     map::Graph graph;
     std::unique_ptr<InteractiveTaskRectItem> interactive_graph;
     std::vector<Agent> agents;
 
     void initEnvironment();
-     void setTaskGroup(std::shared_ptr<TaskGroup> taskGroup);
-
+    void setTaskGroup(std::shared_ptr<TaskGroup> taskGroup);
+    QToolButton *createSidebarButton(const QString& iconPath, const QString& title, std::function<void()> onClickFunction);
+    void updateView();
 public slots:
     void stop();
     void start();
     void showTaskGroupScene();
+    void loadMap();
     void updateTimestep();
+    void toggleSidebar();
 };
 
 #endif // ANIMATIONVIEW_H

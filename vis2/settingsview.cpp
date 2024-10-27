@@ -76,7 +76,7 @@ SettingsView::SettingsView(QWidget *parent) :
     setWindowTitle(tr("Settings"));
     setGeometry(0,0, 700, sidebar->minimumHeight());
 
-    animation = new AnimationView(graph);
+    animation = new AnimationView();
 
 
     /* Create the first view */

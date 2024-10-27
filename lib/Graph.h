@@ -72,6 +72,7 @@ namespace map{
         }
 
         Graph(int width, int height, std::vector<Cell> obstacles)
+            :width(width), height(height)
         {
             cells.resize(width, std::vector<Cell>(height, Cell(0, 0)));
             for (int i = 0; i < width; ++i)

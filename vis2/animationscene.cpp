@@ -10,7 +10,7 @@ MapfScene::MapfScene(Environment* env, QObject* parent)
     for (const auto& agent : agents)
     {
         std::vector<map::Cell> pickups = agent.getTask().getPickupPoints();
-        map::Cell dropoff = agent.getTask().getDropoffLocation();
+        //map::Cell dropoff = agent.getTask().getDropoffLocation();
 
         AgentRectItem* vis_agent = new AgentRectItem();
         vis_agent->drawAgent(this, agent);
@@ -19,12 +19,14 @@ MapfScene::MapfScene(Environment* env, QObject* parent)
     }
 }
 
+
+
 void MapfScene::updateScene(int timestep)
 {
     const std::vector<Agent>& agents = environment->getAgents();
 
 
-    for (int i = 0; i < vis_agents.size(); ++i)
+    for (size_t i = 0; i < vis_agents.size(); ++i)
     {
         const Agent& backendAgent = agents[i];
         vis_agents[i]->draw(this, timestep, backendAgent);
