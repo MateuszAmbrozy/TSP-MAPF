@@ -15,24 +15,15 @@
 #include <QTextStream>
 EditorView::EditorView(QWidget *parent) :
     QWidget(parent),
-    _stackedWidget(nullptr),
-    _activeButton(nullptr),
-    sidebarVisible(true)  // Pasek początkowo widoczny
+    sidebarVisible(true)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QVBoxLayout *sidebarLayout = new QVBoxLayout();
     sidebar = new QWidget();
 
-    _activeButton = createSidebarButton(":/icons/assets/settings.svg", tr("General"), nullptr); // Przycisk bez akcji na razie
-
-    _activeButton->setChecked(true);
-    sidebarLayout->addWidget(_activeButton);
-
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/dollar.svg", tr("Save"), [this]() { saveMap(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", tr("Load"), [this]() { loadMap(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/crop.svg", tr("Clear"), [this]() { clearAgents(); }));
-
-    sidebarLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding));
     sidebarLayout->setSpacing(0);
 
     sidebar->setLayout(sidebarLayout);
@@ -80,11 +71,7 @@ EditorView::EditorView(QWidget *parent) :
     sidebarAnimation->setEndValue(0);
 
     connect(sidebarAnimation, &QPropertyAnimation::finished, this, [this]() {
-        if (!sidebarVisible) {
-            this->sidebar->setVisible(false);
-        } else {
-            this->sidebar->setVisible(true);
-        }
+        sidebar->setVisible(sidebarVisible);
     });
 
     QPushButton *toggleButton = new QPushButton(this);

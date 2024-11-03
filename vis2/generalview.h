@@ -1,33 +1,30 @@
-/**
- * @file generalview.h
- * @author fl0mll
- * @date 2017/12/21
- *
- * This document contains proprietary information belonging to mllapps.com
- * Passing on and copying of this document, use and communication of its
- * contents is not permitted without prior written authorization.
- *
- * @brief General view interface
- */
 #ifndef GENERALVIEW_H
 #define GENERALVIEW_H
-
-#include <QWidget>
-
-namespace Ui {
-class GeneralView;
-}
-
+#include "qwidget.h"
+#include <iostream>
+// #include <string>
+// #include "../lib/setup.h"
 class GeneralView : public QWidget
 {
-    Q_OBJECT
-
+    enum Algorithm {
+        A_STAR,
+        WHCA
+    };
 public:
-    explicit GeneralView(QWidget *parent = 0);
-    ~GeneralView();
+
+
+    GeneralView();
+
+    void show();
+
+    Algorithm getSelectedAlgorithm() const;
+
+    void printSelectedAlgorithm() const;
 
 private:
-    Ui::GeneralView *ui;
+    Algorithm selectedAlgorithm;
+
+    void selectAlgorithm(int choice);
 };
 
 #endif // GENERALVIEW_H

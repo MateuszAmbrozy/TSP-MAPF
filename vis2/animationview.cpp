@@ -1,4 +1,5 @@
 #include "animationview.h"
+#include "qapplication.h"
 #include "qtoolbutton.h"
 #include <QFileDialog>
 #include <QJsonObject>
@@ -7,8 +8,14 @@
 #include <QFile>
 #include <QTextStream>
 AnimationView::AnimationView(QWidget *parent)
-    : QWidget(parent), inputWidget(nullptr), timestep(0), sidebarVisible(true)
+    : QWidget(parent),
+    inputWidget(nullptr),
+    timestep(0),
+    sidebarVisible(true)
+
 {
+    mapfScene = nullptr;
+    mapfView = nullptr;
     mainLayout = new QHBoxLayout(this);
 
     // Create sidebar layout and add buttons
@@ -17,10 +24,11 @@ AnimationView::AnimationView(QWidget *parent)
 
     timer = new QTimer(this);
 
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/visa.svg", "Start", [this]() { start(); }));
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/amex.svg", "Stop", [this]() { stop(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/play.svg", "Start", [this]() { start(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/pause.svg", "Stop", [this]() { stop(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/add.svg", "Add Task", [this]() { showTaskGroupScene(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload map", [this]() { loadMap(); }));
+    //sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload tasks", [this]() { loadTasks(); }));
     //sidebarLayout->addSpacerItem(new QSpacerItem(0, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
     sidebar->setLayout(sidebarLayout);
     sidebar->setObjectName("sidebar");
@@ -48,7 +56,6 @@ AnimationView::AnimationView(QWidget *parent)
     QVBoxLayout *sidebarContainerLayout = new QVBoxLayout(sidebarContainer);
 
     sidebarContainerLayout->addWidget(sidebar);
-    //sidebarContainerLayout->addSpacerItem(new QSpacerItem(0, 50, QSizePolicy::Minimum, QSizePolicy::Expanding));
     sidebarContainerLayout->addWidget(toggleButton,0, Qt::AlignLeft | Qt::AlignBottom);
 
     sidebarContainerLayout->setSpacing(5);
@@ -70,6 +77,11 @@ AnimationView::~AnimationView() {
         delete mapfScene;
     if(mapfView)
         delete mapfView;
+}
+
+void AnimationView::setAlgorithm(AlgType algorithm)
+{
+    this->algorithm = algorithm;
 }
 
 QToolButton *AnimationView::createSidebarButton(const QString &iconPath, const QString &title, std::function<void()> onClickFunction)
@@ -118,18 +130,24 @@ void AnimationView::setTaskGroup(std::shared_ptr<TaskGroup> taskGroup)
 }
 void AnimationView::start()
 {
-    timer->start(700);
+    if(interactive_graph == nullptr)
+    {
+        qDebug("Interactive_graph == nullptr\n");
+        return;
+    }
+    timer->start(500);
 }
 
 
 void AnimationView::showTaskGroupScene()
 {
-    taskGroupScene = new QGraphicsScene();
-    if(interactive_graph != nullptr)
+    if(interactive_graph == nullptr)
     {
-
-        qDebug("Interactive_graph != nullptr\n");
+        qDebug("Interactive_graph == nullptr\n");
+        return;
     }
+    taskGroupScene = new QGraphicsScene();
+
 
     inputWidget = new TaskInputWidget(taskGroupScene, interactive_graph.get());
 
@@ -138,20 +156,17 @@ void AnimationView::showTaskGroupScene()
                 this->setTaskGroup(std::move(taskGroup));  // Transfer ownership using std::move
             });
 
-    // Create the taskGroupView for visualizing the TaskGroupScene
     taskGroupView = new QGraphicsView(taskGroupScene);
 
-    // Add interactive_graph to the scene
     taskGroupScene->addItem(interactive_graph.get());
     interactive_graph->setPos(100, 300);
 
-    // Make sure the interactive_graph has focus
     interactive_graph->setFocus();
     taskGroupView->setFocusPolicy(Qt::StrongFocus);
-    // Set view properties
+
     taskGroupView->setMinimumSize(400, 400);
-    taskGroupView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    taskGroupView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // taskGroupView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // taskGroupView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QVBoxLayout *taskGroupLayout = new QVBoxLayout();
     taskGroupLayout->addWidget(inputWidget);  // Add input widget to layout
@@ -161,6 +176,9 @@ void AnimationView::showTaskGroupScene()
     QWidget *taskGroupWindow = new QWidget();
     taskGroupWindow->setLayout(taskGroupLayout);
     taskGroupWindow->setWindowTitle("Task Group");
+
+    taskGroupWindow->setAttribute(Qt::WA_DeleteOnClose);
+    connect(QApplication::instance(), &QApplication::aboutToQuit, taskGroupWindow, &QWidget::close);
 
     // Show the newly created window
     taskGroupWindow->show();
@@ -226,24 +244,102 @@ void AnimationView::loadMap()
 
         //delete e;
         //if(e) delete e;
-        e = new Environment(agents, graph);
 
-        e->assignVacanAgents();
+
+        // e = new Environment(agents, graph);
+
+        // e->assignVacanAgents();
+
+        whca_environment = new WHCA_Environment(agents, graph);
+        whca_environment->assignVacanAgents();
         interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
 
 
         //if(mapfScene) delete mapfScene;
-        if(mapfScene) mapfScene->clear();
-        mapfScene = new MapfScene(e);
+        if(mapfScene) delete mapfScene;
+        //mapfScene = new MapfScene(e);
+        mapfScene = new MapfScene(whca_environment);
 
-        //if(mapfView) delete mapfView;
-
+        if(mapfView) delete mapfView;
         mapfView = new QGraphicsView(mapfScene, this);
 
         mainLayout->addWidget(mapfView);
 
     }
 }
+
+// void AnimationView::loadTasks()
+// {
+//     QFile file(fileName);
+//     if (!file.open(QIODevice::ReadOnly))
+//     {
+//         qWarning() << "Could not open file:" << fileName;
+//         return;
+//     }
+
+//     QByteArray jsonData = file.readAll();
+//     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+//     if (jsonDoc.isNull() || !jsonDoc.isObject())
+//     {
+//         qWarning() << "Invalid JSON format in file:" << fileName;
+//         return;
+//     }
+
+//     QJsonObject mapData = jsonDoc.object();
+
+//     // Extract map dimensions
+//     int width = mapData["width"].toInt();
+//     int height = mapData["height"].toInt();
+
+//     // Extract obstacles as a vector of QPoint
+//     QJsonArray obstaclesArray = mapData["obstacles"].toArray();
+//     std::vector<map::Cell> obstacles;
+//     for (const QJsonValue &obstacleVal : obstaclesArray)
+//     {
+//         QJsonObject obstacleObj = obstacleVal.toObject();
+//         int x = obstacleObj["x"].toInt();
+//         int y = obstacleObj["y"].toInt();
+//         obstacles.push_back(map::Cell(x, y));
+//     }
+
+//     // Extract agents as a vector of AgentData
+//     QJsonArray agentsArray = mapData["agents"].toArray();
+
+//     for (int i=0; i<agentsArray.size(); i++)
+//     {
+//         QJsonObject agentObj = agentsArray[i].toObject();
+//         int x = agentObj["x"].toInt();
+//         int y = agentObj["y"].toInt();
+//         int capacity = agentObj["capacity"].toInt();
+//         agents.push_back({i, capacity, {x, y}});
+//     }
+
+
+//     file.close();
+//     qDebug() << "Map data loaded from" << fileName;
+
+//     graph = map::Graph(width, height, obstacles);
+
+
+//     //delete e;
+//     //if(e) delete e;
+//     e = new Environment(agents, graph);
+
+//     e->assignVacanAgents();
+//     interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
+
+
+//     //if(mapfScene) delete mapfScene;
+//     if(mapfScene) delete mapfScene;
+//     mapfScene = new MapfScene(e);
+
+//     if(mapfView) delete mapfView;
+//     mapfView = new QGraphicsView(mapfScene, this);
+
+//     mainLayout->addWidget(mapfView);
+
+// }
+
 void AnimationView::stop()
 {
     timer->stop();
@@ -251,11 +347,13 @@ void AnimationView::stop()
 
 void AnimationView::updateTimestep()
 {
-    if (currentTaskGroup) {
-        e->runTimestep(timestep, currentTaskGroup.get());
+    if (currentTaskGroup)
+    {
+        whca_environment->runTimestep(timestep, currentTaskGroup.get());
         currentTaskGroup.reset();
-    } else {
-        e->runTimestep(timestep);
+    } else
+    {
+        whca_environment->runTimestep(timestep);
     }
     mapfScene->updateScene(timestep);
     timestep++;

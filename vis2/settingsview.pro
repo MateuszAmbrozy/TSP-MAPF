@@ -11,6 +11,7 @@ CONFIG += c++14
 SOURCES += main.cpp\
     agentinputwidget.cpp \
     agentlistitemwidget.cpp \
+    generalview.cpp \
     graph/inetractivetaskgraph.cpp \
     graph/interactiveagentgraph.cpp \
     agentrectitem.cpp \
@@ -25,7 +26,7 @@ SOURCES += main.cpp\
     pointlistitemwidget.cpp \
     sidebaritem.cpp \
     settingsview.cpp \
-    generalview.cpp \
+    $$files(../src/WHCA/*.cpp) \
     $$files(../src/*.cpp) \
     $$files(../src/AStar/*.cpp) \
     $$files(../src/Space-Time-AStar/*.cpp) \
@@ -35,6 +36,7 @@ SOURCES += main.cpp\
 HEADERS += \
     agentinputwidget.h \
     agentlistitemwidget.h \
+    generalview.h \
     graph/inetractivetaskgraph.h \
     graph/interactiveagentgraph.h \
     agentrectitem.h \
@@ -49,7 +51,7 @@ HEADERS += \
     pointlistitemwidget.h \
     sidebaritem.h \
     settingsview.h \
-    generalview.h \
+    $$files(../lib/WHCA/*.h) \
     $$files(../lib/*.h) \
     $$files(../lib/AStar/*.h) \
     $$files(../lib/Space-Time-AStar/*.h) \
@@ -59,7 +61,7 @@ INCLUDEPATH += ../lib
 INCLUDEPATH += ../lib/AStar
 INCLUDEPATH += ../lib/Space-Time-AStar
 
-FORMS    += generalview.ui
+FORMS    +=
 RESOURCES += default.qrc
 
 target.files = settingsview

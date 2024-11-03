@@ -3,8 +3,6 @@
 #include "../TaskGroup.h"
 #include "../Agent.h"
 #include "Node.h"
-
-
 #include <cmath>
 #include <iostream>
 #include <numeric>

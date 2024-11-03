@@ -1,5 +1,4 @@
 #include "../lib/Agent.h"
-#include <iostream>
 
 Agent::Agent(int id, int capacity, map::Cell position)
     : id(id), capacity(capacity), accessibleCapacity(capacity),
@@ -7,6 +6,18 @@ Agent::Agent(int id, int capacity, map::Cell position)
          {
             
          }
+
+// Agent::Agent(const Agent &other)
+//  :  id(other.id),
+//     capacity(other.capacity),
+//     accessibleCapacity(other.accessibleCapacity),
+//     position(other.position),
+//     tasks(other.tasks),
+//     startPos(other.startPos),
+//     path(other.path),
+//     illicits(other.illicits),
+//     idle(other.idle)
+//          {}
 
 int Agent::getId() const {
     return id;

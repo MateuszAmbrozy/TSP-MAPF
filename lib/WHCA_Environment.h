@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
 #include <vector>
 #include <optional>
-#include <ctime>
-#include <unordered_map>
-//#include <chrono>
+
+
 #include <windows.h>
 #include  <random>
 #include  <iterator>
@@ -13,20 +11,25 @@
 #include "TaskGroup.h"
 #include "Graph.h"
 #include "TSP.h"
-#include "setup.h"
+#include "WHCA/whca.h"
 #include "Space-Time-AStar/Reservation.h"
-#include "Space-Time-AStar/SpaceTimeAStar.h"
+
+#include "WHCA/WHCA_Agent.h"
 
 
 
-class Environment {
+
+class WHCA_Environment {
 private:
-    std::vector<Agent> agents;
-    std::vector<Agent> vacant_agents;
+    std::vector<WHCA_Agent> agents;
+    std::vector<WHCA_Agent> vacant_agents;
+
     std::vector<TaskGroup> task_list; //in every task list is group of tasks
     map::Graph graph;
     TSP tsp;
-    SpaceTimeAStar sta;
+
+    WHCA whca;
+
     Reservation table;
     template<typename Iter, typename RandomGenerator>
     Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
@@ -45,24 +48,44 @@ private:
 
 
 
-    std::vector<Agent> capacity(const TaskGroup& task) const; //wyszukuje agentow spelniajacych ograniczenie pojemnosci z agentow wakacyjnych
-    std::optional<Agent> random(std::vector<Agent>& capableAgents) const;
+    std::vector<WHCA_Agent> capacity(const TaskGroup& task) const;
+    std::optional<WHCA_Agent> random(std::vector<WHCA_Agent>& capableAgents) const;
 
     void addTaskGroup(const TaskGroup& taskGroup);
     //void taskGroupGenerator(); //automatyczne tworzenie taskGroup losowe
 
 
 public:
-    Environment(std::vector<Agent> agents, map::Graph graph);
+    WHCA_Environment(std::vector<Agent> agents, map::Graph graph);
 
-    inline map::Graph getGraph() {return this->graph;}
-    inline std::vector<Agent> getAgents() {return this->agents;}
-    inline std::vector<Agent> getVacantAgents() {return this->vacant_agents;}
+    inline map::Graph getGraph()
+    {
+        return this->graph;
+    }
+    std::vector<Agent> getAgents() {
+        std::vector<Agent> buf;
+        for (const WHCA_Agent& a : agents) {
+            buf.push_back(a.agent);  // Dostęp do agent w środku AgentWrapper
+        }
+        return buf;
+    }
+
+    std::vector<Agent> getVacantAgents()
+    {
+        std::vector<Agent> buf;
+        for(const auto &agent: vacant_agents)
+            buf.push_back(agent.agent);
+        return buf;
+    }
 
     void assignVacanAgents();
+
     TaskGroup TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std::vector<int> avaliablePickupY, std::vector<int> avaliableDropofX, std::vector<int> avaliableDropofY );
+
     void MOVEAGENTS(int timestep);
-    void addAgent(Agent newAgent);
-    void mainAlgorithm();
+    void addAgent(Agent &newAgent);
+
+
     void runTimestep(int timestep, TaskGroup* task = nullptr);
 };
+

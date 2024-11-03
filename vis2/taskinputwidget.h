@@ -20,25 +20,25 @@ public:
     TaskInputWidget(QGraphicsScene *scene, InteractiveTaskRectItem *graphItem, QWidget *parent = nullptr);
 
 private slots:
-    void addPickupPoint(const QPoint &point);  // Slot to handle pickup point selection
-    void setDropoffPoint(const QPoint &point); // Slot to handle dropoff point selection
+    void addPickupPoint(const QPoint &point);
+    void setDropoffPoint(const QPoint &point);
     void removePickupPoint(const QPoint& point);
     void removeDropoffPoint(const QPoint& point);
     void onPickupStopTimeChanged(const QPoint &point, int newStopTime);
     void onDropoffStopTimeChanged(const QPoint &point, int newStopTime);
-    void createTaskGroup(); // Slot to create TaskGroup
+    void createTaskGroup();
 
 private:
-    QGraphicsScene *scene;  // Pointer to the scene
-    InteractiveTaskRectItem *graphItem; // Pointer to the interactive map item
+    QGraphicsScene *scene;
+    InteractiveTaskRectItem *graphItem;
     QLineEdit *capacityInput;
     QListWidget *pointListWidget;
     QSpinBox *stopTimeInput;
 
 
-    std::vector<map::Cell> pickupPoints;   // Lista punktów odbioru
-    map::Cell dropoffPoint;                // Punkt dostawy
-    std::vector<int> stopTimes;            // Czas postoju na punktach
+    std::vector<map::Cell> pickupPoints;
+    map::Cell dropoffPoint;
+    std::vector<int> stopTimes;
     int dropoffStopTime;
 
 
@@ -48,10 +48,10 @@ private:
         int value;
     };
 
-    std::vector<PointData> pickupPointData; // Store pickup points and stop times
-    PointData dropoffPointData;             // Store dropoff point and stop time
+    std::vector<PointData> pickupPointData;
+    PointData dropoffPointData;
 
-    void updatePointList();  // Update the list of points with stop times
+    void updatePointList();
 signals:
     void taskGroupCreated(std::shared_ptr<TaskGroup> taskGroup);
 

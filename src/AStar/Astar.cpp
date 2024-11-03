@@ -33,9 +33,9 @@ float A::Node::calculateH(int startX, int startY, int destX, int destY)
  void A::Astar::copyGraph()
 {
     aStarGraph.resize(graph.cells.size(), std::vector<Node>(graph.height, Node(0, 0)));
-    for(int i = 0; i < graph.cells.size(); i++)
+    for(size_t i = 0; i < graph.cells.size(); i++)
     {
-        for(int j=0; j<graph.cells[i].size(); j++)
+        for(size_t j=0; j<graph.cells[i].size(); j++)
         {
             aStarGraph[i][j] = graph.cells[i][j];
         }

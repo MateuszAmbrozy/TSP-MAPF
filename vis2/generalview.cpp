@@ -1,25 +1,35 @@
-/**
- * @file generalview.cpp
- * @author fl0mll
- * @date 2017/12/21
- *
- * This document contains proprietary information belonging to mllapps.com
- * Passing on and copying of this document, use and communication of its
- * contents is not permitted without prior written authorization.
- *
- * @brief General view implementation
- */
 #include "generalview.h"
-#include "ui_generalview.h"
 
-GeneralView::GeneralView(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::GeneralView)
+GeneralView::GeneralView() : selectedAlgorithm(A_STAR) {}
+
+void GeneralView::show()
 {
-    ui->setupUi(this);
+    std::cout << "Choose Algorithm:\n";
+    std::cout << "1. A* Algorithm\n";
+    std::cout << "2. WHCA Algorithm\n";
+    std::cout << "Enter the number of the algorithm you want to select (1 or 2): ";
+
+    int choice;
+    std::cin >> choice;
+    selectAlgorithm(choice);
 }
 
-GeneralView::~GeneralView()
+GeneralView::Algorithm GeneralView::getSelectedAlgorithm() const
 {
-    delete ui;
+    return selectedAlgorithm;
+}
+
+void GeneralView::printSelectedAlgorithm() const
+{
+    std::string algorithmName = (selectedAlgorithm == A_STAR) ? "A* Algorithm" : "WHCA Algorithm";
+    std::cout << "Selected algorithm: " << algorithmName << "\n";
+}
+
+void GeneralView::selectAlgorithm(int choice)
+{
+    if (choice == 1) {
+        selectedAlgorithm = A_STAR;
+    } else if (choice == 2) {
+        selectedAlgorithm = WHCA;
+    }
 }

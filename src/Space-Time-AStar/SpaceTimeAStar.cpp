@@ -13,7 +13,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
         if (isValid(neighbor.x, neighbor.y) &&
              !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y, neighbor.t) &&
+             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y) &&
              !containtsIllicits)
         {
             neighbors.push_back(neighbor);
@@ -22,7 +22,6 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent
     return neighbors;
 }
 
-//czasem agent wchodzi tutaj w nieskończoną petlę. Dlaczego?
 std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
 {
     std::vector<SpaceTimeCell::Cell> path;
@@ -36,7 +35,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
     if (isDestination(start.x, start.y, target.x, target.y)) 
     {
         std::cout << "Already at the destination." << std::endl;
-        SpaceTimeCell::Cell buf(target, currentTime);
+        SpaceTimeCell::Cell buf(target, currentTime + 1);
         return {buf};
     }
 
@@ -98,7 +97,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
                     c)
                 */
                 SpaceTimeCell::Cell buf = path.back();
-                if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y, waitT))
+                if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y))
                 {
                     SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT); 
                     recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
@@ -162,13 +161,15 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
 
 
 bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table) {
-    if (!table.isReserved(currentCell->x, currentCell->y, waitT)) {
+    if (!table.isReserved(currentCell->x, currentCell->y, waitT))
+    {
         path.push_back(SpaceTimeCell::Cell(currentCell->x, currentCell->y, waitT));
         waitT++;
         return true;
     }
 
-    if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT)) {
+    if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT))
+    {
         path.push_back(SpaceTimeCell::Cell(parentCell->x, parentCell->y, waitT));
         waitT++;
         return true;
@@ -177,18 +178,23 @@ bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, Sp
     SpaceTimeCell::Cell waitCell(currentCell->x, currentCell->y, waitT);
     SpaceTimeCell::Cell alternative = findAlternativeWaitingCell(waitCell, waitT, table);
     
-    if (alternative.x != -1) {
+    if (alternative.x != -1)
+    {
         path.push_back(alternative);
         waitT++;
         
-        if (recursiveWaitAndReturn(&alternative, currentCell, waitT, path, table)) {
+        if (recursiveWaitAndReturn(&alternative, currentCell, waitT, path, table))
+        {
 
             return recursiveWaitAndReturn(currentCell, parentCell, waitT, path, table);
         }
-        else {
+        else
+        {
             return false;
         }
-    } else {
+    }
+    else
+    {
         std::cerr << "No free neighboring cell found. Exiting...\n";
         return false;  
     }
@@ -200,7 +206,7 @@ SpaceTimeCell::Cell SpaceTimeAStar::findAlternativeWaitingCell(const SpaceTimeCe
         SpaceTimeCell::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
         if (isValid(neighbor.x, neighbor.y) &&
              !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-             !table.wouldCauseEdgeCollision(cell.x, cell.y, currentTime, neighbor.x, neighbor.y, neighbor.t))
+             !table.wouldCauseEdgeCollision(cell.x, cell.y, currentTime, neighbor.x, neighbor.y))
         {
             return neighbor;
         }
@@ -248,12 +254,15 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
             return {};
 
         }
+        else if(path.size() == 1)
+        {
+            currentTime++;
+        }
         // Ensure no duplication of cells when appending the path
-        if (!fullPath.empty() && fullPath.back().x == path.front().x &&
+        else if (!fullPath.empty() && fullPath.back().x == path.front().x &&
             fullPath.back().y == path.front().y && fullPath.back().t == path.front().t) {
             path.erase(path.begin());
         }
-
 
         fullPath.insert(fullPath.end(), path.begin(), path.end());
         currentTime = fullPath.back().t;
@@ -274,8 +283,12 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
             return {};
 
         }
-        if (!fullPath.empty() && fullPath.back().x == dropoffPath.front().x &&
-            fullPath.back().y == dropoffPath.front().y && fullPath.back().t == dropoffPath.front().t) 
+        else if(dropoffPath.size() == 1)
+        {
+            currentTime++;
+        }
+        else if (!fullPath.empty() && fullPath.back().x == dropoffPath.front().x &&
+            fullPath.back().y == dropoffPath.front().y && fullPath.back().t == dropoffPath.front().t)
             {
                 dropoffPath.erase(dropoffPath.begin());
             }
@@ -300,7 +313,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
             return {};
 
         }
-        if (!fullPath.empty() && fullPath.back().x == returnPath.front().x &&
+        else if(returnPath.size() == 1)
+        {
+            currentTime++;
+        }
+        else if (!fullPath.empty() && fullPath.back().x == returnPath.front().x &&
             fullPath.back().y == returnPath.front().y && fullPath.back().t == returnPath.front().t) 
         {
             returnPath.erase(returnPath.begin());
@@ -310,25 +327,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         currentTime = fullPath.back().t;
 
     }
-    // std::cout<<std::endl;
-    // for(auto c : fullPath)
-    // {
-    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    // }
-    
-    //std::cout<<"CALA SCIEZKA PRZED SOLVE COLLISION\n";
-    // for(int i=0; i<fullPath.size(); i++)
-    // {
-    //     std::cout<<"(" << fullPath[i].x << "," << fullPath[i].y << ", t: " <<  fullPath[i].t << ") -> ";
-    // }
 
-    
-    //fullPath = solveCollision(fullPath, table, waypoints);
-    
-    //WYPISANIE SCIEZKI
     {
-        std::cout<<"\n CALA SCIEZKA PO SOLVE COLLISION\n";
-        for(int i=0; i<fullPath.size(); i++)
+        std::cout<<"\n CALA SCIEZKA \n";
+        for(size_t i=0; i<fullPath.size(); i++)
         {            
             table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t);
             table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t + 1);

@@ -10,7 +10,13 @@ public:
     static const unsigned int maxTasks;
     static const unsigned int maxCapacity;
     static const unsigned int maxStopTime;
+
+
+
 };
 
 
-//const unsigned int setup::max_time = 100;
+enum class AlgType {
+    A_STAR = 0,
+    WHCA
+};

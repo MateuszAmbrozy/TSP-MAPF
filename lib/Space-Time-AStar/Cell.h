@@ -14,7 +14,11 @@ namespace SpaceTimeCell
             : map::Cell(x, y, isObstacle), t{t}
         {}
 
-        Cell(map::Cell other, int t)
+        Cell(const Cell& other)
+            : map::Cell(other), t(other.t)
+        {}
+
+        Cell(const map::Cell& other, int t)
             : map::Cell(other), t{t}
         {}
         Cell() = default;

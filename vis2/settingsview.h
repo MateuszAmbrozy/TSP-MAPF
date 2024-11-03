@@ -14,6 +14,7 @@
 #include <QMap>
 #include "animationview.h"
 #include "editorview.h"
+#include "generalview.h"
 class QLabel;
 class QToolButton;
 class QStackedWidget;
@@ -40,6 +41,7 @@ private:
     QToolButton * _activeButton;
     AnimationView* animation;
     EditorView* editor;
+    GeneralView* generalView;
     QWidget * sidebar;
     map::Graph graph;
 

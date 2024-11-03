@@ -77,13 +77,12 @@ SettingsView::SettingsView(QWidget *parent) :
     setGeometry(0,0, 700, sidebar->minimumHeight());
 
     animation = new AnimationView();
-
+    editor = new EditorView();
+    generalView = new GeneralView();
 
     /* Create the first view */
-    QWidget *widget = new QWidget;
-    Ui::GeneralView ui;
-    ui.setupUi(widget);
-    push(widget);
+
+    _stackedWidget->addWidget(generalView);
 
     // Inicjalizacja animacji paska bocznego
     sidebarAnimation = new QPropertyAnimation(sidebar, "maximumWidth");
@@ -139,19 +138,16 @@ void SettingsView::changeCenterWidget(bool event)
     // Zmieniaj widok w zależności od przycisku
     if(sender.compare("General") == 0)
     {
-        QWidget *widget = new QWidget;
-        Ui::GeneralView ui;
-        ui.setupUi(widget);
-        // Dodaj widget tylko raz, jeśli jeszcze go nie dodano
-        if (_stackedWidget->indexOf(widget) == -1)
+        if (_stackedWidget->indexOf(generalView) == -1)
         {
-            _stackedWidget->addWidget(widget);
+            _stackedWidget->addWidget(generalView);
         }
-        _stackedWidget->setCurrentWidget(widget);
+        _stackedWidget->setCurrentWidget(generalView);
     }
     else if(sender.compare("Animation") == 0)
     {
         // Dodaj AnimationView tylko raz
+        //animation->setAlgorithm(generalView->getSelectedAlgorithm());
         if (_stackedWidget->indexOf(animation) == -1)
         {
             _stackedWidget->addWidget(animation);
@@ -160,15 +156,12 @@ void SettingsView::changeCenterWidget(bool event)
     }
     else if(sender.compare("Editor") == 0)
     {
-        // Tworzymy instancję EditorView
-        EditorView *editorView = new EditorView();
-
         // Dodajemy editorView do stosu i ustawiamy jako aktywny widok
-        if (_stackedWidget->indexOf(editorView) == -1)
+        if (_stackedWidget->indexOf(editor) == -1)
         {
-            _stackedWidget->addWidget(editorView);
+            _stackedWidget->addWidget(editor);
         }
-        _stackedWidget->setCurrentWidget(editorView);
+        _stackedWidget->setCurrentWidget(editor);
     }
     else if(sender.compare("Maps") == 0)
     {

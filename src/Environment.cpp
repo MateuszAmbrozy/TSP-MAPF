@@ -4,7 +4,7 @@
 
 Environment::Environment(std::vector<Agent> agents, map::Graph graph)
     : graph(graph),
-     tsp(graph), sta(graph)
+    tsp(graph), sta(graph)
     {
        srand(time(0));
         for(auto& agent: agents)
@@ -15,7 +15,8 @@ Environment::Environment(std::vector<Agent> agents, map::Graph graph)
 
 
 
-void Environment::addAgent(Agent& newAgent) {
+void Environment::addAgent(Agent newAgent)
+{
 
     for (Agent& agent : agents) {
             agent.addIllicitCell(newAgent.getStartPosition());  // Add newAgent's startPos to other agents
@@ -49,6 +50,8 @@ std::vector<Agent> Environment::capacity(const TaskGroup& task) const
 
 }
 
+
+
 std::optional<Agent> Environment::random(std::vector<Agent>& capableAgents) const {
     if (!capableAgents.empty()) {
         int randomNum = rand() % capableAgents.size();
@@ -70,14 +73,14 @@ void Environment::MOVEAGENTS(int timestep)
 
             std::vector<SpaceTimeCell::Cell> path = agent.getPath();
 
-            if (path.size() > 0 && timestep < path.size() + path.front().t)
+            if (path.size() > 0 && timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
                 SpaceTimeCell::Cell nextPosition;
 
-                for (const auto& cell : path) 
+                for (const auto& cell : path)
                 {
-                    if (cell.t == timestep) 
+                    if (cell.t == timestep)
                     {
                         nextPosition = cell;
                         break;
@@ -87,16 +90,16 @@ void Environment::MOVEAGENTS(int timestep)
                 agent.move(newPosition);
 
                 std::cout<<agent.getId() << ": (" << agent.getPosition().x << ", " << agent.getPosition().y << "), t = " << timestep << "\n";
-            } 
+            }
             else
             {
                 std::cout << "Agent " << agent.getId() << " has completed its path." << std::endl;
-                for (const auto& cell : agent.getPath()) 
+                for (const auto& cell : agent.getPath())
                 {
                     table.removeReservation(cell.x, cell.y, cell.t);  // Remove cell reservations
 
-                    const auto& nextCell = agent.getPath().back();
-                    if (&cell != &nextCell) 
+                    const auto nextCell = agent.getPath().back();
+                    if (&cell != &nextCell)
                     {
                         table.removeEdgeReservation(cell.x, cell.y, cell.t);
                     }
@@ -105,26 +108,27 @@ void Environment::MOVEAGENTS(int timestep)
                 agent.clearTask();
 
                 vacant_agents.push_back(agent);
-                
+                agent.setIdle(true);
+
             }
-            
+
         }
     }
-    
+
 }
 
 TaskGroup Environment::TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std::vector<int> avaliablePickupY, std::vector<int> avaliableDropofX, std::vector<int> avaliableDropofY ) {
     int numTasks = rand() % setup::maxTasks + 1;
-    
+
     std::vector<map::Cell> pickupPoints;
-    
+
     for (int i = 0; i < numTasks; ++i) {
         int x = *select_randomly(avaliablePickupX.begin(), avaliablePickupX.end());
         int y = *select_randomly(avaliablePickupY.begin(), avaliablePickupY.end());
         pickupPoints.push_back(map::Cell(x, y));
     }
 
-    
+
     int dropoffX = *select_randomly(avaliableDropofX.begin(), avaliableDropofX.end());
     int dropoffY = *select_randomly(avaliableDropofY.begin(), avaliableDropofY.end());
     map::Cell dropoffPoint(dropoffX, dropoffY);
@@ -139,8 +143,8 @@ TaskGroup Environment::TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std
             stopTimes.push_back(rand() % setup::maxStopTime);
         }
         dropoffTime = rand() % setup::maxStopTime;
-    } 
-    else 
+    }
+    else
     {
         stopTimes = std::vector<int>(numTasks, 0);  // Default to 0 if maxStopTime is 0
         dropoffTime = 0;
@@ -159,19 +163,19 @@ void Environment::mainAlgorithm() {
     std::vector<int> avaliableDropofX={1, 2, 3};
     std::vector<int> avaliableDropofY={3};
 
-    for (int timestep = 0; timestep <= setup::max_time; ++timestep) {  // Step 5
-        if(timestep%7==0)
+    for (size_t timestep = 0; timestep <= setup::max_time; ++timestep) {  // Step 5
+        if(timestep%30==0)
             task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));  // Step 6
-        
-        for (int l = 0; l < task_list.size(); ++l) {  // Step 7
+
+        for (size_t l = 0; l < task_list.size(); ++l) {  // Step 7
             const TaskGroup taskGroup = task_list[l];
-            
+
             std::vector<Agent> capableAgents = capacity(taskGroup);  // Step 8
-            
+
         if (capableAgents.size() > 0)
         {
             auto selectedAgentOpt = random(capableAgents);  // Step 10
-            if (!selectedAgentOpt.has_value()) 
+            if (!selectedAgentOpt.has_value())
             {
                 continue;
             }
@@ -179,7 +183,7 @@ void Environment::mainAlgorithm() {
 
             std::cout << "agent: (" << selectedAgent.getPosition().x << ", " << selectedAgent.getPosition().y << ")\n";
             std::cout << taskGroup << std::endl;
-            
+
             std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);  // Step 12, 13
             std::vector<SpaceTimeCell::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
             auto it = std::find(agents.begin(), agents.end(), selectedAgent);
@@ -188,16 +192,16 @@ void Environment::mainAlgorithm() {
             it->assignTask(taskGroup);
             it->setIdle(false);
 
-            
+
             // Usuwanie agenta z vacant_agents
             vacant_agents.erase(
-                std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent), 
+                std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent),
                 vacant_agents.end()
             );  // Step 16
-            
+
             // Usuwanie zadania z task_list
             task_list.erase(
-                std::remove(task_list.begin(), task_list.end(), taskGroup), 
+                std::remove(task_list.begin(), task_list.end(), taskGroup),
                 task_list.end()
             );
         }
@@ -212,23 +216,22 @@ void Environment::runTimestep(int timestep, TaskGroup* task)
 {
     //assignVacanAgents();  // Make sure agents are assigned
 
-    std::vector<int> avaliablePickupX={1, 2, 3, 4, 5, 6, 7, 8};
-    std::vector<int> avaliablePickupY={2, 4, 6, 8};
+    std::vector<int> avaliablePickupX={0, 1, 2, 3, 4, 5, 6, 7, 8};
+    std::vector<int> avaliablePickupY={1, 3, 5, 7};
     std::vector<int> avaliableDropofX={3, 4, 5, 6, 7};
-    std::vector<int> avaliableDropofY={9};
+    std::vector<int> avaliableDropofY={7};
     // Simulate task assignment and agent movements per timestep
     if(task)
     {
         task_list.push_back(*task);
     }
-    // else if(timestep % 7 == 0)
-    // {
-    //     task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
-    // }
-
-
+    else if(timestep % 10 == 0)
+    {
+        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
+    }
     // Iterate over tasks and assign to agents if possible
-    for (int l = 0; l < task_list.size(); ++l) {
+    for (size_t l = 0; l < task_list.size(); ++l)
+    {
         const TaskGroup& taskGroup = task_list[l];
         std::vector<Agent> capableAgents = capacity(taskGroup);
 
@@ -242,15 +245,15 @@ void Environment::runTimestep(int timestep, TaskGroup* task)
                 std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);
                 std::vector<SpaceTimeCell::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
-
+                if(path.empty())
+                    continue;
                 auto it = std::find(agents.begin(), agents.end(), selectedAgent);
 
                 it->assignPath(path);
                 it->assignTask(taskGroup);
                 it->setIdle(false);
 
-                vacant_agents.erase(
-                    std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent), vacant_agents.end());
+                vacant_agents.erase(std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent), vacant_agents.end());
 
                 task_list.erase(std::remove(task_list.begin(), task_list.end(), taskGroup), task_list.end());
             }

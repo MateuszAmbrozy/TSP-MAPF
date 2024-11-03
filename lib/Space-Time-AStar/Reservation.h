@@ -33,11 +33,10 @@ public:
         edgeReservations[{x1, y1}][t] = {x2, y2};
     }
 
-    bool wouldCauseEdgeCollision(int x1, int y1, int t1, int x2, int y2, int t2) const {
+    bool wouldCauseEdgeCollision(int x1, int y1, int t1, int x2, int y2) const {
         // Klucz do rezerwacji dla (x2, y2) - sprawdzamy rezerwacje w tym punkcie w czasie t1
         auto reverseEdgeKey = std::make_pair(x2, y2);
 
-        // Sprawdzenie kolizji dla odwrotnego ruchu (z (x2, y2) do (x1, y1)) w czasie t1
         if (edgeReservations.count(reverseEdgeKey) && edgeReservations.at(reverseEdgeKey).count(t1)) {
             auto reservedMove = edgeReservations.at(reverseEdgeKey).at(t1);
             // Sprawdzamy, czy rezerwowany ruch prowadzi z powrotem do (x1, y1)

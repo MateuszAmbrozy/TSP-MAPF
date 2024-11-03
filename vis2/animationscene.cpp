@@ -1,12 +1,12 @@
 #include "animationscene.h"
 
-MapfScene::MapfScene(Environment* env, QObject* parent)
-    : QGraphicsScene(parent), graph(env->getGraph()), environment(env)
+MapfScene::MapfScene(WHCA_Environment* env, QObject* parent)
+    : QGraphicsScene(parent), graph(env->getGraph()), whca_environment(env)
 {
     vis_graph = new GraphRectItem(graph, nullptr);
     vis_graph->drawGraph(this);
 
-    const std::vector<Agent>& agents = environment->getAgents();
+    const std::vector<Agent>& agents = whca_environment->getAgents();
     for (const auto& agent : agents)
     {
         std::vector<map::Cell> pickups = agent.getTask().getPickupPoints();
@@ -19,12 +19,16 @@ MapfScene::MapfScene(Environment* env, QObject* parent)
     }
 }
 
+MapfScene::MapfScene(Environment *env, QObject *parent)
+{
+
+}
+
 
 
 void MapfScene::updateScene(int timestep)
 {
-    const std::vector<Agent>& agents = environment->getAgents();
-
+    const std::vector<Agent>& agents = whca_environment->getAgents();
 
     for (size_t i = 0; i < vis_agents.size(); ++i)
     {

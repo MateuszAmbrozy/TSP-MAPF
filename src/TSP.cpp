@@ -7,7 +7,7 @@ TSP::TSP(map::Graph graph)
 
 double TSP::calculateTotalDistance(const std::vector<int>& path, const std::vector<std::vector<double>>& distanceMatrix) {
     double totalDistance = 0;
-    for (int i = 0; i < path.size() - 1; ++i) {
+    for (size_t i = 0; i < path.size() - 1; ++i) {
         totalDistance += distanceMatrix[path[i]][path[i + 1]];
     }
     return totalDistance;

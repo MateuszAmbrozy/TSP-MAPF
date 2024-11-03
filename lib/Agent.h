@@ -19,6 +19,8 @@ private:
 
 public:
     Agent(int id, int capacity, map::Cell position);
+    Agent(const Agent& other) = default;
+    ~Agent() = default;
 
     int getId() const;
     

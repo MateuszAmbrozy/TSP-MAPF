@@ -24,15 +24,15 @@ bool A::Node::operator<(const A::Node& other) const {
 }
 
 
-// A::Node& A::Node::operator=(const A::Node& other) {
-//     if (this == &other) return *this;  // Self-assignment check
-//     Cell::operator=(other);  // Use base class (map::Cell) assignment
-//     this->parent = other.parent;  // Copy the parent pointer
-//     this->fCost = other.fCost;
-//     this->gCost = other.gCost;
-//     this->hCost = other.hCost;
-//     return *this;
-// }
+A::Node& A::Node::operator=(const A::Node& other) {
+    if (this == &other) return *this;  // Self-assignment check
+    Cell::operator=(other);  // Use base class (map::Cell) assignment
+    this->parent = other.parent;  // Copy the parent pointer
+    this->fCost = other.fCost;
+    this->gCost = other.gCost;
+    this->hCost = other.hCost;
+    return *this;
+}
 
 
 A::Node& A::Node::operator=(const map::Cell& other) {
