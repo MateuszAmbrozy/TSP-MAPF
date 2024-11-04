@@ -100,14 +100,14 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
                 while (!isTargetFreeForEntireWaitTime(target, waitT, waitTime, table))
                 {
                     SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT-1);
-                    recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
+                    recursiveWaitAndReturn(unit, &waitCell, nullptr, waitT, path, table);
                 }
 
                 SpaceTimeCell::Cell buf = path.back();
                 if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y))
                 {
                     SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT);
-                    recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
+                    recursiveWaitAndReturn(unit, &waitCell, nullptr, waitT, path, table);
                 }
 
 
@@ -115,9 +115,9 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
                 path.push_back(finalCell);
             }
 
-            for (int t = 1; t <= waitTime; ++t)
+            for (int t = 0; t <= waitTime; ++t)
             {
-                SpaceTimeCell::Cell waitCell(target.x, target.y,  waitT + t);
+                SpaceTimeCell::Cell waitCell(target.x, target.y,  waitT + t + 1);
                 path.push_back(waitCell);
             }
 
@@ -179,41 +179,32 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
 
 
 
-bool WHCA::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table) {
-    if (!table.isReserved(currentCell->x, currentCell->y, waitT) &&
-        isValid(currentCell->x, currentCell->y))
+bool WHCA::recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table) {
+    if (!table.isReserved(currentCell->x, currentCell->y, waitT))
     {
         path.push_back(SpaceTimeCell::Cell(currentCell->x, currentCell->y, waitT));
+        qDebug() << "Push wait 1 recursive cell:  (" << currentCell->x << ", " << currentCell->y << "), " << currentCell->t;
         waitT++;
         return true;
     }
 
-    if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT) &&
-        isValid(currentCell->x, currentCell->y))
+    if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT))
     {
         path.push_back(SpaceTimeCell::Cell(parentCell->x, parentCell->y, waitT));
+        qDebug() << "Push wait 2 recursive cell:  (" << currentCell->x << ", " << currentCell->y << "), " << currentCell->t;
         waitT++;
         return true;
     }
 
     SpaceTimeCell::Cell waitCell(currentCell->x, currentCell->y, waitT);
-    SpaceTimeCell::Cell alternative = findAlternativeWaitingCell(waitCell, waitT, table);
+    SpaceTimeCell::Cell alternative = findAlternativeWaitingCell(agent, waitCell, waitT, table);
 
     if (alternative.x != -1)
     {
         path.push_back(alternative);
         waitT++;
-
-        return recursiveWaitAndReturn(&alternative, currentCell, waitT, path, table);
-        // if (recursiveWaitAndReturn(&alternative, currentCell, waitT, path, table))
-        // {
-
-        //     return recursiveWaitAndReturn(currentCell, parentCell, waitT, path, table);
-        // }
-        // else
-        // {
-        //     return false;
-        // }
+        qDebug() << "Push wait 3 recursive cell:  (" << alternative.x << ", " << alternative.y << "), " << alternative.t;
+        return recursiveWaitAndReturn(agent, &alternative, currentCell, waitT, path, table);
     }
     else
     {
@@ -222,17 +213,20 @@ bool WHCA::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCel
     }
 }
 
-SpaceTimeCell::Cell WHCA::findAlternativeWaitingCell(const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table) {
+SpaceTimeCell::Cell WHCA::findAlternativeWaitingCell(const WHCA_Agent& agent, const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table) {
     currentTime--;
+    std::vector<map::Cell> illictis = agent.agent.getIllicits();
     for (auto dir : setup::moves) {
         SpaceTimeCell::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
+        bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
         if (isValid(neighbor.x, neighbor.y) &&
             !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-            !table.wouldCauseEdgeCollision(cell.x, cell.y, currentTime, neighbor.x, neighbor.y))
+            !table.wouldCauseEdgeCollision(cell.x, cell.y, currentTime, neighbor.x, neighbor.y) &&
+            !containtsIllicits)
         {
             // Dodaj logi, aby zobaczyć alternatywne komórki i czas
-            qDebug() << "Alternative cell found for agent at (" << cell.x << ", " << cell.y << "), "
-                      << "moving to (" << neighbor.x << ", " << neighbor.y << ") at time " << neighbor.t;
+            // qDebug() << "Alternative cell found for agent at (" << cell.x << ", " << cell.y << "), "
+            //           << "moving to (" << neighbor.x << ", " << neighbor.y << ") at time " << neighbor.t;
             return neighbor;
         }
     }
@@ -240,7 +234,7 @@ SpaceTimeCell::Cell WHCA::findAlternativeWaitingCell(const SpaceTimeCell::Cell& 
     return SpaceTimeCell::Cell(-1, -1, currentTime);
 }
 bool WHCA::isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table) {
-    for (int t = 0; t <= waitTime; ++t)
+    for (int t = 0; t <= waitTime + 1; ++t)
     {
         if (table.isReserved(target.x, target.y,startTime + t))
         {
@@ -280,7 +274,7 @@ std::vector<SpaceTimeCell::Cell> WHCA::findNextWSteps(WHCA_Agent& unit, int curr
     for (int i = 0; i < steps; ++i) {
         table.reserve(path[i].x, path[i].y, path[i].t);
         table.reserve(path[i].x, path[i].y, path[i].t + 1);
-        qDebug() << "ID: " << unit.agent.getId() << "(" << path[i].x<< ", " << path[i].y << "), T: " <<  path[i].t << " -> ";
+        //qDebug() << "ID: " << unit.agent.getId() << "(" << path[i].x<< ", " << path[i].y << "), T: " <<  path[i].t << " -> ";
         if (i < steps - 1)
         {
             table.reserveEdge(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y, path[i].t);

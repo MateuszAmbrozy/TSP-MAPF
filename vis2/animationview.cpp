@@ -1,4 +1,5 @@
 #include "animationview.h"
+#include "WHCA_Environment.h"
 #include "qapplication.h"
 #include "qtoolbutton.h"
 #include <QFileDialog>
@@ -7,10 +8,11 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QTextStream>
-AnimationView::AnimationView(QWidget *parent)
+AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
     : QWidget(parent),
     inputWidget(nullptr),
     timestep(0),
+    algorithm(algorithm),
     sidebarVisible(true)
 
 {
@@ -245,20 +247,25 @@ void AnimationView::loadMap()
         //delete e;
         //if(e) delete e;
 
+        if(algorithm == AlgType::A_STAR)
+        {
+            environment = new Environment(agents, graph);
+        }
+        else
+        {
+            environment = new WHCA_Environment(agents, graph);
+        }
+        environment->assignVacantAgents();
+        if(mapfScene)
+        {
+            delete mapfScene;
+            mapfScene = nullptr;
+        }
+        mapfScene = new MapfScene(environment);
 
-        // e = new Environment(agents, graph);
 
-        // e->assignVacanAgents();
-
-        whca_environment = new WHCA_Environment(agents, graph);
-        whca_environment->assignVacanAgents();
         interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
 
-
-        //if(mapfScene) delete mapfScene;
-        if(mapfScene) delete mapfScene;
-        //mapfScene = new MapfScene(e);
-        mapfScene = new MapfScene(whca_environment);
 
         if(mapfView) delete mapfView;
         mapfView = new QGraphicsView(mapfScene, this);
@@ -349,11 +356,11 @@ void AnimationView::updateTimestep()
 {
     if (currentTaskGroup)
     {
-        whca_environment->runTimestep(timestep, currentTaskGroup.get());
+        environment->runTimestep(timestep, currentTaskGroup.get());
         currentTaskGroup.reset();
     } else
     {
-        whca_environment->runTimestep(timestep);
+        environment->runTimestep(timestep);
     }
     mapfScene->updateScene(timestep);
     timestep++;

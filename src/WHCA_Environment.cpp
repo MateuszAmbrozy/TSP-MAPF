@@ -1,12 +1,10 @@
 #include "../lib/WHCA_Environment.h"
 
 #include "../lib/setup.h"
-
+#include "QDebug"
 WHCA_Environment::WHCA_Environment(std::vector<Agent> agents, map::Graph graph)
-    : graph(graph),
-    tsp(graph), whca(graph)
+    : BaseEnvironment(graph), whca(graph)
 {
-    srand(time(0));
     for(auto& agent: agents)
     {
         this->addAgent(agent);
@@ -25,7 +23,7 @@ void WHCA_Environment::addAgent(Agent &newAgent)
     agents.push_back(WHCA_Agent(Agent(newAgent)));
 }
 
-void WHCA_Environment::assignVacanAgents()
+void WHCA_Environment::assignVacantAgents()
 {
     vacant_agents.clear();
     for(WHCA_Agent& agent : agents)
@@ -60,10 +58,6 @@ std::optional<WHCA_Agent> WHCA_Environment::random(std::vector<WHCA_Agent>& capa
 }
 
 
-void WHCA_Environment::addTaskGroup(const TaskGroup& taskGroup)
-{
-    task_list.push_back(taskGroup);
-}
 
 
 void WHCA_Environment::MOVEAGENTS(int timestep)
@@ -90,7 +84,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 map::Cell newPosition(nextPosition.x, nextPosition.y);
                 agent.agent.move(newPosition);
 
-                std::cout<<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep << "\n";
+                qDebug() <<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep;
                 if (timestep == path.back().t)
                 {
                     if (!agent.reachedCurrentWaypoint())
@@ -139,43 +133,6 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 
 }
 
-TaskGroup WHCA_Environment::TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std::vector<int> avaliablePickupY, std::vector<int> avaliableDropofX, std::vector<int> avaliableDropofY ) {
-    int numTasks = rand() % setup::maxTasks + 1;
-
-    std::vector<map::Cell> pickupPoints;
-
-    for (int i = 0; i < numTasks; ++i) {
-        int x = *select_randomly(avaliablePickupX.begin(), avaliablePickupX.end());
-        int y = *select_randomly(avaliablePickupY.begin(), avaliablePickupY.end());
-        pickupPoints.push_back(map::Cell(x, y));
-    }
-
-
-    int dropoffX = *select_randomly(avaliableDropofX.begin(), avaliableDropofX.end());
-    int dropoffY = *select_randomly(avaliableDropofY.begin(), avaliableDropofY.end());
-    map::Cell dropoffPoint(dropoffX, dropoffY);
-
-
-    int taskCapacity = rand() % setup::maxCapacity + 1;
-    int dropoffTime;
-    std::vector<int> stopTimes;
-    if (setup::maxStopTime > 0) {
-        for(int i=0; i<numTasks; i++)
-        {
-            stopTimes.push_back(rand() % setup::maxStopTime);
-        }
-        dropoffTime = rand() % setup::maxStopTime;
-    }
-    else
-    {
-        stopTimes = std::vector<int>(numTasks, 0);  // Default to 0 if maxStopTime is 0
-        dropoffTime = 0;
-    }
-
-    TaskGroup taskGroup(taskCapacity, pickupPoints, dropoffPoint, stopTimes, dropoffTime);
-
-    return taskGroup;
-}
 
 
 void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
@@ -191,10 +148,10 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
     {
         task_list.push_back(*task);
     }
-    else if(timestep % 10 == 0)
-    {
-        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
-    }
+    // else if(timestep % 10 == 0)
+    // {
+    //     task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
+    // }
 
 
     // Iterate over tasks and assign to agents if possible

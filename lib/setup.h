@@ -10,11 +10,7 @@ public:
     static const unsigned int maxTasks;
     static const unsigned int maxCapacity;
     static const unsigned int maxStopTime;
-
-
-
 };
-
 
 enum class AlgType {
     A_STAR = 0,

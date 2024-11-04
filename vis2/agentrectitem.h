@@ -41,6 +41,7 @@ public:
     void drawStartPoint(QGraphicsScene* scene, const Agent& agent);
     void draw(QGraphicsScene* scene, int timestep, const Agent& agent);
     void animateMoveAgent(const QRectF& newPosition);
+    void stopAnimation();
 };
 
 #endif // AGENTRECTITEM_H

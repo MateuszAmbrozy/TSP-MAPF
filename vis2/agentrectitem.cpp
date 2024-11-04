@@ -22,6 +22,7 @@
     {
         if (!agentRectItem) return;
 
+
         if (!moveAnimation) {
             moveAnimation = new QVariantAnimation();
             moveAnimation->setDuration(500);
@@ -42,6 +43,12 @@
         moveAnimation->setStartValue(agentRectItem->rect());
         moveAnimation->setEndValue(newPosition);
         moveAnimation->start();
+    }
+
+    void AgentRectItem::stopAnimation()
+    {
+        if(moveAnimation)
+            moveAnimation->stop();
     }
 
 

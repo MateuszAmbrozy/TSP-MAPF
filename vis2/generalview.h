@@ -1,30 +1,31 @@
 #ifndef GENERALVIEW_H
 #define GENERALVIEW_H
-#include "qwidget.h"
-#include <iostream>
-// #include <string>
-// #include "../lib/setup.h"
+
+#include <QWidget>
+#include <QRadioButton>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include "setup.h"
+
 class GeneralView : public QWidget
 {
-    enum Algorithm {
-        A_STAR,
-        WHCA
-    };
+    Q_OBJECT
+
 public:
+    GeneralView(QWidget* parent = nullptr);
 
+    AlgType getSelectedAlgorithm() const;
 
-    GeneralView();
-
-    void show();
-
-    Algorithm getSelectedAlgorithm() const;
-
-    void printSelectedAlgorithm() const;
+private slots:
+    void onCASelected();
+    void onWHCASelected();
 
 private:
-    Algorithm selectedAlgorithm;
-
-    void selectAlgorithm(int choice);
+    QRadioButton* CA;
+    QRadioButton* WHCA;
+    QLabel* label;
+    AlgType selectedAlgorithm;
 };
 
 #endif // GENERALVIEW_H

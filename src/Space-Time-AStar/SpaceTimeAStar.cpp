@@ -108,7 +108,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
                 path.push_back(finalCell);
             }
 
-            for (int t = 1; t <= waitTime; ++t) 
+            for (int t = 1; t <= waitTime; ++t)
             {
                 SpaceTimeCell::Cell waitCell(target.x, target.y,  waitT + t);
                 path.push_back(waitCell);

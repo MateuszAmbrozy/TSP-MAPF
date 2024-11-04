@@ -14,9 +14,9 @@ private:
 
     std::vector<SpaceTimeCell::Cell> pathToTarget(WHCA_Agent &unit, int currentTime, Reservation& table);
 
-    bool recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table);
+    bool recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table);
     bool isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table);
-    SpaceTimeCell::Cell findAlternativeWaitingCell(const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table);
+    SpaceTimeCell::Cell findAlternativeWaitingCell(const WHCA_Agent& agent, const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table);
 public:
     WHCA(map::Graph graph);
     std::vector<SpaceTimeCell::Cell> findNextWSteps(WHCA_Agent& unit, int currentTime, Reservation& table);

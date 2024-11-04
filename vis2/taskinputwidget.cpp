@@ -121,15 +121,16 @@ void TaskInputWidget::createTaskGroup()
 
     // Add pickup points to the scene
     if(pickupPointData.empty())
-        throw std::invalid_argument("No pickup points");
+        return;
     for (const auto &pointData : pickupPointData)
     {
         int x = pointData.point.x();
         int y = pointData.point.y();
-        int stopTime = pointData.value;
+        int stopTime = 10;
+        //int stopTime = pointData.value;
         if (x < 0 || y < 0)
         {
-            throw std::invalid_argument("Współrzędne muszą być dodatnie!");
+            return;
         }
         map::Cell pickup(x, y);
         pickupPoints.push_back(pickup);
@@ -139,8 +140,8 @@ void TaskInputWidget::createTaskGroup()
     int x = dropoffPointData.point.x();
     int y = dropoffPointData.point.y();
     dropoffPoint = map::Cell(x, y);
-    dropoffStopTime = dropoffPointData.value;
-
+    //dropoffStopTime = dropoffPointData.value;
+    dropoffStopTime = 10;
 
     std::shared_ptr<TaskGroup> taskGroup = std::make_unique<TaskGroup>(capacity, pickupPoints, dropoffPoint, stopTimes, dropoffStopTime);
 

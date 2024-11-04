@@ -8,6 +8,7 @@
 #include <QGraphicsView>
 #include <memory>
 #include "../lib/Environment.h"
+#include "../lib/BaseEnvironment.h"
 #include "animationscene.h"
 #include "qpropertyanimation.h"
 #include "taskinputwidget.h"
@@ -15,15 +16,12 @@
 class AnimationView : public QWidget
 {
     Q_OBJECT
-    enum Algorithm {
-        A_STAR,
-        WHCA
-    };
+
 public:
-    explicit AnimationView(QWidget *parent = 0);
+    explicit AnimationView(AlgType algorithm, QWidget *parent = 0);
     ~AnimationView();
 
-    void setAlgorithm(Algorithm algorithm);
+    void setAlgorithm(AlgType algorithm);
 
 private:
     MapfScene* mapfScene;
@@ -36,8 +34,12 @@ private:
     QGraphicsView *taskGroupView;
     QTimer* timer;
     int timestep;
-    //Environment* e;
-    WHCA_Environment* whca_environment;
+
+    // Environment* ca_environment;
+    // WHCA_Environment* whca_environment;
+    AlgType algorithm;
+    BaseEnvironment* environment;
+
     QPushButton* backButton;
     QHBoxLayout *mainLayout;
     QPushButton *startAnimation;
@@ -47,7 +49,7 @@ private:
     QWidget *sidebar;
     QPropertyAnimation *sidebarAnimation;
     bool sidebarVisible;
-    Algorithm algorithm;
+
 
     map::Graph graph;
     std::unique_ptr<InteractiveTaskRectItem> interactive_graph;
