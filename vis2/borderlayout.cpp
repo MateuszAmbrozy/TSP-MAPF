@@ -1,19 +1,5 @@
-/**
- * @file borderlayout.cpp
- * @author fl0mll
- * @date 2016/06/07
- *
- * This document contains proprietary information belonging to mllapps.com
- * Passing on and copying of this document, use and communication of its
- * contents is not permitted without prior written authorization.
- *
- * @brief A layout
- */
 #include "borderlayout.h"
 
-/*------------------------------------------------------------------------------
- * CTOR / DTOR
- *----------------------------------------------------------------------------*/
 BorderLayout::BorderLayout(QWidget *parent, int margin, int spacing)
     : QLayout(parent)
 {
@@ -35,9 +21,6 @@ BorderLayout::~BorderLayout()
     }
 }
 
-/*------------------------------------------------------------------------------
- *
- *----------------------------------------------------------------------------*/
 void BorderLayout::addItem(QLayoutItem *item)
 {
     add(item, West);

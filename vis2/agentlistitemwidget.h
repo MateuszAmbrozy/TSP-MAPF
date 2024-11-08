@@ -20,8 +20,8 @@ public:
         layout->addWidget(label);
 
         spinBox = new QSpinBox(this);
-        spinBox->setRange(0, 1000);  // Zakres pojemności od 0 do 1000
-        spinBox->setValue(capacity);  // Ustaw domyślną pojemność
+        spinBox->setRange(0, 1000);
+        spinBox->setValue(capacity);
         layout->addWidget(spinBox);
 
         connect(spinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &AgentListItemWidget::onCapacityChanged);

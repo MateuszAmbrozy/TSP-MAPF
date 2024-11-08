@@ -20,9 +20,9 @@ public:
     void updateGraphInScene();
 public slots:
     void toggleSidebar();
-    void loadMap();       // Funkcja do wczytywania mapy
-    void saveMap();       // Funkcja do zapisywania mapy
-    void clearAgents();   // Funkcja do czyszczenia agentów
+    void loadMap();
+    void saveMap();
+    void clearAgents();
 
 private:
     QToolButton *createSidebarButton(const QString& iconPath, const QString& title, std::function<void()> onClickFunction);
@@ -35,8 +35,8 @@ private:
     std::shared_ptr<map::Graph> createdMap;
     std::shared_ptr<std::vector<Agent>> created_agents;
 
-    bool sidebarVisible;  // Zmienna do przechowywania stanu paska
-    QPropertyAnimation *sidebarAnimation;  // Animacja paska
+    bool sidebarVisible;
+    QPropertyAnimation *sidebarAnimation;
     void setCreatedGraph(std::shared_ptr<map::Graph> map);
     void setCreatedAgents(std::shared_ptr<std::vector<Agent>> agents);
 };

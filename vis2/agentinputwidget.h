@@ -13,13 +13,10 @@
 class AgentInputWidget : public QWidget
 {
     Q_OBJECT
-
-
-    // Lista pojemności agentów
     struct AgentData
     {
-        QPoint point;  // Pozycja agenta
-        int capacity;  // Pojemność agenta
+        QPoint point;
+        int capacity;
     };
 
 
@@ -28,11 +25,11 @@ private:
     QGraphicsScene *scene;
     InteractiveAgentRectItem *graphItem;
 
-    QGraphicsView *graphicsView;  // Dodajemy QGraphicsView
+    QGraphicsView *graphicsView;
 
     QSpinBox *widthInput;
     QSpinBox *heightInput;
-    QListWidget *agentListWidget;  // Lista agentów z pojemnością
+    QListWidget *agentListWidget;
 
 
     void setScene(QGraphicsScene* scene);

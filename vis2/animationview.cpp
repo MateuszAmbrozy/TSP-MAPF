@@ -79,6 +79,14 @@ AnimationView::~AnimationView() {
         delete mapfScene;
     if(mapfView)
         delete mapfView;
+
+    // // Close and delete any additional windows opened during the session
+    // for (QWidget* window : additionalWindows) {
+    //     if (window) {
+    //         window->close();  // Close the window
+    //         delete window;     // Delete the window object
+    //     }
+    // }
 }
 
 void AnimationView::setAlgorithm(AlgType algorithm)
@@ -182,7 +190,9 @@ void AnimationView::showTaskGroupScene()
     taskGroupWindow->setAttribute(Qt::WA_DeleteOnClose);
     connect(QApplication::instance(), &QApplication::aboutToQuit, taskGroupWindow, &QWidget::close);
 
-    // Show the newly created window
+
+    //additionalWindows.push_back(taskGroupWindow);
+
     taskGroupWindow->show();
 }
 

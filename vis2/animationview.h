@@ -35,8 +35,6 @@ private:
     QTimer* timer;
     int timestep;
 
-    // Environment* ca_environment;
-    // WHCA_Environment* whca_environment;
     AlgType algorithm;
     BaseEnvironment* environment;
 
@@ -59,6 +57,8 @@ private:
     void setTaskGroup(std::shared_ptr<TaskGroup> taskGroup);
     QToolButton *createSidebarButton(const QString& iconPath, const QString& title, std::function<void()> onClickFunction);
     void updateView();
+
+    std::vector<QWidget*> additionalWindows;
 public slots:
     void stop();
     void start();
