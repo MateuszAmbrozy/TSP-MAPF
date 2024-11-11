@@ -1,3 +1,13 @@
+/**
+ * @file borderlayout.h
+ * @author Mateusz Ambroży
+ * @brief Border for menu
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef BORDERLAYOUT_H
 #define BORDERLAYOUT_H
 
@@ -44,4 +54,4 @@ private:
     QList<ItemWrapper *> list;
 };
 
-#endif // BORDERLAYOUT_H
+#endif

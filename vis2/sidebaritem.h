@@ -1,3 +1,13 @@
+/**
+ * @file sidebaritem.h
+ * @author Mateusz Ambroży
+ * @brief one item for menu bar
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef SIDEBARITEM_H
 #define SIDEBARITEM_H
 
@@ -23,4 +33,4 @@ private:
     QLabel * _titleLabel;
 };
 
-#endif // SIDEBARITEM_H
+#endif

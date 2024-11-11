@@ -32,7 +32,7 @@ int Agent::getAccessibleCapacity() const
     return accessibleCapacity;
 }
 
-std::vector<SpaceTimeCell::Cell> Agent::getPath() const
+std::vector<SpaceTime::Cell> Agent::getPath() const
 {
     return this->path;
 }
@@ -61,13 +61,13 @@ void Agent::clearTask()
     setIdle(true);
 }
 
-void Agent::assignPath(std::vector<SpaceTimeCell::Cell> path)
+void Agent::assignPath(std::vector<SpaceTime::Cell> path)
 {
     this->path = path;
 }
 void Agent::clearPath()
 {
-    assignPath(std::vector<SpaceTimeCell::Cell>{});
+    assignPath(std::vector<SpaceTime::Cell>{});
 }
 
 void Agent::setIdle(bool state)

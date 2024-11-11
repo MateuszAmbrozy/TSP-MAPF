@@ -1,3 +1,13 @@
+/**
+ * @file Reservation.h
+ * @author Mateusz Ambroży
+ * @brief 
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include <unordered_map>
 #include <utility>
@@ -11,7 +21,7 @@ class Reservation
 {
 public:
     std::unordered_map<int, std::unordered_map<int, std::unordered_map<int, bool>>> reservations;
-    
+
     // Rezerwacje krawędzi: klucz to ((x1, y1), t), wartość to (x2, y2) 
     std::unordered_map<std::pair<int, int>, std::unordered_map<int, std::pair<int, int>>, PairHash> edgeReservations;
 
@@ -34,27 +44,18 @@ public:
     }
 
     bool wouldCauseEdgeCollision(int x1, int y1, int t1, int x2, int y2) const {
-        // Klucz do rezerwacji dla (x2, y2) - sprawdzamy rezerwacje w tym punkcie w czasie t1
+
         auto reverseEdgeKey = std::make_pair(x2, y2);
 
         if (edgeReservations.count(reverseEdgeKey) && edgeReservations.at(reverseEdgeKey).count(t1)) {
             auto reservedMove = edgeReservations.at(reverseEdgeKey).at(t1);
-            // Sprawdzamy, czy rezerwowany ruch prowadzi z powrotem do (x1, y1)
+
             if (reservedMove.first == x1 && reservedMove.second == y1) {
-                return true;  // Istnieje kolizja na początku ruchu
+                return true;
             }
         }
 
-        // // Dodatkowo sprawdzamy, czy istnieje kolizja w czasie t2 (koniec ruchu)
-        // if (edgeReservations.count(reverseEdgeKey) && edgeReservations.at(reverseEdgeKey).count(t2)) {
-        //     auto reservedMove = edgeReservations.at(reverseEdgeKey).at(t2);
-        //     // Sprawdzamy, czy na końcu ruchu ktoś próbuje poruszać się z (x2, y2) do (x1, y1)
-        //     if (reservedMove.first == x1 && reservedMove.second == y1) {
-        //         return true;  // Istnieje kolizja na końcu ruchu
-        //     }
-        // }
 
-        // Jeśli żadna kolizja nie została wykryta, zwracamy false
         return false;
     }
 

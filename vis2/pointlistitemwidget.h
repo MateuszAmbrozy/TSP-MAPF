@@ -1,3 +1,14 @@
+/**
+ * @file pointlistitemwidget.h
+ * @author your name (you@domain.com)
+ * @brief widgets on menu bar
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+#pragma once
 #include <QWidget>
 #include <QSpinBox>
 #include <QHBoxLayout>

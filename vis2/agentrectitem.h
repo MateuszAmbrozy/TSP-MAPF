@@ -1,3 +1,13 @@
+/**
+ * @file agentrectitem.h
+ * @author Mateusz Ambroży
+ * @brief Class to display agents
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef AGENTRECTITEM_H
 #define AGENTRECTITEM_H
 
@@ -24,7 +34,6 @@ private:
     QGraphicsEllipseItem* startGraphicsItem = nullptr;
     std::vector<QGraphicsLineItem*> pathGraphicsItems;
 
-    // Animacja płynnego ruchu
     QVariantAnimation* moveAnimation = nullptr;
 
     QColor assignRandomColor();
@@ -42,6 +51,8 @@ public:
     void draw(QGraphicsScene* scene, int timestep, const Agent& agent);
     void animateMoveAgent(const QRectF& newPosition);
     void stopAnimation();
+
+    void setAnimationSpeed(int speed);
 };
 
-#endif // AGENTRECTITEM_H
+#endif

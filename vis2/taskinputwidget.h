@@ -1,3 +1,13 @@
+/**
+ * @file taskinputwidget.h
+ * @author Mateusz Ambroży
+ * @brief widget to add tasks
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef TASKINPUTWIDGET_H
 #define TASKINPUTWIDGET_H
 
@@ -6,7 +16,6 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QListWidget>
-// #include "taskgroupscene.h"
 #include "../lib/TaskGroup.h"
 #include "graph/inetractivetaskgraph.h"
 #include "pointlistitemwidget.h"
@@ -57,4 +66,4 @@ signals:
 
 };
 
-#endif // TASKINPUTWIDGET_H
+#endif

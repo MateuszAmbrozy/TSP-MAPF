@@ -1,10 +1,20 @@
+/**
+ * @file Cell.h
+ * @author Mateusz Ambroży
+ * @brief Cell and Node for Space Time A*
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include "../AStar/Node.h"
 #include "../Graph.h"
 
 
-namespace SpaceTimeCell
+namespace SpaceTime
 {
     struct Cell : public map::Cell
     {

@@ -1,3 +1,13 @@
+/**
+ * @file agentinputwidget.h
+ * @author Mateusz Ambroży
+ * @brief Window to editing graph (add Agents and Obstacles)
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef AGENTINPUTWIDGET_H
 #define AGENTINPUTWIDGET_H
 

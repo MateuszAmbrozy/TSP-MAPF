@@ -1,3 +1,13 @@
+/**
+ * @file Agent.h
+ * @author Mateusz Ambroży
+ * @brief Agent background class storing all necessery variables
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include "Space-Time-AStar/Cell.h"
 #include "TaskGroup.h"
@@ -13,9 +23,10 @@ private:
     map::Cell position; 
     TaskGroup tasks;  
     map::Cell startPos;
-    std::vector<SpaceTimeCell::Cell> path;
+    std::vector<SpaceTime::Cell> path;
     std::vector<map::Cell> illicits; //cells that agent cant enter becauese they are 
     bool idle;
+
 
 public:
     Agent(int id, int capacity, map::Cell position);
@@ -26,7 +37,7 @@ public:
     
     int getCapacity() const;
     int getAccessibleCapacity() const;
-    std::vector<SpaceTimeCell::Cell> getPath() const;
+    std::vector<SpaceTime::Cell> getPath() const;
     map::Cell getPosition() const;
     map::Cell getStartPosition() const;
     TaskGroup getTask() const;
@@ -35,7 +46,7 @@ public:
 
     void assignTask(const TaskGroup taskGroup);
     void clearTask();
-    void assignPath(std::vector<SpaceTimeCell::Cell> path);  // Pass by reference
+    void assignPath(std::vector<SpaceTime::Cell> path);  // Pass by reference
     void clearPath();
 
     void setIdle(bool state);

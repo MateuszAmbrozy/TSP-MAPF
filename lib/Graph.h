@@ -1,5 +1,14 @@
+/**
+ * @file Graph.h
+ * @author Mateusz Ambroży
+ * @brief Implementation of Base class of Cell and Graph
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
-
 #include <vector>
 
 namespace map{

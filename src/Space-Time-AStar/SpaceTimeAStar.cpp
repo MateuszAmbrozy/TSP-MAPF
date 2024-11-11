@@ -4,27 +4,61 @@ SpaceTimeAStar::SpaceTimeAStar(map::Graph graph)
 : A::Astar(graph)
 {}
 
-std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, SpaceTimeCell::Node &current, const Reservation &table) {
-    std::vector<SpaceTimeCell::Cell> neighbors;
-    std::vector<map::Cell> illictis = agent.getIllicits();
+// std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, SpaceTime::Node &current, const Reservation &table) {
+//     std::vector<SpaceTime::Cell> neighbors;
+//     std::vector<map::Cell> illictis = agent.getIllicits();
     
-    for (auto dir : setup::moves) {
-        SpaceTimeCell::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
+//     for (auto dir : setup::moves) {
+//         SpaceTime::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
+//         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
+//         if (isValid(neighbor.x, neighbor.y) &&
+//              !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
+//              !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y) &&
+//              !containtsIllicits)
+//         {
+//             neighbors.push_back(neighbor);
+//         }
+//     }
+//     return neighbors;
+// }
+
+std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, map::Cell target,  SpaceTime::Node &current, const Reservation &table) {
+    std::vector<SpaceTime::Cell> neighbors;
+    std::vector<SpaceTime::Cell> reservedNeighbors;
+    std::vector<map::Cell> illictis = agent.getIllicits();
+
+    for (auto dir : setup::moves)
+    {
+        SpaceTime::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
-        if (isValid(neighbor.x, neighbor.y) &&
-             !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y) &&
-             !containtsIllicits)
+
+        // Check if the neighbor is valid and doesn't contain any illicits
+        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits)
         {
-            neighbors.push_back(neighbor);
+
+            if (isDestination(neighbor.x, neighbor.y, target.x, target.y))
+            {
+                if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y)) {
+                    neighbors.push_back(neighbor);  // Prioritize target cell even if reserved
+                }
+            }
+            else {
+                if (!table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
+                    !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
+                {
+                    neighbors.push_back(neighbor);
+                }
+            }
         }
     }
+
+
     return neighbors;
 }
 
-std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
+std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
 {
-    std::vector<SpaceTimeCell::Cell> path;
+    std::vector<SpaceTime::Cell> path;
 
     if (!isValid(target.x, target.y)) 
     {
@@ -35,24 +69,24 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
     if (isDestination(start.x, start.y, target.x, target.y)) 
     {
         std::cout << "Already at the destination." << std::endl;
-        SpaceTimeCell::Cell buf(target, currentTime + 1);
+        SpaceTime::Cell buf(target, currentTime + 1);
         return {buf};
     }
 
     std::vector<std::vector<bool>> closedList(aStarGraph.size(), std::vector<bool>(aStarGraph[0].size(), false));
-    std::priority_queue<SpaceTimeCell::Node, std::vector<SpaceTimeCell::Node>, A::CompareCells> openList;
+    std::priority_queue<SpaceTime::Node, std::vector<SpaceTime::Node>, A::CompareCells> openList;
 
-    SpaceTimeCell::Node startNode(currentTime, start.x, start.y, start.isObstacle);
+    SpaceTime::Node startNode(currentTime, start.x, start.y, start.isObstacle);
 
     startNode.gCost = 0;
-    startNode.hCost = SpaceTimeCell::Node::calculateH(start.x, start.y, target.x, target.y);
+    startNode.hCost = SpaceTime::Node::calculateH(start.x, start.y, target.x, target.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
     startNode.parent = nullptr;
 
     openList.push(startNode);
     int maxWaitTime = 10;
     bool waiting = false;
-    SpaceTimeCell::Node currentCell;
+    SpaceTime::Node currentCell;
     while (!openList.empty()) 
     {
         currentCell = openList.top();
@@ -61,11 +95,11 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
         if (isDestination(currentCell.x, currentCell.y, target.x, target.y)) 
         {
             int waitT = currentCell.t;
-            SpaceTimeCell::Node* temp = &currentCell;
+            SpaceTime::Node* temp = &currentCell;
             while (temp != nullptr) {
-                SpaceTimeCell::Cell cell(temp->x, temp->y, temp->t);
+                SpaceTime::Cell cell(temp->x, temp->y, temp->t);
                 path.push_back(cell);
-                temp = dynamic_cast<SpaceTimeCell::Node*>(temp->parent);
+                temp = dynamic_cast<SpaceTime::Node*>(temp->parent);
             }
             std::reverse(path.begin(), path.end());
 
@@ -74,7 +108,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
             {
                 path.pop_back();
 
-                SpaceTimeCell::Node* parentCell = dynamic_cast<SpaceTimeCell::Node*>(currentCell.parent);
+                SpaceTime::Node* parentCell = dynamic_cast<SpaceTime::Node*>(currentCell.parent);
                 if (!parentCell) {
                     std::cerr << "No parent cell to wait in. Exiting...\n";
                     return path;
@@ -82,7 +116,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
 
                 while (!isTargetFreeForEntireWaitTime(target, waitT, waitTime, table)) 
                 {
-                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT-1); 
+                    SpaceTime::Cell waitCell(parentCell->x, parentCell->y, waitT-1);
                     recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
                 }
 
@@ -96,21 +130,21 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
                     b) przy takich sytuacjach replanowanie ścieżek (wszystkich????)
                     c)
                 */
-                SpaceTimeCell::Cell buf = path.back();
+                SpaceTime::Cell buf = path.back();
                 if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y))
                 {
-                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT); 
+                    SpaceTime::Cell waitCell(parentCell->x, parentCell->y, waitT);
                     recursiveWaitAndReturn(&waitCell, nullptr, waitT, path, table);
                 }
                 
 
-                SpaceTimeCell::Cell finalCell(target.x, target.y, waitT);
+                SpaceTime::Cell finalCell(target.x, target.y, waitT);
                 path.push_back(finalCell);
             }
 
             for (int t = 1; t <= waitTime; ++t)
             {
-                SpaceTimeCell::Cell waitCell(target.x, target.y,  waitT + t);
+                SpaceTime::Cell waitCell(target.x, target.y,  waitT + t);
                 path.push_back(waitCell);
             }
             
@@ -120,12 +154,12 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
     
 
         closedList[currentCell.x][currentCell.y] = true;
-        std::vector<SpaceTimeCell::Cell> neighbors = getNeighbors(unit, currentCell, table);
+        std::vector<SpaceTime::Cell> neighbors = getNeighbors(unit, target, currentCell, table);
 
         if (neighbors.empty() && maxWaitTime > 0) 
         {
             std::cout<<"neighbours empty\n";
-            SpaceTimeCell::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, new SpaceTimeCell::Node(currentCell));
+            SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, new SpaceTime::Node(currentCell));
             openList.push(waitNode);
             maxWaitTime--;
             waiting = true;
@@ -138,10 +172,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
             for (const auto& neighbor : neighbors) {
                 if (!closedList[neighbor.x][neighbor.y]) {
                     double gNew = currentCell.gCost + 1;
-                    double hNew = SpaceTimeCell::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
+                    double hNew = SpaceTime::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
                     double fNew = gNew + hNew;
 
-                    SpaceTimeCell::Node neighborCell(currentCell.t + 1, neighbor.x, neighbor.y, false, new SpaceTimeCell::Node(currentCell), gNew, hNew, fNew);
+                    SpaceTime::Node neighborCell(currentCell.t + 1, neighbor.x, neighbor.y, false, new SpaceTime::Node(currentCell), gNew, hNew, fNew);
                     openList.push(neighborCell);
                 }
             }
@@ -160,23 +194,23 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit,
 
 
 
-bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table) {
+bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table) {
     if (!table.isReserved(currentCell->x, currentCell->y, waitT))
     {
-        path.push_back(SpaceTimeCell::Cell(currentCell->x, currentCell->y, waitT));
+        path.push_back(SpaceTime::Cell(currentCell->x, currentCell->y, waitT));
         waitT++;
         return true;
     }
 
     if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT))
     {
-        path.push_back(SpaceTimeCell::Cell(parentCell->x, parentCell->y, waitT));
+        path.push_back(SpaceTime::Cell(parentCell->x, parentCell->y, waitT));
         waitT++;
         return true;
     }
 
-    SpaceTimeCell::Cell waitCell(currentCell->x, currentCell->y, waitT);
-    SpaceTimeCell::Cell alternative = findAlternativeWaitingCell(waitCell, waitT, table);
+    SpaceTime::Cell waitCell(currentCell->x, currentCell->y, waitT);
+    SpaceTime::Cell alternative = findAlternativeWaitingCell(waitCell, waitT, table);
     
     if (alternative.x != -1)
     {
@@ -200,10 +234,10 @@ bool SpaceTimeAStar::recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, Sp
     }
 }
 
-SpaceTimeCell::Cell SpaceTimeAStar::findAlternativeWaitingCell(const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table) {
+SpaceTime::Cell SpaceTimeAStar::findAlternativeWaitingCell(const SpaceTime::Cell& cell, int currentTime, Reservation& table) {
     currentTime--;
     for (auto dir : setup::moves) {
-        SpaceTimeCell::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
+        SpaceTime::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
         if (isValid(neighbor.x, neighbor.y) &&
              !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
              !table.wouldCauseEdgeCollision(cell.x, cell.y, currentTime, neighbor.x, neighbor.y))
@@ -212,7 +246,7 @@ SpaceTimeCell::Cell SpaceTimeAStar::findAlternativeWaitingCell(const SpaceTimeCe
         }
     }
 
-    return SpaceTimeCell::Cell(-1, -1, currentTime);
+    return SpaceTime::Cell(-1, -1, currentTime);
 }
 bool SpaceTimeAStar::isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table) {
     for (int t = 0; t <= waitTime; ++t) 
@@ -229,8 +263,8 @@ bool SpaceTimeAStar::isTargetFreeForEntireWaitTime(const map::Cell& target, int 
 
 
 
-std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTime, TaskGroup groupTask, std::vector<int> taskOrder, Reservation& table) {
-    std::vector<SpaceTimeCell::Cell> fullPath;
+std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTime, TaskGroup groupTask, std::vector<int> taskOrder, Reservation& table) {
+    std::vector<SpaceTime::Cell> fullPath;
     map::Cell startPos = unit.getPosition();
     map::Cell currentAgentPosition = unit.getPosition();
     std::vector<map::Cell> waypoints;
@@ -247,7 +281,7 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         waypoints.push_back(groupTask[taskIdx]);
         stopTime = groupTask.getPickupStopTime(taskIdx);
 
-        std::vector<SpaceTimeCell::Cell> path = pathToTarget(unit, currentAgentPosition, stopTime, currentTime, currentTaskPosition, table);
+        std::vector<SpaceTime::Cell> path = pathToTarget(unit, currentAgentPosition, stopTime, currentTime, currentTaskPosition, table);
         if(path.size() == 0)
         {
             std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
@@ -258,7 +292,6 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         {
             currentTime++;
         }
-        // Ensure no duplication of cells when appending the path
         else if (!fullPath.empty() && fullPath.back().x == path.front().x &&
             fullPath.back().y == path.front().y && fullPath.back().t == path.front().t) {
             path.erase(path.begin());
@@ -268,15 +301,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         currentTime = fullPath.back().t;
         currentAgentPosition = currentTaskPosition;
     }
-    // std::cout<<std::endl;
-    // for(auto c : fullPath)
-    // {
-    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    // }
 
     ///////////////// Dropoff handling
     {
-        std::vector<SpaceTimeCell::Cell> dropoffPath = pathToTarget(unit, currentAgentPosition, groupTask.getDropoffStopTime(), currentTime, groupTask.getDropoffLocation(), table);
+        std::vector<SpaceTime::Cell> dropoffPath = pathToTarget(unit, currentAgentPosition, groupTask.getDropoffStopTime(), currentTime, groupTask.getDropoffLocation(), table);
         if(dropoffPath.size() == 0)
         {
             std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
@@ -298,15 +326,10 @@ std::vector<SpaceTimeCell::Cell> SpaceTimeAStar::findPath(Agent& unit, int curre
         
         currentAgentPosition = dropoffPath.back();
     }
-    //     std::cout<<std::endl;
-    // for(auto c : fullPath)
-    // {
-    //     std::cout<<c.x << ", " << c.y << " t: " << c.t << " -> ";
-    // }
 
     //////////////// Return to start position
     {
-        std::vector<SpaceTimeCell::Cell> returnPath = pathToTarget(unit, currentAgentPosition, 0, currentTime, startPos, table);
+        std::vector<SpaceTime::Cell> returnPath = pathToTarget(unit, currentAgentPosition, 0, currentTime, startPos, table);
         if(returnPath.size() == 0)
         {
             std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";

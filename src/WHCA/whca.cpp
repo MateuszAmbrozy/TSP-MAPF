@@ -5,28 +5,62 @@ WHCA::WHCA(map::Graph graph)
     : A::Astar(graph)
 {}
 
-std::vector<SpaceTimeCell::Cell> WHCA::getNeighbors(const WHCA_Agent& agent, SpaceTimeCell::Node &current, const Reservation &table) {
-    std::vector<SpaceTimeCell::Cell> neighbors;
+// std::vector<SpaceTime::Cell> WHCA::getNeighbors(const WHCA_Agent& agent, SpaceTime::Node &current, const Reservation &table) {
+//     std::vector<SpaceTime::Cell> neighbors;
+//     std::vector<map::Cell> illictis = agent.agent.getIllicits();
+
+//     for (auto dir : setup::moves) {
+
+//         SpaceTime::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
+//         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
+
+
+//         if (isValid(neighbor.x, neighbor.y) &&
+//             !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
+//             !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y) &&
+//             !containtsIllicits)
+//         {
+//             neighbors.push_back(neighbor);
+//         }
+//     }
+//     return neighbors;
+// }
+std::vector<SpaceTime::Cell> WHCA::getNeighbors(const WHCA_Agent& agent, map::Cell target,  SpaceTime::Node &current, const Reservation &table) {
+    std::vector<SpaceTime::Cell> neighbors;
+    std::vector<SpaceTime::Cell> reservedNeighbors;
     std::vector<map::Cell> illictis = agent.agent.getIllicits();
 
-    for (auto dir : setup::moves) {
-
-        SpaceTimeCell::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
+    for (auto dir : setup::moves)
+    {
+        SpaceTime::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
-        if (isValid(neighbor.x, neighbor.y) &&
-            !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-            !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y) &&
-            !containtsIllicits)
+
+        // Check if the neighbor is valid and doesn't contain any illicits
+        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits)
         {
-            neighbors.push_back(neighbor);
+
+            if (isDestination(neighbor.x, neighbor.y, target.x, target.y))
+            {
+                if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y)) {
+                    neighbors.push_back(neighbor);  // Prioritize target cell even if reserved
+                }
+            }
+            else {
+                if (!table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
+                    !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
+                {
+                    neighbors.push_back(neighbor);
+                }
+            }
         }
     }
+
+
     return neighbors;
 }
-
-std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int currentTime, Reservation& table)
+std::vector<SpaceTime::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int currentTime, Reservation& table)
 {
-    std::vector<SpaceTimeCell::Cell> path;
+    std::vector<SpaceTime::Cell> path;
     map::Cell target = unit.getWaypoints()[unit.getCurrentWaypointIndex()].first;
     map::Cell start = unit.agent.getPosition();
     int waitTime = unit.getWaypoints()[unit.getCurrentWaypointIndex()].second;
@@ -43,16 +77,16 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
     {
         std::cout << "Already at the destination." << std::endl;
         unit.incrementWaypointIndex();
-        SpaceTimeCell::Cell buf(target, currentTime + 1);
+        SpaceTime::Cell buf(target, currentTime + 1);
         return {buf};
     }
 
     std::vector<std::vector<bool>> closedList(aStarGraph.size(), std::vector<bool>(aStarGraph[0].size(), false));
-    std::priority_queue<SpaceTimeCell::Node, std::vector<SpaceTimeCell::Node>, A::CompareCells> openList;
+    std::priority_queue<SpaceTime::Node, std::vector<SpaceTime::Node>, A::CompareCells> openList;
 
-    SpaceTimeCell::Node startNode(currentTime, start.x, start.y, start.isObstacle);
+    SpaceTime::Node startNode(currentTime, start.x, start.y, start.isObstacle);
     startNode.gCost = 0;
-    startNode.hCost = SpaceTimeCell::Node::calculateH(start.x, start.y, target.x, target.y);
+    startNode.hCost = SpaceTime::Node::calculateH(start.x, start.y, target.x, target.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
     startNode.parent = nullptr;
 
@@ -60,8 +94,8 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
     int maxWaitTime = windowSize;
     bool waiting = false;
     int startTime = currentTime;
-    SpaceTimeCell::Node currentCell = openList.top();
-    SpaceTimeCell::Node* bestCell = &startNode;
+    SpaceTime::Node currentCell = openList.top();
+    SpaceTime::Node* bestCell = &startNode;
 
 
     while (!openList.empty() && bestCell->t < startTime + windowSize )
@@ -77,12 +111,12 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
         {
             int waitT = currentCell.t;
 
-            SpaceTimeCell::Node* temp = &currentCell;
+            SpaceTime::Node* temp = &currentCell;
             while (temp != nullptr)
             {
-                SpaceTimeCell::Cell cell(temp->x, temp->y, temp->t);
+                SpaceTime::Cell cell(temp->x, temp->y, temp->t);
                 path.push_back(cell);
-                temp = dynamic_cast<SpaceTimeCell::Node*>(temp->parent);
+                temp = dynamic_cast<SpaceTime::Node*>(temp->parent);
             }
             std::reverse(path.begin(), path.end());
 
@@ -91,7 +125,7 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
             {
                 path.pop_back();
 
-                 SpaceTimeCell::Node* parentCell = dynamic_cast<SpaceTimeCell::Node*>(currentCell.parent);
+                 SpaceTime::Node* parentCell = dynamic_cast<SpaceTime::Node*>(currentCell.parent);
                 if (!parentCell) {
                     std::cerr << "No parent cell to wait in. Exiting...\n";
                     return {};
@@ -99,25 +133,25 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
 
                 while (!isTargetFreeForEntireWaitTime(target, waitT, waitTime, table))
                 {
-                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT-1);
+                    SpaceTime::Cell waitCell(parentCell->x, parentCell->y, waitT-1);
                     recursiveWaitAndReturn(unit, &waitCell, nullptr, waitT, path, table);
                 }
 
-                SpaceTimeCell::Cell buf = path.back();
+                SpaceTime::Cell buf = path.back();
                 if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y))
                 {
-                    SpaceTimeCell::Cell waitCell(parentCell->x, parentCell->y, waitT);
+                    SpaceTime::Cell waitCell(parentCell->x, parentCell->y, waitT);
                     recursiveWaitAndReturn(unit, &waitCell, nullptr, waitT, path, table);
                 }
 
 
-                SpaceTimeCell::Cell finalCell(target.x, target.y, waitT);
+                SpaceTime::Cell finalCell(target.x, target.y, waitT);
                 path.push_back(finalCell);
             }
 
             for (int t = 0; t <= waitTime; ++t)
             {
-                SpaceTimeCell::Cell waitCell(target.x, target.y,  waitT + t + 1);
+                SpaceTime::Cell waitCell(target.x, target.y,  waitT + t + 1);
                 path.push_back(waitCell);
             }
 
@@ -127,13 +161,13 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
 
 
         closedList[currentCell.x][currentCell.y] = true;
-        std::vector<SpaceTimeCell::Cell> neighbors = getNeighbors(unit, currentCell, table);
+        std::vector<SpaceTime::Cell> neighbors = getNeighbors(unit, target, currentCell, table);
 
 
         if (neighbors.empty() && maxWaitTime > 0)
         {
             std::cout<<"neighbours empty\n";
-            SpaceTimeCell::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, new SpaceTimeCell::Node(currentCell));
+            SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, new SpaceTime::Node(currentCell));
             openList.push(waitNode);
             maxWaitTime--;
             waiting = true;
@@ -145,10 +179,10 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
             for (const auto& neighbor : neighbors) {
                 if (!closedList[neighbor.x][neighbor.y]) {
                     double gNew = currentCell.gCost + 1;
-                    double hNew = SpaceTimeCell::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
+                    double hNew = SpaceTime::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
                     double fNew = gNew + hNew;
 
-                    SpaceTimeCell::Node neighborCell(currentCell.t + 1, neighbor.x, neighbor.y, false, new SpaceTimeCell::Node(currentCell), gNew, hNew, fNew);
+                    SpaceTime::Node neighborCell(currentCell.t + 1, neighbor.x, neighbor.y, false, new SpaceTime::Node(currentCell), gNew, hNew, fNew);
                     openList.push(neighborCell);
                 }
             }
@@ -161,15 +195,15 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
     if (waiting) {
         std::cerr << "Agent has reached max waiting time with no valid path found.\n";
     }
-    SpaceTimeCell::Node* temp = bestCell;
+    SpaceTime::Node* temp = bestCell;
     while (temp != nullptr) {
-        SpaceTimeCell::Cell cell(temp->x, temp->y, temp->t);
+        SpaceTime::Cell cell(temp->x, temp->y, temp->t);
         path.push_back(cell);
-        temp = dynamic_cast<SpaceTimeCell::Node*>(temp->parent);
+        temp = dynamic_cast<SpaceTime::Node*>(temp->parent);
     }
     std::reverse(path.begin(), path.end());
 
-    std::vector<SpaceTimeCell::Cell> limitedPath;
+    std::vector<SpaceTime::Cell> limitedPath;
     int stepsToMove = std::min(stepSize, static_cast<int>(path.size()));
     limitedPath.insert(limitedPath.end(), path.begin(), path.begin() + stepsToMove);
 
@@ -178,11 +212,10 @@ std::vector<SpaceTimeCell::Cell> WHCA::pathToTarget(WHCA_Agent& unit, int curren
 }
 
 
-
-bool WHCA::recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table) {
+bool WHCA::recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table) {
     if (!table.isReserved(currentCell->x, currentCell->y, waitT))
     {
-        path.push_back(SpaceTimeCell::Cell(currentCell->x, currentCell->y, waitT));
+        path.push_back(SpaceTime::Cell(currentCell->x, currentCell->y, waitT));
         qDebug() << "Push wait 1 recursive cell:  (" << currentCell->x << ", " << currentCell->y << "), " << currentCell->t;
         waitT++;
         return true;
@@ -190,18 +223,18 @@ bool WHCA::recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTimeCell::Cell* 
 
     if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT))
     {
-        path.push_back(SpaceTimeCell::Cell(parentCell->x, parentCell->y, waitT));
+        path.push_back(SpaceTime::Cell(parentCell->x, parentCell->y, waitT));
         qDebug() << "Push wait 2 recursive cell:  (" << currentCell->x << ", " << currentCell->y << "), " << currentCell->t;
         waitT++;
         return true;
     }
 
-    SpaceTimeCell::Cell waitCell(currentCell->x, currentCell->y, waitT);
-    SpaceTimeCell::Cell alternative = findAlternativeWaitingCell(agent, waitCell, waitT, table);
+    SpaceTime::Cell waitCell(currentCell->x, currentCell->y, waitT);
+    SpaceTime::Cell alternative = findAlternativeWaitingCell(agent, waitCell, waitT, table);
 
     if (alternative.x != -1)
     {
-        path.push_back(alternative);
+       path.push_back(alternative);
         waitT++;
         qDebug() << "Push wait 3 recursive cell:  (" << alternative.x << ", " << alternative.y << "), " << alternative.t;
         return recursiveWaitAndReturn(agent, &alternative, currentCell, waitT, path, table);
@@ -213,11 +246,11 @@ bool WHCA::recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTimeCell::Cell* 
     }
 }
 
-SpaceTimeCell::Cell WHCA::findAlternativeWaitingCell(const WHCA_Agent& agent, const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table) {
+SpaceTime::Cell WHCA::findAlternativeWaitingCell(const WHCA_Agent& agent, const SpaceTime::Cell& cell, int currentTime, Reservation& table) {
     currentTime--;
     std::vector<map::Cell> illictis = agent.agent.getIllicits();
     for (auto dir : setup::moves) {
-        SpaceTimeCell::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
+        SpaceTime::Cell neighbor(cell.x + dir.first, cell.y + dir.second, currentTime + 1);
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
         if (isValid(neighbor.x, neighbor.y) &&
             !table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
@@ -231,7 +264,7 @@ SpaceTimeCell::Cell WHCA::findAlternativeWaitingCell(const WHCA_Agent& agent, co
         }
     }
 
-    return SpaceTimeCell::Cell(-1, -1, currentTime);
+    return SpaceTime::Cell(-1, -1, currentTime);
 }
 bool WHCA::isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table) {
     for (int t = 0; t <= waitTime + 1; ++t)
@@ -248,11 +281,9 @@ bool WHCA::isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime,
 
 
 
-std::vector<SpaceTimeCell::Cell> WHCA::findNextWSteps(WHCA_Agent& unit, int currentTime, Reservation& table)
+std::vector<SpaceTime::Cell> WHCA::findNextWSteps(WHCA_Agent& unit, int currentTime, Reservation& table)
 {
-    std::vector<SpaceTimeCell::Cell> path;
-
-    std::vector<map::Cell> waypoints;
+    std::vector<SpaceTime::Cell> path;
 
 
     path = pathToTarget(unit, currentTime, table);
@@ -274,6 +305,7 @@ std::vector<SpaceTimeCell::Cell> WHCA::findNextWSteps(WHCA_Agent& unit, int curr
     for (int i = 0; i < steps; ++i) {
         table.reserve(path[i].x, path[i].y, path[i].t);
         table.reserve(path[i].x, path[i].y, path[i].t + 1);
+        //table.reserve(path[i].x, path[i].y, path[i].t + 2);
         //qDebug() << "ID: " << unit.agent.getId() << "(" << path[i].x<< ", " << path[i].y << "), T: " <<  path[i].t << " -> ";
         if (i < steps - 1)
         {

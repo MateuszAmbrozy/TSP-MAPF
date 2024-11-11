@@ -38,3 +38,10 @@ void MapfScene::updateScene(int timestep)
 
     update();
 }
+
+void MapfScene::updateAgentAnimationSpeed(int speed)
+{
+    for (auto* vis_agent : vis_agents) {
+        vis_agent->setAnimationSpeed(speed);
+    }
+}

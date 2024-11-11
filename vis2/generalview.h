@@ -1,3 +1,13 @@
+/**
+ * @file generalview.h
+ * @author Mateusz Ambroży
+ * @brief main window to chose algorithm
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef GENERALVIEW_H
 #define GENERALVIEW_H
 
@@ -28,4 +38,4 @@ private:
     AlgType selectedAlgorithm;
 };
 
-#endif // GENERALVIEW_H
+#endif

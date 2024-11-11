@@ -1,3 +1,13 @@
+/**
+ * @file agentlistitemwidget.h
+ * @author Mateusz Ambroży
+ * @brief QSpinbox to display capacity of agents and edit them
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef AGENTLISTITEMWIDGET_H
 #define AGENTLISTITEMWIDGET_H
 

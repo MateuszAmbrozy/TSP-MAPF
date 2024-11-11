@@ -1,3 +1,13 @@
+/**
+ * @file SpaceTimeAStar.h
+ * @author Mateusz Ambroży
+ * @brief Implementation of Space Time A* 
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include <vector>
 
@@ -14,12 +24,12 @@
 class SpaceTimeAStar :public A::Astar
 {
 private:
-    std::vector<SpaceTimeCell::Cell> getNeighbors(const Agent& agent, SpaceTimeCell::Node &current, const Reservation &table);
-    std::vector<SpaceTimeCell::Cell> pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table);
-    bool recursiveWaitAndReturn(SpaceTimeCell::Cell* currentCell, SpaceTimeCell::Cell* parentCell, int& waitT, std::vector<SpaceTimeCell::Cell>& path, Reservation& table);
+    std::vector<SpaceTime::Cell> getNeighbors(const Agent& agent, map::Cell target, SpaceTime::Node &current, const Reservation &table);
+    std::vector<SpaceTime::Cell> pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table);
+    bool recursiveWaitAndReturn(SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table);
     bool isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table);
-    SpaceTimeCell::Cell findAlternativeWaitingCell(const SpaceTimeCell::Cell& cell, int currentTime, Reservation& table);
+    SpaceTime::Cell findAlternativeWaitingCell(const SpaceTime::Cell& cell, int currentTime, Reservation& table);
 public:
     SpaceTimeAStar(map::Graph graph);
-    std::vector<SpaceTimeCell::Cell> findPath(Agent& unit, int currentTime, TaskGroup groupTask, std::vector<int> taskOrder, Reservation& table);
+    std::vector<SpaceTime::Cell> findPath(Agent& unit, int currentTime, TaskGroup groupTask, std::vector<int> taskOrder, Reservation& table);
 };

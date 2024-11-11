@@ -1,3 +1,13 @@
+/**
+ * @file settingsview.h
+ * @author your name (you@domain.com)
+ * @brief base function for menu bar
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef SETTINGSVIEW_H
 #define SETTINGSVIEW_H
 
@@ -24,7 +34,7 @@ public:
 
 public slots:
     void changeCenterWidget(bool);
-    void toggleSidebar();  // Nowa funkcja do chowania/rozwijania paska
+    void toggleSidebar();
 
 private:
     QToolButton * createSidebarButton(const QString& iconPath, const QString& title);
@@ -38,7 +48,7 @@ private:
 
 
     bool sidebarVisible;  // Zmienna do przechowywania stanu paska
-    QPropertyAnimation* sidebarAnimation;  // Animacja paska
+    QPropertyAnimation* sidebarAnimation;
     void initGraph();
 };
 

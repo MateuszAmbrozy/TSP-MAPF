@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author Mateusz Ambroży
+ * @brief main
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "settingsview.h"
 #include <QApplication>
 #include <QFontDatabase>

@@ -1,3 +1,13 @@
+/**
+ * @file BaseEnvironment.h
+ * @author Mateusz Ambroży
+ * @brief Base class to for Environment and WHCA Environment
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef BASEENVIRONMENT_H
 #define BASEENVIRONMENT_H
 #include "Reservation.h"

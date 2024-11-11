@@ -1,4 +1,13 @@
-// mapfscene.h
+/**
+ * @file animationscene.h
+ * @author Mateusz Ambroży
+ * @brief Scene in AnimationView where graph, agents draw and animate
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef MAPFSCENE_H
 #define MAPFSCENE_H
 
@@ -21,6 +30,8 @@ public:
     ~MapfScene();
     void drawEnvironment();
     void updateScene(int timestep);
+
+    void updateAgentAnimationSpeed(int speed);
 };
 
-#endif // MAPFSCENE_H
+#endif

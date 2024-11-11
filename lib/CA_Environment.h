@@ -1,12 +1,19 @@
+/**
+ * @file Environment.h
+ * @author Mateusz Ambroży
+ * @brief Cooperative A* Environment 
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include <iostream>
 #include <vector>
 #include <optional>
 #include <ctime>
 #include <unordered_map>
-//#include <chrono>
-
-
 #include "Agent.h"
 
 #include "Graph.h"
@@ -17,7 +24,7 @@
 #include "BaseEnvironment.h"
 
 
-class Environment : public BaseEnvironment
+class CA_Environment : public BaseEnvironment
 {
 private:
     std::vector<Agent> agents;
@@ -31,7 +38,7 @@ private:
     std::optional<Agent> random(std::vector<Agent>& capableAgents) const;
 
 public:
-    Environment(std::vector<Agent> agents, map::Graph graph);
+    CA_Environment(std::vector<Agent> agents, map::Graph graph);
 
 
     std::vector<Agent> getAgents() {return this->agents;}

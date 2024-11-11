@@ -1,3 +1,13 @@
+/**
+ * @file AStar.h
+ * @author Mateusz Ambroży
+ * @brief Typical A* algorithm
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include "../Graph.h"
 #include "../TaskGroup.h"

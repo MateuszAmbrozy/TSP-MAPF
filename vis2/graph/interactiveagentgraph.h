@@ -1,3 +1,13 @@
+/**
+ * @file interactiveagentgraph.h
+ * @author Mateusz Ambroży
+ * @brief Graph to add agents and obstacles
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef INTERACTIVEAGENTGRAPH_H
 #define INTERACTIVEAGENTGRAPH_H
 

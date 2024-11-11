@@ -1,3 +1,13 @@
+/**
+ * @file interactivecellitem.h
+ * @author Mateusz Ambroży
+ * @brief Class of cell which can be interactive with user (LMB/RMB)
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef INTERACTIVECELLITEM_H
 #define INTERACTIVECELLITEM_H
 #include <QGraphicsRectItem>

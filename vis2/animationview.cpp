@@ -8,19 +8,20 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QTextStream>
+#include <QLabel>
 AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
     : QWidget(parent),
     inputWidget(nullptr),
     timestep(0),
+    animationSpeed(500),
     algorithm(algorithm),
     sidebarVisible(true)
-
 {
     mapfScene = nullptr;
     mapfView = nullptr;
     mainLayout = new QHBoxLayout(this);
 
-    // Create sidebar layout and add buttons
+    // Sidebar setup
     QVBoxLayout *sidebarLayout = new QVBoxLayout();
     sidebar = new QWidget(this);
 
@@ -30,8 +31,6 @@ AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/pause.svg", "Stop", [this]() { stop(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/add.svg", "Add Task", [this]() { showTaskGroupScene(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload map", [this]() { loadMap(); }));
-    //sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload tasks", [this]() { loadTasks(); }));
-    //sidebarLayout->addSpacerItem(new QSpacerItem(0, 20, QSizePolicy::Minimum, QSizePolicy::Expanding));
     sidebar->setLayout(sidebarLayout);
     sidebar->setObjectName("sidebar");
     sidebar->setMinimumHeight(sidebarLayout->count() * 76);
@@ -46,29 +45,48 @@ AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
         sidebar->setVisible(sidebarVisible);
     });
 
-    // Create the toggle button
+    // Toggle button for sidebar
     QPushButton *toggleButton = new QPushButton();
     toggleButton->setFixedSize(40, 40);
     toggleButton->setText("☰");
     toggleButton->setStyleSheet("QPushButton { border: 1px solid black; }");
     connect(toggleButton, &QPushButton::clicked, this, &AnimationView::toggleSidebar);
 
-    // Container for sidebar and toggle button
+    // Sidebar container
     QWidget *sidebarContainer = new QWidget(this);
     QVBoxLayout *sidebarContainerLayout = new QVBoxLayout(sidebarContainer);
-
     sidebarContainerLayout->addWidget(sidebar);
-    sidebarContainerLayout->addWidget(toggleButton,0, Qt::AlignLeft | Qt::AlignBottom);
-
+    sidebarContainerLayout->addWidget(toggleButton, 0, Qt::AlignLeft | Qt::AlignBottom);
     sidebarContainerLayout->setSpacing(5);
     sidebarContainerLayout->setContentsMargins(0, 0, 0, 0);
 
-    // Add sidebarContainer to main layout on the left
+    // Slider setup
+    aniamtionSpeedSlider = new QSlider();
+    aniamtionSpeedSlider->setOrientation(Qt::Horizontal);
+    aniamtionSpeedSlider->setTickInterval(5);
+    aniamtionSpeedSlider->setRange(1, 100);
+    aniamtionSpeedSlider->setFixedSize(150, 20);
+
+    QLabel* animationSpeedLabel = new QLabel();
+    animationSpeedLabel->setText("Animation Speed");
+
+    // Pionowy layout dla slidera i mapfView
+    QVBoxLayout *mapLayout = new QVBoxLayout();
+    mapLayout->addWidget(animationSpeedLabel, 0, Qt::AlignCenter);
+    mapLayout->addWidget(aniamtionSpeedSlider, 0, Qt::AlignCenter); // Suwak na górze
+    mapfView = new QGraphicsView(mapfScene, this);  // Utwórz mapfView
+    mapLayout->addWidget(mapfView);                 // Dodaj mapfView pod suwak
+
+    // Dodaj sidebar i map layout do mainLayout
     mainLayout->addWidget(sidebarContainer, 0, Qt::AlignLeft);
-    //mainLayout->addWidget(mapfView);
+    mainLayout->addLayout(mapLayout); // Dodaj pionowy układ dla suwaka i mapy
+
     setLayout(mainLayout);
     setWindowTitle(tr("Animation"));
     setGeometry(0, 0, 700, sidebar->minimumHeight());
+
+    // Connect slider changes to animation speed adjustment
+    connect(aniamtionSpeedSlider, SIGNAL(valueChanged(int)), this, SLOT(onChange()));
     connect(timer, &QTimer::timeout, this, &AnimationView::updateTimestep);
 }
 
@@ -129,9 +147,17 @@ void AnimationView::toggleSidebar()
     sidebarAnimation->start();
     sidebarVisible = !sidebarVisible;
 }
-void AnimationView::initEnvironment()
-{
 
+void AnimationView::onChange()
+{
+    int sliderValue = aniamtionSpeedSlider->value();
+    animationSpeed = 1000 - sliderValue * 9;
+
+    timer->setInterval(animationSpeed);
+
+    if (mapfScene) {
+        mapfScene->updateAgentAnimationSpeed(animationSpeed);
+    }
 }
 
 void AnimationView::setTaskGroup(std::shared_ptr<TaskGroup> taskGroup)
@@ -145,7 +171,7 @@ void AnimationView::start()
         qDebug("Interactive_graph == nullptr\n");
         return;
     }
-    timer->start(500);
+    timer->start(animationSpeed);
 }
 
 
@@ -238,7 +264,7 @@ void AnimationView::loadMap()
         // Extract agents as a vector of AgentData
         QJsonArray agentsArray = mapData["agents"].toArray();
 
-        for (int i=0; i<agentsArray.size(); i++)
+        for (int i = 0; i < agentsArray.size(); i++)
         {
             QJsonObject agentObj = agentsArray[i].toObject();
             int x = agentObj["x"].toInt();
@@ -247,43 +273,46 @@ void AnimationView::loadMap()
             agents.push_back({i, capacity, {x, y}});
         }
 
-
         file.close();
         qDebug() << "Map data loaded from" << fileName;
 
         graph = map::Graph(width, height, obstacles);
 
-
-        //delete e;
-        //if(e) delete e;
-
-        if(algorithm == AlgType::A_STAR)
+        // Inicjalizacja środowiska
+        if (algorithm == AlgType::A_STAR)
         {
-            environment = new Environment(agents, graph);
+            environment = new CA_Environment(agents, graph);
         }
         else
         {
             environment = new WHCA_Environment(agents, graph);
         }
         environment->assignVacantAgents();
-        if(mapfScene)
+
+        // Usuń istniejącą scenę i utwórz nową
+        if (mapfScene)
         {
             delete mapfScene;
             mapfScene = nullptr;
         }
         mapfScene = new MapfScene(environment);
-
-
         interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
 
-
-        if(mapfView) delete mapfView;
-        mapfView = new QGraphicsView(mapfScene, this);
-
+        if (mapfView)
+        {
+            mapfView->setScene(mapfScene);  // Aktualizacja sceny w mapfView
+        }
+        else
+        {
+            // Jeśli `mapfView` nie istnieje, utwórz go i dodaj do układu
+            mapfView = new QGraphicsView(mapfScene, this);
+            mapfView->setMinimumSize(400, 400); // Opcjonalnie: ustaw minimalny rozmiar mapy
+            dynamic_cast<QVBoxLayout*>(mainLayout->itemAt(1))->addWidget(mapfView);
+        }
         mainLayout->addWidget(mapfView);
-
     }
 }
+
 
 // void AnimationView::loadTasks()
 // {

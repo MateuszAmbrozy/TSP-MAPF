@@ -1,3 +1,13 @@
+/**
+ * @file TSP.h
+ * @author Mateusz Ambroży
+ * @brief Implementation of TSP(Traveling Salesman Problem)
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include "AStar/AStar.h"
 #include "Graph.h"

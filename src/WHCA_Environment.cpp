@@ -48,8 +48,7 @@ std::vector<WHCA_Agent> WHCA_Environment::capacity(const TaskGroup& task) const
 
 }
 
-
-std::optional<WHCA_Agent> WHCA_Environment::random(std::vector<WHCA_Agent>& capableAgents) const {
+std::optional<std::reference_wrapper<WHCA_Agent>> WHCA_Environment::random(std::vector<WHCA_Agent>& capableAgents) const {
     if (!capableAgents.empty()) {
         int randomNum = rand() % capableAgents.size();
         return capableAgents.at(randomNum); // Return a reference
@@ -66,12 +65,12 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
     {
         if (!agent.agent.isIdle()) {
 
-            std::vector<SpaceTimeCell::Cell> path = agent.agent.getPath();
+            std::vector<SpaceTime::Cell> path = agent.agent.getPath();
 
             if (path.size() > 0 && timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
-                SpaceTimeCell::Cell nextPosition;
+                SpaceTime::Cell nextPosition;
 
                 for (const auto& cell : path)
                 {
@@ -89,7 +88,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 {
                     if (!agent.reachedCurrentWaypoint())
                     {
-                        std::vector<SpaceTimeCell::Cell> nextPath = whca.findNextWSteps(agent, timestep, table);
+                        std::vector<SpaceTime::Cell> nextPath = whca.findNextWSteps(agent, timestep, table);
                         if (!nextPath.empty())
                         {
                             agent.agent.assignPath(nextPath);
@@ -103,11 +102,12 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 for (const auto& cell : agent.agent.getPath())
                 {
                     table.removeReservation(cell.x, cell.y, cell.t);  // Remove cell reservations
-
+                    table.removeReservation(cell.x, cell.y, cell.t + 1);
                     const auto nextCell = agent.agent.getPath().back();
                     if (&cell != &nextCell)
                     {
                         table.removeEdgeReservation(cell.x, cell.y, cell.t);
+
                     }
                 }
                 agent.agent.clearPath();
@@ -121,7 +121,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 }
                 else
                 {
-                    std::vector<SpaceTimeCell::Cell> path = whca.findNextWSteps(agent, timestep, table);
+                    std::vector<SpaceTime::Cell> path = whca.findNextWSteps(agent, timestep, table);
                     agent.agent.assignPath(path);
                 }
 
@@ -137,21 +137,19 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 
 void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
 {
-    //assignVacanAgents();  // Make sure agents are assigned
 
     std::vector<int> avaliablePickupX={0, 1, 2, 3, 4, 5, 6, 7, 8};
     std::vector<int> avaliablePickupY={1, 3, 5, 7};
     std::vector<int> avaliableDropofX={3, 4, 5, 6, 7};
     std::vector<int> avaliableDropofY={7};
-    // Simulate task assignment and agent movements per timestep
     if(task)
     {
         task_list.push_back(*task);
     }
-    // else if(timestep % 10 == 0)
-    // {
-    //     task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
-    // }
+    else if(timestep % 10 == 0)
+    {
+        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
+    }
 
 
     // Iterate over tasks and assign to agents if possible
@@ -165,7 +163,8 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
             auto selectedAgentOpt = random(capableAgents);
             if (selectedAgentOpt.has_value())
             {
-                WHCA_Agent& selectedAgent = *selectedAgentOpt;
+                WHCA_Agent& selectedAgent = selectedAgentOpt->get();
+                int agentID;
                 std::cout << "agent: (" << selectedAgent.agent.getPosition().x << ", " << selectedAgent.agent.getPosition().y << ")\n";
                 std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent.agent, taskGroup);
@@ -178,24 +177,29 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
                 waypoints.push_back({taskGroup.getDropoffLocation(), taskGroup.getDropoffStopTime()});
                 waypoints.push_back({selectedAgent.agent.getStartPosition(), 0});
 
-                selectedAgent.setWaypoints(waypoints);
+                // selectedAgent.setWaypoints(waypoints);
+                // task == nullptr ? selectedAgent.agent.assignTask(taskGroup) : selectedAgent.agent.assignTask(*task);
+                // selectedAgent.agent.setIdle(false);
 
-                std::vector<SpaceTimeCell::Cell> path = whca.findNextWSteps(selectedAgent, timestep, table);
 
-                if(path.empty())
-                    continue;
-                //auto it = std::find(agents.begin(), agents.end(), selectedAgent);
+
                 for(size_t i=0; i<agents.size(); i++)
                 {
                     if(agents[i].agent.getId() == selectedAgent.agent.getId())
                     {
                         agents[i].setWaypoints(waypoints);
-                        agents[i].agent.assignPath(path);
                         task == nullptr ? agents[i].agent.assignTask(taskGroup) : agents[i].agent.assignTask(*task);
                         agents[i].agent.setIdle(false);
+                        agentID = i;
                         break;
                     }
                 }
+
+                std::vector<SpaceTime::Cell> path = whca.findNextWSteps(agents[agentID], timestep, table);
+
+                if(path.empty())
+                    continue;
+                agents[agentID].agent.assignPath(path);
 
                 vacant_agents.erase(std::remove(vacant_agents.begin(), vacant_agents.end(), selectedAgent), vacant_agents.end());
 

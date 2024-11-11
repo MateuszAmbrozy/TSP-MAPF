@@ -1,8 +1,8 @@
-#include "../lib/Environment.h"
+#include "../lib/CA_Environment.h"
 
 
 
-Environment::Environment(std::vector<Agent> agents, map::Graph graph)
+CA_Environment::CA_Environment(std::vector<Agent> agents, map::Graph graph)
     : BaseEnvironment(graph), sta(graph)
     {
         for(auto& agent: agents)
@@ -13,7 +13,7 @@ Environment::Environment(std::vector<Agent> agents, map::Graph graph)
 
 
 
-void Environment::addAgent(Agent& newAgent)
+void CA_Environment::addAgent(Agent& newAgent)
 {
 
     for (Agent& agent : agents) {
@@ -23,7 +23,7 @@ void Environment::addAgent(Agent& newAgent)
     agents.push_back(newAgent);
 }
 
-void Environment::assignVacantAgents()
+void CA_Environment::assignVacantAgents()
 {
     vacant_agents.clear();
     for(const Agent& agent : agents)
@@ -34,7 +34,7 @@ void Environment::assignVacantAgents()
 }
 
 
-std::vector<Agent> Environment::capacity(const TaskGroup& task) const
+std::vector<Agent> CA_Environment::capacity(const TaskGroup& task) const
 {
     std::vector<Agent> buf;
     for(const auto& agent :vacant_agents)
@@ -50,7 +50,7 @@ std::vector<Agent> Environment::capacity(const TaskGroup& task) const
 
 
 
-std::optional<Agent> Environment::random(std::vector<Agent>& capableAgents) const {
+std::optional<Agent> CA_Environment::random(std::vector<Agent>& capableAgents) const {
     if (!capableAgents.empty()) {
         int randomNum = rand() % capableAgents.size();
         return capableAgents.at(randomNum); // Return a reference
@@ -60,18 +60,18 @@ std::optional<Agent> Environment::random(std::vector<Agent>& capableAgents) cons
 
 
 
-void Environment::MOVEAGENTS(int timestep)
+void CA_Environment::MOVEAGENTS(int timestep)
 {
     for(auto& agent: agents)
     {
         if (!agent.isIdle()) {
 
-            std::vector<SpaceTimeCell::Cell> path = agent.getPath();
+            std::vector<SpaceTime::Cell> path = agent.getPath();
 
             if (path.size() > 0 && timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
-                SpaceTimeCell::Cell nextPosition;
+                SpaceTime::Cell nextPosition;
 
                 for (const auto& cell : path)
                 {
@@ -114,7 +114,7 @@ void Environment::MOVEAGENTS(int timestep)
 
 
 
-void Environment::mainAlgorithm() {
+void CA_Environment::mainAlgorithm() {
 
     assignVacantAgents();  // Step 3
     std::vector<int> avaliablePickupX={1, 2};
@@ -144,7 +144,7 @@ void Environment::mainAlgorithm() {
             std::cout << taskGroup << std::endl;
 
             std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);  // Step 12, 13
-            std::vector<SpaceTimeCell::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
+            std::vector<SpaceTime::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
             auto it = std::find(agents.begin(), agents.end(), selectedAgent);
 
             it->assignPath(path);
@@ -171,7 +171,7 @@ void Environment::mainAlgorithm() {
     }
 }
 
-void Environment::runTimestep(int timestep, TaskGroup* task)
+void CA_Environment::runTimestep(int timestep, TaskGroup* task)
 {
     //assignVacanAgents();  // Make sure agents are assigned
 
@@ -203,7 +203,7 @@ void Environment::runTimestep(int timestep, TaskGroup* task)
                 std::cout << "agent: (" << selectedAgent.getPosition().x << ", " << selectedAgent.getPosition().y << ")\n";
                 std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);
-                std::vector<SpaceTimeCell::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
+                std::vector<SpaceTime::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
                 if(path.empty())
                     continue;
                 auto it = std::find(agents.begin(), agents.end(), selectedAgent);

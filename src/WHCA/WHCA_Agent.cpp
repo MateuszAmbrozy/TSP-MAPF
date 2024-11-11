@@ -1,6 +1,6 @@
 #include "../../lib/WHCA/WHCA_Agent.h"
 WHCA_Agent::WHCA_Agent(const Agent &agent)
-    : currentWaypointIndex(0), W(5), K(5), agent(agent)
+    : currentWaypointIndex(0), W(10), K(5), agent(agent)
     {}
 
 

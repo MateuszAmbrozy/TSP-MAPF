@@ -1,3 +1,13 @@
+/**
+ * @file WHCA_Agent.h
+ * @author Mateusz Ambroży
+ * @brief Agent using in WHCA algorithm
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include "../Agent.h"
 #include "../Graph.h"
@@ -15,7 +25,7 @@ public:
     int K;
     Agent agent;
     // Metody dostępu
-    std::vector<SpaceTimeCell::Cell> getCurrentPath() const;
+    std::vector<SpaceTime::Cell> getCurrentPath() const;
     int getCurrentWaypointIndex() const;
     bool atCurrentWaypoint() const;
     std::vector<std::pair<map::Cell, int>> getWaypoints();

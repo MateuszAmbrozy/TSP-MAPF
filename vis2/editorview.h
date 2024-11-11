@@ -1,3 +1,13 @@
+/**
+ * @file editorview.h
+ * @author Mateusz Ambroży
+ * @brief Window to display edit graph
+ * @version 0.1
+ * @date 2024-11-08
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #ifndef EDITORVIEW_H
 #define EDITORVIEW_H
 
@@ -41,4 +51,4 @@ private:
     void setCreatedAgents(std::shared_ptr<std::vector<Agent>> agents);
 };
 
-#endif // EDITORVIEW_H
+#endif

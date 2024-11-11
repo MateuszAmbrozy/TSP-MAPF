@@ -51,6 +51,13 @@
             moveAnimation->stop();
     }
 
+    void AgentRectItem::setAnimationSpeed(int speed)
+    {
+        if (moveAnimation) {
+            moveAnimation->setDuration(speed);  // Update duration based on new speed
+        }
+    }
+
 
     void AgentRectItem::drawPickupPoints(QGraphicsScene* scene, const Agent& agent)
     {
@@ -92,11 +99,11 @@
         clearPath(scene);
 
         QPen pathPen(agentColor, 1, Qt::DashLine);
-        std::vector<SpaceTimeCell::Cell> path = agent.getPath();
+        std::vector<SpaceTime::Cell> path = agent.getPath();
 
         for (size_t i = 1; i < path.size(); ++i) {
-            const SpaceTimeCell::Cell& from = path[i - 1];
-            const SpaceTimeCell::Cell& to = path[i];
+            const SpaceTime::Cell& from = path[i - 1];
+            const SpaceTime::Cell& to = path[i];
 
             QGraphicsLineItem* line = scene->addLine(from.x * 20 + 10, from.y * 20 + 10,
                                                      to.x * 20 + 10, to.y * 20 + 10, pathPen);
@@ -168,7 +175,7 @@
 
     void AgentRectItem::draw(QGraphicsScene* scene, int timestep, const Agent& agent)
     {
-        std::vector<SpaceTimeCell::Cell> path = agent.getPath();
+        std::vector<SpaceTime::Cell> path = agent.getPath();
 
         if (path.size() > 0 && timestep < path.size() + path.front().t)
         {
