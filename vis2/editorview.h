@@ -21,7 +21,20 @@
 #include "../lib/Graph.h"
 #include "../lib/Agent.h"
 #include "agentinputwidget.h"
-
+#include "sidebar.h"
+#include "qjsonarray.h"
+#include <QToolButton>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QIcon>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QFile>
+#include <QTextStream>
 class EditorView : public QWidget
 {
     Q_OBJECT
@@ -40,7 +53,7 @@ private:
     QToolButton *_activeButton;
     QWidget *sidebar;
 
-    AgentInputWidget* inputWidget;
+    std::shared_ptr<AgentInputWidget> inputWidget;
 
     std::shared_ptr<map::Graph> createdMap;
     std::shared_ptr<std::vector<Agent>> created_agents;

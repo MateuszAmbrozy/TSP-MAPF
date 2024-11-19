@@ -17,7 +17,7 @@
 #include <iostream>
 #include <numeric>
 #include <queue>
-
+#include <memory>
 namespace A
 {
     struct CompareCells {
@@ -32,7 +32,7 @@ namespace A
             map::Graph graph;
             std::vector<std::vector<Node>> aStarGraph;
 
-            int lengthOfPath(Node* node);
+            int lengthOfPath(std::shared_ptr<A::Node> node);
             void copyGraph();
             bool isValid(int x, int y);
             bool isDestination(int startX, int startY, int destX, int destY);

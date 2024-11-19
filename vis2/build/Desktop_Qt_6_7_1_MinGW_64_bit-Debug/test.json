@@ -1,0 +1,29 @@
+{
+    "agents": [
+        {
+            "capacity": 0,
+            "x": 1,
+            "y": 1
+        }
+    ],
+    "avaliableDropoffs": [
+        {
+            "x": 3,
+            "y": 1
+        }
+    ],
+    "avaliablePickups": [
+        {
+            "x": 2,
+            "y": 1
+        }
+    ],
+    "height": 10,
+    "obstacles": [
+        {
+            "x": 4,
+            "y": 1
+        }
+    ],
+    "width": 10
+}

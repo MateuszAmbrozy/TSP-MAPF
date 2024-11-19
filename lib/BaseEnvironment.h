@@ -10,7 +10,7 @@
  */
 #ifndef BASEENVIRONMENT_H
 #define BASEENVIRONMENT_H
-#include "Reservation.h"
+#include "Space-Time-AStar/Reservation.h"
 #include "TaskGroup.h"
 #include "TSP.h"
 #include <windows.h>
@@ -23,9 +23,12 @@ protected:
     map::Graph graph;
     TSP tsp;
     Reservation table;
+    std::vector<std::pair<int, int>> avaliablePickups;
+    std::vector<std::pair<int, int>> avaliableDropoff;
 
     template<typename Iter, typename RandomGenerator>
-    Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
+    Iter select_randomly(Iter start, Iter end, RandomGenerator& g)
+    {
         std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
         std::advance(start, dis(g));
         return start;
@@ -39,10 +42,11 @@ protected:
     }
 
 public:
-    BaseEnvironment(map::Graph graph);
-    TaskGroup TASKGROUPGENERATOR(std::vector<int> avaliablePickupX, std::vector<int> avaliablePickupY, std::vector<int> avaliableDropofX, std::vector<int> avaliableDropofY );
-    virtual void addTaskGroup(const TaskGroup& taskGroup);
+    BaseEnvironment(map::Graph graph, std::vector<std::pair<int, int>> avaliableDropoffs, std::vector<std::pair<int, int>> avaliablePickups);
 
+    TaskGroup TASKGROUPGENERATOR();
+    virtual void addTaskGroup(const TaskGroup& taskGroup);
+    void assignTasks(std::vector<TaskGroup> tasks);
 
     virtual void assignVacantAgents() = 0;
     virtual void MOVEAGENTS(int timestep) = 0;

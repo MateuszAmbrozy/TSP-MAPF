@@ -1,18 +1,5 @@
 #include "editorview.h"
-#include "borderlayout.h"
-#include "qjsonarray.h"
-#include <QToolButton>
-#include <QMessageBox>
-#include <QFileDialog>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QSpacerItem>
-#include <QIcon>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QFile>
-#include <QTextStream>
+
 EditorView::EditorView(QWidget *parent) :
     QWidget(parent),
     sidebarVisible(true)
@@ -21,39 +8,39 @@ EditorView::EditorView(QWidget *parent) :
     QVBoxLayout *sidebarLayout = new QVBoxLayout();
     sidebar = new QWidget();
 
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/dollar.svg", tr("Save"), [this]() { saveMap(); }));
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", tr("Load"), [this]() { loadMap(); }));
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/crop.svg", tr("Clear"), [this]() { clearAgents(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/save.svg", tr("Save"), [this]() { saveMap(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/download.svg", tr("Load"), [this]() { loadMap(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/clear.svg", tr("Clear"), [this]() { clearAgents(); }));
     sidebarLayout->setSpacing(0);
 
     sidebar->setLayout(sidebarLayout);
     sidebar->setObjectName("sidebar");
     sidebar->setMinimumHeight(sidebarLayout->count() * 76);
 
-    BorderLayout *layout = new BorderLayout();
-    layout->addWidget(sidebar, BorderLayout::West);
+    Sidebar *layout = new Sidebar();
+    layout->addWidget(sidebar, Sidebar::West);
 
 
     // Dodanie AgentInputWidget do layoutu
     QGraphicsScene *scene = new QGraphicsScene(this);
     InteractiveAgentRectItem *graphItem = nullptr;
 
-    inputWidget = new AgentInputWidget(scene, graphItem, this);
+    inputWidget = std::make_shared<AgentInputWidget>(scene, graphItem, this);
 
-    connect(inputWidget, &AgentInputWidget::mapCreated, this,
+    connect(inputWidget.get(), &AgentInputWidget::mapCreated, this,
             [this](std::shared_ptr<map::Graph> map)
             {
                 setCreatedGraph(map);
                 updateGraphInScene();
             });
 
-    connect(inputWidget, &AgentInputWidget::agentsCreated, this,
+    connect(inputWidget.get(), &AgentInputWidget::agentsCreated, this,
             [this](std::shared_ptr<std::vector<Agent>> agents)
             {
                 setCreatedAgents(agents);  // Zapisz agentów
             });
 
-    layout->addWidget(inputWidget, BorderLayout::Center);  // AgentInputWidget w centralnej części
+    layout->addWidget(inputWidget.get(), Sidebar::Center);  // AgentInputWidget w centralnej części
 
     QWidget *borderLayoutContainer = new QWidget;
     borderLayoutContainer->setLayout(layout);
@@ -131,8 +118,9 @@ QToolButton *EditorView::createSidebarButton(const QString &iconPath, const QStr
     btn->setCheckable(true);
 
     if (onClickFunction) {
-        QObject::connect(btn, &QToolButton::clicked, this, [onClickFunction]() {
+        QObject::connect(btn, &QToolButton::clicked, this, [btn, onClickFunction]() {
             onClickFunction();
+            btn->setChecked(false);
         });
     }
 
@@ -168,11 +156,9 @@ void EditorView::loadMap()
 
         QJsonObject mapData = jsonDoc.object();
 
-        // Extract map dimensions
         int width = mapData["width"].toInt();
         int height = mapData["height"].toInt();
 
-        // Extract obstacles as a vector of QPoint
         QJsonArray obstaclesArray = mapData["obstacles"].toArray();
         std::vector<QPoint> obstacles;
         for (const QJsonValue &obstacleVal : obstaclesArray) {
@@ -182,7 +168,6 @@ void EditorView::loadMap()
             obstacles.push_back(QPoint(x, y));
         }
 
-        // Extract agents as a vector of AgentData
         QJsonArray agentsArray = mapData["agents"].toArray();
         std::vector<AgentInputWidget::AgentData> agentsData;
         for (const QJsonValue &agentVal : agentsArray) {
@@ -190,11 +175,29 @@ void EditorView::loadMap()
             int x = agentObj["x"].toInt();
             int y = agentObj["y"].toInt();
             int capacity = agentObj["capacity"].toInt();
-            agentsData.push_back({QPoint(x, y), capacity});  // Create AgentData with position and capacity
+            agentsData.push_back({QPoint(x, y), capacity});
         }
 
-        // Pass the parsed data to AgentInputWidget::loadMap
-        inputWidget->loadMap(width, height, obstacles, agentsData);
+        QJsonArray pickupsArray = mapData["avaliablePickups"].toArray();
+        std::vector<QPoint> pickupsData;
+        for (const QJsonValue &pickupVal : pickupsArray)
+        {
+            QJsonObject pickupObj = pickupVal.toObject();
+            int x = pickupObj["x"].toInt();
+            int y = pickupObj["y"].toInt();
+            pickupsData.push_back({QPoint(x, y)});
+        }
+
+        QJsonArray dropoffArray = mapData["avaliableDropoffs"].toArray();
+        std::vector<QPoint> dropoffsData;
+        for (const QJsonValue &dropoffVal : dropoffArray) {
+            QJsonObject dropoffObj = dropoffVal.toObject();
+            int x = dropoffObj["x"].toInt();
+            int y = dropoffObj["y"].toInt();
+            dropoffsData.push_back({QPoint(x, y)});
+        }
+
+        inputWidget->loadMap(width, height, obstacles, agentsData, pickupsData, dropoffsData);
 
         file.close();
         qDebug() << "Map data loaded from" << fileName;
@@ -229,13 +232,38 @@ void EditorView::saveMap()
 
     // Tworzymy tablicę JSON dla przeszkód
     QJsonArray obstaclesArray;
-    for (const auto& obstacle : inputWidget->obstacles) {
+    for (const auto& obstacle : inputWidget->obstacles)
+    {
         QJsonObject obstacleObject;
         obstacleObject["x"] = obstacle.x();
         obstacleObject["y"] = obstacle.y();
-        obstaclesArray.append(obstacleObject);  // Dodajemy przeszkodę do tablicy
+        obstaclesArray.append(obstacleObject);
     }
-    mapData["obstacles"] = obstaclesArray;  // Dodajemy tablicę przeszkód do mapy
+    mapData["obstacles"] = obstaclesArray;
+
+
+    // Tworzymy tablicę JSON dla pickupPoints
+    QJsonArray avaliablePickupPointsArray;
+    for (const auto& pickup : inputWidget->avaliablePickupPoints)
+    {
+        QJsonObject pickupObject;
+        pickupObject["x"] = pickup.x();
+        pickupObject["y"] = pickup.y();
+        avaliablePickupPointsArray.append(pickupObject);
+    }
+    mapData["avaliablePickups"] = avaliablePickupPointsArray;
+
+    // Dropoff points
+    QJsonArray avaliableDropoffPointsArray;
+    for (const auto& dropoff : inputWidget->avaliableDropoffPoints)
+    {
+        QJsonObject dropoffObject;
+        dropoffObject["x"] = dropoff.x();
+        dropoffObject["y"] = dropoff.y();
+        avaliableDropoffPointsArray.append(dropoffObject);
+    }
+    mapData["avaliableDropoffs"] = avaliableDropoffPointsArray;
+
 
     // Konwersja QJsonObject do QJsonDocument
     QJsonDocument jsonDoc(mapData);

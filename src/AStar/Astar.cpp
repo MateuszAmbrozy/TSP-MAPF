@@ -9,15 +9,15 @@ bool A::Astar::isValid(int x, int y)
             (!graph.cells[x][y].isObstacle));
 }
 
-int A::Astar::lengthOfPath(A::Node* node)
+int A::Astar::lengthOfPath(std::shared_ptr<A::Node> node)
 {
-    Node* cell = node;
+    std::shared_ptr<A::Node> cell = node;
     int len = 0;
-    if(!node || !node->parent)
+    if(!node || !node->getParent())
         return 0;
     
-    while (cell->parent != nullptr) {
-        cell = cell->parent;
+    while (cell->getParent() != nullptr) {
+        cell = cell->getParent();
         len++;
     }
 
@@ -78,7 +78,7 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
     startNode.gCost = 0;
     startNode.hCost = A::Node::calculateH(start.x, start.y, dest.x, dest.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
-    startNode.parent = nullptr; 
+    startNode.setParent(nullptr); 
 
     openList.push(startNode);
     while (!openList.empty()) {
@@ -87,7 +87,7 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
 
         if (isDestination(currentCell.x, currentCell.y, dest.x, dest.y)) 
         {           
-            return lengthOfPath(&currentCell);
+            return lengthOfPath(std::make_shared<A::Node>(currentCell));
         }
 
         closedList[currentCell.x][currentCell.y] = true;
@@ -108,7 +108,8 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
                         double hNew = A::Node::calculateH(neighborPos.first, neighborPos.second, dest.x, dest.y);
                         double fNew = gNew + hNew;
 
-                        Node neighborCell(neighborPos.first, neighborPos.second, false, new A::Node(currentCell), gNew, hNew, fNew);
+                        std::shared_ptr<A::Node> parentNode = std::make_shared<A::Node>(currentCell);
+                        Node neighborCell(neighborPos.first, neighborPos.second, false, parentNode, gNew, hNew, fNew);
                         openList.push(neighborCell);
                     }
                 }

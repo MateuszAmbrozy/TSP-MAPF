@@ -32,7 +32,7 @@ private:
     double calculateTotalDistance(const std::vector<int>& path, const std::vector<std::vector<double>>& distanceMatrix);
     std::vector<std::vector<double>> calcDistanceMatrix(const Agent& agent, const TaskGroup& taskGroup);
     std::vector<int> twoOptSwap(const std::vector<int>& path, int i, int j);
-
+    double euclideanDistance(const map::Cell& a, const map::Cell& b);
 public:
     TSP(map::Graph graph);
 

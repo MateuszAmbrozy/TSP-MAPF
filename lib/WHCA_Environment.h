@@ -43,10 +43,10 @@ private:
 
 
 public:
-    WHCA_Environment(std::vector<Agent> agents, map::Graph graph);
+    WHCA_Environment(std::vector<Agent> agents, map::Graph graph, std::vector<std::pair<int, int>> avaliablePickups, std::vector<std::pair<int, int>> avaliableDropoffs);
 
 
-    std::vector<Agent> getAgents() {
+    std::vector<Agent> getAgents() override{
         std::vector<Agent> buf;
         for (const WHCA_Agent& a : agents) {
             buf.push_back(a.agent);
@@ -54,7 +54,7 @@ public:
         return buf;
     }
 
-    std::vector<Agent> getVacantAgents()
+    std::vector<Agent> getVacantAgents() override
     {
         std::vector<Agent> buf;
         for(const auto &agent: vacant_agents)
@@ -62,12 +62,12 @@ public:
         return buf;
     }
 
-    void assignVacantAgents();
+    void assignVacantAgents() override;
+    bool allTasksCompleted();
+    void MOVEAGENTS(int timestep) override;
+    void addAgent(Agent &newAgent) override;
 
-    void MOVEAGENTS(int timestep);
-    void addAgent(Agent &newAgent);
 
-
-    void runTimestep(int timestep, TaskGroup* task = nullptr);
+    void runTimestep(int timestep, TaskGroup* task = nullptr) override;
 };
 

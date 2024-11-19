@@ -21,11 +21,11 @@ class InteractiveGraphRectItem :public VisualizationGraph
 public:
     explicit InteractiveGraphRectItem(map::Graph graph, QGraphicsItem* parent = nullptr);
 
-    void drawGraph(QGraphicsScene* scene) override;
+    virtual void drawGraph(QGraphicsScene* scene) override;
 
     virtual void handleCellLeftClick(const QPoint& cellPos) = 0;
     virtual void handleCellRightClick(const QPoint& cellPos) = 0;
-    void toggleSelectionMode();
+    virtual void toggleSelectionMode() = 0;
 
 protected:
     bool toggle;

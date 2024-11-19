@@ -1,24 +1,44 @@
+/* QTextBrowser */
 QTextBrowser {
-  font-family: Lato;
+  font-family: Lato, sans-serif;
   font-weight: 300;
-  font-size: 50px;
-  background-color: #ededed;
+  font-size: 20px;
+  color: #333333;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
 }
+
+/* Sidebar Styling */
 QWidget#sidebar {
-  background-color: #292929;
+  background-color: #3a3c6e;
+  border-right: 1px solid #f5d5d5;
 }
+
+/* Sidebar Button Default Style */
 QToolButton {
-  margin: 5px;
-  color: #ededed;
-  background-color: #292929;
-  border: none;
-  font-size: 11px;
+  margin: 6px;
+  padding: 8px;
+  color: #eeeeee;
+  background-color: #333333;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 6px;
 }
+
+/* Sidebar Button Hover Effect */
 QToolButton:hover {
-  border: 2px solid #2c92ea;
-  border-radius: 5px;
+  background-color: #3b3b3b;
+  border: 1px solid #4a90e2;
+  color: #ffffff;
 }
+
+/* Sidebar Button Checked (Selected) Style */
 QToolButton:checked {
-  border: 2px solid gray;
-  border-radius: 5px;
+  background-color: #4a90e2;
+  border: 1px solid #4a90e2;
+  color: #ffffff;
+  font-weight: 500;
 }

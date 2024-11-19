@@ -1,3 +1,4 @@
+
 #include "taskinputwidget.h"
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -10,7 +11,6 @@ TaskInputWidget::TaskInputWidget(QGraphicsScene *scene, InteractiveTaskRectItem 
     QVBoxLayout *layout = new QVBoxLayout(this);
     QFormLayout *formLayout = new QFormLayout;
 
-
     capacityInput = new QLineEdit(this);
     formLayout->addRow(new QLabel("Capacity:"), capacityInput);
     layout->addLayout(formLayout);
@@ -22,14 +22,12 @@ TaskInputWidget::TaskInputWidget(QGraphicsScene *scene, InteractiveTaskRectItem 
     connect(createTaskButton, &QPushButton::clicked, this, &TaskInputWidget::createTaskGroup);
     layout->addWidget(createTaskButton);
 
-
     graphItem->drawGraph(scene);
 
     connect(graphItem, &InteractiveTaskRectItem::pickupPointSelected, this, &TaskInputWidget::addPickupPoint);
     connect(graphItem, &InteractiveTaskRectItem::dropoffPointSelected, this, &TaskInputWidget::setDropoffPoint);
     connect(graphItem, &InteractiveTaskRectItem::pickupPointRemoved, this, &TaskInputWidget::removePickupPoint);
     connect(graphItem, &InteractiveTaskRectItem::dropoffPointRemoved, this, &TaskInputWidget::removeDropoffPoint);
-
 }
 
 void TaskInputWidget::addPickupPoint(const QPoint &point)

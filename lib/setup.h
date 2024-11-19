@@ -19,6 +19,7 @@ public:
     static const unsigned int maxTasks;
     static const unsigned int maxCapacity;
     static const unsigned int maxStopTime;
+    static const unsigned int cellSize;
 };
 
 enum class AlgType {

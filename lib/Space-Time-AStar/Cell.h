@@ -12,7 +12,7 @@
 
 #include "../AStar/Node.h"
 #include "../Graph.h"
-
+#include <memory>
 
 namespace SpaceTime
 {
@@ -57,13 +57,14 @@ namespace SpaceTime
     public:
 
         int t;
+        std::shared_ptr<Node> parent; 
         Node() = default;
 
         Node(int t, int x, int y, bool isObstacle = false,
-             A::Node* parent = nullptr, float gCost = 0,
+             std::shared_ptr<Node> parent = nullptr, float gCost = 0,
              float hCost = 0, float fCost = 0)
-            : A::Node(x, y, isObstacle, parent, gCost, hCost, fCost),
-              t(t)
+            : A::Node(x, y, isObstacle, nullptr, gCost, hCost, fCost),
+              t(t), parent(parent)
         {}
 
         Node(const A::Node& other, int t)
@@ -71,7 +72,8 @@ namespace SpaceTime
               t(t)
         {}
 
-        Node& operator=(const A::Node* other) {
+        Node& operator=(const A::Node* other) 
+        {
             if (this == other) return *this;
             A::Node::operator=(*other);
             t = 0;

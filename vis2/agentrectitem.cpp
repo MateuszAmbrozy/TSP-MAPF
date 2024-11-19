@@ -149,7 +149,6 @@
         QPen pen(agentColor);
         QBrush agentBrush(agentColor);
 
-        // Przeliczenie pozycji agenta na piksele zgodnie ze skalą siatki - tylko przy pierwszym rysowaniu
         QPointF initialPosition(
             agent.getPosition().x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2 - agentSize / 2,
             agent.getPosition().y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2 - agentSize / 2
@@ -158,13 +157,10 @@
         QRectF rect(initialPosition, QSize(agentSize, agentSize));
 
         if (!agentRectItem) {
-            // Ustawienie `setRect` tylko raz, aby ustalić rozmiar i początkową pozycję
             agentRectItem = scene->addRect(rect, pen, agentBrush);
         } else {
             animateMoveAgent(rect);
         }
-
-        // Ustawienie etykiety ID agenta
         if (!idLabel) {
             idLabel = new QGraphicsTextItem(QString::number(agent.getId()));
             scene->addItem(idLabel);

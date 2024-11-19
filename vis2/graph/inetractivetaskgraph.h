@@ -15,7 +15,9 @@
 #include <QPoint>
 #include <QGraphicsScene>
 #include "interactivegraphrectitem.h"
-
+#include "interactivecellitem.h"
+#include "../lib/Agent.h"
+#include "../lib/setup.h"
 enum class cellState {NORMAL = 0, PICKUP, DROPOFF};
 
 class InteractiveTaskRectItem :public InteractiveGraphRectItem
@@ -23,13 +25,14 @@ class InteractiveTaskRectItem :public InteractiveGraphRectItem
     Q_OBJECT
 
 public:
-    InteractiveTaskRectItem(map::Graph graph, QGraphicsItem* parent = nullptr);
+    InteractiveTaskRectItem(map::Graph graph, const std::vector<Agent>& agents, QGraphicsItem* parent = nullptr);
 
     QSet<QPoint> pickupPoints;
     QSet<QPoint> dropoffPoints;
 
     void handleCellLeftClick(const QPoint& cellPos) override;
     void handleCellRightClick(const QPoint& cellPos) override;
+    void drawGraph(QGraphicsScene *scene) override;
     void clear();
 
 signals:
@@ -40,6 +43,11 @@ signals:
 
 private:
     void updateCellColor(int x, int y, cellState state);
+    std::vector<Agent> agents;
+    bool isAgentCell(const QPoint& cellPos) const;
+
+    QPoint currentDropoffPoint;
+    void toggleSelectionMode() override;
 };
 
 #endif // INTERACTIVETASKGRAPH_H

@@ -30,7 +30,7 @@ AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/play.svg", "Start", [this]() { start(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/pause.svg", "Stop", [this]() { stop(); }));
     sidebarLayout->addWidget(createSidebarButton(":/icons/assets/add.svg", "Add Task", [this]() { showTaskGroupScene(); }));
-    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/cloud.svg", "Upload map", [this]() { loadMap(); }));
+    sidebarLayout->addWidget(createSidebarButton(":/icons/assets/download.svg", "Upload map", [this]() { loadMap(); }));
     sidebar->setLayout(sidebarLayout);
     sidebar->setObjectName("sidebar");
     sidebar->setMinimumHeight(sidebarLayout->count() * 76);
@@ -73,13 +73,13 @@ AnimationView::AnimationView(AlgType algorithm, QWidget *parent)
     // Pionowy layout dla slidera i mapfView
     QVBoxLayout *mapLayout = new QVBoxLayout();
     mapLayout->addWidget(animationSpeedLabel, 0, Qt::AlignCenter);
-    mapLayout->addWidget(aniamtionSpeedSlider, 0, Qt::AlignCenter); // Suwak na górze
-    mapfView = new QGraphicsView(mapfScene, this);  // Utwórz mapfView
-    mapLayout->addWidget(mapfView);                 // Dodaj mapfView pod suwak
+    mapLayout->addWidget(aniamtionSpeedSlider, 0, Qt::AlignCenter);
+    mapfView = new QGraphicsView(mapfScene, this);
+    mapLayout->addWidget(mapfView);
 
     // Dodaj sidebar i map layout do mainLayout
     mainLayout->addWidget(sidebarContainer, 0, Qt::AlignLeft);
-    mainLayout->addLayout(mapLayout); // Dodaj pionowy układ dla suwaka i mapy
+    mainLayout->addLayout(mapLayout);
 
     setLayout(mainLayout);
     setWindowTitle(tr("Animation"));
@@ -125,8 +125,9 @@ QToolButton *AnimationView::createSidebarButton(const QString &iconPath, const Q
     btn->setCheckable(true);
 
     if (onClickFunction) {
-        QObject::connect(btn, &QToolButton::clicked, this, [onClickFunction]() {
+        QObject::connect(btn, &QToolButton::clicked, this, [onClickFunction, btn]() {
             onClickFunction();
+            btn->setChecked(false);  // Uncheck after action is performed
         });
     }
 
@@ -273,43 +274,71 @@ void AnimationView::loadMap()
             agents.push_back({i, capacity, {x, y}});
         }
 
+        QJsonArray pickupsArray = mapData["avaliablePickups"].toArray();
+        std::vector<std::pair<int, int>> avaliablePickups;
+        for (const QJsonValue &pickupVal : pickupsArray)
+        {
+            QJsonObject pickupObj = pickupVal.toObject();
+            int x = pickupObj["x"].toInt();
+            int y = pickupObj["y"].toInt();
+            avaliablePickups.emplace_back(x, y);
+        }
+
+        // Extract available dropoff points as std::vector<std::pair<int, int>>
+        QJsonArray dropoffsArray = mapData["avaliableDropoffs"].toArray();
+        std::vector<std::pair<int, int>> avaliableDropoffs;
+        for (const QJsonValue &dropoffVal : dropoffsArray)
+        {
+            QJsonObject dropoffObj = dropoffVal.toObject();
+            int x = dropoffObj["x"].toInt();
+            int y = dropoffObj["y"].toInt();
+            avaliableDropoffs.emplace_back(x, y);
+        }
+
         file.close();
         qDebug() << "Map data loaded from" << fileName;
 
         graph = map::Graph(width, height, obstacles);
 
-        // Inicjalizacja środowiska
+        // Initialize the environment
         if (algorithm == AlgType::A_STAR)
         {
-            environment = new CA_Environment(agents, graph);
+            environment = new CA_Environment(agents, graph, avaliablePickups, avaliableDropoffs);
         }
         else
         {
-            environment = new WHCA_Environment(agents, graph);
+            environment = new WHCA_Environment(agents, graph, avaliablePickups, avaliableDropoffs);
         }
+
+        // const int seed = 42;  // Using a fixed seed value
+        // srand(seed);
+
+        // Define available positions for pickup and dropoff points
+        // std::vector<std::pair<int, int>> availablePickupX
+        // std::vector<std::pair<int, int>> availablePickupY
+        // std::vector<std::pair<int, int>> availableDropofX
+        // std::vector<std::pair<int, int>> availableDropofY
+        // std::vector<TaskGroup> tasks;
+        // for (int i = 0; i < 10; ++i)
+        // {
+        //     TaskGroup task = environment->TASKGROUPGENERATOR(availablePickupX, availablePickupY, availableDropofX, availableDropofY);
+        //     tasks.push_back(task);
+        // }
+
+        // // CA_Environment
+        // environment->assignTasks(tasks);
         environment->assignVacantAgents();
 
-        // Usuń istniejącą scenę i utwórz nową
+        // Reset mapfScene and update mapfView's scene
         if (mapfScene)
         {
             delete mapfScene;
             mapfScene = nullptr;
         }
         mapfScene = new MapfScene(environment);
-        interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph);
+        interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph, agents);
 
-        if (mapfView)
-        {
-            mapfView->setScene(mapfScene);  // Aktualizacja sceny w mapfView
-        }
-        else
-        {
-            // Jeśli `mapfView` nie istnieje, utwórz go i dodaj do układu
-            mapfView = new QGraphicsView(mapfScene, this);
-            mapfView->setMinimumSize(400, 400); // Opcjonalnie: ustaw minimalny rozmiar mapy
-            dynamic_cast<QVBoxLayout*>(mainLayout->itemAt(1))->addWidget(mapfView);
-        }
-        mainLayout->addWidget(mapfView);
+        mapfView->setScene(mapfScene);
     }
 }
 

@@ -11,7 +11,7 @@
 #pragma once
 #include "../Agent.h"
 #include "../Graph.h"
-#include "Space-Time-AStar/Cell.h"
+#include "../Space-Time-AStar/Cell.h"
 #include <vector>
 
 class WHCA_Agent{

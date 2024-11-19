@@ -1,9 +1,9 @@
 #include "../lib/WHCA_Environment.h"
 
 #include "../lib/setup.h"
-#include "QDebug"
-WHCA_Environment::WHCA_Environment(std::vector<Agent> agents, map::Graph graph)
-    : BaseEnvironment(graph), whca(graph)
+//#include "QDebug"
+WHCA_Environment::WHCA_Environment(std::vector<Agent> agents, map::Graph graph, std::vector<std::pair<int, int>> avaliablePickups, std::vector<std::pair<int, int>> avaliableDropoffs)
+    : BaseEnvironment(graph, avaliablePickups, avaliableDropoffs), whca(graph)
 {
     for(auto& agent: agents)
     {
@@ -83,7 +83,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 map::Cell newPosition(nextPosition.x, nextPosition.y);
                 agent.agent.move(newPosition);
 
-                qDebug() <<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep;
+                std::cout<<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep << std::endl;
                 if (timestep == path.back().t)
                 {
                     if (!agent.reachedCurrentWaypoint())
@@ -113,14 +113,18 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 agent.agent.clearPath();
                 if(agent.finished())
                 {
+
                     agent.agent.clearTask();
                     agent.agent.setIdle(true);
                     agent.clearWaypoints();
                     agent.clearCurrentWayPointIndex();
                     vacant_agents.push_back(agent);
+
                 }
                 else
                 {
+
+
                     std::vector<SpaceTime::Cell> path = whca.findNextWSteps(agent, timestep, table);
                     agent.agent.assignPath(path);
                 }
@@ -133,23 +137,30 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 
 }
 
-
+bool WHCA_Environment::allTasksCompleted()
+{
+        // Sprawdzenie, czy lista zadań jest pusta
+        if (!task_list.empty()) {
+            return false;  // Są jeszcze zadania do wykonania
+        }
+        for (const auto& agent : agents) {
+        if (!agent.agent.isIdle()) {
+            return false;
+        }
+    }
+    return true;
+}
 
 void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
 {
-
-    std::vector<int> avaliablePickupX={0, 1, 2, 3, 4, 5, 6, 7, 8};
-    std::vector<int> avaliablePickupY={1, 3, 5, 7};
-    std::vector<int> avaliableDropofX={3, 4, 5, 6, 7};
-    std::vector<int> avaliableDropofY={7};
     if(task)
     {
         task_list.push_back(*task);
     }
-    else if(timestep % 10 == 0)
-    {
-        task_list.push_back(TASKGROUPGENERATOR(avaliablePickupX, avaliablePickupY, avaliableDropofX, avaliableDropofY));
-    }
+    // else if(timestep % 10 == 0)
+    // {
+    //     task_list.push_back(TASKGROUPGENERATOR());
+    // }
 
 
     // Iterate over tasks and assign to agents if possible
@@ -165,8 +176,8 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
             {
                 WHCA_Agent& selectedAgent = selectedAgentOpt->get();
                 int agentID;
-                std::cout << "agent: (" << selectedAgent.agent.getPosition().x << ", " << selectedAgent.agent.getPosition().y << ")\n";
-                std::cout << taskGroup << std::endl;
+                //std::cout << "agent: (" << selectedAgent.agent.getPosition().x << ", " << selectedAgent.agent.getPosition().y << ")\n";
+                //std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent.agent, taskGroup);
                 std::vector<std::pair<map::Cell, int>> waypoints;
 

@@ -12,30 +12,38 @@ double TSP::calculateTotalDistance(const std::vector<int>& path, const std::vect
     }
     return totalDistance;
 }
-
+double TSP::euclideanDistance(const map::Cell& a, const map::Cell& b) {
+    double dx = a.x - b.x;
+    double dy = a.y - b.y;
+    return std::sqrt(dx * dx + dy * dy);
+}
 std::vector<std::vector<double>> TSP::calcDistanceMatrix(const Agent& agent, const TaskGroup& taskGroup) {
     int n = taskGroup.getNumTasks();
-    std::vector<std::vector<double>> distanceMatrix(n + 2, std::vector<double>(n + 2, 0));  // Extra slots for agent's position and dropoff
+    std::vector<std::vector<double>> distanceMatrix(n + 2, std::vector<double>(n + 2, 0));
 
-    // Calculate distances between agent's position and pickup points
-    for (int i = 0; i < n; ++i) {
-        distanceMatrix[0][i + 1] = astar.calculate(agent.getPosition(), taskGroup.getPickupLocation(i));
-        distanceMatrix[i + 1][0] = distanceMatrix[0][i + 1];  // Symmetric distances
-    }
-
-    // Calculate distances between pickup points
-    for (int i = 0; i < n; ++i) {
-        for (int j = i + 1; j < n; ++j) {
-            distanceMatrix[i + 1][j + 1] = astar.calculate(taskGroup.getPickupLocation(i), taskGroup.getPickupLocation(j));
-            distanceMatrix[j + 1][i + 1] = distanceMatrix[i + 1][j + 1];  // Symmetric distances
-        }
-    }
-
-    // Calculate distances between pickup points and the drop-off point
+    map::Cell agentPos = agent.getPosition();
     map::Cell dropoff = taskGroup.getDropoffLocation();
+
     for (int i = 0; i < n; ++i) {
-        distanceMatrix[i + 1][n + 1] = astar.calculate(taskGroup.getPickupLocation(i), dropoff);
-        distanceMatrix[n + 1][i + 1] = distanceMatrix[i + 1][n + 1];  // Symmetric distances
+        map::Cell pickup = taskGroup.getPickupLocation(i);
+
+        // Odległość od agenta do punktów odbioru
+        distanceMatrix[0][i + 1] = euclideanDistance(agentPos, pickup);
+        distanceMatrix[i + 1][0] = distanceMatrix[0][i + 1];
+
+        // Odległość od punktów odbioru do miejsca dostawy
+        distanceMatrix[i + 1][n + 1] = euclideanDistance(pickup, dropoff);
+        distanceMatrix[n + 1][i + 1] = distanceMatrix[i + 1][n + 1];
+    }
+
+    // Odległości między punktami odbioru
+    for (int i = 0; i < n; ++i) {
+        map::Cell locI = taskGroup.getPickupLocation(i);
+        for (int j = i + 1; j < n; ++j) {
+            map::Cell locJ = taskGroup.getPickupLocation(j);
+            distanceMatrix[i + 1][j + 1] = euclideanDistance(locI, locJ);
+            distanceMatrix[j + 1][i + 1] = distanceMatrix[i + 1][j + 1];
+        }
     }
 
     return distanceMatrix;
@@ -50,22 +58,21 @@ std::vector<int> TSP::twoOptSwap(const std::vector<int>& path, int i, int j) {
 std::vector<int> TSP::solveTSP(Agent agent, const TaskGroup& taskGroup) {
     std::vector<std::vector<double>> distanceMatrix = this->calcDistanceMatrix(agent, taskGroup);
     int n = taskGroup.getNumTasks();
-    std::vector<int> path(n + 2);  // Start from agent's position (index 0) and end at the drop-off point (index n+1)
+    std::vector<int> path(n + 2); 
 
-    // Initialize path
+
     for (int i = 1; i <= n; ++i) {
         path[i] = i;
     }
-    path[0] = 0;  // Start from agent's position
-    path[n + 1] = n + 1;  // End at drop-off point
+    path[0] = 0;  
+    path[n + 1] = n + 1;  
 
-    // 2-opt algorithm to optimize the path
     bool improvement = true;
     while (improvement) {
         improvement = false;
         double bestDistance = calculateTotalDistance(path, distanceMatrix);
 
-        for (int i = 1; i < n; ++i) {  // Skip start (agent) and end (dropoff)
+        for (int i = 1; i < n; ++i) { 
             for (int j = i + 1; j <= n; ++j) {
                 std::vector<int> newPath = twoOptSwap(path, i, j);
                 double newDistance = calculateTotalDistance(newPath, distanceMatrix);
@@ -79,7 +86,6 @@ std::vector<int> TSP::solveTSP(Agent agent, const TaskGroup& taskGroup) {
         }
     }
 
-    // Return optimized task order (ignoring start and end points)
     std::vector<int> optimizedTaskOrder(path.begin() + 1, path.end() - 1);
     std::transform(optimizedTaskOrder.begin(), optimizedTaskOrder.end(), optimizedTaskOrder.begin(), [](int i) { return --i; });
 

@@ -26,83 +26,101 @@ AgentInputWidget::AgentInputWidget(QGraphicsScene *scene, InteractiveAgentRectIt
     connect(createMapButton, &QPushButton::clicked, this, &AgentInputWidget::createMap);
     layout->addWidget(createMapButton);
 
-    // Tworzymy QGraphicsView do wyświetlania sceny
     graphicsView = new QGraphicsView(this);
-    graphicsView->setScene(scene);  // Ustawiamy początkową scenę
-    layout->addWidget(graphicsView);  // Dodajemy widok do layoutu
+    graphicsView->setScene(scene);
+    layout->addWidget(graphicsView);
 
     agentListWidget = new QListWidget(this);
-    agentListWidget->setMaximumHeight(50);
+    agentListWidget->setMaximumHeight(110);
     layout->addWidget(agentListWidget);
 
     updateAgentList();
 }
+AgentInputWidget::~AgentInputWidget()
+{
+    if(graphItem) delete graphItem;
+}
 void AgentInputWidget::clear()
 {
-    // 1. Usuń wszystkich agentów i przeszkody
-    agentsData.clear();   // Czyścimy wektor przechowujący agentów i ich pojemności
-    obstacles.clear();    // Czyścimy wektor przechowujący przeszkody
 
-    // 2. Wyczyść scenę graficzną
+    agentsData.clear();
+    obstacles.clear();
+
     if (scene) {
-        scene->clear();  // Usunięcie wszystkich elementów ze sceny graficznej
+        scene->clear();
     }
 
-    // 3. Zaktualizuj listę agentów
     if (agentListWidget) {
-        agentListWidget->clear();  // Wyczyść listę widżetów dla agentów
+        agentListWidget->clear();
     }
-
-    // 4. Przywróć pierwotny stan grafu (opcjonalne dodanie pustej mapy)
-    // Możesz opcjonalnie przywrócić początkową szerokość/wysokość mapy i utworzyć pustą mapę
-    createMap();  // Przywrócenie pustego grafu
+    createMap();
 }
 
-void AgentInputWidget::loadMap(int width, int height, const std::vector<QPoint>& obstacles, const std::vector<AgentData>& agentsData)
+void AgentInputWidget::loadMap(int width, int height, const std::vector<QPoint>& obstacles,
+                               const std::vector<AgentData>& agentsData, const std::vector<QPoint>& pickupsData,
+                               const std::vector<QPoint>& dropoffsData)
 {
-    // Clear existing agents and obstacles
     this->agentsData.clear();
     this->obstacles.clear();
+    this->avaliableDropoffPoints.clear();
+    this->avaliablePickupPoints.clear();
 
     if (scene) {
-        scene->clear();  // Usunięcie wszystkich elementów ze sceny graficznej
+        scene->clear();
     }
-    //graphItem->clear();
 
-    // Create a new map based on the given dimensions
+
     std::shared_ptr<map::Graph> newMap = std::make_shared<map::Graph>(width, height);
     graphItem = new InteractiveAgentRectItem(*newMap, nullptr);  // Create new graph item
 
-    // Add obstacles to the new map
+
     this->width = width;
     this->height = height;
     this->obstacles = obstacles;
     this->agentsData = agentsData;
+    this->avaliablePickupPoints = pickupsData;
+    this->avaliableDropoffPoints = dropoffsData;
 
 
 
     graphItem->drawGraph(scene);
     scene->addItem(graphItem);
-    for (const QPoint& obstacle : obstacles) {
-        graphItem->obstaclePoints.insert(obstacle);  // Update internal set
-        graphItem->updateCellColor(obstacle.x(), obstacle.y(), InteractiveAgentRectItem::cellState::OBSTACLE);
-    }
 
-    // Add agents to the graph item
-    for (const auto& agent : agentsData) {
-        graphItem->agentPoints.insert(agent.point);  // Update internal set
-        graphItem->updateCellColor(agent.point.x(), agent.point.y(), InteractiveAgentRectItem::cellState::AGENT);
+
+    for (const QPoint& obstacle : obstacles)
+    {
+        graphItem->obstaclePoints.insert(obstacle);
+        graphItem->updateCellColor(obstacle.x(), obstacle.y(), InteractiveAgentRectItem::Option::OBSTACLE);
+    }
+    for (const auto& agent : agentsData)
+    {
+        graphItem->agentPoints.insert(agent.point);
+        graphItem->updateCellColor(agent.point.x(), agent.point.y(), InteractiveAgentRectItem::Option::AGENT);
+    }
+    for (const auto& pickup : pickupsData)
+    {
+        graphItem->avaliablePickupPoints.insert(pickup);
+        graphItem->updateCellColor(pickup.x(), pickup.y(), InteractiveAgentRectItem::Option::PICKUP);
+    }
+    for (const auto& dropoff : dropoffsData)
+    {
+        graphItem->avaliableDropoffPoints.insert(dropoff);
+        graphItem->updateCellColor(dropoff.x(), dropoff.y(), InteractiveAgentRectItem::Option::DROPOFF);
     }
     connect(graphItem, &InteractiveAgentRectItem::agentSelected, this, &AgentInputWidget::addAgent);
     connect(graphItem, &InteractiveAgentRectItem::obstacleSelected, this, &AgentInputWidget::addObstacle);
     connect(graphItem, &InteractiveAgentRectItem::agentRemoved, this, &AgentInputWidget::removeAgent);
     connect(graphItem, &InteractiveAgentRectItem::obstacleRemoved, this, &AgentInputWidget::removeObstacle);
 
+    connect(graphItem, &InteractiveAgentRectItem::pickupSelected, this, &AgentInputWidget::addPickupPoint);
+    connect(graphItem, &InteractiveAgentRectItem::dropoffSelected, this, &AgentInputWidget::addDropoffPoint);
+    connect(graphItem, &InteractiveAgentRectItem::pickupRemoved, this, &AgentInputWidget::removePickupPoint);
+    connect(graphItem, &InteractiveAgentRectItem::dropoffRemoved, this, &AgentInputWidget::removeDropoffPoint);
 
-    graphicsView->setScene(scene);  // Ensure the graphics view shows the updated scene
+    graphicsView->setScene(scene);
     updateAgentList();
 }
-// Metoda do aktualizacji sceny w QGraphicsView
+
 void AgentInputWidget::setScene(QGraphicsScene *newScene)
 {
     scene = newScene;
@@ -117,12 +135,12 @@ void AgentInputWidget::updateAgentList()
     {
         const auto &agentData = agentsData[i];
 
-        // Tworzymy widżet dla agenta z pozycją i pojemnością
+
         auto *itemWidget = new AgentListItemWidget("Agent", agentData.point, agentData.capacity, this);
 
-        // Po zmianie pojemności, aktualizujemy dane w `agentsData`
+
         connect(itemWidget, &AgentListItemWidget::capacityChanged, this, [this, i](const QPoint &, int newCapacity) {
-            agentsData[i].capacity = newCapacity;  // Aktualizacja pojemności agenta
+            agentsData[i].capacity = newCapacity;
         });
 
         QListWidgetItem *item = new QListWidgetItem(agentListWidget);
@@ -143,7 +161,16 @@ void AgentInputWidget::addObstacle(const QPoint &point)
     obstacles.push_back(point);
     updateMap();
 }
-
+void AgentInputWidget::addPickupPoint(const QPoint &point)
+{
+    avaliablePickupPoints.push_back(point);
+    updateMap();
+}
+void AgentInputWidget::addDropoffPoint(const QPoint &point)
+{
+    avaliableDropoffPoints.push_back(point);
+    updateMap();
+}
 void AgentInputWidget::removeAgent(const QPoint &point)
 {
     auto it = std::remove_if(agentsData.begin(), agentsData.end(), [&point](const AgentData &data) {
@@ -166,10 +193,28 @@ void AgentInputWidget::removeObstacle(const QPoint &point)
         updateMap();
     }
 }
-
+void AgentInputWidget::removePickupPoint(const QPoint &point)
+{
+    auto it = std::remove_if(avaliablePickupPoints.begin(), avaliablePickupPoints.end(), [&point](const QPoint &cell) {
+        return cell == point;
+    });
+    if (it != avaliablePickupPoints.end()) {
+        avaliablePickupPoints.erase(it);
+        updateMap();
+    }
+}
+void AgentInputWidget::removeDropoffPoint(const QPoint &point)
+{
+    auto it = std::remove_if(avaliableDropoffPoints.begin(), avaliableDropoffPoints.end(), [&point](const QPoint &cell) {
+        return cell == point;
+    });
+    if (it != avaliableDropoffPoints.end()) {
+        avaliableDropoffPoints.erase(it);
+        updateMap();
+    }
+}
 void AgentInputWidget::updateMap()
 {
-    // Placeholder function to update the UI or other components when the map changes.
 }
 
 void AgentInputWidget::createMap()
@@ -179,11 +224,11 @@ void AgentInputWidget::createMap()
 
     agentsData.clear();
     obstacles.clear();
-    //graphItem->clear();  // Clear current graph item before creating a new one
+    //graphItem->clear();
 
 
     std::shared_ptr<map::Graph> newMap = std::make_shared<map::Graph>(width, height);
-    emit mapCreated(newMap);  // Emit the signal with the new map
+    emit mapCreated(newMap);
 
 
     scene->clear();
@@ -196,6 +241,11 @@ void AgentInputWidget::createMap()
     connect(graphItem, &InteractiveAgentRectItem::obstacleSelected, this, &AgentInputWidget::addObstacle);
     connect(graphItem, &InteractiveAgentRectItem::agentRemoved, this, &AgentInputWidget::removeAgent);
     connect(graphItem, &InteractiveAgentRectItem::obstacleRemoved, this, &AgentInputWidget::removeObstacle);
+
+    connect(graphItem, &InteractiveAgentRectItem::pickupSelected, this, &AgentInputWidget::addPickupPoint);
+    connect(graphItem, &InteractiveAgentRectItem::dropoffSelected, this, &AgentInputWidget::addDropoffPoint);
+    connect(graphItem, &InteractiveAgentRectItem::pickupRemoved, this, &AgentInputWidget::removePickupPoint);
+    connect(graphItem, &InteractiveAgentRectItem::dropoffRemoved, this, &AgentInputWidget::removeDropoffPoint);
 
     graphicsView->setScene(scene);
     updateAgentList();

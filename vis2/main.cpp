@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include "settingsview.h"
+#include "menu.h"
 #include <QApplication>
 #include <QFontDatabase>
 #include <QDebug>
@@ -17,7 +17,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    SettingsView w;
+    Menu menu;
 
 
     QFile styleFile(":/styles/styles/default.qss");
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     QString style( styleFile.readAll() );
     app.setStyleSheet( style );
 
-    w.show();
+    menu.show();
 
     return app.exec();
 }

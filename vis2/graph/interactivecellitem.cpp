@@ -14,15 +14,12 @@ InteractiveCellItem::InteractiveCellItem(const QRectF &rect, QPoint cellPosition
 void InteractiveCellItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 
-    std::cout << "Cell clicked at: (" << cellPosition.x() << ", " << cellPosition.y() << ")\n";
-    if (event->button() == Qt::LeftButton) {
-        qDebug()<<"Scene Clicked!" << event->button();
-
+    if (event->button() == Qt::LeftButton)
+    {
         parentGraphItem->handleCellLeftClick(cellPosition);
     }
-    if (event->button() == Qt::RightButton) {
-        qDebug()<<"Scene Clicked!" << event->button();
-
+    if (event->button() == Qt::RightButton)
+    {
         parentGraphItem->handleCellRightClick(cellPosition);
     }
     event->accept();
@@ -30,7 +27,6 @@ void InteractiveCellItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void InteractiveCellItem::keyPressEvent(QKeyEvent* event)
 {
-    qDebug("pressed space\n");
     if (event->key() == Qt::Key_Space)
     {
         parentGraphItem->toggleSelectionMode();

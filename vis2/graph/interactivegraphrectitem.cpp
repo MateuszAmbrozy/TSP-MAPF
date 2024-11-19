@@ -14,8 +14,10 @@ void InteractiveGraphRectItem::drawGraph(QGraphicsScene *scene) {
     QBrush obstacleBrush(Qt::gray);
     QBrush normalBrush(Qt::white);
 
-    for (int i = 0; i < graph.width; ++i) {
-        for (int j = 0; j < graph.height; ++j) {
+    for (int i = 0; i < graph.width; ++i)
+    {
+        for (int j = 0; j < graph.height; ++j)
+        {
             const map::Cell& cell = graph.cells[i][j];
             QRectF rect(i * cellSize, j * cellSize, cellSize, cellSize);
 
@@ -33,6 +35,3 @@ QPoint InteractiveGraphRectItem::getCellFromPosition(const QPointF& position) {
     return QPoint(x, y);
 }
 
-void InteractiveGraphRectItem::toggleSelectionMode() {
-    toggle = !toggle;
-}

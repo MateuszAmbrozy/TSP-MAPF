@@ -32,6 +32,7 @@ class AgentInputWidget : public QWidget
 
     friend class EditorView;
 private:
+    enum class options{Agent = 0, Obstacle, Pickup, Dropoff};
     QGraphicsScene *scene;
     InteractiveAgentRectItem *graphItem;
 
@@ -46,22 +47,30 @@ private:
     std::vector<QPoint> obstacles;
     std::vector<AgentData> agentsData;
     int width, height;
+    std::vector<QPoint> avaliablePickupPoints;
+    std::vector<QPoint> avaliableDropoffPoints;
 
     void updateMap();
 
 private slots:
+
     void addAgent(const QPoint &point);
+    void addPickupPoint(const QPoint &point);
+    void addDropoffPoint(const QPoint& point);
     void addObstacle(const QPoint &point);
     void removeAgent(const QPoint& point);
     void removeObstacle(const QPoint& point);
+    void removePickupPoint(const QPoint& point);
+    void removeDropoffPoint(const QPoint& point);
+
 
     void createMap();
     void updateAgentList();
 public:
     AgentInputWidget(QGraphicsScene *scene, InteractiveAgentRectItem *graphItem, QWidget *parent = nullptr);
-
+    ~AgentInputWidget();
     void clear();
-    void loadMap(int width, int height, const std::vector<QPoint>& obstacles, const std::vector<AgentData>& agentsData);
+    void loadMap(int width, int height, const std::vector<QPoint>& obstacles, const std::vector<AgentData>& agentsData, const std::vector<QPoint>& pickupsData, const std::vector<QPoint>& dropoffsData);
 signals:
     void mapCreated(std::shared_ptr<map::Graph> map);
     void agentsCreated(std::shared_ptr<std::vector<Agent>> agents);

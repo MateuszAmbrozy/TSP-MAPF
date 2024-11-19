@@ -20,7 +20,7 @@
 #include "graph/inetractivetaskgraph.h"
 #include "pointlistitemwidget.h"
 #include <QMessageBox>
-
+#include <../lib/Agent.h>
 class TaskInputWidget : public QWidget
 {
     Q_OBJECT
@@ -43,7 +43,6 @@ private:
     QLineEdit *capacityInput;
     QListWidget *pointListWidget;
     QSpinBox *stopTimeInput;
-
 
     std::vector<map::Cell> pickupPoints;
     map::Cell dropoffPoint;

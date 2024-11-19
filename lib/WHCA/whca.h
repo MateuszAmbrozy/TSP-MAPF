@@ -22,9 +22,9 @@ public:
 private:
     std::vector<SpaceTime::Cell> getNeighbors(const WHCA_Agent& agent, map::Cell target, SpaceTime::Node &current, const Reservation &table);
 
-    std::vector<SpaceTime::Cell> pathToTarget(WHCA_Agent &unit, int currentTime, Reservation& table);
+    std::vector<SpaceTime::Cell> pathToTarget(WHCA_Agent& unit, map::Cell start, map::Cell target, int currentTime, Reservation& table);
 
-    bool recursiveWaitAndReturn(const WHCA_Agent& agent, SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table);
+    bool recursiveWaitAndReturn(WHCA_Agent& unit, const int waitTime, const map::Cell& target, SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table);
     bool isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table);
     SpaceTime::Cell findAlternativeWaitingCell(const WHCA_Agent& agent, const SpaceTime::Cell& cell, int currentTime, Reservation& table);
 public:

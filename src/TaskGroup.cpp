@@ -8,7 +8,8 @@ int TaskGroup::getCapacity() const {
     return capacity;
 }
 
-map::Cell TaskGroup::getPickupLocation(int index) const {
+map::Cell TaskGroup::getPickupLocation(int index) const
+{
     if (index >= 0 && index < pickup_points.size()) {
         return pickup_points[index];
     }

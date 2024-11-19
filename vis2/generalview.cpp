@@ -1,33 +1,38 @@
 #include "generalview.h"
 #include <QGroupBox>
+
 GeneralView::GeneralView(QWidget* parent) : QWidget(parent), selectedAlgorithm(AlgType::A_STAR)
 {
-    // Tworzymy etykietę dla wyboru algorytmu
+    // Label for algorithm selection
     label = new QLabel("Select an Algorithm:", this);
     label->setStyleSheet("font-size: 16px; font-weight: bold; color: #333;");
 
-    // Tworzymy przyciski radiowe z ładnym CSS
+    // Radio buttons with word wrapping and improved styles
     CA = new QRadioButton("Algorithm Cooperative A*", this);
     WHCA = new QRadioButton("Algorithm Window Hierarchical Cooperative A*", this);
     CA->setChecked(true);
     CA->setStyleSheet("QRadioButton { font-size: 14px; padding: 5px; }");
     WHCA->setStyleSheet("QRadioButton { font-size: 14px; padding: 5px; }");
 
-    // Łączymy sygnały, aby zaktualizować wybrany algorytm
+    // Connect signals to update selected algorithm
     connect(CA, &QRadioButton::toggled, this, &GeneralView::onCASelected);
     connect(WHCA, &QRadioButton::toggled, this, &GeneralView::onWHCASelected);
 
-    // Ustawiamy QGroupBox, aby zorganizować wybór algorytmu
+    // Group box to organize algorithm selection
     QGroupBox* algorithmGroupBox = new QGroupBox("Algorithm Selection", this);
-    algorithmGroupBox->setStyleSheet("QGroupBox { font-size: 16px; font-weight: bold; border: 1px solid #AAA; margin-top: 20px; padding: 15px; }");
+    algorithmGroupBox->setStyleSheet(
+        "QGroupBox { font-size: 16px; font-weight: bold; "
+        "border: 1px solid #AAA; margin-top: 10px; padding: 10px 10px 10px 20px; } "
+        "QGroupBox::title { subcontrol-origin: margin; left: 15px; top: -5px; }"  // Adjust title position
+        );
 
-    // Ustawiamy układ dla QGroupBox
+    // Layout for the group box
     QVBoxLayout* radioLayout = new QVBoxLayout();
     radioLayout->addWidget(CA);
     radioLayout->addWidget(WHCA);
     algorithmGroupBox->setLayout(radioLayout);
 
-    // Ustawiamy główny układ dla GeneralView
+    // Main layout for GeneralView
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(label);
     layout->addWidget(algorithmGroupBox);
@@ -37,7 +42,7 @@ GeneralView::GeneralView(QWidget* parent) : QWidget(parent), selectedAlgorithm(A
 
     setLayout(layout);
     setStyleSheet("background-color: #F9F9F9; border-radius: 8px;");
-    setFixedSize(300, 200);
+    setFixedSize(320, 220);  // Increase width and height to fit content better
 }
 
 AlgType GeneralView::getSelectedAlgorithm() const
