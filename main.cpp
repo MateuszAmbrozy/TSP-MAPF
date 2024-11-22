@@ -22,8 +22,9 @@ std::vector<std::pair<int, int>> pickupsData, dropoffData;
 void loadMap(std::string fileName){
     // Otwieranie pliku
     
-    std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map2_obstacles.json", std::ifstream::in);
-    if (!file.is_open()) {
+    std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\test_agents.json", std::ifstream::in);
+    if (!file.is_open()) 
+    {
         std::cerr << "Could not open file: " << fileName << std::endl;
         return;
     }
@@ -106,7 +107,7 @@ void loadMap(std::string fileName){
 void testEnvi()
 {
     const int seed = 42;  // Using a fixed seed value
-    srand(time(0));
+    srand(seed);
 
     std::vector<int> numValues;
     std::vector<int> results;
@@ -117,7 +118,7 @@ void testEnvi()
 
 
     // Loop over different values of num
-    for (int num = 1; num <= 15; num++)
+    for (int num = 1; num <= 33; num++)
     
     {
         map::Graph graph(width, height, obstacles);
@@ -251,14 +252,25 @@ void testAgents()
         tasks.push_back(task);
     }
     delete base;
+    
 
     // Iteracja dla różnej liczby agentów
-    for (int num = 1; num <= 20; ++num)
+    for (int num = 1; num <= numTasks; ++num)
     {
-        CA_Environment e(agentsLocal, graph, pickupsData, dropoffData);
-        WHCA_Environment whca_e(agentsLocal, graph, pickupsData, dropoffData);
+        std::vector<Agent> currentAgents;
 
-        std::vector<Agent> currentAgents(agentsLocal.begin(), agentsLocal.begin() + num);
+        // Upewnij się, że liczba agentów nie przekracza dostępnych pozycji
+        if (num > agentPositions.size()) {
+            std::cerr << "Za mało dostępnych pozycji dla liczby agentów: " << num << std::endl;
+            break; // Możesz też dodać nowe pozycje dynamicznie
+        }
+
+        // Generowanie `num` agentów
+        for (int i = 0; i < num; ++i) {
+            const auto& [x, y] = agentPositions[i];
+            map::Cell position(x, y);
+            currentAgents.emplace_back(i, 50, position);
+        }
         CA_Environment currentCA(currentAgents, graph, pickupsData, dropoffData);
         WHCA_Environment currentWHCA(currentAgents, graph, pickupsData, dropoffData);
 
@@ -446,7 +458,7 @@ int main()
 {
    // testEnvi();
     loadMap("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map2.json");
-    testEnvi();
-    //testAgents();
+    //testEnvi();
+    testAgents();
     return 0;
 }

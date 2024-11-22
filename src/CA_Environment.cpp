@@ -36,7 +36,8 @@ void CA_Environment::assignVacantAgents()
 bool CA_Environment::allTasksCompleted()
 {
         // Sprawdzenie, czy lista zadań jest pusta
-        if (!task_list.empty()) {
+        if (!task_list.empty()) 
+        {
             return false;  // Są jeszcze zadania do wykonania
         }
 
@@ -130,14 +131,14 @@ void CA_Environment::MOVEAGENTS(int timestep)
 
 void CA_Environment::runTimestep(int timestep, TaskGroup* task)
 {
-    if(task)
-    {
-        task_list.push_back(*task);
-    }
-    else if(timestep % 5 == 0)
-    {
-        task_list.push_back(TASKGROUPGENERATOR());
-    }
+    // if(task)
+    // {
+    //     task_list.push_back(*task);
+    // }
+    // else if(timestep % 5 == 0)
+    // {
+    //     task_list.push_back(TASKGROUPGENERATOR());
+    // }
     // Iterate over tasks and assign to agents if possible
     for (size_t l = 0; l < task_list.size(); ++l)
     {

@@ -147,15 +147,15 @@ bool WHCA_Environment::allTasksCompleted()
 }
 
 void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
- {
-    if(task)
-    {
-        task_list.push_back(*task);
-    }
-    else if(timestep % 9 == 0)
-    {
-        task_list.push_back(TASKGROUPGENERATOR());
-    }
+{
+    // if(task)
+    // {
+    //     task_list.push_back(*task);
+    // }
+    // else if(timestep % 9 == 0)
+    // {
+    //     task_list.push_back(TASKGROUPGENERATOR());
+    // }
 
 
     // Iterate over tasks and assign to agents if possible

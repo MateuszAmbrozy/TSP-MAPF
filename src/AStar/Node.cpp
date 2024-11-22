@@ -22,7 +22,15 @@ A::Node::Node(const A::Node& other)
 bool A::Node::operator<(const A::Node& other) const {
     return fCost < other.fCost;
 }
+bool A::Node::operator == (const Node& other) const
+{
+    return Cell::operator==(other) && parent == other.parent && fCost==other.fCost;
+}
 
+bool A::Node::operator == (Node& other) const
+{
+    return Cell::operator==(other) && parent == other.parent && fCost==other.fCost;
+}
 
 A::Node& A::Node::operator=(const A::Node& other) {
     if (this == &other) return *this;

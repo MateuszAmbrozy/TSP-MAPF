@@ -79,6 +79,21 @@ namespace SpaceTime
             t = 0;
             return *this;
         }
+        bool operator == (const Node& other) const
+        {
+            return
+                A::Node::operator==(other) &&
+                t == other.t;
+        }
     };
 
+}
+namespace std {
+template<>
+struct hash<SpaceTime::Node> {
+    size_t operator()(const SpaceTime::Node& node) const {
+        // Combine hash values of all relevant members
+        return hash<int>()(node.x) ^ (hash<int>()(node.y) << 1) ^ (hash<int>()(node.t) << 2);
+    }
+};
 }

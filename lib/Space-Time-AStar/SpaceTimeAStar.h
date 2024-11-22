@@ -19,12 +19,12 @@
 #include "../Agent.h"
 #include "Reservation.h"
 #include "../setup.h"
-
-
+#include <unordered_set>
+#include <chrono>
 class SpaceTimeAStar :public A::Astar
 {
 private:
-    std::vector<SpaceTime::Cell> getNeighbors(const Agent& agent, map::Cell target, SpaceTime::Node &current, const Reservation &table);
+    std::vector<SpaceTime::Cell> getNeighbors(const Agent& agent, map::Cell target, SpaceTime::Node &current, const Reservation &table, std::vector<std::vector<bool>> closedList);
     std::vector<SpaceTime::Cell> pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table);
     bool recursiveWaitAndReturn(const Agent& unit, const int waitTime, const map::Cell& target, SpaceTime::Cell* currentCell, SpaceTime::Cell* parentCell, int& waitT, std::vector<SpaceTime::Cell>& path, Reservation& table);
     bool isTargetFreeForEntireWaitTime(const map::Cell& target, int startTime, int waitTime, Reservation& table);

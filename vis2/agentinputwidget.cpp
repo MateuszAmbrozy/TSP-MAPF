@@ -45,6 +45,8 @@ void AgentInputWidget::clear()
 
     agentsData.clear();
     obstacles.clear();
+    avaliableDropoffPoints.clear();
+    avaliablePickupPoints.clear();
 
     if (scene) {
         scene->clear();
@@ -53,6 +55,7 @@ void AgentInputWidget::clear()
     if (agentListWidget) {
         agentListWidget->clear();
     }
+
     createMap();
 }
 

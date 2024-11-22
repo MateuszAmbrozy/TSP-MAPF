@@ -29,6 +29,8 @@ public:
 
     virtual ~Node() {}
     bool operator<(const Node& other) const;
+    bool operator == (const Node& other) const;
+    bool operator == (Node& other) const;
 
     static float calculateH(int startX, int startY, int destX, int destY);
 };

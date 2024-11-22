@@ -22,9 +22,8 @@ SpaceTimeAStar::SpaceTimeAStar(map::Graph graph)
 //     return neighbors;
 // }
 
-std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, map::Cell target,  SpaceTime::Node &current, const Reservation &table) {
+std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, map::Cell target,  SpaceTime::Node &current, const Reservation &table, std::vector<std::vector<bool>> closedList) {
     std::vector<SpaceTime::Cell> neighbors;
-    std::vector<SpaceTime::Cell> reservedNeighbors;
     std::vector<map::Cell> illictis = agent.getIllicits();
 
     for (auto dir : setup::moves)
@@ -33,16 +32,18 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, ma
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
 
         // Check if the neighbor is valid and doesn't contain any illicits
-        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits)
+        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits /*&& !closedList[neighbor.x][neighbor.y]*/)
         {
 
             if (isDestination(neighbor.x, neighbor.y, target.x, target.y))
             {
-                if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y)) {
+                if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
+                {
                     neighbors.push_back(neighbor);  // Prioritize target cell even if reserved
                 }
             }
-            else {
+            else
+            {
                 if (!table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
                     !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
                 {
@@ -58,6 +59,7 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, ma
 
 std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, const map::Cell& start, const int waitTime, int currentTime, const map::Cell& target, Reservation& table)
 {
+    auto isDestinationStartTime = std::chrono::high_resolution_clock::now();
     std::vector<SpaceTime::Cell> path;
 
     if (!isValid(target.x, target.y)) 
@@ -73,12 +75,14 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         return {buf};
     }
 
-    std::vector<std::vector<bool>> closedList(aStarGraph.size(), std::vector<bool>(aStarGraph[0].size(), false));
+    std::vector<std::vector<bool>> closedList(graph.cells.size(), std::vector<bool>(graph.cells[0].size(), false));
+    std::unordered_map<SpaceTime::Node, unsigned int> closedSet;
     std::priority_queue<SpaceTime::Node, std::vector<SpaceTime::Node>, A::CompareCells> openList;
 
     SpaceTime::Node startNode(currentTime, start.x, start.y, start.isObstacle);
 
     startNode.gCost = 0;
+    //double hNew = SpaceTime::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
     startNode.hCost = SpaceTime::Node::calculateH(start.x, start.y, target.x, target.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
     startNode.parent = nullptr;
@@ -87,11 +91,12 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
     int maxWaitTime = 5;
     bool waiting = false;
     SpaceTime::Node currentCell;
-    while (!openList.empty()) 
+    int iterator = 0;
+    while (!openList.empty())
     {
         currentCell = openList.top();
         openList.pop();
-
+        closedSet.insert({currentCell, currentCell.fCost});
         if (isDestination(currentCell.x, currentCell.y, target.x, target.y)) 
         {
             int waitT = currentCell.t;
@@ -136,6 +141,7 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
                     else
                     {
                         std::cerr << "No alternative path found after waiting. Exiting...\n";
+                        return {};
                     }
                     currentTime = alternativePath.back().t + 1;
                 }
@@ -143,15 +149,26 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
                 path.push_back(finalCell);
             }
 
+            int counter = 0;
+            for(int i=0; i<closedList.size(); i++)
+            {
+                for(int j=0; j<closedList[0].size(); j++)
+                {
+                    if(closedList[i][j]) counter++;
+                }
+            }
+            auto isDestinationEndTime = std::chrono::high_resolution_clock::now();
+            auto isDestinationDuration = std::chrono::duration_cast<std::chrono::milliseconds>(isDestinationEndTime - isDestinationStartTime).count();
 
-
-            
+            // Print the elapsed time
+            //std::cout << "Execution time for agent " << unit.getId() << " of partPath: " << isDestinationDuration << " millisenconds" << std::endl;
+            //std::cout<<"Iterator: " << iterator << ", openList.size(): " << openList.size() << ", closedList.size(): " << counter << " for agent: " << unit.getId() <<std::endl;
             return path;
         }
     
 
-        closedList[currentCell.x][currentCell.y] = true;
-        std::vector<SpaceTime::Cell> neighbors = getNeighbors(unit, target, currentCell, table);
+        //closedList[currentCell.x][currentCell.y] = true;
+        std::vector<SpaceTime::Cell> neighbors = getNeighbors(unit, target, currentCell, table, closedList);
 
         if(maxWaitTime == 0)
         {
@@ -159,10 +176,11 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         }
         else if (neighbors.empty() && maxWaitTime > 0) 
         {
+            std::cout<<"waiting, no neigbors\n";
             if (!table.isReserved(currentCell.x, currentCell.y, currentCell.t + 1))
             {
                 auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
-                SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode);
+                SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode, currentCell.gCost + 1, currentCell.hCost, currentCell.fCost + 1);
                 openList.push(waitNode);
                 maxWaitTime--;
                 waiting = true;
@@ -177,21 +195,35 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         {
             waiting = false;
             maxWaitTime = 5;
-            for (const auto& neighbor : neighbors) {
-                if (!closedList[neighbor.x][neighbor.y]) {
+            for (SpaceTime::Cell& neighbor : neighbors)
+            {
                     double gNew = currentCell.gCost + 1;
                     double hNew = SpaceTime::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
+                    //double hNew = calculate(neighbor, target);
                     double fNew = gNew + hNew;
 
-                    auto parentNode = std::make_shared<SpaceTime::Node>(currentCell); // Tworzenie inteligentnego wskaźnika
+                    auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
                     SpaceTime::Node neighborCell(currentCell.t + 1, neighbor.x, neighbor.y, false, parentNode, gNew, hNew, fNew);
+                    iterator++;
+                    auto it = closedSet.find(neighborCell);
+                    if (it != closedSet.end()) {
+                        if (fNew >= it->second) {
+                            // Skip if fNew is greater or equal to the existing fCost
+                            continue;
+                        }
+                    } else
+                    {
+                        closedSet[neighborCell] = fNew;
+                    }
+
                     openList.push(neighborCell);
-                }
+
             }
         }
+
+
     }
     
-
     if (waiting) {
         std::cerr << "Agent has reached max waiting time with no valid path found.\n";
     } else {
@@ -287,9 +319,6 @@ bool SpaceTimeAStar::isTargetFreeForEntireWaitTime(const map::Cell& target, int 
 }
 
 
-
-
-
 std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTime, TaskGroup groupTask, std::vector<int> taskOrder, Reservation& table) {
     std::vector<SpaceTime::Cell> fullPath;
     map::Cell startPos = unit.getPosition();
@@ -297,9 +326,10 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTi
     std::vector<map::Cell> waypoints;
     int stopTime;
 
-
+    auto startTime = std::chrono::high_resolution_clock::now();
     for (int taskIdx : taskOrder) {
-        if (taskIdx >= groupTask.getNumTasks() || taskIdx < 0) {
+        if (taskIdx >= groupTask.getNumTasks() || taskIdx < 0)
+        {
             std::cerr << "Invalid task _" << taskIdx << "_ in task order." << std::endl;
             return fullPath;
         }
@@ -406,5 +436,10 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTi
         }
         //std::cout<<std::endl;
     }
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+
+    // Print the elapsed time
+    //std::cout << "Execution time for agent " << unit.getId() << " of findTotalPath: " << duration << " millisenconds" << std::endl;
     return fullPath;
 }
