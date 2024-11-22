@@ -16,6 +16,7 @@
 #include "../TSP.h"
 #include "WHCA_Agent.h"
 #include "../Space-Time-AStar/Reservation.h"
+#include <chrono>
 class WHCA: public A::Astar
 {
 public:

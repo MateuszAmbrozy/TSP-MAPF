@@ -134,10 +134,10 @@ void CA_Environment::runTimestep(int timestep, TaskGroup* task)
     {
         task_list.push_back(*task);
     }
-    // else if(timestep % 10 == 0)
-    // {
-    //     task_list.push_back(TASKGROUPGENERATOR());
-    // }
+    else if(timestep % 5 == 0)
+    {
+        task_list.push_back(TASKGROUPGENERATOR());
+    }
     // Iterate over tasks and assign to agents if possible
     for (size_t l = 0; l < task_list.size(); ++l)
     {

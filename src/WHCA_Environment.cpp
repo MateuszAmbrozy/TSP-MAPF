@@ -11,8 +11,6 @@ WHCA_Environment::WHCA_Environment(std::vector<Agent> agents, map::Graph graph, 
     }
 }
 
-
-
 void WHCA_Environment::addAgent(Agent &newAgent)
 {
     for (auto& agent : agents)
@@ -63,11 +61,13 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 {
     for(auto& agent: agents)
     {
-        if (!agent.agent.isIdle()) {
+        std::vector<SpaceTime::Cell> path = agent.agent.getPath();
+        if (!agent.agent.isIdle() && path.size() > 0)
+        {
 
-            std::vector<SpaceTime::Cell> path = agent.agent.getPath();
 
-            if (path.size() > 0 && timestep < static_cast<int>(path.size()) + path.front().t)
+
+            if (timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
                 SpaceTime::Cell nextPosition;
@@ -83,7 +83,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 map::Cell newPosition(nextPosition.x, nextPosition.y);
                 agent.agent.move(newPosition);
 
-                std::cout<<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep << std::endl;
+                //std::cout<<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep << std::endl;
                 if (timestep == path.back().t)
                 {
                     if (!agent.reachedCurrentWaypoint())
@@ -103,28 +103,24 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 {
                     table.removeReservation(cell.x, cell.y, cell.t);  // Remove cell reservations
                     table.removeReservation(cell.x, cell.y, cell.t + 1);
+                    //table.removeReservation(cell.x, cell.y, cell.t + 2);
                     const auto nextCell = agent.agent.getPath().back();
                     if (&cell != &nextCell)
                     {
                         table.removeEdgeReservation(cell.x, cell.y, cell.t);
-
                     }
                 }
                 agent.agent.clearPath();
                 if(agent.finished())
                 {
-
                     agent.agent.clearTask();
                     agent.agent.setIdle(true);
                     agent.clearWaypoints();
                     agent.clearCurrentWayPointIndex();
                     vacant_agents.push_back(agent);
-
                 }
                 else
                 {
-
-
                     std::vector<SpaceTime::Cell> path = whca.findNextWSteps(agent, timestep, table);
                     agent.agent.assignPath(path);
                 }
@@ -139,9 +135,8 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 
 bool WHCA_Environment::allTasksCompleted()
 {
-        // Sprawdzenie, czy lista zadań jest pusta
         if (!task_list.empty()) {
-            return false;  // Są jeszcze zadania do wykonania
+            return false;
         }
         for (const auto& agent : agents) {
         if (!agent.agent.isIdle()) {
@@ -152,15 +147,15 @@ bool WHCA_Environment::allTasksCompleted()
 }
 
 void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
-{
+ {
     if(task)
     {
         task_list.push_back(*task);
     }
-    // else if(timestep % 10 == 0)
-    // {
-    //     task_list.push_back(TASKGROUPGENERATOR());
-    // }
+    else if(timestep % 9 == 0)
+    {
+        task_list.push_back(TASKGROUPGENERATOR());
+    }
 
 
     // Iterate over tasks and assign to agents if possible
@@ -199,7 +194,8 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
                     if(agents[i].agent.getId() == selectedAgent.agent.getId())
                     {
                         agents[i].setWaypoints(waypoints);
-                        task == nullptr ? agents[i].agent.assignTask(taskGroup) : agents[i].agent.assignTask(*task);
+                        //task == nullptr ? agents[i].agent.assignTask(taskGroup) : agents[i].agent.assignTask(*task);
+                        agents[i].agent.assignTask(taskGroup);
                         agents[i].agent.setIdle(false);
                         agentID = i;
                         break;

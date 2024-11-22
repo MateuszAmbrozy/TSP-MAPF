@@ -27,16 +27,14 @@ std::vector<std::vector<double>> TSP::calcDistanceMatrix(const Agent& agent, con
     for (int i = 0; i < n; ++i) {
         map::Cell pickup = taskGroup.getPickupLocation(i);
 
-        // Odległość od agenta do punktów odbioru
         distanceMatrix[0][i + 1] = euclideanDistance(agentPos, pickup);
         distanceMatrix[i + 1][0] = distanceMatrix[0][i + 1];
 
-        // Odległość od punktów odbioru do miejsca dostawy
         distanceMatrix[i + 1][n + 1] = euclideanDistance(pickup, dropoff);
         distanceMatrix[n + 1][i + 1] = distanceMatrix[i + 1][n + 1];
     }
 
-    // Odległości między punktami odbioru
+
     for (int i = 0; i < n; ++i) {
         map::Cell locI = taskGroup.getPickupLocation(i);
         for (int j = i + 1; j < n; ++j) {

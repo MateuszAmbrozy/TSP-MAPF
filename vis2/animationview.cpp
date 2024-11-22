@@ -309,24 +309,6 @@ void AnimationView::loadMap()
         {
             environment = new WHCA_Environment(agents, graph, avaliablePickups, avaliableDropoffs);
         }
-
-        // const int seed = 42;  // Using a fixed seed value
-        // srand(seed);
-
-        // Define available positions for pickup and dropoff points
-        // std::vector<std::pair<int, int>> availablePickupX
-        // std::vector<std::pair<int, int>> availablePickupY
-        // std::vector<std::pair<int, int>> availableDropofX
-        // std::vector<std::pair<int, int>> availableDropofY
-        // std::vector<TaskGroup> tasks;
-        // for (int i = 0; i < 10; ++i)
-        // {
-        //     TaskGroup task = environment->TASKGROUPGENERATOR(availablePickupX, availablePickupY, availableDropofX, availableDropofY);
-        //     tasks.push_back(task);
-        // }
-
-        // // CA_Environment
-        // environment->assignTasks(tasks);
         environment->assignVacantAgents();
 
         // Reset mapfScene and update mapfView's scene

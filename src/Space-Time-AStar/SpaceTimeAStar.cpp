@@ -84,7 +84,7 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
     startNode.parent = nullptr;
 
     openList.push(startNode);
-    int maxWaitTime = 15;
+    int maxWaitTime = 5;
     bool waiting = false;
     SpaceTime::Node currentCell;
     while (!openList.empty()) 
@@ -96,7 +96,8 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         {
             int waitT = currentCell.t;
            std::shared_ptr<SpaceTime::Node> temp = std::make_shared<SpaceTime::Node>(currentCell);
-            while (temp != nullptr) {
+            while (temp != nullptr) 
+            {
                 SpaceTime::Cell cell(temp->x, temp->y, temp->t);
                 path.push_back(cell);
                 temp = temp->parent;
@@ -152,20 +153,30 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         closedList[currentCell.x][currentCell.y] = true;
         std::vector<SpaceTime::Cell> neighbors = getNeighbors(unit, target, currentCell, table);
 
-        if (neighbors.empty() && maxWaitTime > 0) 
+        if(maxWaitTime == 0)
         {
-            //std::cout<<"neighbours empty\n";
-            auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
-            SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode);
-            openList.push(waitNode);
-            maxWaitTime--;
-            waiting = true;
+            return {};
+        }
+        else if (neighbors.empty() && maxWaitTime > 0) 
+        {
+            if (!table.isReserved(currentCell.x, currentCell.y, currentCell.t + 1))
+            {
+                auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
+                SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode);
+                openList.push(waitNode);
+                maxWaitTime--;
+                waiting = true;
+            } else {
+                std::cerr << "Wait node at (" << currentCell.x << ", " << currentCell.y
+                          << ") t = " << currentCell.t + 1 << " is reserved.\n";
+                return {};
+            }
         } 
         
         else if(!neighbors.empty())
         {
             waiting = false;
-            maxWaitTime = 15;
+            maxWaitTime = 5;
             for (const auto& neighbor : neighbors) {
                 if (!closedList[neighbor.x][neighbor.y]) {
                     double gNew = currentCell.gCost + 1;

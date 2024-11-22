@@ -8,6 +8,7 @@ BaseEnvironment::BaseEnvironment(map::Graph graph, std::vector<std::pair<int, in
     avaliableDropoff(avaliableDropoff)
 {
     //srand(time(0));
+    table = Reservation();
 }
 TaskGroup BaseEnvironment::TASKGROUPGENERATOR()
 {
