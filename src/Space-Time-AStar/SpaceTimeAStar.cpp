@@ -32,20 +32,20 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::getNeighbors(const Agent& agent, ma
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
 
         // Check if the neighbor is valid and doesn't contain any illicits
-        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits /*&& !closedList[neighbor.x][neighbor.y]*/)
+        if (isValid(neighbor.x, neighbor.y) && !containtsIllicits)
         {
 
             if (isDestination(neighbor.x, neighbor.y, target.x, target.y))
             {
-                if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
-                {
+                //if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
+                //{
                     neighbors.push_back(neighbor);  // Prioritize target cell even if reserved
-                }
+                //}
             }
             else
             {
-                if (!table.isReserved(neighbor.x, neighbor.y, neighbor.t) &&
-                    !table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
+                if (!table.isReserved(neighbor.x, neighbor.y, neighbor.t))// &&
+                   //!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
                 {
                     neighbors.push_back(neighbor);
                 }
@@ -70,11 +70,16 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
 
     if (isDestination(start.x, start.y, target.x, target.y)) 
     {
-        //std::cout << "Already at the destination." << std::endl;
+        std::cout << "Already at the destination." << std::endl;
         SpaceTime::Cell buf(target, currentTime + 1);
         return {buf};
     }
-
+    std::vector<map::Cell> illictis = unit.getIllicits();
+    if(std::find(illictis.begin(), illictis.end(), target) != illictis.end())
+    {
+        std::cerr << "Target is an obstacle or invalid." << std::endl;
+        return path;
+    }
     std::vector<std::vector<bool>> closedList(graph.cells.size(), std::vector<bool>(graph.cells[0].size(), false));
     std::unordered_map<SpaceTime::Node, unsigned int> closedSet;
     std::priority_queue<SpaceTime::Node, std::vector<SpaceTime::Node>, A::CompareCells> openList;
@@ -148,15 +153,6 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
                 SpaceTime::Cell finalCell(target.x, target.y, waitT);
                 path.push_back(finalCell);
             }
-
-            int counter = 0;
-            for(int i=0; i<closedList.size(); i++)
-            {
-                for(int j=0; j<closedList[0].size(); j++)
-                {
-                    if(closedList[i][j]) counter++;
-                }
-            }
             auto isDestinationEndTime = std::chrono::high_resolution_clock::now();
             auto isDestinationDuration = std::chrono::duration_cast<std::chrono::milliseconds>(isDestinationEndTime - isDestinationStartTime).count();
 
@@ -176,18 +172,26 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
         }
         else if (neighbors.empty() && maxWaitTime > 0) 
         {
-            std::cout<<"waiting, no neigbors\n";
+            //std::cout<<"waiting, no neigbors\n";
+            auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
             if (!table.isReserved(currentCell.x, currentCell.y, currentCell.t + 1))
             {
-                auto parentNode = std::make_shared<SpaceTime::Node>(currentCell);
                 SpaceTime::Node waitNode(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode, currentCell.gCost + 1, currentCell.hCost, currentCell.fCost + 1);
                 openList.push(waitNode);
                 maxWaitTime--;
+                auto it = closedSet.find(waitNode);
+                if (it != closedSet.end()) 
+                {
+                    it->second = currentCell.fCost + 1;
+                }
                 waiting = true;
             } else {
+                
+                SpaceTime::Node neighborCell(currentCell.t + 1, currentCell.x, currentCell.y, false, parentNode, currentCell.gCost, currentCell.hCost, currentCell.fCost);
+                auto it = closedSet.find(neighborCell);
                 std::cerr << "Wait node at (" << currentCell.x << ", " << currentCell.y
                           << ") t = " << currentCell.t + 1 << " is reserved.\n";
-                return {};
+                closedSet[neighborCell] = INT_MAX;
             }
         } 
         
@@ -208,10 +212,10 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::pathToTarget(const Agent& unit, con
                     auto it = closedSet.find(neighborCell);
                     if (it != closedSet.end()) {
                         if (fNew >= it->second) {
-                            // Skip if fNew is greater or equal to the existing fCost
                             continue;
                         }
-                    } else
+                    }
+                    else
                     {
                         closedSet[neighborCell] = fNew;
                     }
@@ -340,7 +344,7 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTi
 
         std::vector<SpaceTime::Cell> path = pathToTarget(unit, currentAgentPosition, stopTime, currentTime, currentTaskPosition, table);
 
-        if(path.size() == 0)
+        if(path.empty())
         {
             //std::cout<<"ERROR::SpaceTimeAStar::findPath - not found path. Return {}.\n";
             return {};
@@ -441,5 +445,6 @@ std::vector<SpaceTime::Cell> SpaceTimeAStar::findPath(Agent& unit, int currentTi
 
     // Print the elapsed time
     //std::cout << "Execution time for agent " << unit.getId() << " of findTotalPath: " << duration << " millisenconds" << std::endl;
+
     return fullPath;
 }

@@ -79,7 +79,8 @@ void CA_Environment::MOVEAGENTS(int timestep)
 {
     for(auto& agent: agents)
     {
-        if (!agent.isIdle()) {
+        if (!agent.isIdle()) 
+        {
 
             std::vector<SpaceTime::Cell> path = agent.getPath();
 

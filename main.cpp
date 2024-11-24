@@ -18,11 +18,28 @@ std::vector<map::Cell> obstacles;
 std::vector<Agent> agents;
 std::vector<std::pair<int, int>> pickupsData, dropoffData;
 
+// Przykład funkcji losowego wyboru agentów
+std::vector<Agent> getRandomAgents(std::vector<Agent>& agents, int num) {
+    if (num > agents.size()) {
+        std::cerr << "Liczba losowanych agentów przekracza dostępnych: " << agents.size() << std::endl;
+        return {};
+    }
 
+    // Ziarno do losowania dla powtarzalności wyników (opcjonalnie można zmienić)
+    std::random_device rd;
+    std::mt19937 generator(rd());
+
+    // Przemieszaj agentów
+    std::shuffle(agents.begin(), agents.end(), generator);
+
+    // Wybierz pierwsze `num` agentów
+    return std::vector<Agent>(agents.begin(), agents.begin() + num);
+}
 void loadMap(std::string fileName){
     // Otwieranie pliku
     
-    std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\test_agents.json", std::ifstream::in);
+    //std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\huge_map_with_pickuppoints_and_dropoffpoints.json", std::ifstream::in);
+    std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map3.json", std::ifstream::in);
     if (!file.is_open()) 
     {
         std::cerr << "Could not open file: " << fileName << std::endl;
@@ -107,7 +124,7 @@ void loadMap(std::string fileName){
 void testEnvi()
 {
     const int seed = 42;  // Using a fixed seed value
-    srand(seed);
+    srand(time(0));
 
     std::vector<int> numValues;
     std::vector<int> results;
@@ -118,7 +135,7 @@ void testEnvi()
 
 
     // Loop over different values of num
-    for (int num = 1; num <= 33; num++)
+    for (int num = 1; num <= 15; num++)
     
     {
         map::Graph graph(width, height, obstacles);
@@ -128,7 +145,7 @@ void testEnvi()
         std::vector<TaskGroup> tasks;
 
         // Generate tasks
-        for (int i = 1; i < num * 3; ++i)
+        for (int i = 1; i <= num * 3; ++i)
         {
             TaskGroup task = e.TASKGROUPGENERATOR();
             tasks.push_back(task);
@@ -178,15 +195,7 @@ void testEnvi()
 
         numValues.push_back(num*3);
     }
-    // if (results.empty() || whca_results.empty()) {
-    //     std::cerr << "Brak danych do rysowania wykresu." << std::endl;
-    //     return;
-    // }
 
-    // if (results.size() != numValues.size() || whca_results.size() != numValues.size()) {
-    //     std::cerr << "Niezgodność rozmiarów wektorów." << std::endl;
-    //     return;
-    // }
     plt::plot(numValues, results, "b-");  // Linia niebieska dla CA_Environment
     plt::plot(numValues, whca_results, "r-");  // Linia czerwona dla WHCA_Environment
     plt::xlabel("num (Liczba zadań)");
@@ -205,30 +214,116 @@ void testEnvi()
     plt::show();
     plt::save("s2.png");
 }
+void testEnvi_usrednione()
+{
+    const int seed = 42;  // Using a fixed seed value
+    srand(time(NULL));
+
+    const int iterations = 15;
+
+    std::vector<int> numValues;  // Liczba zadań
+    std::vector<std::vector<int>> all_ca_results;  // Wyniki CA dla każdej iteracji
+    std::vector<std::vector<int>> all_whca_results;  // Wyniki WHCA dla każdej iteracji
+    std::vector<std::vector<double>> all_ca_times;  // Czasy CA dla każdej iteracji
+    std::vector<std::vector<double>> all_whca_times;  // Czasy WHCA dla każdej iteracji
+
+    // Loop over different values of num
+    for (int num = 1; num <= 66; num++) {
+        std::vector<int> ca_results(iterations, 0);  // Wyniki dla każdej iteracji
+        std::vector<int> whca_results(iterations, 0);
+        std::vector<double> ca_times(iterations, 0.0);  // Czasy dla każdej iteracji
+        std::vector<double> whca_times(iterations, 0.0);
+
+        for (int iter = 0; iter < iterations; ++iter) {
+            map::Graph graph(width, height, obstacles);
+            CA_Environment e(agents, graph, pickupsData, dropoffData);
+            WHCA_Environment whca_e(agents, graph, pickupsData, dropoffData);
+
+            std::vector<TaskGroup> tasks;
+
+            // Generate tasks
+            for (int i = 1; i <= num * 3; ++i) {
+                TaskGroup task = e.TASKGROUPGENERATOR();
+                tasks.push_back(task);
+            }
+
+            // CA_Environment
+            e.assignTasks(tasks);
+            e.assignVacantAgents();
+            auto start = std::chrono::high_resolution_clock::now();
+            for (size_t timestep = 0; true; ++timestep) {
+                e.runTimestep(timestep);
+                if (e.allTasksCompleted()) {
+                    ca_results[iter] = timestep;
+                    break;
+                }
+            }
+            auto end = std::chrono::high_resolution_clock::now();
+            ca_times[iter] = std::chrono::duration<double>(end - start).count();
+
+            // WHCA_Environment
+            whca_e.assignTasks(tasks);
+            whca_e.assignVacantAgents();
+            start = std::chrono::high_resolution_clock::now();
+            for (size_t timestep = 0; true; ++timestep) {
+                whca_e.runTimestep(timestep);
+                if (whca_e.allTasksCompleted()) {
+                    whca_results[iter] = timestep;
+                    break;
+                }
+            }
+            end = std::chrono::high_resolution_clock::now();
+            whca_times[iter] = std::chrono::duration<double>(end - start).count();
+        }
+
+        // Zapisanie wyników dla tej liczby zadań
+        all_ca_results.push_back(ca_results);
+        all_whca_results.push_back(whca_results);
+        all_ca_times.push_back(ca_times);
+        all_whca_times.push_back(whca_times);
+        numValues.push_back(num * 3);
+    }
+
+    // Obliczanie średnich wyników
+    std::vector<double> avg_results;
+    std::vector<double> avg_whca_results;
+    std::vector<double> avg_ca_times;
+    std::vector<double> avg_whca_times;
+
+    for (size_t i = 0; i < numValues.size(); ++i) {
+        double ca_result_avg = std::accumulate(all_ca_results[i].begin(), all_ca_results[i].end(), 0.0) / iterations;
+        double whca_result_avg = std::accumulate(all_whca_results[i].begin(), all_whca_results[i].end(), 0.0) / iterations;
+        double ca_time_avg = std::accumulate(all_ca_times[i].begin(), all_ca_times[i].end(), 0.0) / iterations;
+        double whca_time_avg = std::accumulate(all_whca_times[i].begin(), all_whca_times[i].end(), 0.0) / iterations;
+
+        avg_results.push_back(ca_result_avg);
+        avg_whca_results.push_back(whca_result_avg);
+        avg_ca_times.push_back(ca_time_avg);
+        avg_whca_times.push_back(whca_time_avg);
+    }
+    // Wykres 1: Kroki czasowe vs liczba zadań
+    plt::plot(numValues, avg_results, "b-");
+    plt::plot(numValues, avg_whca_results, "r-");
+    plt::xlabel("num (Liczba zadań)");
+    plt::ylabel("Średnie kroki czasowe");
+    plt::title("Kroki czasowe vs Liczba zadań (średnie z 15 iteracji)");
+
+    plt::show();
+    plt::save("s1_avg.png");
+
+    // Wykres 2: Czas wykonania vs liczba zadań
+    plt::figure();
+    plt::plot(numValues, avg_ca_times, "b-");
+    plt::plot(numValues, avg_whca_times, "r-");
+    plt::xlabel("num (Liczba zadań)");
+    plt::ylabel("Średni czas wykonania (sekundy)");
+    plt::title("Czas wykonania vs Liczba zadań (średnie z 15 iteracji)");
+    plt::show();
+    plt::save("s2_avg.png");
+}
+
 void testAgents()
 {
-    std::vector<std::pair<int, int>> agentPositions;
-
-    for (int x = 0; x < 15; ++x)
-    {
-        agentPositions.emplace_back(x, 0); 
-        agentPositions.emplace_back(x, 9); 
-    }
-
-    for (int y = 1; y < 9; ++y)
-    {
-        agentPositions.emplace_back(0, y); 
-        agentPositions.emplace_back(14, y);
-    }
-
-    std::vector<Agent> agentsLocal;
-    for (size_t i = 0; i < agentPositions.size(); ++i)
-    {
-        const auto& [x, y] = agentPositions[i];
-        agentsLocal.emplace_back(i, 15, map::Cell(x, y));
-    }
-
-
     const int seed = 42;  // Using a fixed seed value
     srand(seed);
 
@@ -241,7 +336,7 @@ void testAgents()
     std::vector<double> whca_times;
     std::vector<double> ca_times;
 
-    const int numTasks = 20;
+    const int numTasks = 31;
     // Generowanie zadań
     map::Graph graph(width, height, obstacles);
     std::vector<TaskGroup> tasks;
@@ -252,25 +347,16 @@ void testAgents()
         tasks.push_back(task);
     }
     delete base;
-    
+    std::streambuf* orig_buf = std::cout.rdbuf();
 
-    // Iteracja dla różnej liczby agentów
+    // set null
+    std::cout.rdbuf(NULL);
+
+    //Iteracja dla różnej liczby agentów
     for (int num = 1; num <= numTasks; ++num)
     {
-        std::vector<Agent> currentAgents;
-
-        // Upewnij się, że liczba agentów nie przekracza dostępnych pozycji
-        if (num > agentPositions.size()) {
-            std::cerr << "Za mało dostępnych pozycji dla liczby agentów: " << num << std::endl;
-            break; // Możesz też dodać nowe pozycje dynamicznie
-        }
-
-        // Generowanie `num` agentów
-        for (int i = 0; i < num; ++i) {
-            const auto& [x, y] = agentPositions[i];
-            map::Cell position(x, y);
-            currentAgents.emplace_back(i, 50, position);
-        }
+        std::cout<<"------------------------------------   " << num << "------------------------------------\n"; 
+        std::vector<Agent> currentAgents = getRandomAgents(agents, num);
         CA_Environment currentCA(currentAgents, graph, pickupsData, dropoffData);
         WHCA_Environment currentWHCA(currentAgents, graph, pickupsData, dropoffData);
 
@@ -315,7 +401,7 @@ void testAgents()
         whca_times.push_back(czasWSekundach);
 
         numAgents.push_back(num);
-    }
+   }
 
     // Wykres Makespan
     plt::plot(numAgents, results, "b-");  // Linia niebieska
@@ -458,7 +544,8 @@ int main()
 {
    // testEnvi();
     loadMap("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map2.json");
-    //testEnvi();
-    testAgents();
+    testEnvi();
+    //testEnvi_usrednione();
+    //testAgents();
     return 0;
 }

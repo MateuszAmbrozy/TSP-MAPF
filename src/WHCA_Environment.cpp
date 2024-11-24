@@ -64,9 +64,6 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
         std::vector<SpaceTime::Cell> path = agent.agent.getPath();
         if (!agent.agent.isIdle() && path.size() > 0)
         {
-
-
-
             if (timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
@@ -88,10 +85,16 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                 {
                     if (!agent.reachedCurrentWaypoint())
                     {
+                        //agent.incrementWaypointIndex();
                         std::vector<SpaceTime::Cell> nextPath = whca.findNextWSteps(agent, timestep, table);
                         if (!nextPath.empty())
                         {
                             agent.agent.assignPath(nextPath);
+                        }
+                        else
+                        {
+                            agent.agent.assignPath({SpaceTime::Cell(agent.agent.getPosition(), timestep+1)});
+                            //std::cout<<"PROBLEMPROBLEMPROBLEMPROBLEMPROBLEMPROBLEMPROBLEM FOR: " << agent.agent.getId() << "\n";
                         }
                     }
                 }
@@ -101,7 +104,7 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
 
                 for (const auto& cell : agent.agent.getPath())
                 {
-                    table.removeReservation(cell.x, cell.y, cell.t);  // Remove cell reservations
+                    table.removeReservation(cell.x, cell.y, cell.t);
                     table.removeReservation(cell.x, cell.y, cell.t + 1);
                     //table.removeReservation(cell.x, cell.y, cell.t + 2);
                     const auto nextCell = agent.agent.getPath().back();
@@ -124,8 +127,6 @@ void WHCA_Environment::MOVEAGENTS(int timestep)
                     std::vector<SpaceTime::Cell> path = whca.findNextWSteps(agent, timestep, table);
                     agent.agent.assignPath(path);
                 }
-
-
             }
 
         }
@@ -152,7 +153,7 @@ void WHCA_Environment::runTimestep(int timestep, TaskGroup *task)
     // {
     //     task_list.push_back(*task);
     // }
-    // else if(timestep % 9 == 0)
+    // else if(timestep % 2 == 0)
     // {
     //     task_list.push_back(TASKGROUPGENERATOR());
     // }

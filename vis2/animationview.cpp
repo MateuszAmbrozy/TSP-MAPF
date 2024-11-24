@@ -227,6 +227,8 @@ void AnimationView::loadMap()
 {
     agents.clear();
 
+
+
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Map"), "", tr("Map Files (*.json)"));
     if (!fileName.isEmpty())
     {
@@ -299,7 +301,14 @@ void AnimationView::loadMap()
         qDebug() << "Map data loaded from" << fileName;
 
         graph = map::Graph(width, height, obstacles);
-
+        std::vector<TaskGroup> tasks;
+        BaseEnvironment* base = new CA_Environment({}, graph, avaliablePickups, avaliableDropoffs);
+        for (int i = 0; i < 20; ++i)
+        {
+            TaskGroup task = base->TASKGROUPGENERATOR();
+            tasks.push_back(task);
+        }
+        delete base;
         // Initialize the environment
         if (algorithm == AlgType::A_STAR)
         {
@@ -310,6 +319,7 @@ void AnimationView::loadMap()
             environment = new WHCA_Environment(agents, graph, avaliablePickups, avaliableDropoffs);
         }
         environment->assignVacantAgents();
+        environment->assignTasks(tasks);
 
         // Reset mapfScene and update mapfView's scene
         if (mapfScene)
@@ -321,6 +331,9 @@ void AnimationView::loadMap()
         interactive_graph = std::make_unique<InteractiveTaskRectItem>(graph, agents);
 
         mapfView->setScene(mapfScene);
+
+
+
     }
 }
 

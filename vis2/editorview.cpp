@@ -139,6 +139,7 @@ void EditorView::setCreatedAgents(std::shared_ptr<std::vector<Agent>> agents)
 
 void EditorView::loadMap()
 {
+    this->clearAgents();
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Map"), "", tr("Map Files (*.json)"));
     if (!fileName.isEmpty()) {
         QFile file(fileName);
