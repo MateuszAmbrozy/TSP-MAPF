@@ -1,0 +1,50 @@
+\doxysection{inetractivetaskgraph.\+h}
+\hypertarget{inetractivetaskgraph_8h_source}{}\label{inetractivetaskgraph_8h_source}\index{inetractivetaskgraph.h@{inetractivetaskgraph.h}}
+\mbox{\hyperlink{inetractivetaskgraph_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ INTERACTIVETASKGRAPH\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ INTERACTIVETASKGRAPH\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QSet>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QPoint>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QGraphicsScene>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interactivegraphrectitem_8h}{interactivegraphrectitem.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interactivecellitem_8h}{interactivecellitem.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}../lib/Agent.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}../lib/setup.h"{}}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63}{cellState}}\ \{\mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63a1e23852820b9154316c7c06e2b7ba051}{NORMAL}}\ =\ 0,\ \mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63ae9219bd92c52d0830281c0ea2323d2de}{PICKUP}},\ \mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63a9cdd1fd97fdc8662dfb8d0ae290ec117}{DROPOFF}}\};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_interactive_task_rect_item}{InteractiveTaskRectItem}}\ :\textcolor{keyword}{public}\ \mbox{\hyperlink{class_interactive_graph_rect_item}{InteractiveGraphRectItem}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_interactive_task_rect_item_aeb0bf5292e474700fd444b28934e5460}{InteractiveTaskRectItem}}(\mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}},\ \textcolor{keyword}{const}\ std::vector<Agent>\&\ \mbox{\hyperlink{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe}{agents}},\ QGraphicsItem*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_task_rect_item_a37048d59d45e2fbd02352d131ccdb016}{pickupPoints}};}
+\DoxyCodeLine{00031\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_task_rect_item_a9252193d4105fd7f2a365ce3df32b83a}{dropoffPoints}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a7e3bc14ff21365307e1fb41f3881439f}{handleCellLeftClick}}(\textcolor{keyword}{const}\ QPoint\&\ cellPos)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a8715a3ef336b900baa460d0f429822ec}{handleCellRightClick}}(\textcolor{keyword}{const}\ QPoint\&\ cellPos)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81}{drawGraph}}(QGraphicsScene\ *scene)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384}{clear}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ signals:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a9c949a835fb7218fd868bc37c647f73d}{pickupPointSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a29ad184d5fbe4c9f3cf6c2a6463c48f6}{dropoffPointSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a1a381c2ccf252edab50d09e304420efd}{pickupPointRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a689a1d0a78fa0fbc345896cee67e3585}{dropoffPointRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393}{updateCellColor}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63}{cellState}}\ state);}
+\DoxyCodeLine{00046\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe}{agents}};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_interactive_task_rect_item_ab8fd70826bfbd84221bf1062ea474766}{isAgentCell}}(\textcolor{keyword}{const}\ QPoint\&\ cellPos)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ QPoint\ \mbox{\hyperlink{class_interactive_task_rect_item_a7f5256c20e623a26760af3c0585cfb80}{currentDropoffPoint}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_task_rect_item_aa23836aeb348b07923f73761ee1a97ce}{toggleSelectionMode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INTERACTIVETASKGRAPH\_H}}
+
+\end{DoxyCode}

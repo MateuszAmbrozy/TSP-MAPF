@@ -1,0 +1,42 @@
+\doxysection{AStar.\+h}
+\hypertarget{_a_star_8h_source}{}\label{_a_star_8h_source}\index{AStar.h@{AStar.h}}
+\mbox{\hyperlink{_a_star_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../Graph.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_task_group_8h}{../TaskGroup.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{../Agent.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_node_8h}{Node.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_a}{A}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_1_1_compare_cells}{CompareCells}}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_a_1_1_compare_cells_a2596e5a3610384bd8aa00f0647458edb}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{A::Node}}\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{A::Node}}\ b)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{fCost}}\ >\ b.\mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{fCost}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_1_1_astar}{Astar}}}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<std::vector<Node>>\ \mbox{\hyperlink{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358}{aStarGraph}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888}{lengthOfPath}}(std::shared\_ptr<A::Node>\ node);}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c}{copyGraph}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3}{isValid}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce}{isDestination}}(\textcolor{keywordtype}{int}\ startX,\ \textcolor{keywordtype}{int}\ startY,\ \textcolor{keywordtype}{int}\ destX,\ \textcolor{keywordtype}{int}\ destY);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_a_1_1_astar_a6776e80e1cd8fe2a0da112fc3a8b53a9}{Astar}}(\mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917}{calculate}}(\mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ start,\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ dest);}
+\DoxyCodeLine{00044\ \ \ \ \ \};\ \ \ }
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}

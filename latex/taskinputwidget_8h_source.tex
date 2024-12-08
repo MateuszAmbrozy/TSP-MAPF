@@ -1,0 +1,65 @@
+\doxysection{taskinputwidget.\+h}
+\hypertarget{taskinputwidget_8h_source}{}\label{taskinputwidget_8h_source}\index{taskinputwidget.h@{taskinputwidget.h}}
+\mbox{\hyperlink{taskinputwidget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ TASKINPUTWIDGET\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ TASKINPUTWIDGET\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QLineEdit>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QSpinBox>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QListWidget>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_task_group_8h}{../lib/TaskGroup.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{inetractivetaskgraph_8h}{graph/inetractivetaskgraph.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pointlistitemwidget_8h}{pointlistitemwidget.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{_agent_8h}{../lib/Agent.h}}>}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_task_input_widget}{TaskInputWidget}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_task_input_widget_a73e9a6242b07736d01b39cd6238226c9}{TaskInputWidget}}(QGraphicsScene\ *\mbox{\hyperlink{class_task_input_widget_a79510f82561c0ac7fcf0be54247c14e8}{scene}},\ \mbox{\hyperlink{class_interactive_task_rect_item}{InteractiveTaskRectItem}}\ *\mbox{\hyperlink{class_task_input_widget_ab212fc4a9f62075b80ffbd8fc70e6071}{graphItem}},\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_af4042443635d23820090bbe234ecf78a}{addPickupPoint}}(\textcolor{keyword}{const}\ QPoint\ \&point);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_a41a23d928ea5645609599eafd34518c4}{setDropoffPoint}}(\textcolor{keyword}{const}\ QPoint\ \&point);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_aa73b8bb0cf6ca03f6d49d4cdb2e1c165}{removePickupPoint}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_acc35db80d0eba96628f4de2addad6d00}{removeDropoffPoint}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_aa51b655853c55c66c2186f841e7d6d9a}{onPickupStopTimeChanged}}(\textcolor{keyword}{const}\ QPoint\ \&point,\ \textcolor{keywordtype}{int}\ newStopTime);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_a4a9f76f40ceaef9f14af50592952717f}{onDropoffStopTimeChanged}}(\textcolor{keyword}{const}\ QPoint\ \&point,\ \textcolor{keywordtype}{int}\ newStopTime);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_a85711d10604bdf9f2fa6a42d27f69816}{createTaskGroup}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ QGraphicsScene\ *\mbox{\hyperlink{class_task_input_widget_a79510f82561c0ac7fcf0be54247c14e8}{scene}};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_interactive_task_rect_item}{InteractiveTaskRectItem}}\ *\mbox{\hyperlink{class_task_input_widget_ab212fc4a9f62075b80ffbd8fc70e6071}{graphItem}};}
+\DoxyCodeLine{00043\ \ \ \ \ QLineEdit\ *\mbox{\hyperlink{class_task_input_widget_a213b455a567da548b3cf3d4043f1c483}{capacityInput}};}
+\DoxyCodeLine{00044\ \ \ \ \ QListWidget\ *\mbox{\hyperlink{class_task_input_widget_aa998c978116d692c685b3e3f136000e5}{pointListWidget}};}
+\DoxyCodeLine{00045\ \ \ \ \ QSpinBox\ *\mbox{\hyperlink{class_task_input_widget_a9512fa4b546990728884133efcaba3d4}{stopTimeInput}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ std::vector<map::Cell>\ \mbox{\hyperlink{class_task_input_widget_a9a00cf26ddbb0e6e71210938c532bf96}{pickupPoints}};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_task_input_widget_a79a829b7364be6ac4a10794290fb8711}{dropoffPoint}};}
+\DoxyCodeLine{00049\ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{class_task_input_widget_a4dcabb98b910f9f526f7471a9af84ac5}{stopTimes}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_task_input_widget_a8ebe2add4980243ed2c740f3b47595e0}{dropoffStopTime}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_task_input_widget_1_1_point_data}{PointData}}}
+\DoxyCodeLine{00054\ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ QPoint\ \mbox{\hyperlink{struct_task_input_widget_1_1_point_data_aacbe139a6727fe3af08903b7bc303032}{point}};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_task_input_widget_1_1_point_data_ac877f0d3b2241759eb3eda906ca38d2c}{value}};}
+\DoxyCodeLine{00057\ \ \ \ \ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::vector<PointData>\ \mbox{\hyperlink{class_task_input_widget_a602a61a1e53b7ab4a36134e762e23bfc}{pickupPointData}};}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{struct_task_input_widget_1_1_point_data}{PointData}}\ \mbox{\hyperlink{class_task_input_widget_a3c6ae0bb8ba6d060527885c5bc2ed33f}{dropoffPointData}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_a8bfdf690bb6a159007565cf9fcc7b78e}{updatePointList}}();}
+\DoxyCodeLine{00063\ signals:}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_task_input_widget_a6e69ca52fbb2c86be8cee3b5c1f7ade3}{taskGroupCreated}}(std::shared\_ptr<TaskGroup>\ taskGroup);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

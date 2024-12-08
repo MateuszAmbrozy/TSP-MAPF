@@ -9,14 +9,14 @@ GeneralView::GeneralView(QWidget* parent) : QWidget(parent), selectedAlgorithm(A
 
     // Radio buttons with word wrapping and improved styles
     CA = new QRadioButton("Algorithm Cooperative A*", this);
-    WHCA = new QRadioButton("Algorithm Window Hierarchical Cooperative A*", this);
+    WCA = new QRadioButton("Algorithm Window Hierarchical Cooperative A*", this);
     CA->setChecked(true);
     CA->setStyleSheet("QRadioButton { font-size: 14px; padding: 5px; }");
-    WHCA->setStyleSheet("QRadioButton { font-size: 14px; padding: 5px; }");
+    WCA->setStyleSheet("QRadioButton { font-size: 14px; padding: 5px; }");
 
     // Connect signals to update selected algorithm
     connect(CA, &QRadioButton::toggled, this, &GeneralView::onCASelected);
-    connect(WHCA, &QRadioButton::toggled, this, &GeneralView::onWHCASelected);
+    connect(WCA, &QRadioButton::toggled, this, &GeneralView::onWHCASelected);
 
     // Group box to organize algorithm selection
     QGroupBox* algorithmGroupBox = new QGroupBox("Algorithm Selection", this);
@@ -29,7 +29,7 @@ GeneralView::GeneralView(QWidget* parent) : QWidget(parent), selectedAlgorithm(A
     // Layout for the group box
     QVBoxLayout* radioLayout = new QVBoxLayout();
     radioLayout->addWidget(CA);
-    radioLayout->addWidget(WHCA);
+    radioLayout->addWidget(WCA);
     algorithmGroupBox->setLayout(radioLayout);
 
     // Main layout for GeneralView

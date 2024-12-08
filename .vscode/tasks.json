@@ -3,28 +3,47 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe build active file",
+            "label": "C/C++: g++.exe build entire project with Python",
             "command": "C:\\Program Files\\MinGW\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",                                  // Debugging
-                "-std=c++17",                          // Standard C++17
-                "${workspaceFolder}/main.cpp",         // Main file
-                "${workspaceFolder}/src/*.cpp",        // All .cpp files in src
-                "${workspaceFolder}/src/Space-Time-AStar/*.cpp", // Specific directory
-                "${workspaceFolder}/src/AStar/*.cpp",    
-                "-I", "${workspaceFolder}/lib",        // Include directory for headers
-                "-o", "${workspaceFolder}/main.exe"    // Output executable
+                "-g",
+                "-std=c++17",
+                
+                // Kompilacja plików źródłowych
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/src/Space-Time-AStar/*.cpp",
+                "${workspaceFolder}/src/WHCA/*.cpp",
+                "${workspaceFolder}/src/AStar/*.cpp",
+                
+                // Dodanie ścieżki do nagłówków Pythona
+                "-I", "C:\\Users\\ambro\\AppData\\Local\\Programs\\Python\\Python312\\include",
+                
+                // Dodanie ścieżki do numpy
+                "-I", "C:\\Users\\ambro\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\numpy\\core\\include",
+                
+                // Dodanie ścieżki do bibliotek Pythona
+                "-L", "C:\\Users\\ambro\\AppData\\Local\\Programs\\Python\\Python312\\libs",
+                
+                // Linkowanie z biblioteką python312
+                "-lpython312",
+                
+                // Dodanie ścieżki do dodatkowych nagłówków projektu
+                "-I", "${workspaceFolder}/lib",
+                
+                // Wyjściowy plik wykonywalny
+                "-o", "${workspaceFolder}/main.exe"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"  // Current working directory
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Task to build the entire project"
+            "detail": "Task to build the entire project with Python dependencies"
         }
     ]
 }

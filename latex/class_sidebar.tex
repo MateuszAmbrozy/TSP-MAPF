@@ -1,0 +1,315 @@
+\doxysection{Sidebar Class Reference}
+\hypertarget{class_sidebar}{}\label{class_sidebar}\index{Sidebar@{Sidebar}}
+
+
+{\ttfamily \#include $<$sidebar.\+h$>$}
+
+
+
+Inherits QLayout.
+
+
+
+Collaboration diagram for Sidebar\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{class_sidebar__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_sidebar_1_1_wrapper}{Wrapper}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Position}} \{ \newline
+\mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565a266e585c5c5558989fa945eedce38871}{West}}
+, \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565a322f3b86b69f21f0279a6a3e5d6ba214}{North}}
+, \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565a604a92b3952006e84758360271d0b4c9}{South}}
+, \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565ab2db014885d0424e966405eb7ade8499}{East}}
+, \newline
+\mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565a5bd5f190bc082d98c6673328d366962a}{Center}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sidebar_abb79136274d6e078aa55bed58be23347}{Sidebar}} (QWidget \texorpdfstring{$\ast$}{*}parent, int margin=0, int spacing=-\/1)
+\item 
+\mbox{\hyperlink{class_sidebar_aa2adb92f96d8b3bd7945c88a0724cbb2}{Sidebar}} (int spacing=-\/1)
+\item 
+\mbox{\hyperlink{class_sidebar_ab52078a5886bdb0f0fdbdc81c5c04b46}{\texorpdfstring{$\sim$}{\string~}\+Sidebar}} ()
+\item 
+void \mbox{\hyperlink{class_sidebar_abac1c79686d40d51d0a0768be008cc35}{add\+Item}} (QLayout\+Item \texorpdfstring{$\ast$}{*}item) Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+void \mbox{\hyperlink{class_sidebar_a41374523527f6159b78a29906cf6035e}{add\+Widget}} (QWidget \texorpdfstring{$\ast$}{*}widget, \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Position}} position)
+\item 
+Qt\+::\+Orientations \mbox{\hyperlink{class_sidebar_a07c0c76ff94c64ef9d847402e452a50c}{expanding\+Directions}} () const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+bool \mbox{\hyperlink{class_sidebar_a0d7b6298fdf1f22c0096ee6b4c8eded3}{has\+Height\+For\+Width}} () const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+int \mbox{\hyperlink{class_sidebar_af9b6d17c40feb6ea748cc556135b281a}{count}} () const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+QLayout\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_sidebar_ac1b7f6b52928afc853a624eed7b74fb5}{item\+At}} (int index) const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+QSize \mbox{\hyperlink{class_sidebar_a07e284482c8bb6380890de41182e6e5e}{minimum\+Size}} () const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+void \mbox{\hyperlink{class_sidebar_aa6e060f268dcdd0a2963d52ecf879ac2}{set\+Geometry}} (const QRect \&rect) Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+QSize \mbox{\hyperlink{class_sidebar_a040cfba4510556b2b14310d6287229c3}{size\+Hint}} () const Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+QLayout\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_sidebar_abf41c65235c14c32279997acbbbdae44}{take\+At}} (int index) Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\item 
+void \mbox{\hyperlink{class_sidebar_ad2fab914fdadeb65a406b2728911f559}{add}} (QLayout\+Item \texorpdfstring{$\ast$}{*}item, \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Position}} position)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5}{Size\+Type}} \{ \mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5a23e71b757007498c669bc83c2a3bf430}{Minimum\+Size}}
+, \mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5a505f8000521ca06697d6a63986d964b1}{Size\+Hint}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QSize \mbox{\hyperlink{class_sidebar_ae13f6ba30bb5e2504cbf93b5387b60d2}{calculate\+Size}} (\mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5}{Size\+Type}} size\+Type) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QList$<$ \mbox{\hyperlink{struct_sidebar_1_1_wrapper}{Wrapper}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_sidebar_af4a2ee7be4bce435a984de6816a33146}{list}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565}\index{Sidebar@{Sidebar}!Position@{Position}}
+\index{Position@{Position}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{Position}{Position}}
+{\footnotesize\ttfamily \label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+enum \mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Sidebar\+::\+Position}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{West@{West}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!West@{West}}}\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565a266e585c5c5558989fa945eedce38871}\label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+West&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{North@{North}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!North@{North}}}\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565a322f3b86b69f21f0279a6a3e5d6ba214}\label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+North&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{South@{South}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!South@{South}}}\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565a604a92b3952006e84758360271d0b4c9}\label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+South&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{East@{East}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!East@{East}}}\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565ab2db014885d0424e966405eb7ade8499}\label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+East&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Center@{Center}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!Center@{Center}}}\Hypertarget{class_sidebar_a57e9c689e004d5410256cb7b78883565a5bd5f190bc082d98c6673328d366962a}\label{class_sidebar_a57e9c689e004d5410256cb7b78883565} 
+Center&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5}\index{Sidebar@{Sidebar}!SizeType@{SizeType}}
+\index{SizeType@{SizeType}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{SizeType}{SizeType}}
+{\footnotesize\ttfamily \label{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5} 
+enum \mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5}{Sidebar\+::\+Size\+Type}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MinimumSize@{MinimumSize}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!MinimumSize@{MinimumSize}}}\Hypertarget{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5a23e71b757007498c669bc83c2a3bf430}\label{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5} 
+Minimum\+Size&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SizeHint@{SizeHint}!Sidebar@{Sidebar}}\index{Sidebar@{Sidebar}!SizeHint@{SizeHint}}}\Hypertarget{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5a505f8000521ca06697d6a63986d964b1}\label{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5} 
+Size\+Hint&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_sidebar_abb79136274d6e078aa55bed58be23347}\index{Sidebar@{Sidebar}!Sidebar@{Sidebar}}
+\index{Sidebar@{Sidebar}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{Sidebar()}{Sidebar()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_sidebar_abb79136274d6e078aa55bed58be23347} 
+Sidebar\+::\+Sidebar (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{, }\item[{int}]{margin}{ = {\ttfamily 0}, }\item[{int}]{spacing}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{class_sidebar_aa2adb92f96d8b3bd7945c88a0724cbb2}\index{Sidebar@{Sidebar}!Sidebar@{Sidebar}}
+\index{Sidebar@{Sidebar}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{Sidebar()}{Sidebar()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_sidebar_aa2adb92f96d8b3bd7945c88a0724cbb2} 
+Sidebar\+::\+Sidebar (\begin{DoxyParamCaption}\item[{int}]{spacing}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_sidebar_ab52078a5886bdb0f0fdbdc81c5c04b46}\index{Sidebar@{Sidebar}!````~Sidebar@{\texorpdfstring{$\sim$}{\string~}Sidebar}}
+\index{````~Sidebar@{\texorpdfstring{$\sim$}{\string~}Sidebar}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Sidebar()}{\string~Sidebar()}}
+{\footnotesize\ttfamily \label{class_sidebar_ab52078a5886bdb0f0fdbdc81c5c04b46} 
+Sidebar\+::\texorpdfstring{$\sim$}{\string~}\+Sidebar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_sidebar_ab52078a5886bdb0f0fdbdc81c5c04b46_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sidebar_ad2fab914fdadeb65a406b2728911f559}\index{Sidebar@{Sidebar}!add@{add}}
+\index{add@{add}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily \label{class_sidebar_ad2fab914fdadeb65a406b2728911f559} 
+void Sidebar\+::add (\begin{DoxyParamCaption}\item[{QLayout\+Item \texorpdfstring{$\ast$}{*}}]{item}{, }\item[{\mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Position}}}]{position}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sidebar_ad2fab914fdadeb65a406b2728911f559_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_abac1c79686d40d51d0a0768be008cc35}\index{Sidebar@{Sidebar}!addItem@{addItem}}
+\index{addItem@{addItem}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{addItem()}{addItem()}}
+{\footnotesize\ttfamily \label{class_sidebar_abac1c79686d40d51d0a0768be008cc35} 
+void Sidebar\+::add\+Item (\begin{DoxyParamCaption}\item[{QLayout\+Item \texorpdfstring{$\ast$}{*}}]{item}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{class_sidebar_abac1c79686d40d51d0a0768be008cc35_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_a41374523527f6159b78a29906cf6035e}\index{Sidebar@{Sidebar}!addWidget@{addWidget}}
+\index{addWidget@{addWidget}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{addWidget()}{addWidget()}}
+{\footnotesize\ttfamily \label{class_sidebar_a41374523527f6159b78a29906cf6035e} 
+void Sidebar\+::add\+Widget (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{widget}{, }\item[{\mbox{\hyperlink{class_sidebar_a57e9c689e004d5410256cb7b78883565}{Position}}}]{position}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_sidebar_a41374523527f6159b78a29906cf6035e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sidebar_a41374523527f6159b78a29906cf6035e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_ae13f6ba30bb5e2504cbf93b5387b60d2}\index{Sidebar@{Sidebar}!calculateSize@{calculateSize}}
+\index{calculateSize@{calculateSize}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{calculateSize()}{calculateSize()}}
+{\footnotesize\ttfamily \label{class_sidebar_ae13f6ba30bb5e2504cbf93b5387b60d2} 
+QSize Sidebar\+::calculate\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sidebar_a8316b76b8565bdc7aa37d85f51d239e5}{Size\+Type}}}]{size\+Type}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_sidebar_ae13f6ba30bb5e2504cbf93b5387b60d2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_af9b6d17c40feb6ea748cc556135b281a}\index{Sidebar@{Sidebar}!count@{count}}
+\index{count@{count}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily \label{class_sidebar_af9b6d17c40feb6ea748cc556135b281a} 
+int Sidebar\+::count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_sidebar_a07c0c76ff94c64ef9d847402e452a50c}\index{Sidebar@{Sidebar}!expandingDirections@{expandingDirections}}
+\index{expandingDirections@{expandingDirections}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{expandingDirections()}{expandingDirections()}}
+{\footnotesize\ttfamily \label{class_sidebar_a07c0c76ff94c64ef9d847402e452a50c} 
+Qt\+::\+Orientations Sidebar\+::expanding\+Directions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_sidebar_a0d7b6298fdf1f22c0096ee6b4c8eded3}\index{Sidebar@{Sidebar}!hasHeightForWidth@{hasHeightForWidth}}
+\index{hasHeightForWidth@{hasHeightForWidth}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{hasHeightForWidth()}{hasHeightForWidth()}}
+{\footnotesize\ttfamily \label{class_sidebar_a0d7b6298fdf1f22c0096ee6b4c8eded3} 
+bool Sidebar\+::has\+Height\+For\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_sidebar_ac1b7f6b52928afc853a624eed7b74fb5}\index{Sidebar@{Sidebar}!itemAt@{itemAt}}
+\index{itemAt@{itemAt}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{itemAt()}{itemAt()}}
+{\footnotesize\ttfamily \label{class_sidebar_ac1b7f6b52928afc853a624eed7b74fb5} 
+QLayout\+Item \texorpdfstring{$\ast$}{*} Sidebar\+::item\+At (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_sidebar_a07e284482c8bb6380890de41182e6e5e}\index{Sidebar@{Sidebar}!minimumSize@{minimumSize}}
+\index{minimumSize@{minimumSize}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{minimumSize()}{minimumSize()}}
+{\footnotesize\ttfamily \label{class_sidebar_a07e284482c8bb6380890de41182e6e5e} 
+QSize Sidebar\+::minimum\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_sidebar_a07e284482c8bb6380890de41182e6e5e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_aa6e060f268dcdd0a2963d52ecf879ac2}\index{Sidebar@{Sidebar}!setGeometry@{setGeometry}}
+\index{setGeometry@{setGeometry}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{setGeometry()}{setGeometry()}}
+{\footnotesize\ttfamily \label{class_sidebar_aa6e060f268dcdd0a2963d52ecf879ac2} 
+void Sidebar\+::set\+Geometry (\begin{DoxyParamCaption}\item[{const QRect \&}]{rect}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_sidebar_a040cfba4510556b2b14310d6287229c3}\index{Sidebar@{Sidebar}!sizeHint@{sizeHint}}
+\index{sizeHint@{sizeHint}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{sizeHint()}{sizeHint()}}
+{\footnotesize\ttfamily \label{class_sidebar_a040cfba4510556b2b14310d6287229c3} 
+QSize Sidebar\+::size\+Hint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{class_sidebar_a040cfba4510556b2b14310d6287229c3_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sidebar_abf41c65235c14c32279997acbbbdae44}\index{Sidebar@{Sidebar}!takeAt@{takeAt}}
+\index{takeAt@{takeAt}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{takeAt()}{takeAt()}}
+{\footnotesize\ttfamily \label{class_sidebar_abf41c65235c14c32279997acbbbdae44} 
+QLayout\+Item \texorpdfstring{$\ast$}{*} Sidebar\+::take\+At (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{class_sidebar_abf41c65235c14c32279997acbbbdae44_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_sidebar_af4a2ee7be4bce435a984de6816a33146}\index{Sidebar@{Sidebar}!list@{list}}
+\index{list@{list}!Sidebar@{Sidebar}}
+\doxysubsubsection{\texorpdfstring{list}{list}}
+{\footnotesize\ttfamily \label{class_sidebar_af4a2ee7be4bce435a984de6816a33146} 
+QList$<$\mbox{\hyperlink{struct_sidebar_1_1_wrapper}{Wrapper}} \texorpdfstring{$\ast$}{*}$>$ Sidebar\+::list\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sidebar_8h}{sidebar.\+h}}\item 
+\mbox{\hyperlink{sidebar_8cpp}{sidebar.\+cpp}}\end{DoxyCompactItemize}

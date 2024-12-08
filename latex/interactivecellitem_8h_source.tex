@@ -1,0 +1,35 @@
+\doxysection{interactivecellitem.\+h}
+\hypertarget{interactivecellitem_8h_source}{}\label{interactivecellitem_8h_source}\index{interactivecellitem.h@{interactivecellitem.h}}
+\mbox{\hyperlink{interactivecellitem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ INTERACTIVECELLITEM\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ INTERACTIVECELLITEM\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QGraphicsRectItem>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QPen>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QBrush>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QSet>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QPoint>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QGraphicsScene>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interactivegraphrectitem_8h}{interactivegraphrectitem.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}qgraphicssceneevent.h"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ class\ InteractiveGraphRectItem;}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_interactive_cell_item}{InteractiveCellItem}}\ :\ \textcolor{keyword}{public}\ QGraphicsRectItem}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_interactive_cell_item_a0380d1cf96af1e34ae73c383aefc3762}{InteractiveCellItem}}(\textcolor{keyword}{const}\ QRectF\ \&rect,\ QPoint\ \mbox{\hyperlink{class_interactive_cell_item_a55e484a1cee22b50b3fc619af6c859e6}{cellPosition}},\ \mbox{\hyperlink{class_interactive_graph_rect_item}{InteractiveGraphRectItem}}*\ parent);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_cell_item_afd4b77b8347774c8441005afad3123e1}{mousePressEvent}}(QGraphicsSceneMouseEvent*\ event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_cell_item_a390102ced1c1a4d26e4cb0bbebe314e0}{keyPressEvent}}(QKeyEvent*\ event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \ \ QPoint\ \mbox{\hyperlink{class_interactive_cell_item_a55e484a1cee22b50b3fc619af6c859e6}{cellPosition}};\ \ \textcolor{comment}{//\ Store\ the\ cell's\ grid\ position}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_interactive_graph_rect_item}{InteractiveGraphRectItem}}*\ \mbox{\hyperlink{class_interactive_cell_item_a3dc71d1d6b171d0ee51d39c442dfb3f1}{parentGraphItem}};\ \ \textcolor{comment}{//\ Pointer\ to\ the\ parent\ graph\ item}}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INTERACTIVECELLITEM\_H}}
+
+\end{DoxyCode}

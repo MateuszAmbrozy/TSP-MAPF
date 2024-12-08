@@ -33,7 +33,7 @@ private slots:
 
 private:
     QRadioButton* CA;
-    QRadioButton* WHCA;
+    QRadioButton* WCA;
     QLabel* label;
     AlgType selectedAlgorithm;
 };

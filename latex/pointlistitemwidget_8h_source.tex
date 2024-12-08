@@ -1,0 +1,50 @@
+\doxysection{pointlistitemwidget.\+h}
+\hypertarget{pointlistitemwidget_8h_source}{}\label{pointlistitemwidget_8h_source}\index{pointlistitemwidget.h@{pointlistitemwidget.h}}
+\mbox{\hyperlink{pointlistitemwidget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QSpinBox>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QHBoxLayout>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_point_list_item_widget}{PointListItemWidget}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_point_list_item_widget_aade51a70e98c6a144bc6b99d2fd35c04}{PointListItemWidget}}(\textcolor{keyword}{const}\ QString\ \&pointType,\ \textcolor{keyword}{const}\ QPoint\ \&\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_point_list_item_widget_a7aac7da6dfb4069226953f2a424b09c8}{stopTime}},\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ :\ QWidget(parent),\ \mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}}(\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}})}
+\DoxyCodeLine{00024\ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ QHBoxLayout\ *layout\ =\ \textcolor{keyword}{new}\ QHBoxLayout(\textcolor{keyword}{this});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ QLabel\ *label\ =\ \textcolor{keyword}{new}\ QLabel(QString(\textcolor{stringliteral}{"{}\%1:\ (\%2,\ \%3)"{}}).arg(pointType).arg(\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}}.x()).arg(\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}}.y()),\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ layout-\/>addWidget(label);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}}\ =\ \textcolor{keyword}{new}\ QSpinBox(\textcolor{keyword}{this});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}}-\/>setRange(0,\ 1000);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}}-\/>setValue(\mbox{\hyperlink{class_point_list_item_widget_a7aac7da6dfb4069226953f2a424b09c8}{stopTime}});}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ layout-\/>addWidget(\mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}});}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ connect(\mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}},\ QOverload<int>::of(\&QSpinBox::valueChanged),\ \textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_point_list_item_widget_a16c3a079f917a4a89286684a06c3f68f}{PointListItemWidget::onStopTimeChanged}});}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_point_list_item_widget_a7aac7da6dfb4069226953f2a424b09c8}{stopTime}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}}-\/>value();\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ QPoint\ \mbox{\hyperlink{class_point_list_item_widget_a7131c7efb0e9680edf829ac321625a68}{getPoint}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}};\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ signals:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_list_item_widget_a949d6345f9924067cbfba519be0c3ae0}{stopTimeChanged}}(\textcolor{keyword}{const}\ QPoint\ \&\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_point_list_item_widget_a7aac7da6dfb4069226953f2a424b09c8}{stopTime}});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_point_list_item_widget_a16c3a079f917a4a89286684a06c3f68f}{onStopTimeChanged}}(\textcolor{keywordtype}{int}\ newStopTime)}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ emit\ \mbox{\hyperlink{class_point_list_item_widget_a949d6345f9924067cbfba519be0c3ae0}{stopTimeChanged}}(\mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}},\ newStopTime);}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ QPoint\ \mbox{\hyperlink{class_point_list_item_widget_a8b4ac42eb575a09b2602137c5642e06e}{point}};}
+\DoxyCodeLine{00052\ \ \ \ \ QSpinBox\ *\mbox{\hyperlink{class_point_list_item_widget_a2ffb449c78d410e42083c707fe749644}{spinBox}};}
+\DoxyCodeLine{00053\ \};}
+
+\end{DoxyCode}

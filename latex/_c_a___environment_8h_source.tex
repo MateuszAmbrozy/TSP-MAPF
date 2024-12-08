@@ -1,0 +1,50 @@
+\doxysection{CA\+\_\+\+Environment.\+h}
+\hypertarget{_c_a___environment_8h_source}{}\label{_c_a___environment_8h_source}\index{CA\_Environment.h@{CA\_Environment.h}}
+\mbox{\hyperlink{_c_a___environment_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{Agent.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_t_s_p_8h}{TSP.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{setup_8h}{setup.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_reservation_8h}{CA/Reservation.h}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cooperative_a_8h}{CA/CooperativeA.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_base_environment_8h}{BaseEnvironment.h}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_c_a___environment}{CA\_Environment}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_base_environment}{BaseEnvironment}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_ad2b00bc078377e8770855fff6c22dd12}{agents}};}
+\DoxyCodeLine{00031\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_ae0935846bba8c66624a9317886d2c388}{vacant\_agents}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_cooperative_a}{CooperativeA}}\ \mbox{\hyperlink{class_c_a___environment_a68aec685de102aa00c9a31e11b92483d}{sta}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_aaaaf67b55c584777ecd5f0df5e7eaa33}{capacity}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_task_group}{TaskGroup}}\&\ task)\ \textcolor{keyword}{const};\ \textcolor{comment}{//wyszukuje\ agentow\ spelniajacych\ ograniczenie\ pojemnosci\ z\ agentow\ wakacyjnych}}
+\DoxyCodeLine{00037\ \ \ \ \ std::optional<Agent>\ \mbox{\hyperlink{class_c_a___environment_a7bc07317c1efc3e7bed681bee0ce4686}{random}}(std::vector<Agent>\&\ capableAgents)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{class_c_a___environment_a440aeaa16ca570307a7668ee67d3ace8}{CA\_Environment}}(std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_ad2b00bc078377e8770855fff6c22dd12}{agents}},\ \mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_base_environment_a3814f6d5496be62f054d497ad26315e0}{graph}},\ std::vector<std::pair<int,\ int>>\ \mbox{\hyperlink{class_base_environment_a3e3e5e973527c948681fc362edbcf927}{avaliablePickups}},\ std::vector<std::pair<int,\ int>>\ avaliableDropoffs);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_a0fda49180196f628ed96204ad24cb923}{getAgents}}()\ \{\textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{class_c_a___environment_ad2b00bc078377e8770855fff6c22dd12}{agents}};\}}
+\DoxyCodeLine{00044\ \ \ \ \ std::vector<Agent>\ \mbox{\hyperlink{class_c_a___environment_a70ba103197e08266fc2b133fdc700985}{getVacantAgents}}()\ \{\textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{class_c_a___environment_ae0935846bba8c66624a9317886d2c388}{vacant\_agents}};\}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_c_a___environment_a7895479b86007de21e5ff41cb2fe21bc}{assignVacantAgents}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_c_a___environment_acd87ee0dcca80b075c8bf735ca287c70}{allTasksCompleted}}();\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_c_a___environment_ae3ad7d25ae6919e06f8de9ee45686bf7}{MOVEAGENTS}}(\textcolor{keywordtype}{int}\ timestep);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_c_a___environment_a6f17045c0c37ee1c0e9179ba3399cf58}{addAgent}}(\mbox{\hyperlink{class_agent}{Agent}}\&\ newAgent);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_c_a___environment_ab923e0bc6b21d4df5b8354aebdacb8ac}{mainAlgorithm}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_c_a___environment_aa122d4e4c9d915aa95d3b9e7669a5a8b}{runTimestep}}(\textcolor{keywordtype}{int}\ timestep,\ \mbox{\hyperlink{class_task_group}{TaskGroup}}*\ task\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00053\ \};}
+
+\end{DoxyCode}

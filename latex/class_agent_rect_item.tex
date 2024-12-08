@@ -1,0 +1,344 @@
+\doxysection{Agent\+Rect\+Item Class Reference}
+\hypertarget{class_agent_rect_item}{}\label{class_agent_rect_item}\index{AgentRectItem@{AgentRectItem}}
+
+
+{\ttfamily \#include $<$agentrectitem.\+h$>$}
+
+
+
+Collaboration diagram for Agent\+Rect\+Item\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{class_agent_rect_item__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_agent_rect_item_adc544999b3c7ce8e423b4c00d1138ecf}{Agent\+Rect\+Item}} ()
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80}{draw\+Agent}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8}{draw\+Start\+Point}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a2f4ad4d9a12f946455a9d59cef22313b}{draw}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, int timestep, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_ae73ae8d174adf57b0a1e589b447c7faa}{animate\+Move\+Agent}} (const QRectF \&new\+Position)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_ac1a3fbdb6a7bee23a2c5bbefa88f526b}{stop\+Animation}} ()
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a55299edc3c2b68e538061e3f17f48ba0}{set\+Animation\+Speed}} (int speed)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QColor \mbox{\hyperlink{class_agent_rect_item_a6ee3e134d4cda9855249a4da3c955376}{assign\+Random\+Color}} ()
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2}{draw\+Pickup\+Points}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890}{draw\+Dropoff\+Point}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02}{draw\+Path}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene, const \mbox{\hyperlink{class_agent}{Agent}} \&agent)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_aa22a77ee68295080a4f4d04c7edea222}{clear\+Path}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene)
+\item 
+void \mbox{\hyperlink{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954}{clear\+Pickup\+Dropoff}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QGraphics\+Text\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_rect_item_a5fa9e81ba0159b807c3d6d44dab80c97}{id\+Label}}
+\item 
+QColor \mbox{\hyperlink{class_agent_rect_item_aa6afd2106bdc8c3dee3eea52046dcdb9}{agent\+Color}}
+\item 
+QGraphics\+Rect\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_rect_item_ab99eaef6be0c5202759b4e24622c6331}{agent\+Rect\+Item}} = nullptr
+\item 
+std\+::vector$<$ QGraphics\+Ellipse\+Item \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_agent_rect_item_ad07d8669f32539b02c48d11879d66461}{pickup\+Graphics\+Items}}
+\item 
+QGraphics\+Rect\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_rect_item_abe895ede1d0c8b725f0cba383b761858}{dropoff\+Graphics\+Item}} = nullptr
+\item 
+QGraphics\+Ellipse\+Item \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_rect_item_a99a73e1759974d24c07f51d5d03b5dec}{start\+Graphics\+Item}} = nullptr
+\item 
+std\+::vector$<$ QGraphics\+Line\+Item \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_agent_rect_item_aacddac4fc8150ff60c2c6fd8ce10cce5}{path\+Graphics\+Items}}
+\item 
+QVariant\+Animation \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_rect_item_a4eaff793d98ae01b791c14892c7787e1}{move\+Animation}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_agent_rect_item_adc544999b3c7ce8e423b4c00d1138ecf}\index{AgentRectItem@{AgentRectItem}!AgentRectItem@{AgentRectItem}}
+\index{AgentRectItem@{AgentRectItem}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{AgentRectItem()}{AgentRectItem()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_adc544999b3c7ce8e423b4c00d1138ecf} 
+Agent\+Rect\+Item\+::\+Agent\+Rect\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_adc544999b3c7ce8e423b4c00d1138ecf_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_agent_rect_item_ae73ae8d174adf57b0a1e589b447c7faa}\index{AgentRectItem@{AgentRectItem}!animateMoveAgent@{animateMoveAgent}}
+\index{animateMoveAgent@{animateMoveAgent}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{animateMoveAgent()}{animateMoveAgent()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_ae73ae8d174adf57b0a1e589b447c7faa} 
+void Agent\+Rect\+Item\+::animate\+Move\+Agent (\begin{DoxyParamCaption}\item[{const QRectF \&}]{new\+Position}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_ae73ae8d174adf57b0a1e589b447c7faa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a6ee3e134d4cda9855249a4da3c955376}\index{AgentRectItem@{AgentRectItem}!assignRandomColor@{assignRandomColor}}
+\index{assignRandomColor@{assignRandomColor}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{assignRandomColor()}{assignRandomColor()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a6ee3e134d4cda9855249a4da3c955376} 
+QColor Agent\+Rect\+Item\+::assign\+Random\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a6ee3e134d4cda9855249a4da3c955376_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_aa22a77ee68295080a4f4d04c7edea222}\index{AgentRectItem@{AgentRectItem}!clearPath@{clearPath}}
+\index{clearPath@{clearPath}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{clearPath()}{clearPath()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_aa22a77ee68295080a4f4d04c7edea222} 
+void Agent\+Rect\+Item\+::clear\+Path (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_aa22a77ee68295080a4f4d04c7edea222_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954}\index{AgentRectItem@{AgentRectItem}!clearPickupDropoff@{clearPickupDropoff}}
+\index{clearPickupDropoff@{clearPickupDropoff}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{clearPickupDropoff()}{clearPickupDropoff()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954} 
+void Agent\+Rect\+Item\+::clear\+Pickup\+Dropoff (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a2f4ad4d9a12f946455a9d59cef22313b}\index{AgentRectItem@{AgentRectItem}!draw@{draw}}
+\index{draw@{draw}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a2f4ad4d9a12f946455a9d59cef22313b} 
+void Agent\+Rect\+Item\+::draw (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{int}]{timestep}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a2f4ad4d9a12f946455a9d59cef22313b_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80}\index{AgentRectItem@{AgentRectItem}!drawAgent@{drawAgent}}
+\index{drawAgent@{drawAgent}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{drawAgent()}{drawAgent()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80} 
+void Agent\+Rect\+Item\+::draw\+Agent (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890}\index{AgentRectItem@{AgentRectItem}!drawDropoffPoint@{drawDropoffPoint}}
+\index{drawDropoffPoint@{drawDropoffPoint}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{drawDropoffPoint()}{drawDropoffPoint()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890} 
+void Agent\+Rect\+Item\+::draw\+Dropoff\+Point (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02}\index{AgentRectItem@{AgentRectItem}!drawPath@{drawPath}}
+\index{drawPath@{drawPath}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{drawPath()}{drawPath()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02} 
+void Agent\+Rect\+Item\+::draw\+Path (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2}\index{AgentRectItem@{AgentRectItem}!drawPickupPoints@{drawPickupPoints}}
+\index{drawPickupPoints@{drawPickupPoints}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{drawPickupPoints()}{drawPickupPoints()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2} 
+void Agent\+Rect\+Item\+::draw\+Pickup\+Points (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8}\index{AgentRectItem@{AgentRectItem}!drawStartPoint@{drawStartPoint}}
+\index{drawStartPoint@{drawStartPoint}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{drawStartPoint()}{drawStartPoint()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8} 
+void Agent\+Rect\+Item\+::draw\+Start\+Point (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{const \mbox{\hyperlink{class_agent}{Agent}} \&}]{agent}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_rect_item_a55299edc3c2b68e538061e3f17f48ba0}\index{AgentRectItem@{AgentRectItem}!setAnimationSpeed@{setAnimationSpeed}}
+\index{setAnimationSpeed@{setAnimationSpeed}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{setAnimationSpeed()}{setAnimationSpeed()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a55299edc3c2b68e538061e3f17f48ba0} 
+void Agent\+Rect\+Item\+::set\+Animation\+Speed (\begin{DoxyParamCaption}\item[{int}]{speed}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_agent_rect_item_ac1a3fbdb6a7bee23a2c5bbefa88f526b}\index{AgentRectItem@{AgentRectItem}!stopAnimation@{stopAnimation}}
+\index{stopAnimation@{stopAnimation}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{stopAnimation()}{stopAnimation()}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_ac1a3fbdb6a7bee23a2c5bbefa88f526b} 
+void Agent\+Rect\+Item\+::stop\+Animation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_agent_rect_item_aa6afd2106bdc8c3dee3eea52046dcdb9}\index{AgentRectItem@{AgentRectItem}!agentColor@{agentColor}}
+\index{agentColor@{agentColor}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{agentColor}{agentColor}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_aa6afd2106bdc8c3dee3eea52046dcdb9} 
+QColor Agent\+Rect\+Item\+::agent\+Color\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_ab99eaef6be0c5202759b4e24622c6331}\index{AgentRectItem@{AgentRectItem}!agentRectItem@{agentRectItem}}
+\index{agentRectItem@{agentRectItem}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{agentRectItem}{agentRectItem}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_ab99eaef6be0c5202759b4e24622c6331} 
+QGraphics\+Rect\+Item\texorpdfstring{$\ast$}{*} Agent\+Rect\+Item\+::agent\+Rect\+Item = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_abe895ede1d0c8b725f0cba383b761858}\index{AgentRectItem@{AgentRectItem}!dropoffGraphicsItem@{dropoffGraphicsItem}}
+\index{dropoffGraphicsItem@{dropoffGraphicsItem}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{dropoffGraphicsItem}{dropoffGraphicsItem}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_abe895ede1d0c8b725f0cba383b761858} 
+QGraphics\+Rect\+Item\texorpdfstring{$\ast$}{*} Agent\+Rect\+Item\+::dropoff\+Graphics\+Item = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_a5fa9e81ba0159b807c3d6d44dab80c97}\index{AgentRectItem@{AgentRectItem}!idLabel@{idLabel}}
+\index{idLabel@{idLabel}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{idLabel}{idLabel}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a5fa9e81ba0159b807c3d6d44dab80c97} 
+QGraphics\+Text\+Item\texorpdfstring{$\ast$}{*} Agent\+Rect\+Item\+::id\+Label\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_a4eaff793d98ae01b791c14892c7787e1}\index{AgentRectItem@{AgentRectItem}!moveAnimation@{moveAnimation}}
+\index{moveAnimation@{moveAnimation}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{moveAnimation}{moveAnimation}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a4eaff793d98ae01b791c14892c7787e1} 
+QVariant\+Animation\texorpdfstring{$\ast$}{*} Agent\+Rect\+Item\+::move\+Animation = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_aacddac4fc8150ff60c2c6fd8ce10cce5}\index{AgentRectItem@{AgentRectItem}!pathGraphicsItems@{pathGraphicsItems}}
+\index{pathGraphicsItems@{pathGraphicsItems}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{pathGraphicsItems}{pathGraphicsItems}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_aacddac4fc8150ff60c2c6fd8ce10cce5} 
+std\+::vector$<$QGraphics\+Line\+Item\texorpdfstring{$\ast$}{*}$>$ Agent\+Rect\+Item\+::path\+Graphics\+Items\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_ad07d8669f32539b02c48d11879d66461}\index{AgentRectItem@{AgentRectItem}!pickupGraphicsItems@{pickupGraphicsItems}}
+\index{pickupGraphicsItems@{pickupGraphicsItems}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{pickupGraphicsItems}{pickupGraphicsItems}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_ad07d8669f32539b02c48d11879d66461} 
+std\+::vector$<$QGraphics\+Ellipse\+Item\texorpdfstring{$\ast$}{*}$>$ Agent\+Rect\+Item\+::pickup\+Graphics\+Items\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_rect_item_a99a73e1759974d24c07f51d5d03b5dec}\index{AgentRectItem@{AgentRectItem}!startGraphicsItem@{startGraphicsItem}}
+\index{startGraphicsItem@{startGraphicsItem}!AgentRectItem@{AgentRectItem}}
+\doxysubsubsection{\texorpdfstring{startGraphicsItem}{startGraphicsItem}}
+{\footnotesize\ttfamily \label{class_agent_rect_item_a99a73e1759974d24c07f51d5d03b5dec} 
+QGraphics\+Ellipse\+Item\texorpdfstring{$\ast$}{*} Agent\+Rect\+Item\+::start\+Graphics\+Item = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{agentrectitem_8h}{agentrectitem.\+h}}\item 
+\mbox{\hyperlink{agentrectitem_8cpp}{agentrectitem.\+cpp}}\end{DoxyCompactItemize}

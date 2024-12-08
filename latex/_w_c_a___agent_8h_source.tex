@@ -1,0 +1,42 @@
+\doxysection{WCA\+\_\+\+Agent.\+h}
+\hypertarget{_w_c_a___agent_8h_source}{}\label{_w_c_a___agent_8h_source}\index{WCA\_Agent.h@{WCA\_Agent.h}}
+\mbox{\hyperlink{_w_c_a___agent_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{../Agent.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../Graph.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cell_8h}{../CA/Cell.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_w_c_a___agent}{WCA\_Agent}}\{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ std::vector<std::pair<map::Cell,\ int>>\ \mbox{\hyperlink{class_w_c_a___agent_a9d5dfef4252497d7bef98b3b1d04c714}{waypoints}};\ \textcolor{comment}{//waypints\ key-\/position,\ value-\/stoptime}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_w_c_a___agent_a43a83582a7dbcb03e4b3c4b79189d93b}{currentWaypointIndex}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_w_c_a___agent_ab3753589c6aca5de4be53b7e10fe6dae}{WCA\_Agent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ \mbox{\hyperlink{class_w_c_a___agent_a8a349177e20d05caafc7b672743c9f03}{agent}});}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_w_c_a___agent_a73cada2ffdefc4186a9cd274522ef6de}{W}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_w_c_a___agent_adc54e22213969b749a8ead512184da0b}{K}};}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_agent}{Agent}}\ \mbox{\hyperlink{class_w_c_a___agent_a8a349177e20d05caafc7b672743c9f03}{agent}};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Metody\ dostępu}}
+\DoxyCodeLine{00028\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_w_c_a___agent_a71d90b23001082a1d19c8253c0a68228}{getCurrentPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_w_c_a___agent_a7b69eab4b35d39364a2fc3b3978c2a87}{getCurrentWaypointIndex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_w_c_a___agent_a9c2f50e859e3b75d230740f581ea30d8}{atCurrentWaypoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ \ \ \ \ std::vector<std::pair<map::Cell,\ int>>\ \mbox{\hyperlink{class_w_c_a___agent_a7dad63ee88d48456f81a4fa8e273e08f}{getWaypoints}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_w_c_a___agent_a575d96a0a6da8c159eb0ad94b4d0df7d}{incrementWaypointIndex}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_w_c_a___agent_ac39d2d6dc0ae416081ca7120384d9932}{clearWaypoints}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_w_c_a___agent_a9425bac4f6cba9b65fda162d5e824db2}{clearCurrentWayPointIndex}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Sprawdza,\ czy\ agent\ osiągnął\ bieżący\ punkt\ docelowy}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_w_c_a___agent_a8466161a6eaad3fe310f10b7204deb7b}{reachedCurrentWaypoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_w_c_a___agent_acfdc40aad47275e25981d619ee359250}{setWaypoints}}(\textcolor{keyword}{const}\ std::vector<std::pair<map::Cell,\ int>\ >\ \&newGetWaypoints);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_w_c_a___agent_a09000f985e1015912e8d72eec7e39554}{finished}}();}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_w_c_a___agent_a74131a359f5b926d87bea74b6dec685f}{operator\ ==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_w_c_a___agent}{WCA\_Agent}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+
+\end{DoxyCode}

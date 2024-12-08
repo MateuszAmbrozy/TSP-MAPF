@@ -82,12 +82,12 @@ void CA_Environment::MOVEAGENTS(int timestep)
         if (!agent.isIdle()) 
         {
 
-            std::vector<SpaceTime::Cell> path = agent.getPath();
+            std::vector<CA::Cell> path = agent.getPath();
 
             if (path.size() > 0 && timestep < static_cast<int>(path.size()) + path.front().t)
             {
 
-                SpaceTime::Cell nextPosition;
+                CA::Cell nextPosition;
 
                 for (const auto& cell : path)
                 {
@@ -132,14 +132,14 @@ void CA_Environment::MOVEAGENTS(int timestep)
 
 void CA_Environment::runTimestep(int timestep, TaskGroup* task)
 {
-    // if(task)
-    // {
-    //     task_list.push_back(*task);
-    // }
-    // else if(timestep % 5 == 0)
-    // {
-    //     task_list.push_back(TASKGROUPGENERATOR());
-    // }
+    if(task)
+    {
+        task_list.push_back(*task);
+    }
+    else if(timestep % 10 == 0)
+    {
+        task_list.push_back(TASKGROUPGENERATOR());
+    }
     // Iterate over tasks and assign to agents if possible
     for (size_t l = 0; l < task_list.size(); ++l)
     {
@@ -155,7 +155,7 @@ void CA_Environment::runTimestep(int timestep, TaskGroup* task)
                 //std::cout << "agent: (" << selectedAgent.getPosition().x << ", " << selectedAgent.getPosition().y << ")\n";
                 //std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent, taskGroup);
-                std::vector<SpaceTime::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
+                std::vector<CA::Cell> path = sta.findPath(selectedAgent, timestep, taskGroup, order, table);
                 if(path.empty())
                     continue;
                 auto it = std::find(agents.begin(), agents.end(), selectedAgent);

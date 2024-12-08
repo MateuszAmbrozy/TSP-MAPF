@@ -1,0 +1,55 @@
+\doxysection{agentrectitem.\+h}
+\hypertarget{agentrectitem_8h_source}{}\label{agentrectitem_8h_source}\index{agentrectitem.h@{agentrectitem.h}}
+\mbox{\hyperlink{agentrectitem_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ AGENTRECTITEM\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ AGENTRECTITEM\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{../lib/Agent.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QGraphicsRectItem>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QGraphicsObject>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QGraphicsTextItem>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QColor>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QRandomGenerator>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <QGraphicsEllipseItem>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QVariantAnimation>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QGraphicsLineItem>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent_rect_item}{AgentRectItem}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ QGraphicsTextItem*\ \mbox{\hyperlink{class_agent_rect_item_a5fa9e81ba0159b807c3d6d44dab80c97}{idLabel}};}
+\DoxyCodeLine{00029\ \ \ \ \ QColor\ \mbox{\hyperlink{class_agent_rect_item_aa6afd2106bdc8c3dee3eea52046dcdb9}{agentColor}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ QGraphicsRectItem*\ \mbox{\hyperlink{class_agent_rect_item_ab99eaef6be0c5202759b4e24622c6331}{agentRectItem}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00032\ \ \ \ \ std::vector<QGraphicsEllipseItem*>\ \mbox{\hyperlink{class_agent_rect_item_ad07d8669f32539b02c48d11879d66461}{pickupGraphicsItems}};}
+\DoxyCodeLine{00033\ \ \ \ \ QGraphicsRectItem*\ \mbox{\hyperlink{class_agent_rect_item_abe895ede1d0c8b725f0cba383b761858}{dropoffGraphicsItem}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00034\ \ \ \ \ QGraphicsEllipseItem*\ \mbox{\hyperlink{class_agent_rect_item_a99a73e1759974d24c07f51d5d03b5dec}{startGraphicsItem}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00035\ \ \ \ \ std::vector<QGraphicsLineItem*>\ \mbox{\hyperlink{class_agent_rect_item_aacddac4fc8150ff60c2c6fd8ce10cce5}{pathGraphicsItems}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ QVariantAnimation*\ \mbox{\hyperlink{class_agent_rect_item_a4eaff793d98ae01b791c14892c7787e1}{moveAnimation}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ QColor\ \mbox{\hyperlink{class_agent_rect_item_a6ee3e134d4cda9855249a4da3c955376}{assignRandomColor}}();}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a0e06521c168b686daa5bcfa6bffd78d2}{drawPickupPoints}}(QGraphicsScene*\ scene,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a55c720295a91aa19be41070ae42c8890}{drawDropoffPoint}}(QGraphicsScene*\ scene,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_abfbb9dcc63b91ec89385d156db0d9e02}{drawPath}}(QGraphicsScene*\ scene,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_aa22a77ee68295080a4f4d04c7edea222}{clearPath}}(QGraphicsScene*\ scene);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a47193c9bac62c5ff380b6f9e31b53954}{clearPickupDropoff}}(QGraphicsScene*\ scene);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_agent_rect_item_adc544999b3c7ce8e423b4c00d1138ecf}{AgentRectItem}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a0e40e9d773acad4dd63254fcce7a6e80}{drawAgent}}(QGraphicsScene*\ scene,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_afa28c6f9e7388219574de1e447ffe3f8}{drawStartPoint}}(QGraphicsScene*\ scene,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a2f4ad4d9a12f946455a9d59cef22313b}{draw}}(QGraphicsScene*\ scene,\ \textcolor{keywordtype}{int}\ timestep,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_ae73ae8d174adf57b0a1e589b447c7faa}{animateMoveAgent}}(\textcolor{keyword}{const}\ QRectF\&\ newPosition);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_ac1a3fbdb6a7bee23a2c5bbefa88f526b}{stopAnimation}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_rect_item_a55299edc3c2b68e538061e3f17f48ba0}{setAnimationSpeed}}(\textcolor{keywordtype}{int}\ speed);}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

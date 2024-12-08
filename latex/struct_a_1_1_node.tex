@@ -1,0 +1,246 @@
+\doxysection{A\+::Node Struct Reference}
+\hypertarget{struct_a_1_1_node}{}\label{struct_a_1_1_node}\index{A::Node@{A::Node}}
+
+
+{\ttfamily \#include $<$Node.\+h$>$}
+
+
+
+Inheritance diagram for A\+::Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{struct_a_1_1_node__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+::Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=151pt]{struct_a_1_1_node__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_a_1_1_node}{Node}} \& \mbox{\hyperlink{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068}{operator=}} (const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&other)
+\item 
+\mbox{\hyperlink{struct_a_1_1_node}{Node}} \& \mbox{\hyperlink{struct_a_1_1_node_a86a358a66e6fdc545c91f6d30d58a73c}{operator=}} (const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&other)
+\item 
+\mbox{\hyperlink{struct_a_1_1_node_a6070ae8bc78bedf6957c99a011d9994f}{Node}} ()=default
+\item 
+\mbox{\hyperlink{struct_a_1_1_node_aa7de5c562086bc77778946abe789ab78}{Node}} (int \mbox{\hyperlink{structmap_1_1_cell_ad8fcfad7b67cf080cecc49033c94c07e}{x}}, int \mbox{\hyperlink{structmap_1_1_cell_afb6b9c98b28d2ead56141e57a9fd2f27}{y}}, bool \mbox{\hyperlink{structmap_1_1_cell_ad65eace573022f3c0e7e38a1f7b0ccd3}{is\+Obstacle}}=false, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{Node}} $>$ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}}=nullptr, float \mbox{\hyperlink{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48}{g\+Cost}}=0, float \mbox{\hyperlink{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e}{h\+Cost}}=0, float \mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{f\+Cost}}=0)
+\item 
+\mbox{\hyperlink{struct_a_1_1_node_ab05d952ea82d0ab72c6606bbd461cba5}{Node}} (const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&other)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$ \mbox{\hyperlink{struct_a_1_1_node_aa8ff1f57cd0e8b0f885d05072352df7e}{get\+Parent}} ()
+\item 
+void \mbox{\hyperlink{struct_a_1_1_node_a923ccd2fd08766f86c2bc1c4380874fd}{set\+Parent}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}})
+\item 
+virtual \mbox{\hyperlink{struct_a_1_1_node_a89ad92cda65c066e09e68f3c3a0bc2a4}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()
+\item 
+bool \mbox{\hyperlink{struct_a_1_1_node_a4624f973045015567f82ac57a2f48b1b}{operator$<$}} (const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&other) const
+\item 
+bool \mbox{\hyperlink{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f}{operator==}} (const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&other) const
+\item 
+bool \mbox{\hyperlink{struct_a_1_1_node_ab154f7e0d88a398edd5e6bfa88efd2b2}{operator==}} (\mbox{\hyperlink{struct_a_1_1_node}{Node}} \&other) const
+\item 
+bool \mbox{\hyperlink{structmap_1_1_cell_a43ab1d91b3ec3442f9cef9b39474b102}{operator==}} (const \mbox{\hyperlink{structmap_1_1_cell_aff46854719913042bc044537687dd45a}{Cell}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{struct_a_1_1_node_a16b5bfcb69d3760cb97ed1d091991256}{calculateH}} (int startX, int startY, int destX, int destY)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48}{g\+Cost}}
+\item 
+float \mbox{\hyperlink{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e}{h\+Cost}}
+\item 
+float \mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{f\+Cost}}
+\item 
+int \mbox{\hyperlink{structmap_1_1_cell_ad8fcfad7b67cf080cecc49033c94c07e}{x}}
+\item 
+int \mbox{\hyperlink{structmap_1_1_cell_afb6b9c98b28d2ead56141e57a9fd2f27}{y}}
+\item 
+bool \mbox{\hyperlink{structmap_1_1_cell_ad65eace573022f3c0e7e38a1f7b0ccd3}{is\+Obstacle}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{Node}} $>$ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_a_1_1_node_a6070ae8bc78bedf6957c99a011d9994f}\index{A::Node@{A::Node}!Node@{Node}}
+\index{Node@{Node}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a6070ae8bc78bedf6957c99a011d9994f} 
+A\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{struct_a_1_1_node_aa7de5c562086bc77778946abe789ab78}\index{A::Node@{A::Node}!Node@{Node}}
+\index{Node@{Node}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_aa7de5c562086bc77778946abe789ab78} 
+A\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{bool}]{is\+Obstacle}{ = {\ttfamily false}, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{Node}} $>$}]{parent}{ = {\ttfamily nullptr}, }\item[{float}]{g\+Cost}{ = {\ttfamily 0}, }\item[{float}]{h\+Cost}{ = {\ttfamily 0}, }\item[{float}]{f\+Cost}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\Hypertarget{struct_a_1_1_node_ab05d952ea82d0ab72c6606bbd461cba5}\index{A::Node@{A::Node}!Node@{Node}}
+\index{Node@{Node}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_ab05d952ea82d0ab72c6606bbd461cba5} 
+A\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption})}
+
+\Hypertarget{struct_a_1_1_node_a89ad92cda65c066e09e68f3c3a0bc2a4}\index{A::Node@{A::Node}!````~Node@{\texorpdfstring{$\sim$}{\string~}Node}}
+\index{````~Node@{\texorpdfstring{$\sim$}{\string~}Node}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Node()}{\string~Node()}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a89ad92cda65c066e09e68f3c3a0bc2a4} 
+virtual A\+::\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_a_1_1_node_a16b5bfcb69d3760cb97ed1d091991256}\index{A::Node@{A::Node}!calculateH@{calculateH}}
+\index{calculateH@{calculateH}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{calculateH()}{calculateH()}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a16b5bfcb69d3760cb97ed1d091991256} 
+float A\+::\+Node\+::calculateH (\begin{DoxyParamCaption}\item[{int}]{startX}{, }\item[{int}]{startY}{, }\item[{int}]{destX}{, }\item[{int}]{destY}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_a_1_1_node_a16b5bfcb69d3760cb97ed1d091991256_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{struct_a_1_1_node_aa8ff1f57cd0e8b0f885d05072352df7e}\index{A::Node@{A::Node}!getParent@{getParent}}
+\index{getParent@{getParent}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{getParent()}{getParent()}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_aa8ff1f57cd0e8b0f885d05072352df7e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$ A\+::\+Node\+::get\+Parent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{struct_a_1_1_node_a4624f973045015567f82ac57a2f48b1b}\index{A::Node@{A::Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a4624f973045015567f82ac57a2f48b1b} 
+bool A\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068}\index{A::Node@{A::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068} 
+\mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} \& A\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{struct_a_1_1_node_a86a358a66e6fdc545c91f6d30d58a73c}\index{A::Node@{A::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a86a358a66e6fdc545c91f6d30d58a73c} 
+\mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} \& A\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption})}
+
+\Hypertarget{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f}\index{A::Node@{A::Node}!operator==@{operator==}}
+\index{operator==@{operator==}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f} 
+bool A\+::\+Node\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_a_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{struct_a_1_1_node_ab154f7e0d88a398edd5e6bfa88efd2b2}\index{A::Node@{A::Node}!operator==@{operator==}}
+\index{operator==@{operator==}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_ab154f7e0d88a398edd5e6bfa88efd2b2} 
+bool A\+::\+Node\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_a_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structmap_1_1_cell_a43ab1d91b3ec3442f9cef9b39474b102}\index{A::Node@{A::Node}!operator==@{operator==}}
+\index{operator==@{operator==}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{structmap_1_1_cell_a43ab1d91b3ec3442f9cef9b39474b102} 
+bool map\+::\+Cell\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmap_1_1_cell}{Cell}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+\Hypertarget{struct_a_1_1_node_a923ccd2fd08766f86c2bc1c4380874fd}\index{A::Node@{A::Node}!setParent@{setParent}}
+\index{setParent@{setParent}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{setParent()}{setParent()}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a923ccd2fd08766f86c2bc1c4380874fd} 
+void A\+::\+Node\+::set\+Parent (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$}]{parent}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{struct_a_1_1_node_a923ccd2fd08766f86c2bc1c4380874fd_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}\index{A::Node@{A::Node}!fCost@{fCost}}
+\index{fCost@{fCost}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{fCost}{fCost}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388} 
+float A\+::\+Node\+::f\+Cost}
+
+\Hypertarget{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48}\index{A::Node@{A::Node}!gCost@{gCost}}
+\index{gCost@{gCost}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{gCost}{gCost}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48} 
+float A\+::\+Node\+::g\+Cost}
+
+\Hypertarget{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e}\index{A::Node@{A::Node}!hCost@{hCost}}
+\index{hCost@{hCost}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{hCost}{hCost}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e} 
+float A\+::\+Node\+::h\+Cost}
+
+\Hypertarget{structmap_1_1_cell_ad65eace573022f3c0e7e38a1f7b0ccd3}\index{A::Node@{A::Node}!isObstacle@{isObstacle}}
+\index{isObstacle@{isObstacle}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{isObstacle}{isObstacle}}
+{\footnotesize\ttfamily \label{structmap_1_1_cell_ad65eace573022f3c0e7e38a1f7b0ccd3} 
+bool map\+::\+Cell\+::is\+Obstacle\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\Hypertarget{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}\index{A::Node@{A::Node}!parent@{parent}}
+\index{parent@{parent}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily \label{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{struct_a_1_1_node}{Node}}$>$ A\+::\+Node\+::parent\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{structmap_1_1_cell_ad8fcfad7b67cf080cecc49033c94c07e}\index{A::Node@{A::Node}!x@{x}}
+\index{x@{x}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \label{structmap_1_1_cell_ad8fcfad7b67cf080cecc49033c94c07e} 
+int map\+::\+Cell\+::x\hspace{0.3cm}{\ttfamily [inherited]}}
+
+\Hypertarget{structmap_1_1_cell_afb6b9c98b28d2ead56141e57a9fd2f27}\index{A::Node@{A::Node}!y@{y}}
+\index{y@{y}!A::Node@{A::Node}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \label{structmap_1_1_cell_afb6b9c98b28d2ead56141e57a9fd2f27} 
+int map\+::\+Cell\+::y\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_node_8h}{Node.\+h}}\item 
+\mbox{\hyperlink{_astar_8cpp}{Astar.\+cpp}}\item 
+\mbox{\hyperlink{_node_8cpp}{Node.\+cpp}}\end{DoxyCompactItemize}

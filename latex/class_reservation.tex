@@ -1,0 +1,172 @@
+\doxysection{Reservation Class Reference}
+\hypertarget{class_reservation}{}\label{class_reservation}\index{Reservation@{Reservation}}
+
+
+{\ttfamily \#include $<$Reservation.\+h$>$}
+
+
+
+Collaboration diagram for Reservation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{class_reservation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_reservation_a6545bb890ea32ac35a7ad0d9ac892c20}{Reservation}} ()=default
+\item 
+bool \mbox{\hyperlink{class_reservation_a1088b91af655cf9699da2cd09489be20}{is\+Reserved}} (int x, int y, int t) const
+\item 
+void \mbox{\hyperlink{class_reservation_a343dbc6b03a61329adcb99c6a7aa4d29}{reserve}} (int x, int y, int t)
+\item 
+void \mbox{\hyperlink{class_reservation_ab1b490c6c542835c87cda5d41934a3bd}{reserve\+Edge}} (int x1, int y1, int x2, int y2, int t)
+\item 
+bool \mbox{\hyperlink{class_reservation_ae7841c51c9eef7d0170708eee3388dd1}{would\+Cause\+Edge\+Collision}} (int x1, int y1, int t1, int x2, int y2) const
+\item 
+bool \mbox{\hyperlink{class_reservation_a9a7c8998a159369fb6fd1bdb7f8c693f}{would\+Cause\+Collision}} (int x1, int y1, int t1, int x2, int y2, int t2) const
+\item 
+void \mbox{\hyperlink{class_reservation_aab2909bfaec01a974ce8e50c7e0d6c75}{remove\+Reservation}} (int x, int y, int t)
+\item 
+void \mbox{\hyperlink{class_reservation_a61c864018f1911447d5b453d1962cc81}{remove\+Edge\+Reservation}} (int x1, int y1, int t)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ int, std\+::unordered\+\_\+map$<$ int, std\+::unordered\+\_\+map$<$ int, bool $>$ $>$ $>$ \mbox{\hyperlink{class_reservation_a0cdbad1fe58882ed40649eab4ea26e91}{reservations}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::pair$<$ int, int $>$, std\+::unordered\+\_\+map$<$ int, std\+::pair$<$ int, int $>$ $>$, \mbox{\hyperlink{struct_pair_hash}{Pair\+Hash}} $>$ \mbox{\hyperlink{class_reservation_a2fe009d77070e7a2bd42af02b72d695e}{edge\+Reservations}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_reservation_a6545bb890ea32ac35a7ad0d9ac892c20}\index{Reservation@{Reservation}!Reservation@{Reservation}}
+\index{Reservation@{Reservation}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{Reservation()}{Reservation()}}
+{\footnotesize\ttfamily \label{class_reservation_a6545bb890ea32ac35a7ad0d9ac892c20} 
+Reservation\+::\+Reservation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_reservation_a1088b91af655cf9699da2cd09489be20}\index{Reservation@{Reservation}!isReserved@{isReserved}}
+\index{isReserved@{isReserved}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{isReserved()}{isReserved()}}
+{\footnotesize\ttfamily \label{class_reservation_a1088b91af655cf9699da2cd09489be20} 
+bool Reservation\+::is\+Reserved (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{t}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_a1088b91af655cf9699da2cd09489be20_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_a61c864018f1911447d5b453d1962cc81}\index{Reservation@{Reservation}!removeEdgeReservation@{removeEdgeReservation}}
+\index{removeEdgeReservation@{removeEdgeReservation}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{removeEdgeReservation()}{removeEdgeReservation()}}
+{\footnotesize\ttfamily \label{class_reservation_a61c864018f1911447d5b453d1962cc81} 
+void Reservation\+::remove\+Edge\+Reservation (\begin{DoxyParamCaption}\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{int}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_a61c864018f1911447d5b453d1962cc81_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_aab2909bfaec01a974ce8e50c7e0d6c75}\index{Reservation@{Reservation}!removeReservation@{removeReservation}}
+\index{removeReservation@{removeReservation}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{removeReservation()}{removeReservation()}}
+{\footnotesize\ttfamily \label{class_reservation_aab2909bfaec01a974ce8e50c7e0d6c75} 
+void Reservation\+::remove\+Reservation (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_aab2909bfaec01a974ce8e50c7e0d6c75_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_a343dbc6b03a61329adcb99c6a7aa4d29}\index{Reservation@{Reservation}!reserve@{reserve}}
+\index{reserve@{reserve}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily \label{class_reservation_a343dbc6b03a61329adcb99c6a7aa4d29} 
+void Reservation\+::reserve (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_a343dbc6b03a61329adcb99c6a7aa4d29_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_ab1b490c6c542835c87cda5d41934a3bd}\index{Reservation@{Reservation}!reserveEdge@{reserveEdge}}
+\index{reserveEdge@{reserveEdge}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{reserveEdge()}{reserveEdge()}}
+{\footnotesize\ttfamily \label{class_reservation_ab1b490c6c542835c87cda5d41934a3bd} 
+void Reservation\+::reserve\+Edge (\begin{DoxyParamCaption}\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{int}]{x2}{, }\item[{int}]{y2}{, }\item[{int}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_ab1b490c6c542835c87cda5d41934a3bd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_a9a7c8998a159369fb6fd1bdb7f8c693f}\index{Reservation@{Reservation}!wouldCauseCollision@{wouldCauseCollision}}
+\index{wouldCauseCollision@{wouldCauseCollision}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{wouldCauseCollision()}{wouldCauseCollision()}}
+{\footnotesize\ttfamily \label{class_reservation_a9a7c8998a159369fb6fd1bdb7f8c693f} 
+bool Reservation\+::would\+Cause\+Collision (\begin{DoxyParamCaption}\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{int}]{t1}{, }\item[{int}]{x2}{, }\item[{int}]{y2}{, }\item[{int}]{t2}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_a9a7c8998a159369fb6fd1bdb7f8c693f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_reservation_ae7841c51c9eef7d0170708eee3388dd1}\index{Reservation@{Reservation}!wouldCauseEdgeCollision@{wouldCauseEdgeCollision}}
+\index{wouldCauseEdgeCollision@{wouldCauseEdgeCollision}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{wouldCauseEdgeCollision()}{wouldCauseEdgeCollision()}}
+{\footnotesize\ttfamily \label{class_reservation_ae7841c51c9eef7d0170708eee3388dd1} 
+bool Reservation\+::would\+Cause\+Edge\+Collision (\begin{DoxyParamCaption}\item[{int}]{x1}{, }\item[{int}]{y1}{, }\item[{int}]{t1}{, }\item[{int}]{x2}{, }\item[{int}]{y2}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_reservation_ae7841c51c9eef7d0170708eee3388dd1_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_reservation_a2fe009d77070e7a2bd42af02b72d695e}\index{Reservation@{Reservation}!edgeReservations@{edgeReservations}}
+\index{edgeReservations@{edgeReservations}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{edgeReservations}{edgeReservations}}
+{\footnotesize\ttfamily \label{class_reservation_a2fe009d77070e7a2bd42af02b72d695e} 
+std\+::unordered\+\_\+map$<$std\+::pair$<$int, int$>$, std\+::unordered\+\_\+map$<$int, std\+::pair$<$int, int$>$ $>$, \mbox{\hyperlink{struct_pair_hash}{Pair\+Hash}}$>$ Reservation\+::edge\+Reservations}
+
+\Hypertarget{class_reservation_a0cdbad1fe58882ed40649eab4ea26e91}\index{Reservation@{Reservation}!reservations@{reservations}}
+\index{reservations@{reservations}!Reservation@{Reservation}}
+\doxysubsubsection{\texorpdfstring{reservations}{reservations}}
+{\footnotesize\ttfamily \label{class_reservation_a0cdbad1fe58882ed40649eab4ea26e91} 
+std\+::unordered\+\_\+map$<$int, std\+::unordered\+\_\+map$<$int, std\+::unordered\+\_\+map$<$int, bool$>$ $>$ $>$ Reservation\+::reservations}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_reservation_8h}{Reservation.\+h}}\end{DoxyCompactItemize}

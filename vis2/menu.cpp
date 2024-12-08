@@ -61,7 +61,7 @@ QWidget* Menu::getViewByName(const QString &viewName) {
         return generalView;
     } else if (viewName == "Animation")
     {
-        if (animation) delete animation;
+        //if (animation) delete animation;
         animation = new AnimationView(generalView->getSelectedAlgorithm());
         return animation;
 

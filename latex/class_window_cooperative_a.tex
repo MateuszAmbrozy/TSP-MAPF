@@ -1,0 +1,301 @@
+\doxysection{Window\+CooperativeA Class Reference}
+\hypertarget{class_window_cooperative_a}{}\label{class_window_cooperative_a}\index{WindowCooperativeA@{WindowCooperativeA}}
+
+
+{\ttfamily \#include $<$Window\+Cooperative\+A.\+h$>$}
+
+
+
+Inheritance diagram for Window\+CooperativeA\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{class_window_cooperative_a__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Window\+CooperativeA\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_window_cooperative_a__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_window_cooperative_a_a085fb01b0b8bf3c20a7bb9c66439c681}{Window\+CooperativeA}} (\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}})
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \mbox{\hyperlink{class_window_cooperative_a_a802795b3f32f19cbabd16905ac7596ca}{find\+Next\+WSteps}} (\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&unit, int current\+Time, \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\item 
+int \mbox{\hyperlink{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917}{calculate}} (\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} start, \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} dest)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888}{length\+Of\+Path}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$ node)
+\item 
+void \mbox{\hyperlink{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c}{copy\+Graph}} ()
+\item 
+bool \mbox{\hyperlink{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3}{is\+Valid}} (int x, int y)
+\item 
+bool \mbox{\hyperlink{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce}{is\+Destination}} (int startX, int startY, int destX, int destY)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}}
+\item 
+std\+::vector$<$ std\+::vector$<$ Node $>$ $>$ \mbox{\hyperlink{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358}{a\+Star\+Graph}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \mbox{\hyperlink{class_window_cooperative_a_a5ff542b1ac1e914a78a94a836e34d3c3}{get\+Neighbors}} (const \mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&agent, \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} target, \mbox{\hyperlink{class_c_a_1_1_node}{CA\+::\+Node}} \&current, const \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\item 
+void \mbox{\hyperlink{class_window_cooperative_a_aa7a649e3f45cce37ef53894ad259587d}{extracted}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \mbox{\hyperlink{class_window_cooperative_a_a19b0171e8bc67bf450b7272794ddd9fd}{path\+To\+Target}} (\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&unit, \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} start, \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} target, int current\+Time, \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \mbox{\hyperlink{class_window_cooperative_a_a3acbb6b91c15b758a148985ae68404df}{reconstruct\+Path}} (const \mbox{\hyperlink{class_c_a_1_1_node}{CA\+::\+Node}} \&node)
+\item 
+bool \mbox{\hyperlink{class_window_cooperative_a_aa210875b81748ec08d1423600fb67f51}{recursive\+Wait\+And\+Return}} (\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&unit, const int wait\+Time, const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&target, \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \texorpdfstring{$\ast$}{*}current\+Cell, \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \texorpdfstring{$\ast$}{*}parent\+Cell, int \&waitT, std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \&path, \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\item 
+bool \mbox{\hyperlink{class_window_cooperative_a_a7a116c36d68bcce4a39d48a24f99b044}{is\+Target\+Free\+For\+Entire\+Wait\+Time}} (const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&target, int start\+Time, int wait\+Time, \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\item 
+\mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \mbox{\hyperlink{class_window_cooperative_a_ace2469b5f413f8d253edadce762289e4}{find\+Alternative\+Waiting\+Cell}} (const \mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&agent, const \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \&cell, int current\+Time, \mbox{\hyperlink{class_reservation}{Reservation}} \&table)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_window_cooperative_a_a085fb01b0b8bf3c20a7bb9c66439c681}\index{WindowCooperativeA@{WindowCooperativeA}!WindowCooperativeA@{WindowCooperativeA}}
+\index{WindowCooperativeA@{WindowCooperativeA}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{WindowCooperativeA()}{WindowCooperativeA()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a085fb01b0b8bf3c20a7bb9c66439c681} 
+Window\+Cooperative\+A\+::\+Window\+CooperativeA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}}}]{graph}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917}\index{WindowCooperativeA@{WindowCooperativeA}!calculate@{calculate}}
+\index{calculate@{calculate}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{calculate()}{calculate()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917} 
+int A\+::\+Astar\+::calculate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{start}{, }\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{dest}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c}\index{WindowCooperativeA@{WindowCooperativeA}!copyGraph@{copyGraph}}
+\index{copyGraph@{copyGraph}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{copyGraph()}{copyGraph()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c} 
+void A\+::\+Astar\+::copy\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\Hypertarget{class_window_cooperative_a_aa7a649e3f45cce37ef53894ad259587d}\index{WindowCooperativeA@{WindowCooperativeA}!extracted@{extracted}}
+\index{extracted@{extracted}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{extracted()}{extracted()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_aa7a649e3f45cce37ef53894ad259587d} 
+void Window\+Cooperative\+A\+::extracted (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_window_cooperative_a_ace2469b5f413f8d253edadce762289e4}\index{WindowCooperativeA@{WindowCooperativeA}!findAlternativeWaitingCell@{findAlternativeWaitingCell}}
+\index{findAlternativeWaitingCell@{findAlternativeWaitingCell}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{findAlternativeWaitingCell()}{findAlternativeWaitingCell()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_ace2469b5f413f8d253edadce762289e4} 
+\mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} Window\+Cooperative\+A\+::find\+Alternative\+Waiting\+Cell (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&}]{agent}{, }\item[{const \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \&}]{cell}{, }\item[{int}]{current\+Time}{, }\item[{\mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_ace2469b5f413f8d253edadce762289e4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_ace2469b5f413f8d253edadce762289e4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_window_cooperative_a_a802795b3f32f19cbabd16905ac7596ca}\index{WindowCooperativeA@{WindowCooperativeA}!findNextWSteps@{findNextWSteps}}
+\index{findNextWSteps@{findNextWSteps}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{findNextWSteps()}{findNextWSteps()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a802795b3f32f19cbabd16905ac7596ca} 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ Window\+Cooperative\+A\+::find\+Next\+WSteps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&}]{unit}{, }\item[{int}]{current\+Time}{, }\item[{\mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a802795b3f32f19cbabd16905ac7596ca_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a802795b3f32f19cbabd16905ac7596ca_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_window_cooperative_a_a5ff542b1ac1e914a78a94a836e34d3c3}\index{WindowCooperativeA@{WindowCooperativeA}!getNeighbors@{getNeighbors}}
+\index{getNeighbors@{getNeighbors}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{getNeighbors()}{getNeighbors()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a5ff542b1ac1e914a78a94a836e34d3c3} 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ Window\+Cooperative\+A\+::get\+Neighbors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&}]{agent}{, }\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{target}{, }\item[{\mbox{\hyperlink{class_c_a_1_1_node}{CA\+::\+Node}} \&}]{current}{, }\item[{const \mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+table.\+would\+Cause\+Edge\+Collision(current.\+x, current.\+y, current.\+t, neighbor.\+x, neighbor.\+y))Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a5ff542b1ac1e914a78a94a836e34d3c3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a5ff542b1ac1e914a78a94a836e34d3c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce}\index{WindowCooperativeA@{WindowCooperativeA}!isDestination@{isDestination}}
+\index{isDestination@{isDestination}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{isDestination()}{isDestination()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce} 
+bool A\+::\+Astar\+::is\+Destination (\begin{DoxyParamCaption}\item[{int}]{startX}{, }\item[{int}]{startY}{, }\item[{int}]{destX}{, }\item[{int}]{destY}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_window_cooperative_a_a7a116c36d68bcce4a39d48a24f99b044}\index{WindowCooperativeA@{WindowCooperativeA}!isTargetFreeForEntireWaitTime@{isTargetFreeForEntireWaitTime}}
+\index{isTargetFreeForEntireWaitTime@{isTargetFreeForEntireWaitTime}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{isTargetFreeForEntireWaitTime()}{isTargetFreeForEntireWaitTime()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a7a116c36d68bcce4a39d48a24f99b044} 
+bool Window\+Cooperative\+A\+::is\+Target\+Free\+For\+Entire\+Wait\+Time (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&}]{target}{, }\item[{int}]{start\+Time}{, }\item[{int}]{wait\+Time}{, }\item[{\mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a7a116c36d68bcce4a39d48a24f99b044_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a7a116c36d68bcce4a39d48a24f99b044_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3}\index{WindowCooperativeA@{WindowCooperativeA}!isValid@{isValid}}
+\index{isValid@{isValid}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3} 
+bool A\+::\+Astar\+::is\+Valid (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888}\index{WindowCooperativeA@{WindowCooperativeA}!lengthOfPath@{lengthOfPath}}
+\index{lengthOfPath@{lengthOfPath}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{lengthOfPath()}{lengthOfPath()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888} 
+int A\+::\+Astar\+::length\+Of\+Path (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\Hypertarget{class_window_cooperative_a_a19b0171e8bc67bf450b7272794ddd9fd}\index{WindowCooperativeA@{WindowCooperativeA}!pathToTarget@{pathToTarget}}
+\index{pathToTarget@{pathToTarget}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{pathToTarget()}{pathToTarget()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a19b0171e8bc67bf450b7272794ddd9fd} 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ Window\+Cooperative\+A\+::path\+To\+Target (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&}]{unit}{, }\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{start}{, }\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{target}{, }\item[{int}]{current\+Time}{, }\item[{\mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a19b0171e8bc67bf450b7272794ddd9fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_a19b0171e8bc67bf450b7272794ddd9fd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_window_cooperative_a_a3acbb6b91c15b758a148985ae68404df}\index{WindowCooperativeA@{WindowCooperativeA}!reconstructPath@{reconstructPath}}
+\index{reconstructPath@{reconstructPath}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{reconstructPath()}{reconstructPath()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_a3acbb6b91c15b758a148985ae68404df} 
+std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ Window\+Cooperative\+A\+::reconstruct\+Path (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_c_a_1_1_node}{CA\+::\+Node}} \&}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_window_cooperative_a_aa210875b81748ec08d1423600fb67f51}\index{WindowCooperativeA@{WindowCooperativeA}!recursiveWaitAndReturn@{recursiveWaitAndReturn}}
+\index{recursiveWaitAndReturn@{recursiveWaitAndReturn}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{recursiveWaitAndReturn()}{recursiveWaitAndReturn()}}
+{\footnotesize\ttfamily \label{class_window_cooperative_a_aa210875b81748ec08d1423600fb67f51} 
+bool Window\+Cooperative\+A\+::recursive\+Wait\+And\+Return (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_w_c_a___agent}{WCA\+\_\+\+Agent}} \&}]{unit}{, }\item[{const int}]{wait\+Time}{, }\item[{const \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} \&}]{target}{, }\item[{\mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \texorpdfstring{$\ast$}{*}}]{current\+Cell}{, }\item[{\mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} \texorpdfstring{$\ast$}{*}}]{parent\+Cell}{, }\item[{int \&}]{waitT}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA\+::\+Cell}} $>$ \&}]{path}{, }\item[{\mbox{\hyperlink{class_reservation}{Reservation}} \&}]{table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_aa210875b81748ec08d1423600fb67f51_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_window_cooperative_a_aa210875b81748ec08d1423600fb67f51_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358}\index{WindowCooperativeA@{WindowCooperativeA}!aStarGraph@{aStarGraph}}
+\index{aStarGraph@{aStarGraph}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{aStarGraph}{aStarGraph}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358} 
+std\+::vector$<$std\+::vector$<$Node$>$ $>$ A\+::\+Astar\+::a\+Star\+Graph\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\Hypertarget{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}\index{WindowCooperativeA@{WindowCooperativeA}!graph@{graph}}
+\index{graph@{graph}!WindowCooperativeA@{WindowCooperativeA}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} A\+::\+Astar\+::graph\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_window_cooperative_a_8h}{Window\+Cooperative\+A.\+h}}\item 
+\mbox{\hyperlink{_window_cooperative_a_8cpp}{Window\+Cooperative\+A.\+cpp}}\end{DoxyCompactItemize}

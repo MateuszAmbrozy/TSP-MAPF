@@ -79,6 +79,11 @@
         "unordered_set": "cpp",
         "variant": "cpp",
         "xtree": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "codecvt": "cpp",
+        "cstdarg": "cpp",
+        "filesystem": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }

@@ -13,7 +13,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
 enable_testing()
 
-add_subdirectory(googletest)
+#add_subdirectory(googletest)
 
 file(GLOB_RECURSE Headers lib/*.hpp)
 #file(GLOB_RECURSE Headers lib/Space-Time-AStar/*.hpp)
@@ -33,4 +33,4 @@ add_executable(${This}_app main.cpp)
 # Linkowanie pliku wykonywalnego z biblioteką
 target_link_libraries(${This}_app PRIVATE ${This})
 
-add_subdirectory(gtest)
+#add_subdirectory(gtest)

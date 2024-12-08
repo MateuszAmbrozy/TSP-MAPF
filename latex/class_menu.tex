@@ -1,0 +1,335 @@
+\doxysection{Menu Class Reference}
+\hypertarget{class_menu}{}\label{class_menu}\index{Menu@{Menu}}
+
+
+{\ttfamily \#include $<$menu.\+h$>$}
+
+
+
+Inherits QWidget.
+
+
+
+Collaboration diagram for Menu\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_menu__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_menu_a9c29738abd115538941d939c94a75878}{change\+Center\+Widget}} (bool event)
+\item 
+void \mbox{\hyperlink{class_menu_ad807f55f894b532432f6a73ec0d9dc63}{toggle\+Sidebar}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_menu_aea36ff15ed756c91b7731a2025175f16}{Menu}} (QWidget \texorpdfstring{$\ast$}{*}parent=0)
+\item 
+\mbox{\hyperlink{class_menu_a831387f51358cfb88cd018e1777bc980}{\texorpdfstring{$\sim$}{\string~}\+Menu}} ()
+\item 
+void \mbox{\hyperlink{class_menu_ac16f9e3afbf4380ce868d99829ed8f45}{push}} (QWidget \texorpdfstring{$\ast$}{*}page)
+\item 
+void \mbox{\hyperlink{class_menu_a4bc7f77e522a1db9061e80bb3de6f2f3}{pop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QTool\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae}{create\+Sidebar\+Button}} (const QString \&icon\+Path, const QString \&title)
+\item 
+void \mbox{\hyperlink{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547}{setup\+Sidebar}} ()
+\item 
+void \mbox{\hyperlink{class_menu_a6bafcf6631b175c255c20d51ca738bf3}{setup\+Main\+Layout}} ()
+\item 
+void \mbox{\hyperlink{class_menu_a72bf92b25c7c559548ddb7af3e06cb2f}{setup\+Toglle\+Animation}} ()
+\item 
+QWidget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11}{get\+View\+By\+Name}} (const QString \&view\+Name)
+\item 
+void \mbox{\hyperlink{class_menu_aba1b7194c1f843c704e809f2f211eda2}{set\+Stacked\+Widget\+Page}} (QWidget \texorpdfstring{$\ast$}{*}view)
+\item 
+void \mbox{\hyperlink{class_menu_a6e549ab96a576fb812b886333b1cadde}{init\+Graph}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QStacked\+Widget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_ae357ff3fa056983f5377623ac8388db3}{\+\_\+stacked\+Widget}}
+\item 
+QTool\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_acb39abf6d70b769ea60660e68cf6c9c2}{\+\_\+active\+Button}}
+\item 
+\mbox{\hyperlink{class_animation_view}{Animation\+View}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a234492dcc9593fb9ecf9ee1835f04ff0}{animation}}
+\item 
+\mbox{\hyperlink{class_editor_view}{Editor\+View}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a2c84967c6bd8d1bf6968607c6f5f23f7}{editor}}
+\item 
+\mbox{\hyperlink{class_general_view}{General\+View}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a0754cfa6572a0b3e62bf5f9cb3e19888}{general\+View}}
+\item 
+QWidget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a35ac84c530c578b22f90e0d5992d837e}{sidebar}}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_menu_aa04f14a9967b7dd1b30c85f8af1ed798}{graph}}
+\item 
+bool \mbox{\hyperlink{class_menu_a73bb7964336ebb2bd7edceee90c087a3}{sidebar\+Visible}}
+\item 
+QProperty\+Animation \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_menu_a93c2f643bbef74ef896e32883741483e}{sidebar\+Animation}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_menu_aea36ff15ed756c91b7731a2025175f16}\index{Menu@{Menu}!Menu@{Menu}}
+\index{Menu@{Menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{Menu()}{Menu()}}
+{\footnotesize\ttfamily \label{class_menu_aea36ff15ed756c91b7731a2025175f16} 
+Menu\+::\+Menu (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_aea36ff15ed756c91b7731a2025175f16_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_a831387f51358cfb88cd018e1777bc980}\index{Menu@{Menu}!````~Menu@{\texorpdfstring{$\sim$}{\string~}Menu}}
+\index{````~Menu@{\texorpdfstring{$\sim$}{\string~}Menu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Menu()}{\string~Menu()}}
+{\footnotesize\ttfamily \label{class_menu_a831387f51358cfb88cd018e1777bc980} 
+Menu\+::\texorpdfstring{$\sim$}{\string~}\+Menu (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_a9c29738abd115538941d939c94a75878}\index{Menu@{Menu}!changeCenterWidget@{changeCenterWidget}}
+\index{changeCenterWidget@{changeCenterWidget}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{changeCenterWidget}{changeCenterWidget}}
+{\footnotesize\ttfamily \label{class_menu_a9c29738abd115538941d939c94a75878} 
+void Menu\+::change\+Center\+Widget (\begin{DoxyParamCaption}\item[{bool}]{event}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_a9c29738abd115538941d939c94a75878_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_a9c29738abd115538941d939c94a75878_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae}\index{Menu@{Menu}!createSidebarButton@{createSidebarButton}}
+\index{createSidebarButton@{createSidebarButton}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{createSidebarButton()}{createSidebarButton()}}
+{\footnotesize\ttfamily \label{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae} 
+QTool\+Button \texorpdfstring{$\ast$}{*} Menu\+::create\+Sidebar\+Button (\begin{DoxyParamCaption}\item[{const QString \&}]{icon\+Path}{, }\item[{const QString \&}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11}\index{Menu@{Menu}!getViewByName@{getViewByName}}
+\index{getViewByName@{getViewByName}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{getViewByName()}{getViewByName()}}
+{\footnotesize\ttfamily \label{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11} 
+QWidget \texorpdfstring{$\ast$}{*} Menu\+::get\+View\+By\+Name (\begin{DoxyParamCaption}\item[{const QString \&}]{view\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_a6e549ab96a576fb812b886333b1cadde}\index{Menu@{Menu}!initGraph@{initGraph}}
+\index{initGraph@{initGraph}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{initGraph()}{initGraph()}}
+{\footnotesize\ttfamily \label{class_menu_a6e549ab96a576fb812b886333b1cadde} 
+void Menu\+::init\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a4bc7f77e522a1db9061e80bb3de6f2f3}\index{Menu@{Menu}!pop@{pop}}
+\index{pop@{pop}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \label{class_menu_a4bc7f77e522a1db9061e80bb3de6f2f3} 
+void Menu\+::pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_menu_ac16f9e3afbf4380ce868d99829ed8f45}\index{Menu@{Menu}!push@{push}}
+\index{push@{push}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily \label{class_menu_ac16f9e3afbf4380ce868d99829ed8f45} 
+void Menu\+::push (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{page}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_menu_aba1b7194c1f843c704e809f2f211eda2}\index{Menu@{Menu}!setStackedWidgetPage@{setStackedWidgetPage}}
+\index{setStackedWidgetPage@{setStackedWidgetPage}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{setStackedWidgetPage()}{setStackedWidgetPage()}}
+{\footnotesize\ttfamily \label{class_menu_aba1b7194c1f843c704e809f2f211eda2} 
+void Menu\+::set\+Stacked\+Widget\+Page (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{view}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_aba1b7194c1f843c704e809f2f211eda2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_a6bafcf6631b175c255c20d51ca738bf3}\index{Menu@{Menu}!setupMainLayout@{setupMainLayout}}
+\index{setupMainLayout@{setupMainLayout}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{setupMainLayout()}{setupMainLayout()}}
+{\footnotesize\ttfamily \label{class_menu_a6bafcf6631b175c255c20d51ca738bf3} 
+void Menu\+::setup\+Main\+Layout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_a6bafcf6631b175c255c20d51ca738bf3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_menu_a6bafcf6631b175c255c20d51ca738bf3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547}\index{Menu@{Menu}!setupSidebar@{setupSidebar}}
+\index{setupSidebar@{setupSidebar}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{setupSidebar()}{setupSidebar()}}
+{\footnotesize\ttfamily \label{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547} 
+void Menu\+::setup\+Sidebar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_a72bf92b25c7c559548ddb7af3e06cb2f}\index{Menu@{Menu}!setupToglleAnimation@{setupToglleAnimation}}
+\index{setupToglleAnimation@{setupToglleAnimation}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{setupToglleAnimation()}{setupToglleAnimation()}}
+{\footnotesize\ttfamily \label{class_menu_a72bf92b25c7c559548ddb7af3e06cb2f} 
+void Menu\+::setup\+Toglle\+Animation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_menu_a72bf92b25c7c559548ddb7af3e06cb2f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_menu_ad807f55f894b532432f6a73ec0d9dc63}\index{Menu@{Menu}!toggleSidebar@{toggleSidebar}}
+\index{toggleSidebar@{toggleSidebar}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{toggleSidebar}{toggleSidebar}}
+{\footnotesize\ttfamily \label{class_menu_ad807f55f894b532432f6a73ec0d9dc63} 
+void Menu\+::toggle\+Sidebar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_menu_ad807f55f894b532432f6a73ec0d9dc63_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_menu_acb39abf6d70b769ea60660e68cf6c9c2}\index{Menu@{Menu}!\_activeButton@{\_activeButton}}
+\index{\_activeButton@{\_activeButton}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{\_activeButton}{\_activeButton}}
+{\footnotesize\ttfamily \label{class_menu_acb39abf6d70b769ea60660e68cf6c9c2} 
+QTool\+Button\texorpdfstring{$\ast$}{*} Menu\+::\+\_\+active\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_ae357ff3fa056983f5377623ac8388db3}\index{Menu@{Menu}!\_stackedWidget@{\_stackedWidget}}
+\index{\_stackedWidget@{\_stackedWidget}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{\_stackedWidget}{\_stackedWidget}}
+{\footnotesize\ttfamily \label{class_menu_ae357ff3fa056983f5377623ac8388db3} 
+QStacked\+Widget\texorpdfstring{$\ast$}{*} Menu\+::\+\_\+stacked\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a234492dcc9593fb9ecf9ee1835f04ff0}\index{Menu@{Menu}!animation@{animation}}
+\index{animation@{animation}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{animation}{animation}}
+{\footnotesize\ttfamily \label{class_menu_a234492dcc9593fb9ecf9ee1835f04ff0} 
+\mbox{\hyperlink{class_animation_view}{Animation\+View}}\texorpdfstring{$\ast$}{*} Menu\+::animation\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a2c84967c6bd8d1bf6968607c6f5f23f7}\index{Menu@{Menu}!editor@{editor}}
+\index{editor@{editor}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{editor}{editor}}
+{\footnotesize\ttfamily \label{class_menu_a2c84967c6bd8d1bf6968607c6f5f23f7} 
+\mbox{\hyperlink{class_editor_view}{Editor\+View}}\texorpdfstring{$\ast$}{*} Menu\+::editor\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a0754cfa6572a0b3e62bf5f9cb3e19888}\index{Menu@{Menu}!generalView@{generalView}}
+\index{generalView@{generalView}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{generalView}{generalView}}
+{\footnotesize\ttfamily \label{class_menu_a0754cfa6572a0b3e62bf5f9cb3e19888} 
+\mbox{\hyperlink{class_general_view}{General\+View}}\texorpdfstring{$\ast$}{*} Menu\+::general\+View\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_aa04f14a9967b7dd1b30c85f8af1ed798}\index{Menu@{Menu}!graph@{graph}}
+\index{graph@{graph}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_menu_aa04f14a9967b7dd1b30c85f8af1ed798} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} Menu\+::graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a35ac84c530c578b22f90e0d5992d837e}\index{Menu@{Menu}!sidebar@{sidebar}}
+\index{sidebar@{sidebar}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{sidebar}{sidebar}}
+{\footnotesize\ttfamily \label{class_menu_a35ac84c530c578b22f90e0d5992d837e} 
+QWidget\texorpdfstring{$\ast$}{*} Menu\+::sidebar\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a93c2f643bbef74ef896e32883741483e}\index{Menu@{Menu}!sidebarAnimation@{sidebarAnimation}}
+\index{sidebarAnimation@{sidebarAnimation}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{sidebarAnimation}{sidebarAnimation}}
+{\footnotesize\ttfamily \label{class_menu_a93c2f643bbef74ef896e32883741483e} 
+QProperty\+Animation\texorpdfstring{$\ast$}{*} Menu\+::sidebar\+Animation\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_menu_a73bb7964336ebb2bd7edceee90c087a3}\index{Menu@{Menu}!sidebarVisible@{sidebarVisible}}
+\index{sidebarVisible@{sidebarVisible}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{sidebarVisible}{sidebarVisible}}
+{\footnotesize\ttfamily \label{class_menu_a73bb7964336ebb2bd7edceee90c087a3} 
+bool Menu\+::sidebar\+Visible\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{menu_8h}{menu.\+h}}\item 
+\mbox{\hyperlink{menu_8cpp}{menu.\+cpp}}\end{DoxyCompactItemize}

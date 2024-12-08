@@ -1,0 +1,26 @@
+\doxysection{visualizationgraph.\+h}
+\hypertarget{visualizationgraph_8h_source}{}\label{visualizationgraph_8h_source}\index{visualizationgraph.h@{visualizationgraph.h}}
+\mbox{\hyperlink{visualizationgraph_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ VISUALIZATIONGRAPH\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ VISUALIZATIONGRAPH\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QGraphicsRectItem>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QObject>}\ \textcolor{comment}{//\ Dodajemy\ QObject\ dla\ mechanizmu\ MOC}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../../lib/Graph.h}}"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualization_graph}{VisualizationGraph}}\ :\ \textcolor{keyword}{public}\ QObject,\ \textcolor{keyword}{public}\ QGraphicsRectItem\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_visualization_graph_a17f47ae87948213f694100bd3ed718fb}{VisualizationGraph}}(\mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}},\ QGraphicsItem*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_visualization_graph_a297f11859ff86a6eea744cbfe1daba1b}{drawGraph}}(QGraphicsScene*\ scene)\ =\ 0;}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VISUALIZATIONGRAPH\_H}}
+
+\end{DoxyCode}

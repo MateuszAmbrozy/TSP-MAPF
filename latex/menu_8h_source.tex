@@ -1,0 +1,57 @@
+\doxysection{menu.\+h}
+\hypertarget{menu_8h_source}{}\label{menu_8h_source}\index{menu.h@{menu.h}}
+\mbox{\hyperlink{menu_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ MENU\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ MENU\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{animationview_8h}{animationview.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{editorview_8h}{editorview.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{generalview_8h}{generalview.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }QLabel;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }QToolButton;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }QStackedWidget;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }QString;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_menu}{Menu}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_menu_aea36ff15ed756c91b7731a2025175f16}{Menu}}(QWidget\ *parent\ =\ 0);}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_menu_a831387f51358cfb88cd018e1777bc980}{\string~Menu}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ac16f9e3afbf4380ce868d99829ed8f45}{push}}(QWidget\ *\ page);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a4bc7f77e522a1db9061e80bb3de6f2f3}{pop}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a9c29738abd115538941d939c94a75878}{changeCenterWidget}}(\textcolor{keywordtype}{bool}\ event);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ad807f55f894b532432f6a73ec0d9dc63}{toggleSidebar}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ QToolButton\ *\ \mbox{\hyperlink{class_menu_a7ccdc3be519d65e4dc7ec4fb3effe0ae}{createSidebarButton}}(\textcolor{keyword}{const}\ QString\&\ iconPath,\ \textcolor{keyword}{const}\ QString\&\ title);}
+\DoxyCodeLine{00041\ \ \ \ \ QStackedWidget\ *\ \mbox{\hyperlink{class_menu_ae357ff3fa056983f5377623ac8388db3}{\_stackedWidget}};}
+\DoxyCodeLine{00042\ \ \ \ \ QToolButton\ *\ \mbox{\hyperlink{class_menu_acb39abf6d70b769ea60660e68cf6c9c2}{\_activeButton}};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_animation_view}{AnimationView}}*\ \mbox{\hyperlink{class_menu_a234492dcc9593fb9ecf9ee1835f04ff0}{animation}};}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_editor_view}{EditorView}}*\ \mbox{\hyperlink{class_menu_a2c84967c6bd8d1bf6968607c6f5f23f7}{editor}};}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_general_view}{GeneralView}}*\ \mbox{\hyperlink{class_menu_a0754cfa6572a0b3e62bf5f9cb3e19888}{generalView}};}
+\DoxyCodeLine{00046\ \ \ \ \ QWidget\ *\ \mbox{\hyperlink{class_menu_a35ac84c530c578b22f90e0d5992d837e}{sidebar}};}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_menu_aa04f14a9967b7dd1b30c85f8af1ed798}{graph}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_ae70d6d665969cc5e2f12b6ce30d6c547}{setupSidebar}}();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a6bafcf6631b175c255c20d51ca738bf3}{setupMainLayout}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a72bf92b25c7c559548ddb7af3e06cb2f}{setupToglleAnimation}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ QWidget*\ \mbox{\hyperlink{class_menu_ab670ccac03d0f0ce361f8c07aacc9e11}{getViewByName}}(\textcolor{keyword}{const}\ QString\&\ viewName);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_aba1b7194c1f843c704e809f2f211eda2}{setStackedWidgetPage}}(QWidget*\ view);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_menu_a73bb7964336ebb2bd7edceee90c087a3}{sidebarVisible}};}
+\DoxyCodeLine{00056\ \ \ \ \ QPropertyAnimation*\ \mbox{\hyperlink{class_menu_a93c2f643bbef74ef896e32883741483e}{sidebarAnimation}};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_a6e549ab96a576fb812b886333b1cadde}{initGraph}}();}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MENU\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -36,10 +36,9 @@ std::vector<Agent> getRandomAgents(std::vector<Agent>& agents, int num) {
     return std::vector<Agent>(agents.begin(), agents.begin() + num);
 }
 void loadMap(std::string fileName){
-    // Otwieranie pliku
-    
+    fileName = "D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\test_graph_size\\" + fileName;
     //std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\huge_map_with_pickuppoints_and_dropoffpoints.json", std::ifstream::in);
-    std::ifstream file("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map3.json", std::ifstream::in);
+    std::ifstream file(fileName, std::ifstream::in);
     if (!file.is_open()) 
     {
         std::cerr << "Could not open file: " << fileName << std::endl;
@@ -135,7 +134,7 @@ void testEnvi()
 
 
     // Loop over different values of num
-    for (int num = 1; num <= 15; num++)
+    for (int num = 1; num <= 33; num++)
     
     {
         map::Graph graph(width, height, obstacles);
@@ -228,7 +227,8 @@ void testEnvi_usrednione()
     std::vector<std::vector<double>> all_whca_times;  // Czasy WHCA dla każdej iteracji
 
     // Loop over different values of num
-    for (int num = 1; num <= 66; num++) {
+    for (int num = 1; num <= 33; num++) {
+        std::cout<<"----------------------- " << num << " -----------------------\n";
         std::vector<int> ca_results(iterations, 0);  // Wyniki dla każdej iteracji
         std::vector<int> whca_results(iterations, 0);
         std::vector<double> ca_times(iterations, 0.0);  // Czasy dla każdej iteracji
@@ -341,16 +341,12 @@ void testAgents()
     map::Graph graph(width, height, obstacles);
     std::vector<TaskGroup> tasks;
     BaseEnvironment* base = new CA_Environment({}, graph, pickupsData, dropoffData);
-    for (int i = 0; i < numTasks; ++i)
+    for (int i = 1; i <= numTasks; ++i)
     {
         TaskGroup task = base->TASKGROUPGENERATOR();
         tasks.push_back(task);
     }
     delete base;
-    std::streambuf* orig_buf = std::cout.rdbuf();
-
-    // set null
-    std::cout.rdbuf(NULL);
 
     //Iteracja dla różnej liczby agentów
     for (int num = 1; num <= numTasks; ++num)
@@ -540,12 +536,118 @@ void testAgents_multi_times()
     plt::title("Czas wykonania vs Liczba agentów");
     plt::show();
 }
+
+void testMaps()
+{
+    srand(42);
+    // Lista map do przetestowania
+    std::vector<std::string> maps = {"10x10.json", "15x15.json", "20x20.json", "25x25.json", "30x30.json"};
+    int numTasks = 40; // Stała liczba zadań
+
+    // Wyniki dla różnych map
+    std::vector<int> makespan_CA, makespan_WHCA;
+    std::vector<double> time_CA, time_WHCA;
+    std::vector<std::string> mapNames; // Nazwy map do etykiet
+
+    for (const auto& mapFile : maps)
+    {
+        // Wczytaj mapę
+        agents.clear();
+        pickupsData.clear();
+        dropoffData.clear();
+        obstacles.clear();
+        std::cout << "Loading map: " << mapFile << std::endl;
+        loadMap(mapFile);
+
+        // Stwórz graf na podstawie wczytanej mapy
+        map::Graph graph(width, height, obstacles);
+        BaseEnvironment* base = new CA_Environment({}, graph, pickupsData, dropoffData);
+                // Przygotowanie zadań
+        std::vector<TaskGroup> tasks;
+        for (int i = 1; i <= numTasks; ++i)
+        {
+            TaskGroup task = base->TASKGROUPGENERATOR();
+            tasks.push_back(task);
+        }
+        delete base;
+
+
+
+        // Test CA_Environment
+        CA_Environment e(agents, graph, pickupsData, dropoffData);
+        e.assignTasks(tasks);
+        e.assignVacantAgents();
+        auto start = std::chrono::high_resolution_clock::now();
+        for (size_t timestep = 0; true; ++timestep)
+        {
+            e.runTimestep(timestep);
+            if (e.allTasksCompleted())
+            {
+                makespan_CA.push_back(timestep);
+                std::cout << "CA: All tasks completed in " << timestep << " timesteps.\n";
+                break;
+            }
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        time_CA.push_back(duration.count());
+        std::cout << "CA Execution time: " << duration.count() << " seconds.\n";
+
+        // Test WHCA_Environment
+        WHCA_Environment whca_e(agents, graph, pickupsData, dropoffData);
+        whca_e.assignTasks(tasks);
+        whca_e.assignVacantAgents();
+        start = std::chrono::high_resolution_clock::now();
+        for (size_t timestep = 0; true; ++timestep)
+        {
+            whca_e.runTimestep(timestep);
+            if (whca_e.allTasksCompleted())
+            {
+                makespan_WHCA.push_back(timestep);
+                std::cout << "WHCA: All tasks completed in " << timestep << " timesteps.\n";
+                break;
+            }
+        }
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+        time_WHCA.push_back(duration.count());
+        std::cout << "WHCA Execution time: " << duration.count() << " seconds.\n";
+
+        // Dodaj nazwę mapy do wyników
+        mapNames.push_back(mapFile);
+    }
+
+    // Wizualizacja wyników
+    std::vector<int> mapSizes = {10, 15, 20, 25, 30}; // Rozmiary map odpowiadające nazwom
+
+    // Wykres 1: Wielkość mapy vs Makespan
+    plt::figure();
+    plt::plot(mapSizes, makespan_CA, "b-");
+    plt::plot(mapSizes, makespan_WHCA, "r-");
+    plt::xlabel("Rozmiar mapy (bok kwadratu)");
+    plt::ylabel("Makespan (kroki czasowe)");
+    plt::title("Liczba kroków vs Rozmiar mapy");
+    plt::show();
+    plt::save("makespan_vs_map_size.png");
+
+    // Wykres 2: Wielkość mapy vs Czas wykonania
+    plt::figure();
+    plt::plot(mapSizes, time_CA, "b-");
+    plt::plot(mapSizes, time_WHCA, "r-");
+    plt::xlabel("Rozmiar mapy (bok kwadratu)");
+    plt::ylabel("Czas wykonania (sekundy)");
+    plt::title("Czas wykonania vs Rozmiar mapy");
+    plt::show();
+    plt::save("time_vs_map_size.png");
+}
+
 int main() 
 {
    // testEnvi();
-    loadMap("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map2.json");
-    testEnvi();
+    //loadMap("D:\\All\\Studia\\Zajecia\\Semestr_7\\Inzynierka\\TEST\\TSP-MAPD\\vis2\\build\\Desktop_Qt_6_7_1_MinGW_64_bit-Debug\\map2.json");
+    //testEnvi();
     //testEnvi_usrednione();
     //testAgents();
+    testMaps();
     return 0;
 }

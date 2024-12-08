@@ -1,0 +1,138 @@
+\doxysection{A\+::Astar Class Reference}
+\hypertarget{class_a_1_1_astar}{}\label{class_a_1_1_astar}\index{A::Astar@{A::Astar}}
+
+
+{\ttfamily \#include $<$AStar.\+h$>$}
+
+
+
+Inheritance diagram for A\+::Astar\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_1_1_astar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+::Astar\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{class_a_1_1_astar__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_1_1_astar_a6776e80e1cd8fe2a0da112fc3a8b53a9}{Astar}} (\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}})
+\item 
+int \mbox{\hyperlink{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917}{calculate}} (\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} start, \mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}} dest)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888}{length\+Of\+Path}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$ node)
+\item 
+void \mbox{\hyperlink{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c}{copy\+Graph}} ()
+\item 
+bool \mbox{\hyperlink{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3}{is\+Valid}} (int x, int y)
+\item 
+bool \mbox{\hyperlink{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce}{is\+Destination}} (int startX, int startY, int destX, int destY)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}}
+\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{struct_a_1_1_node}{Node}} $>$ $>$ \mbox{\hyperlink{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358}{a\+Star\+Graph}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_a_1_1_astar_a6776e80e1cd8fe2a0da112fc3a8b53a9}\index{A::Astar@{A::Astar}!Astar@{Astar}}
+\index{Astar@{Astar}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{Astar()}{Astar()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a6776e80e1cd8fe2a0da112fc3a8b53a9} 
+A\+::\+Astar\+::\+Astar (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}}}]{graph}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917}\index{A::Astar@{A::Astar}!calculate@{calculate}}
+\index{calculate@{calculate}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{calculate()}{calculate()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917} 
+int A\+::\+Astar\+::calculate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{start}{, }\item[{\mbox{\hyperlink{structmap_1_1_cell}{map\+::\+Cell}}}]{dest}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{class_a_1_1_astar_a6eaba2f79e05b3832eedcd347a67b917_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c}\index{A::Astar@{A::Astar}!copyGraph@{copyGraph}}
+\index{copyGraph@{copyGraph}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{copyGraph()}{copyGraph()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a5c894c921556b3e385d2c42a96163a7c} 
+void A\+::\+Astar\+::copy\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce}\index{A::Astar@{A::Astar}!isDestination@{isDestination}}
+\index{isDestination@{isDestination}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{isDestination()}{isDestination()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce} 
+bool A\+::\+Astar\+::is\+Destination (\begin{DoxyParamCaption}\item[{int}]{startX}{, }\item[{int}]{startY}{, }\item[{int}]{destX}{, }\item[{int}]{destY}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_1_1_astar_a39f9494825b65c423db72b31dac79cce_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3}\index{A::Astar@{A::Astar}!isValid@{isValid}}
+\index{isValid@{isValid}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3} 
+bool A\+::\+Astar\+::is\+Valid (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_1_1_astar_af396574c01c730159e736e83ce6c96d3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888}\index{A::Astar@{A::Astar}!lengthOfPath@{lengthOfPath}}
+\index{lengthOfPath@{lengthOfPath}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{lengthOfPath()}{lengthOfPath()}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af75b5e0719545021a60cc5d501934888} 
+int A\+::\+Astar\+::length\+Of\+Path (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_a_1_1_node}{A\+::\+Node}} $>$}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358}\index{A::Astar@{A::Astar}!aStarGraph@{aStarGraph}}
+\index{aStarGraph@{aStarGraph}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{aStarGraph}{aStarGraph}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_a9bf013a1e73e45fdd9bc85de92c22358} 
+std\+::vector$<$std\+::vector$<$\mbox{\hyperlink{struct_a_1_1_node}{Node}}$>$ $>$ A\+::\+Astar\+::a\+Star\+Graph\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}\index{A::Astar@{A::Astar}!graph@{graph}}
+\index{graph@{graph}!A::Astar@{A::Astar}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} A\+::\+Astar\+::graph\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_star_8h}{AStar.\+h}}\item 
+\mbox{\hyperlink{_astar_8cpp}{Astar.\+cpp}}\end{DoxyCompactItemize}

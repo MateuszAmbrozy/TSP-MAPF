@@ -10,16 +10,28 @@
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Agent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Environment.cpp">
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\BaseEnvironment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Space-Time-AStar\SpaceTimeAStar.cpp">
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\CA\CooperativeA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\CA_Environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\TSP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\TaskGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA\WCA_Agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA\WindowCooperativeA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA_Environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\setup.cpp">

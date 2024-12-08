@@ -1,0 +1,32 @@
+\doxysection{Cooperative\+A.\+h}
+\hypertarget{_cooperative_a_8h_source}{}\label{_cooperative_a_8h_source}\index{CooperativeA.h@{CooperativeA.h}}
+\mbox{\hyperlink{_cooperative_a_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cell_8h}{Cell.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_star_8h}{../AStar/AStar.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../Graph.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_task_group_8h}{../TaskGroup.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_t_s_p_8h}{../TSP.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{../Agent.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_reservation_8h}{Reservation.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{setup_8h}{../setup.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_cooperative_a}{CooperativeA}}\ :\textcolor{keyword}{public}\ \mbox{\hyperlink{class_a_1_1_astar}{A::Astar}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_cooperative_a_aeeb7f64a6cafc258b21d12bc60580c07}{getNeighbors}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ agent,\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ target,\ \mbox{\hyperlink{class_c_a_1_1_node}{CA::Node}}\ \&current,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_reservation}{Reservation}}\ \&table,\ std::vector<std::vector<bool>>\ closedList);}
+\DoxyCodeLine{00028\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_cooperative_a_aaede759282608d90890b28e655834642}{pathToTarget}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ unit,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ start,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ waitTime,\ \textcolor{keywordtype}{int}\ currentTime,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ target,\ \mbox{\hyperlink{class_reservation}{Reservation}}\&\ table);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_cooperative_a_a7addf6d0cea6303866ac3e7cf9e768dd}{recursiveWaitAndReturn}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ unit,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ waitTime,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ target,\ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA::Cell}}*\ currentCell,\ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA::Cell}}*\ parentCell,\ \textcolor{keywordtype}{int}\&\ waitT,\ std::vector<CA::Cell>\&\ path,\ \mbox{\hyperlink{class_reservation}{Reservation}}\&\ table);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_cooperative_a_a093e6387f15578155e5218c97e386878}{isTargetFreeForEntireWaitTime}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ target,\ \textcolor{keywordtype}{int}\ startTime,\ \textcolor{keywordtype}{int}\ waitTime,\ \mbox{\hyperlink{class_reservation}{Reservation}}\&\ table);}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA::Cell}}\ \mbox{\hyperlink{class_cooperative_a_adb5cb7eab6aee6c2ee5634dfed11fbc8}{findAlternativeWaitingCell}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ unit,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_c_a_1_1_cell}{CA::Cell}}\&\ cell,\ \textcolor{keywordtype}{int}\ currentTime,\ \mbox{\hyperlink{class_reservation}{Reservation}}\&\ table);}
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_cooperative_a_aa4e10af4fe2e7f5bd531937851d95693}{CooperativeA}}(\mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_a_1_1_astar_af72003e3c020a4688a1a58da85e1ebbb}{graph}});}
+\DoxyCodeLine{00034\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_cooperative_a_a845d9fc221dcb62b75b253469ed1842d}{findPath}}(\mbox{\hyperlink{class_agent}{Agent}}\&\ unit,\ \textcolor{keywordtype}{int}\ currentTime,\ \mbox{\hyperlink{class_task_group}{TaskGroup}}\ groupTask,\ std::vector<int>\ taskOrder,\ \mbox{\hyperlink{class_reservation}{Reservation}}\&\ table);}
+\DoxyCodeLine{00035\ \};}
+
+\end{DoxyCode}

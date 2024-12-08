@@ -1,3 +1,8 @@
 *.pro.user
 *.*~
 *.o
+build/
+json/
+html/
+Doxyfile
+main.exe

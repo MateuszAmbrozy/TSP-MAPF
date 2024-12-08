@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#include "Space-Time-AStar/Cell.h"
+#include "CA/Cell.h"
 #include "TaskGroup.h"
 #include "Graph.h"
 #include <vector>
@@ -23,7 +23,7 @@ private:
     map::Cell position; 
     TaskGroup tasks;  
     map::Cell startPos;
-    std::vector<SpaceTime::Cell> path;
+    std::vector<CA::Cell> path;
     std::vector<map::Cell> illicits; //cells that agent cant enter becauese they are 
     bool idle;
 
@@ -37,7 +37,7 @@ public:
     
     int getCapacity() const;
     int getAccessibleCapacity() const;
-    std::vector<SpaceTime::Cell> getPath() const;
+    std::vector<CA::Cell> getPath() const;
     map::Cell getPosition() const;
     map::Cell getStartPosition() const;
     TaskGroup getTask() const;
@@ -46,7 +46,7 @@ public:
 
     void assignTask(const TaskGroup taskGroup);
     void clearTask();
-    void assignPath(std::vector<SpaceTime::Cell> path);  // Pass by reference
+    void assignPath(std::vector<CA::Cell> path);  // Pass by reference
     void clearPath();
 
     void setIdle(bool state);

@@ -1,0 +1,76 @@
+\doxysection{agentinputwidget.\+h}
+\hypertarget{agentinputwidget_8h_source}{}\label{agentinputwidget_8h_source}\index{agentinputwidget.h@{agentinputwidget.h}}
+\mbox{\hyperlink{agentinputwidget_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ AGENTINPUTWIDGET\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ AGENTINPUTWIDGET\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QGraphicsView>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QGraphicsScene>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interactiveagentgraph_8h}{graph/interactiveagentgraph.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_agent_8h}{../lib/Agent.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QSpinBox>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QListWidget>}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent_input_widget}{AgentInputWidget}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{AgentData}}}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ QPoint\ \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data_a11b4a8073094ec3d92d3e169de32fd51}{point}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data_a610800ac34a2378671846726f7fad30b}{capacity}};}
+\DoxyCodeLine{00030\ \ \ \ \ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_editor_view}{EditorView}};}
+\DoxyCodeLine{00034\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938}{options}}\{\mbox{\hyperlink{class_agent}{Agent}}\ =\ 0,\ \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938afe29c1262b319e6d200d32384ae636c7}{Obstacle}},\ \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a96fd07f8244c1d8b9a38930ea4bdec97}{Pickup}},\ \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a2ca7f66d951013c715c9364df30310de}{Dropoff}}\};}
+\DoxyCodeLine{00036\ \ \ \ \ QGraphicsScene\ *\mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}};}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_interactive_agent_rect_item}{InteractiveAgentRectItem}}\ *\mbox{\hyperlink{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee}{graphItem}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ QGraphicsView\ *\mbox{\hyperlink{class_agent_input_widget_acda4033f18ef54ff804e3c4407b60005}{graphicsView}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ QSpinBox\ *\mbox{\hyperlink{class_agent_input_widget_a42e81ca37766a0dc8b7aabf464e34354}{widthInput}};}
+\DoxyCodeLine{00042\ \ \ \ \ QSpinBox\ *\mbox{\hyperlink{class_agent_input_widget_a078b0fe7413ed2f618ce8d81092b679a}{heightInput}};}
+\DoxyCodeLine{00043\ \ \ \ \ QListWidget\ *\mbox{\hyperlink{class_agent_input_widget_a75df0ddd60e2814fc28c3f210641b3f0}{agentListWidget}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_aa3a0c8d88e5e4ec941d6b6716b9cbd1b}{setScene}}(QGraphicsScene*\ \mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}});}
+\DoxyCodeLine{00047\ \ \ \ \ std::vector<QPoint>\ \mbox{\hyperlink{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708}{obstacles}};}
+\DoxyCodeLine{00048\ \ \ \ \ std::vector<AgentData>\ \mbox{\hyperlink{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2}{agentsData}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7}{width}},\ \mbox{\hyperlink{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a}{height}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<QPoint>\ \mbox{\hyperlink{class_agent_input_widget_a3e6384c7a8f56d2893aea064d1e0416a}{avaliablePickupPoints}};}
+\DoxyCodeLine{00051\ \ \ \ \ std::vector<QPoint>\ \mbox{\hyperlink{class_agent_input_widget_a2dc077e2faacca944916e52401676146}{avaliableDropoffPoints}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a6eddd08be0433172ddc7b4a6932e28bc}{updateMap}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02}{addAgent}}(\textcolor{keyword}{const}\ QPoint\ \&point);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676}{addPickupPoint}}(\textcolor{keyword}{const}\ QPoint\ \&point);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387}{addDropoffPoint}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f}{addObstacle}}(\textcolor{keyword}{const}\ QPoint\ \&point);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5}{removeAgent}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c}{removeObstacle}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a328cd08840fb929a4f2840331369798b}{removePickupPoint}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425}{removeDropoffPoint}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5}{createMap}}();}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e}{updateAgentList}}();}
+\DoxyCodeLine{00069\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_agent_input_widget_a7287f4cf38bde0da901228c537580319}{AgentInputWidget}}(QGraphicsScene\ *\mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}},\ \mbox{\hyperlink{class_interactive_agent_rect_item}{InteractiveAgentRectItem}}\ *\mbox{\hyperlink{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee}{graphItem}},\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_agent_input_widget_a1f443ea586023e086f0cdf0086e9f4a6}{\string~AgentInputWidget}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_ae8a2e40ca424c64fa6cbf4f2f79039b2}{clear}}();}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a71c20f31e2ce1e9dbb588d2daa761749}{loadMap}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7}{width}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a}{height}},\ \textcolor{keyword}{const}\ std::vector<QPoint>\&\ \mbox{\hyperlink{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708}{obstacles}},\ \textcolor{keyword}{const}\ std::vector<AgentData>\&\ \mbox{\hyperlink{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2}{agentsData}},\ \textcolor{keyword}{const}\ std::vector<QPoint>\&\ pickupsData,\ \textcolor{keyword}{const}\ std::vector<QPoint>\&\ dropoffsData);}
+\DoxyCodeLine{00074\ signals:}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_aeb922658dc4f76f55ad92918b260497e}{mapCreated}}(std::shared\_ptr<map::Graph>\ \mbox{\hyperlink{namespacemap}{map}});}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_input_widget_a6dd4bd7e91ca139c6d98c5648b7c2b8a}{agentsCreated}}(std::shared\_ptr<std::vector<Agent>>\ agents);}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ AGENTINPUTWIDGET\_H}}
+
+\end{DoxyCode}

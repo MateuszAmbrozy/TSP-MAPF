@@ -1,0 +1,56 @@
+\doxysection{Agent.\+h}
+\hypertarget{_agent_8h_source}{}\label{_agent_8h_source}\index{Agent.h@{Agent.h}}
+\mbox{\hyperlink{_agent_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_cell_8h}{CA/Cell.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_task_group_8h}{TaskGroup.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent}{Agent}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_ae67c3dc91bafcf4354e1394ec5ba2662}{id}};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_ac85805b604778bdbd0dd9075a1656400}{capacity}};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_a733c8563066be6cb0bb3bf4e81e4e39b}{accessibleCapacity}};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_agent_ac8c8043a36279a0d1f7ebf029fab9677}{position}};\ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_task_group}{TaskGroup}}\ \mbox{\hyperlink{class_agent_a45c781979b39d3a54e170fe9b32f660a}{tasks}};\ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_agent_a3810cb964f4897467d1b00e80396ffe0}{startPos}};}
+\DoxyCodeLine{00026\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_agent_a5e6aac4c34832710ee61d24d46d9280a}{path}};}
+\DoxyCodeLine{00027\ \ \ \ \ std::vector<map::Cell>\ \mbox{\hyperlink{class_agent_a56ef25350c07be953f1265fd39c41829}{illicits}};\ \textcolor{comment}{//cells\ that\ agent\ cant\ enter\ becauese\ they\ are\ }}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_agent_ae31136d48176de06a3472544b8299f27}{idle}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_agent_a2c52992de621d72d2ea32b89c9de710b}{Agent}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_ac85805b604778bdbd0dd9075a1656400}{capacity}},\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_agent_ac8c8043a36279a0d1f7ebf029fab9677}{position}});}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_agent_a85b638e1a39563dc3a90711eb08e0376}{Agent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_agent_abc6c8b08f9d404950a74b441ee838c71}{\string~Agent}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_ab2add3f14accbda76cb197f40bb29981}{getId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_a686329fb94986bfa03042d3e753b8633}{getCapacity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_agent_ad586f369230538a214318ccd37b1d617}{getAccessibleCapacity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ \ \ \ \ std::vector<CA::Cell>\ \mbox{\hyperlink{class_agent_a8abff192273402d9de04f606ab5de074}{getPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_agent_aeae2a281d9d9eaaba00f2f4c4a1f2e6c}{getPosition}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \mbox{\hyperlink{class_agent_a411c1dcd9c38f32e63223b5258bae44a}{getStartPosition}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_task_group}{TaskGroup}}\ \mbox{\hyperlink{class_agent_a2ca434be5d68fd45b23ce42d962dbb5a}{getTask}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::vector<map::Cell>\ \mbox{\hyperlink{class_agent_a6b9a7b796fecc2c48b0a6de6ec69f857}{getIllicits}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_a0d02d6e744f6d53729b6da32a6358c5c}{assignTask}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_task_group}{TaskGroup}}\ taskGroup);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_ace496764a9ffd23367130af709474ef2}{clearTask}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_a39ac3b7fa6a4fa5b0fdeb13a797a63d2}{assignPath}}(std::vector<CA::Cell>\ \mbox{\hyperlink{class_agent_a5e6aac4c34832710ee61d24d46d9280a}{path}});\ \ \textcolor{comment}{//\ Pass\ by\ reference}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_a01632c6b9ec63410b97c6244a4841c39}{clearPath}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_aea6f74bc76afb4da6111b97e2db75d71}{setIdle}}(\textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_agent_a3628586e9ac6a97b09da9d04d4e79923}{isIdle}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_aa607d04b558ee92e879e605c2c29d62b}{addIllicitCell}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ cell);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_agent_a074f9e12bbdfcf76bba20a68a2e4b3c6}{operator\ ==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_agent}{Agent}}\&\ other)\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{00057\ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_agent_a18b6c32ec47b842ad81ae3de07a23b97}{move}}(\mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ new\_position);}
+\DoxyCodeLine{00059\ \};}
+
+\end{DoxyCode}

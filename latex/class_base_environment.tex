@@ -1,0 +1,284 @@
+\doxysection{Base\+Environment Class Reference}
+\hypertarget{class_base_environment}{}\label{class_base_environment}\index{BaseEnvironment@{BaseEnvironment}}
+
+
+{\ttfamily \#include $<$Base\+Environment.\+h$>$}
+
+
+
+Inheritance diagram for Base\+Environment\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_base_environment__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Base\+Environment\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_base_environment__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_base_environment_a87d6455168d93b7e8b3ad12af578e6fa}{Base\+Environment}} (\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_base_environment_a3814f6d5496be62f054d497ad26315e0}{graph}}, std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ avaliable\+Dropoffs, std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_base_environment_a3e3e5e973527c948681fc362edbcf927}{avaliable\+Pickups}})
+\item 
+\mbox{\hyperlink{class_task_group}{Task\+Group}} \mbox{\hyperlink{class_base_environment_a9e7be8a459859f90fd26f3466d476c56}{TASKGROUPGENERATOR}} ()
+\item 
+virtual void \mbox{\hyperlink{class_base_environment_a769c3ec97808e7834712ab00acc039d0}{add\+Task\+Group}} (const \mbox{\hyperlink{class_task_group}{Task\+Group}} \&task\+Group)
+\item 
+void \mbox{\hyperlink{class_base_environment_a0a785450aeb6cf8381ad3fdeb8e0c9c2}{assign\+Tasks}} (std\+::vector$<$ \mbox{\hyperlink{class_task_group}{Task\+Group}} $>$ tasks)
+\item 
+virtual void \mbox{\hyperlink{class_base_environment_aa09033de66b042309fadff3fc88a02ca}{assign\+Vacant\+Agents}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_base_environment_a26a4fbee0f2eebed08dcad294bfa6585}{MOVEAGENTS}} (int timestep)=0
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ \mbox{\hyperlink{class_base_environment_a3f93663b0b08170367eac82394394f53}{get\+Agents}} ()=0
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ \mbox{\hyperlink{class_base_environment_a304a641057f48542c6d8b4f83b09e1fc}{get\+Vacant\+Agents}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_base_environment_af449691ead01cbc7918e89ef7b2958da}{run\+Timestep}} (int timestep, \mbox{\hyperlink{class_task_group}{Task\+Group}} \texorpdfstring{$\ast$}{*}task=nullptr)=0
+\item 
+virtual void \mbox{\hyperlink{class_base_environment_ac0552a90785ec2c2cb986d29d3146855}{add\+Agent}} (\mbox{\hyperlink{class_agent}{Agent}} \&new\+Agent)=0
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_base_environment_ad9f9f322c95b2192d074d428b997ff19}{get\+Graph}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Iter , typename Random\+Generator $>$ }\\Iter \mbox{\hyperlink{class_base_environment_aa17dd09a23bfcb63856be708b15df183}{select\+\_\+randomly}} (Iter start, Iter end, Random\+Generator \&g)
+\item 
+{\footnotesize template$<$typename Iter $>$ }\\Iter \mbox{\hyperlink{class_base_environment_a08848e74b36fb191681c8a4aeef33a56}{select\+\_\+randomly}} (Iter start, Iter end)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_task_group}{Task\+Group}} $>$ \mbox{\hyperlink{class_base_environment_a1e93ba0f3d916d310710dfc4f69f2912}{task\+\_\+list}}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_base_environment_a3814f6d5496be62f054d497ad26315e0}{graph}}
+\item 
+\mbox{\hyperlink{class_t_s_p}{TSP}} \mbox{\hyperlink{class_base_environment_aa787486a8535fa27d94f98d8d7e1731a}{tsp}}
+\item 
+\mbox{\hyperlink{class_reservation}{Reservation}} \mbox{\hyperlink{class_base_environment_a34b4b5568b2248e61d270464b82c616c}{table}}
+\item 
+std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_base_environment_a3e3e5e973527c948681fc362edbcf927}{avaliable\+Pickups}}
+\item 
+std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_base_environment_a57f233082c294bc08314d601f0398eca}{avaliable\+Dropoff}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_base_environment_a87d6455168d93b7e8b3ad12af578e6fa}\index{BaseEnvironment@{BaseEnvironment}!BaseEnvironment@{BaseEnvironment}}
+\index{BaseEnvironment@{BaseEnvironment}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{BaseEnvironment()}{BaseEnvironment()}}
+{\footnotesize\ttfamily \label{class_base_environment_a87d6455168d93b7e8b3ad12af578e6fa} 
+Base\+Environment\+::\+Base\+Environment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}}}]{graph}{, }\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{avaliable\+Dropoffs}{, }\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{avaliable\+Pickups}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_base_environment_ac0552a90785ec2c2cb986d29d3146855}\index{BaseEnvironment@{BaseEnvironment}!addAgent@{addAgent}}
+\index{addAgent@{addAgent}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{addAgent()}{addAgent()}}
+{\footnotesize\ttfamily \label{class_base_environment_ac0552a90785ec2c2cb986d29d3146855} 
+virtual void Base\+Environment\+::add\+Agent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_agent}{Agent}} \&}]{new\+Agent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_a6f17045c0c37ee1c0e9179ba3399cf58}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_a8a8b9198f50bee6885018c55ab05c3ef}{WCA\+\_\+\+Environment}}.
+
+\Hypertarget{class_base_environment_a769c3ec97808e7834712ab00acc039d0}\index{BaseEnvironment@{BaseEnvironment}!addTaskGroup@{addTaskGroup}}
+\index{addTaskGroup@{addTaskGroup}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{addTaskGroup()}{addTaskGroup()}}
+{\footnotesize\ttfamily \label{class_base_environment_a769c3ec97808e7834712ab00acc039d0} 
+void Base\+Environment\+::add\+Task\+Group (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_task_group}{Task\+Group}} \&}]{task\+Group}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{class_base_environment_a0a785450aeb6cf8381ad3fdeb8e0c9c2}\index{BaseEnvironment@{BaseEnvironment}!assignTasks@{assignTasks}}
+\index{assignTasks@{assignTasks}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{assignTasks()}{assignTasks()}}
+{\footnotesize\ttfamily \label{class_base_environment_a0a785450aeb6cf8381ad3fdeb8e0c9c2} 
+void Base\+Environment\+::assign\+Tasks (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_task_group}{Task\+Group}} $>$}]{tasks}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_base_environment_aa09033de66b042309fadff3fc88a02ca}\index{BaseEnvironment@{BaseEnvironment}!assignVacantAgents@{assignVacantAgents}}
+\index{assignVacantAgents@{assignVacantAgents}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{assignVacantAgents()}{assignVacantAgents()}}
+{\footnotesize\ttfamily \label{class_base_environment_aa09033de66b042309fadff3fc88a02ca} 
+virtual void Base\+Environment\+::assign\+Vacant\+Agents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_a7895479b86007de21e5ff41cb2fe21bc}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_ab1f37ef378d2a529e429769da96a3eb4}{WCA\+\_\+\+Environment}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_aa09033de66b042309fadff3fc88a02ca_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_base_environment_a3f93663b0b08170367eac82394394f53}\index{BaseEnvironment@{BaseEnvironment}!getAgents@{getAgents}}
+\index{getAgents@{getAgents}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{getAgents()}{getAgents()}}
+{\footnotesize\ttfamily \label{class_base_environment_a3f93663b0b08170367eac82394394f53} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ Base\+Environment\+::get\+Agents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_a0fda49180196f628ed96204ad24cb923}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_add0e17e070ea12cd5241fdb226a7de5f}{WCA\+\_\+\+Environment}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_a3f93663b0b08170367eac82394394f53_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_base_environment_ad9f9f322c95b2192d074d428b997ff19}\index{BaseEnvironment@{BaseEnvironment}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily \label{class_base_environment_ad9f9f322c95b2192d074d428b997ff19} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} Base\+Environment\+::get\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_base_environment_a304a641057f48542c6d8b4f83b09e1fc}\index{BaseEnvironment@{BaseEnvironment}!getVacantAgents@{getVacantAgents}}
+\index{getVacantAgents@{getVacantAgents}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{getVacantAgents()}{getVacantAgents()}}
+{\footnotesize\ttfamily \label{class_base_environment_a304a641057f48542c6d8b4f83b09e1fc} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ Base\+Environment\+::get\+Vacant\+Agents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_a70ba103197e08266fc2b133fdc700985}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_af9a3f92c5dc122eecef86888584c918f}{WCA\+\_\+\+Environment}}.
+
+\Hypertarget{class_base_environment_a26a4fbee0f2eebed08dcad294bfa6585}\index{BaseEnvironment@{BaseEnvironment}!MOVEAGENTS@{MOVEAGENTS}}
+\index{MOVEAGENTS@{MOVEAGENTS}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{MOVEAGENTS()}{MOVEAGENTS()}}
+{\footnotesize\ttfamily \label{class_base_environment_a26a4fbee0f2eebed08dcad294bfa6585} 
+virtual void Base\+Environment\+::\+MOVEAGENTS (\begin{DoxyParamCaption}\item[{int}]{timestep}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_ae3ad7d25ae6919e06f8de9ee45686bf7}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_a54d2afd145c20ff1819d4ec2b710abf1}{WCA\+\_\+\+Environment}}.
+
+\Hypertarget{class_base_environment_af449691ead01cbc7918e89ef7b2958da}\index{BaseEnvironment@{BaseEnvironment}!runTimestep@{runTimestep}}
+\index{runTimestep@{runTimestep}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{runTimestep()}{runTimestep()}}
+{\footnotesize\ttfamily \label{class_base_environment_af449691ead01cbc7918e89ef7b2958da} 
+virtual void Base\+Environment\+::run\+Timestep (\begin{DoxyParamCaption}\item[{int}]{timestep}{, }\item[{\mbox{\hyperlink{class_task_group}{Task\+Group}} \texorpdfstring{$\ast$}{*}}]{task}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_c_a___environment_aa122d4e4c9d915aa95d3b9e7669a5a8b}{CA\+\_\+\+Environment}}, and \mbox{\hyperlink{class_w_c_a___environment_a21c6a14b7e464a4fda8f14c9a8f09f13}{WCA\+\_\+\+Environment}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_af449691ead01cbc7918e89ef7b2958da_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_base_environment_a08848e74b36fb191681c8a4aeef33a56}\index{BaseEnvironment@{BaseEnvironment}!select\_randomly@{select\_randomly}}
+\index{select\_randomly@{select\_randomly}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{select\_randomly()}{select\_randomly()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_base_environment_a08848e74b36fb191681c8a4aeef33a56} 
+template$<$typename Iter $>$ \\
+Iter Base\+Environment\+::select\+\_\+randomly (\begin{DoxyParamCaption}\item[{Iter}]{start}{, }\item[{Iter}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_a08848e74b36fb191681c8a4aeef33a56_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_base_environment_aa17dd09a23bfcb63856be708b15df183}\index{BaseEnvironment@{BaseEnvironment}!select\_randomly@{select\_randomly}}
+\index{select\_randomly@{select\_randomly}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{select\_randomly()}{select\_randomly()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_base_environment_aa17dd09a23bfcb63856be708b15df183} 
+template$<$typename Iter , typename Random\+Generator $>$ \\
+Iter Base\+Environment\+::select\+\_\+randomly (\begin{DoxyParamCaption}\item[{Iter}]{start}{, }\item[{Iter}]{end}{, }\item[{Random\+Generator \&}]{g}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_aa17dd09a23bfcb63856be708b15df183_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_base_environment_a9e7be8a459859f90fd26f3466d476c56}\index{BaseEnvironment@{BaseEnvironment}!TASKGROUPGENERATOR@{TASKGROUPGENERATOR}}
+\index{TASKGROUPGENERATOR@{TASKGROUPGENERATOR}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{TASKGROUPGENERATOR()}{TASKGROUPGENERATOR()}}
+{\footnotesize\ttfamily \label{class_base_environment_a9e7be8a459859f90fd26f3466d476c56} 
+\mbox{\hyperlink{class_task_group}{Task\+Group}} Base\+Environment\+::\+TASKGROUPGENERATOR (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_a9e7be8a459859f90fd26f3466d476c56_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_base_environment_a9e7be8a459859f90fd26f3466d476c56_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_base_environment_a57f233082c294bc08314d601f0398eca}\index{BaseEnvironment@{BaseEnvironment}!avaliableDropoff@{avaliableDropoff}}
+\index{avaliableDropoff@{avaliableDropoff}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{avaliableDropoff}{avaliableDropoff}}
+{\footnotesize\ttfamily \label{class_base_environment_a57f233082c294bc08314d601f0398eca} 
+std\+::vector$<$std\+::pair$<$int, int$>$ $>$ Base\+Environment\+::avaliable\+Dropoff\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_base_environment_a3e3e5e973527c948681fc362edbcf927}\index{BaseEnvironment@{BaseEnvironment}!avaliablePickups@{avaliablePickups}}
+\index{avaliablePickups@{avaliablePickups}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{avaliablePickups}{avaliablePickups}}
+{\footnotesize\ttfamily \label{class_base_environment_a3e3e5e973527c948681fc362edbcf927} 
+std\+::vector$<$std\+::pair$<$int, int$>$ $>$ Base\+Environment\+::avaliable\+Pickups\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_base_environment_a3814f6d5496be62f054d497ad26315e0}\index{BaseEnvironment@{BaseEnvironment}!graph@{graph}}
+\index{graph@{graph}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_base_environment_a3814f6d5496be62f054d497ad26315e0} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} Base\+Environment\+::graph\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_base_environment_a34b4b5568b2248e61d270464b82c616c}\index{BaseEnvironment@{BaseEnvironment}!table@{table}}
+\index{table@{table}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{table}{table}}
+{\footnotesize\ttfamily \label{class_base_environment_a34b4b5568b2248e61d270464b82c616c} 
+\mbox{\hyperlink{class_reservation}{Reservation}} Base\+Environment\+::table\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_base_environment_a1e93ba0f3d916d310710dfc4f69f2912}\index{BaseEnvironment@{BaseEnvironment}!task\_list@{task\_list}}
+\index{task\_list@{task\_list}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{task\_list}{task\_list}}
+{\footnotesize\ttfamily \label{class_base_environment_a1e93ba0f3d916d310710dfc4f69f2912} 
+std\+::vector$<$\mbox{\hyperlink{class_task_group}{Task\+Group}}$>$ Base\+Environment\+::task\+\_\+list\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_base_environment_aa787486a8535fa27d94f98d8d7e1731a}\index{BaseEnvironment@{BaseEnvironment}!tsp@{tsp}}
+\index{tsp@{tsp}!BaseEnvironment@{BaseEnvironment}}
+\doxysubsubsection{\texorpdfstring{tsp}{tsp}}
+{\footnotesize\ttfamily \label{class_base_environment_aa787486a8535fa27d94f98d8d7e1731a} 
+\mbox{\hyperlink{class_t_s_p}{TSP}} Base\+Environment\+::tsp\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_base_environment_8h}{Base\+Environment.\+h}}\item 
+\mbox{\hyperlink{_base_environment_8cpp}{Base\+Environment.\+cpp}}\end{DoxyCompactItemize}

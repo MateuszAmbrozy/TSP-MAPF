@@ -19,8 +19,8 @@
 #include "Graph.h"
 #include "TSP.h"
 #include "setup.h"
-#include "Space-Time-AStar/Reservation.h"
-#include "Space-Time-AStar/SpaceTimeAStar.h"
+#include "CA/Reservation.h"
+#include "CA/CooperativeA.h"
 #include "BaseEnvironment.h"
 
 
@@ -30,7 +30,7 @@ private:
     std::vector<Agent> agents;
     std::vector<Agent> vacant_agents;
 
-    SpaceTimeAStar sta;
+    CooperativeA sta;
 
 
     std::vector<Agent> capacity(const TaskGroup& task) const; //wyszukuje agentow spelniajacych ograniczenie pojemnosci z agentow wakacyjnych

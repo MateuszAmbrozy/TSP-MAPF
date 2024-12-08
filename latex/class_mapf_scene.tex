@@ -1,0 +1,145 @@
+\doxysection{Mapf\+Scene Class Reference}
+\hypertarget{class_mapf_scene}{}\label{class_mapf_scene}\index{MapfScene@{MapfScene}}
+
+
+{\ttfamily \#include $<$animationscene.\+h$>$}
+
+
+
+Inherits QGraphics\+Scene.
+
+
+
+Collaboration diagram for Mapf\+Scene\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_mapf_scene__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_mapf_scene_ad7274bd84a1f40b408032795b18655a9}{Mapf\+Scene}} (\mbox{\hyperlink{class_base_environment}{Base\+Environment}} \texorpdfstring{$\ast$}{*}env, QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\mbox{\hyperlink{class_mapf_scene_ab98bcb7a6be1afd26b782de9ed52ecdc}{\texorpdfstring{$\sim$}{\string~}\+Mapf\+Scene}} ()
+\item 
+void \mbox{\hyperlink{class_mapf_scene_abe1732e70b1f8bae676e1d164f17ce9e}{draw\+Environment}} ()
+\item 
+void \mbox{\hyperlink{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7}{update\+Scene}} (int timestep)
+\item 
+void \mbox{\hyperlink{class_mapf_scene_a9bb61b64b2405b613050fbb5155c197f}{update\+Agent\+Animation\+Speed}} (int speed)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_mapf_scene_a57998319799732d495126a5826a0c677}{graph}}
+\item 
+\mbox{\hyperlink{class_graph_rect_item}{Graph\+Rect\+Item}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_mapf_scene_af8ed19f5736c8e74a7bf528fa8381c33}{vis\+\_\+graph}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_agent_rect_item}{Agent\+Rect\+Item}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_mapf_scene_a328ee87622736c3e09f7d27bedbd5473}{vis\+\_\+agents}}
+\item 
+\mbox{\hyperlink{class_base_environment}{Base\+Environment}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_mapf_scene_a0eca8b4873eb6c659d38a24e57890170}{environment}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_mapf_scene_ad7274bd84a1f40b408032795b18655a9}\index{MapfScene@{MapfScene}!MapfScene@{MapfScene}}
+\index{MapfScene@{MapfScene}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{MapfScene()}{MapfScene()}}
+{\footnotesize\ttfamily \label{class_mapf_scene_ad7274bd84a1f40b408032795b18655a9} 
+Mapf\+Scene\+::\+Mapf\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_base_environment}{Base\+Environment}} \texorpdfstring{$\ast$}{*}}]{env}{, }\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mapf_scene_ad7274bd84a1f40b408032795b18655a9_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_mapf_scene_ab98bcb7a6be1afd26b782de9ed52ecdc}\index{MapfScene@{MapfScene}!````~MapfScene@{\texorpdfstring{$\sim$}{\string~}MapfScene}}
+\index{````~MapfScene@{\texorpdfstring{$\sim$}{\string~}MapfScene}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MapfScene()}{\string~MapfScene()}}
+{\footnotesize\ttfamily \label{class_mapf_scene_ab98bcb7a6be1afd26b782de9ed52ecdc} 
+Mapf\+Scene\+::\texorpdfstring{$\sim$}{\string~}\+Mapf\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mapf_scene_abe1732e70b1f8bae676e1d164f17ce9e}\index{MapfScene@{MapfScene}!drawEnvironment@{drawEnvironment}}
+\index{drawEnvironment@{drawEnvironment}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{drawEnvironment()}{drawEnvironment()}}
+{\footnotesize\ttfamily \label{class_mapf_scene_abe1732e70b1f8bae676e1d164f17ce9e} 
+void Mapf\+Scene\+::draw\+Environment (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_mapf_scene_a9bb61b64b2405b613050fbb5155c197f}\index{MapfScene@{MapfScene}!updateAgentAnimationSpeed@{updateAgentAnimationSpeed}}
+\index{updateAgentAnimationSpeed@{updateAgentAnimationSpeed}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{updateAgentAnimationSpeed()}{updateAgentAnimationSpeed()}}
+{\footnotesize\ttfamily \label{class_mapf_scene_a9bb61b64b2405b613050fbb5155c197f} 
+void Mapf\+Scene\+::update\+Agent\+Animation\+Speed (\begin{DoxyParamCaption}\item[{int}]{speed}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mapf_scene_a9bb61b64b2405b613050fbb5155c197f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7}\index{MapfScene@{MapfScene}!updateScene@{updateScene}}
+\index{updateScene@{updateScene}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{updateScene()}{updateScene()}}
+{\footnotesize\ttfamily \label{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7} 
+void Mapf\+Scene\+::update\+Scene (\begin{DoxyParamCaption}\item[{int}]{timestep}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_mapf_scene_a0eca8b4873eb6c659d38a24e57890170}\index{MapfScene@{MapfScene}!environment@{environment}}
+\index{environment@{environment}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{environment}{environment}}
+{\footnotesize\ttfamily \label{class_mapf_scene_a0eca8b4873eb6c659d38a24e57890170} 
+\mbox{\hyperlink{class_base_environment}{Base\+Environment}}\texorpdfstring{$\ast$}{*} Mapf\+Scene\+::environment\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_mapf_scene_a57998319799732d495126a5826a0c677}\index{MapfScene@{MapfScene}!graph@{graph}}
+\index{graph@{graph}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_mapf_scene_a57998319799732d495126a5826a0c677} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} Mapf\+Scene\+::graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_mapf_scene_a328ee87622736c3e09f7d27bedbd5473}\index{MapfScene@{MapfScene}!vis\_agents@{vis\_agents}}
+\index{vis\_agents@{vis\_agents}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{vis\_agents}{vis\_agents}}
+{\footnotesize\ttfamily \label{class_mapf_scene_a328ee87622736c3e09f7d27bedbd5473} 
+std\+::vector$<$\mbox{\hyperlink{class_agent_rect_item}{Agent\+Rect\+Item}}\texorpdfstring{$\ast$}{*}$>$ Mapf\+Scene\+::vis\+\_\+agents\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_mapf_scene_af8ed19f5736c8e74a7bf528fa8381c33}\index{MapfScene@{MapfScene}!vis\_graph@{vis\_graph}}
+\index{vis\_graph@{vis\_graph}!MapfScene@{MapfScene}}
+\doxysubsubsection{\texorpdfstring{vis\_graph}{vis\_graph}}
+{\footnotesize\ttfamily \label{class_mapf_scene_af8ed19f5736c8e74a7bf528fa8381c33} 
+\mbox{\hyperlink{class_graph_rect_item}{Graph\+Rect\+Item}}\texorpdfstring{$\ast$}{*} Mapf\+Scene\+::vis\+\_\+graph\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{animationscene_8h}{animationscene.\+h}}\item 
+\mbox{\hyperlink{animationscene_8cpp}{animationscene.\+cpp}}\end{DoxyCompactItemize}

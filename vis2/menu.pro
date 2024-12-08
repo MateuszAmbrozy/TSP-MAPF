@@ -25,10 +25,10 @@ SOURCES += main.cpp\
     menu.cpp \
     menuItem.cpp \
     pointlistitemwidget.cpp \
-    $$files(../src/WHCA/*.cpp) \
+    $$files(../src/WCA/*.cpp) \
     $$files(../src/*.cpp) \
     $$files(../src/AStar/*.cpp) \
-    $$files(../src/Space-Time-AStar/*.cpp) \
+    $$files(../src/CA/*.cpp) \
     sidebar.cpp \
     taskinputwidget.cpp
 
@@ -50,16 +50,17 @@ HEADERS += \
     menu.h \
     menuItem.h \
     pointlistitemwidget.h \
-    $$files(../lib/WHCA/*.h) \
+    $$files(../lib/WCA/*.h) \
     $$files(../lib/*.h) \
     $$files(../lib/AStar/*.h) \
-    $$files(../lib/Space-Time-AStar/*.h) \
+    $$files(../lib/CA/*.h) \
     sidebar.h \
     taskinputwidget.h
 
 INCLUDEPATH += ../lib
 INCLUDEPATH += ../lib/AStar
-INCLUDEPATH += ../lib/Space-Time-AStar
+INCLUDEPATH += ../lib/CA
+INCLUDEpATH += ../lib/WCA
 
 FORMS    +=
 RESOURCES += default.qrc

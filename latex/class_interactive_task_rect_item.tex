@@ -1,0 +1,335 @@
+\doxysection{Interactive\+Task\+Rect\+Item Class Reference}
+\hypertarget{class_interactive_task_rect_item}{}\label{class_interactive_task_rect_item}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+
+
+{\ttfamily \#include $<$inetractivetaskgraph.\+h$>$}
+
+
+
+Inheritance diagram for Interactive\+Task\+Rect\+Item\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_interactive_task_rect_item__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Interactive\+Task\+Rect\+Item\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_interactive_task_rect_item__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a9c949a835fb7218fd868bc37c647f73d}{pickup\+Point\+Selected}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a29ad184d5fbe4c9f3cf6c2a6463c48f6}{dropoff\+Point\+Selected}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a1a381c2ccf252edab50d09e304420efd}{pickup\+Point\+Removed}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a689a1d0a78fa0fbc345896cee67e3585}{dropoff\+Point\+Removed}} (const QPoint \&point)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_interactive_task_rect_item_aeb0bf5292e474700fd444b28934e5460}{Interactive\+Task\+Rect\+Item}} (\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}}, const std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ \&\mbox{\hyperlink{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe}{agents}}, QGraphics\+Item \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a7e3bc14ff21365307e1fb41f3881439f}{handle\+Cell\+Left\+Click}} (const QPoint \&cell\+Pos) override
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a8715a3ef336b900baa460d0f429822ec}{handle\+Cell\+Right\+Click}} (const QPoint \&cell\+Pos) override
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81}{draw\+Graph}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}scene) override
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384}{clear}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QSet$<$ QPoint $>$ \mbox{\hyperlink{class_interactive_task_rect_item_a37048d59d45e2fbd02352d131ccdb016}{pickup\+Points}}
+\item 
+QSet$<$ QPoint $>$ \mbox{\hyperlink{class_interactive_task_rect_item_a9252193d4105fd7f2a365ce3df32b83a}{dropoff\+Points}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QPoint \mbox{\hyperlink{class_interactive_graph_rect_item_adae58ebd5dfcdb1a730f22730a25f319}{get\+Cell\+From\+Position}} (const QPointF \&position)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_interactive_graph_rect_item_aaa60fdf4690124a093ed777f44d7abe0}{toggle}}
+\item 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393}{update\+Cell\+Color}} (int x, int y, \mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63}{cell\+State}} state)
+\item 
+bool \mbox{\hyperlink{class_interactive_task_rect_item_ab8fd70826bfbd84221bf1062ea474766}{is\+Agent\+Cell}} (const QPoint \&cell\+Pos) const
+\item 
+void \mbox{\hyperlink{class_interactive_task_rect_item_aa23836aeb348b07923f73761ee1a97ce}{toggle\+Selection\+Mode}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ \mbox{\hyperlink{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe}{agents}}
+\item 
+QPoint \mbox{\hyperlink{class_interactive_task_rect_item_a7f5256c20e623a26760af3c0585cfb80}{current\+Dropoff\+Point}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_interactive_task_rect_item_aeb0bf5292e474700fd444b28934e5460}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{InteractiveTaskRectItem()}{InteractiveTaskRectItem()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_aeb0bf5292e474700fd444b28934e5460} 
+Interactive\+Task\+Rect\+Item\+::\+Interactive\+Task\+Rect\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}}}]{graph}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ \&}]{agents}{, }\item[{QGraphics\+Item \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!clear@{clear}}
+\index{clear@{clear}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384} 
+void Interactive\+Task\+Rect\+Item\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a5e3c2b1db2ffc1f9507dfc558d21d384_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!drawGraph@{drawGraph}}
+\index{drawGraph@{drawGraph}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{drawGraph()}{drawGraph()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81} 
+void Interactive\+Task\+Rect\+Item\+::draw\+Graph (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_interactive_graph_rect_item_afb2665eb21b1f86d962a2db3714b0726}{Interactive\+Graph\+Rect\+Item}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_af8fd9941872ef6d067e69fbcfaca1f81_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_a689a1d0a78fa0fbc345896cee67e3585}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!dropoffPointRemoved@{dropoffPointRemoved}}
+\index{dropoffPointRemoved@{dropoffPointRemoved}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{dropoffPointRemoved}{dropoffPointRemoved}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a689a1d0a78fa0fbc345896cee67e3585} 
+void Interactive\+Task\+Rect\+Item\+::dropoff\+Point\+Removed (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a689a1d0a78fa0fbc345896cee67e3585_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_a29ad184d5fbe4c9f3cf6c2a6463c48f6}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!dropoffPointSelected@{dropoffPointSelected}}
+\index{dropoffPointSelected@{dropoffPointSelected}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{dropoffPointSelected}{dropoffPointSelected}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a29ad184d5fbe4c9f3cf6c2a6463c48f6} 
+void Interactive\+Task\+Rect\+Item\+::dropoff\+Point\+Selected (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a29ad184d5fbe4c9f3cf6c2a6463c48f6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_graph_rect_item_adae58ebd5dfcdb1a730f22730a25f319}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!getCellFromPosition@{getCellFromPosition}}
+\index{getCellFromPosition@{getCellFromPosition}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{getCellFromPosition()}{getCellFromPosition()}}
+{\footnotesize\ttfamily \label{class_interactive_graph_rect_item_adae58ebd5dfcdb1a730f22730a25f319} 
+QPoint Interactive\+Graph\+Rect\+Item\+::get\+Cell\+From\+Position (\begin{DoxyParamCaption}\item[{const QPointF \&}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\Hypertarget{class_interactive_task_rect_item_a7e3bc14ff21365307e1fb41f3881439f}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!handleCellLeftClick@{handleCellLeftClick}}
+\index{handleCellLeftClick@{handleCellLeftClick}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{handleCellLeftClick()}{handleCellLeftClick()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a7e3bc14ff21365307e1fb41f3881439f} 
+void Interactive\+Task\+Rect\+Item\+::handle\+Cell\+Left\+Click (\begin{DoxyParamCaption}\item[{const QPoint \&}]{cell\+Pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_interactive_graph_rect_item_a31561184aa59f5e1fc5cd746619820c5}{Interactive\+Graph\+Rect\+Item}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a7e3bc14ff21365307e1fb41f3881439f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_a8715a3ef336b900baa460d0f429822ec}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!handleCellRightClick@{handleCellRightClick}}
+\index{handleCellRightClick@{handleCellRightClick}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{handleCellRightClick()}{handleCellRightClick()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a8715a3ef336b900baa460d0f429822ec} 
+void Interactive\+Task\+Rect\+Item\+::handle\+Cell\+Right\+Click (\begin{DoxyParamCaption}\item[{const QPoint \&}]{cell\+Pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_interactive_graph_rect_item_a7b472bac07f49882f291809b4d52c704}{Interactive\+Graph\+Rect\+Item}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a8715a3ef336b900baa460d0f429822ec_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_ab8fd70826bfbd84221bf1062ea474766}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!isAgentCell@{isAgentCell}}
+\index{isAgentCell@{isAgentCell}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{isAgentCell()}{isAgentCell()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_ab8fd70826bfbd84221bf1062ea474766} 
+bool Interactive\+Task\+Rect\+Item\+::is\+Agent\+Cell (\begin{DoxyParamCaption}\item[{const QPoint \&}]{cell\+Pos}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_ab8fd70826bfbd84221bf1062ea474766_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_a1a381c2ccf252edab50d09e304420efd}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!pickupPointRemoved@{pickupPointRemoved}}
+\index{pickupPointRemoved@{pickupPointRemoved}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{pickupPointRemoved}{pickupPointRemoved}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a1a381c2ccf252edab50d09e304420efd} 
+void Interactive\+Task\+Rect\+Item\+::pickup\+Point\+Removed (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a1a381c2ccf252edab50d09e304420efd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_a9c949a835fb7218fd868bc37c647f73d}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!pickupPointSelected@{pickupPointSelected}}
+\index{pickupPointSelected@{pickupPointSelected}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{pickupPointSelected}{pickupPointSelected}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a9c949a835fb7218fd868bc37c647f73d} 
+void Interactive\+Task\+Rect\+Item\+::pickup\+Point\+Selected (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a9c949a835fb7218fd868bc37c647f73d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_interactive_task_rect_item_aa23836aeb348b07923f73761ee1a97ce}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!toggleSelectionMode@{toggleSelectionMode}}
+\index{toggleSelectionMode@{toggleSelectionMode}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{toggleSelectionMode()}{toggleSelectionMode()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_aa23836aeb348b07923f73761ee1a97ce} 
+void Interactive\+Task\+Rect\+Item\+::toggle\+Selection\+Mode (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_interactive_graph_rect_item_a7d08a77d722098d0fcc8c6080707793d}{Interactive\+Graph\+Rect\+Item}}.
+
+\Hypertarget{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!updateCellColor@{updateCellColor}}
+\index{updateCellColor@{updateCellColor}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{updateCellColor()}{updateCellColor()}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393} 
+void Interactive\+Task\+Rect\+Item\+::update\+Cell\+Color (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{\mbox{\hyperlink{inetractivetaskgraph_8h_a38e97bf4503f8099c49fac77b951ae63}{cell\+State}}}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_interactive_task_rect_item_a9b2b6601a982708d16d9ff69c79e3393_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!agents@{agents}}
+\index{agents@{agents}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{agents}{agents}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_ae6c0b8e1418c4e9a99a0262b34af6ffe} 
+std\+::vector$<$\mbox{\hyperlink{class_agent}{Agent}}$>$ Interactive\+Task\+Rect\+Item\+::agents\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_interactive_task_rect_item_a7f5256c20e623a26760af3c0585cfb80}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!currentDropoffPoint@{currentDropoffPoint}}
+\index{currentDropoffPoint@{currentDropoffPoint}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{currentDropoffPoint}{currentDropoffPoint}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a7f5256c20e623a26760af3c0585cfb80} 
+QPoint Interactive\+Task\+Rect\+Item\+::current\+Dropoff\+Point\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_interactive_task_rect_item_a9252193d4105fd7f2a365ce3df32b83a}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!dropoffPoints@{dropoffPoints}}
+\index{dropoffPoints@{dropoffPoints}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{dropoffPoints}{dropoffPoints}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a9252193d4105fd7f2a365ce3df32b83a} 
+QSet$<$QPoint$>$ Interactive\+Task\+Rect\+Item\+::dropoff\+Points}
+
+\Hypertarget{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!graph@{graph}}
+\index{graph@{graph}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \label{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea} 
+\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} Visualization\+Graph\+::graph\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+\Hypertarget{class_interactive_task_rect_item_a37048d59d45e2fbd02352d131ccdb016}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!pickupPoints@{pickupPoints}}
+\index{pickupPoints@{pickupPoints}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{pickupPoints}{pickupPoints}}
+{\footnotesize\ttfamily \label{class_interactive_task_rect_item_a37048d59d45e2fbd02352d131ccdb016} 
+QSet$<$QPoint$>$ Interactive\+Task\+Rect\+Item\+::pickup\+Points}
+
+\Hypertarget{class_interactive_graph_rect_item_aaa60fdf4690124a093ed777f44d7abe0}\index{InteractiveTaskRectItem@{InteractiveTaskRectItem}!toggle@{toggle}}
+\index{toggle@{toggle}!InteractiveTaskRectItem@{InteractiveTaskRectItem}}
+\doxysubsubsection{\texorpdfstring{toggle}{toggle}}
+{\footnotesize\ttfamily \label{class_interactive_graph_rect_item_aaa60fdf4690124a093ed777f44d7abe0} 
+bool Interactive\+Graph\+Rect\+Item\+::toggle\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{inetractivetaskgraph_8h}{inetractivetaskgraph.\+h}}\item 
+\mbox{\hyperlink{moc__inetractivetaskgraph_8cpp}{moc\+\_\+inetractivetaskgraph.\+cpp}}\item 
+\mbox{\hyperlink{inetractivetaskgraph_8cpp}{inetractivetaskgraph.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,54 @@
+\doxysection{interactiveagentgraph.\+h}
+\hypertarget{interactiveagentgraph_8h_source}{}\label{interactiveagentgraph_8h_source}\index{interactiveagentgraph.h@{interactiveagentgraph.h}}
+\mbox{\hyperlink{interactiveagentgraph_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ INTERACTIVEAGENTGRAPH\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ INTERACTIVEAGENTGRAPH\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QSet>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QPoint>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QGraphicsScene>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interactivegraphrectitem_8h}{interactivegraphrectitem.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_interactive_agent_rect_item}{InteractiveAgentRectItem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_interactive_graph_rect_item}{InteractiveGraphRectItem}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9}{Option}}\ \{\mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9a1e23852820b9154316c7c06e2b7ba051}{NORMAL}}\ =\ 0,\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9a355e2c58b95170df578b37fc88eadcac}{AGENT}},\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9a2399122c182da0d5946e2937bb73edf2}{OBSTACLE}},\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9ae9219bd92c52d0830281c0ea2323d2de}{PICKUP}},\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9a9cdd1fd97fdc8662dfb8d0ae290ec117}{DROPOFF}}\};}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_interactive_agent_rect_item_a94ed46fed71312d2e9c4638ca9f183c7}{InteractiveAgentRectItem}}(\mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_visualization_graph_aecb655e7bfc02aa7424c0e67fda2d3ea}{graph}},\ QGraphicsItem*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_agent_rect_item_af64804a1c5a50f3c0213e4648274af63}{agentPoints}};}
+\DoxyCodeLine{00030\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_agent_rect_item_a9636acf169303e7c3870ba1febee30ea}{obstaclePoints}};}
+\DoxyCodeLine{00031\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_agent_rect_item_a74be32f1868dfebf9da8ad3a53ebf173}{avaliablePickupPoints}};}
+\DoxyCodeLine{00032\ \ \ \ \ QSet<QPoint>\ \mbox{\hyperlink{class_interactive_agent_rect_item_ac78e154335b3dce97201354a43fc4d2b}{avaliableDropoffPoints}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a8995f7541b494680bdd954db386f0c7a}{handleCellLeftClick}}(\textcolor{keyword}{const}\ QPoint\&\ cellPos)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_add1ebafcadd80780cada67e0d88585e6}{handleCellRightClick}}(\textcolor{keyword}{const}\ QPoint\&\ cellPos)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a925ce8b2f80f567838cd6d4d3bb28360}{updateCellColor}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9}{Option}}\ state);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a2c71fc8957b09b94ef779588b73c1f72}{clear}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ signals:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a6b067ea89aafc96558d40d3075886f91}{agentSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a4bc009496e53dfea99c415a05c286662}{obstacleSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a32dc96c337155e08a62dfcbf1125471b}{agentRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a56241a5f061d5dd55ebf73b2bd778b84}{obstacleRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_ad1a6d057112b04c77da256930711ff27}{pickupSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_ad61367879e19fcfa9908bbd60a8d490e}{pickupRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a29b60e2e62d5b3ad2e7f2608069fbd07}{dropoffSelected}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_accb5b9fffb7579e38535a555ac484c22}{dropoffRemoved}}(\textcolor{keyword}{const}\ QPoint\&\ point);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_interactive_agent_rect_item_adad3152586a0121342ad59d99960a5b9}{Option}}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a2c34d38cfeb0def1c75ce849dd94eabd}{option}};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_interactive_agent_rect_item_a1ed24f81c25e5e830fb478c8667951db}{toggleSelectionMode}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INTERACTIVEAGENTGRAPH\_H}}
+
+\end{DoxyCode}

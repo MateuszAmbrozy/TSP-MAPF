@@ -177,29 +177,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{EBA6D5D0-D063-3FBE-A4B4-F4E30C6F181E}</Project>
       <Name>Example</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\gtest\ExampleTest.vcxproj">
-      <Project>{418F79AD-3605-3C4E-A340-C0CB692A99F5}</Project>
-      <Name>ExampleTest</Name>
-    </ProjectReference>
     <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\Example_app.vcxproj">
       <Project>{97C89DCE-C2BC-3216-9AB0-C97753E49FEA}</Project>
       <Name>Example_app</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\googletest\googlemock\gmock.vcxproj">
-      <Project>{CF2CA00A-D344-31FE-AC47-726665C32869}</Project>
-      <Name>gmock</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\googletest\googlemock\gmock_main.vcxproj">
-      <Project>{A95943BC-D6B9-3242-9425-45FD9BC406F4}</Project>
-      <Name>gmock_main</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\googletest\googletest\gtest.vcxproj">
-      <Project>{859F9B5C-E8A1-3BBD-B50A-42DC3FAE3C9C}</Project>
-      <Name>gtest</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\build\googletest\googletest\gtest_main.vcxproj">
-      <Project>{2BFBAC39-A96D-3173-A19F-5289C27D9ADC}</Project>
-      <Name>gtest_main</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

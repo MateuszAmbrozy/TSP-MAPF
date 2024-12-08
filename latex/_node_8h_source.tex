@@ -1,0 +1,33 @@
+\doxysection{Node.\+h}
+\hypertarget{_node_8h_source}{}\label{_node_8h_source}\index{Node.h@{Node.h}}
+\mbox{\hyperlink{_node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../Graph.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_a}{A}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_a_1_1_node}{Node}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ std::shared\_ptr<Node>\ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}};\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48}{gCost}},\ \mbox{\hyperlink{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e}{hCost}},\ \mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{fCost}};}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ \mbox{\hyperlink{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmap_1_1_cell}{map::Cell}}\&\ other);}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ \mbox{\hyperlink{struct_a_1_1_node_ac3670af6a23294d425dc37cc35fbf068}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ other);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{struct_a_1_1_node_a6070ae8bc78bedf6957c99a011d9994f}{Node}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{struct_a_1_1_node_aa7de5c562086bc77778946abe789ab78}{Node}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structmap_1_1_cell_ad8fcfad7b67cf080cecc49033c94c07e}{x}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structmap_1_1_cell_afb6b9c98b28d2ead56141e57a9fd2f27}{y}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structmap_1_1_cell_ad65eace573022f3c0e7e38a1f7b0ccd3}{isObstacle}}\ =\ \textcolor{keyword}{false},\ std::shared\_ptr<Node>\ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}}\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_a_1_1_node_a336fd3bdc15ccd76f1e16d1db8740c48}{gCost}}=0,\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_a_1_1_node_a7cd60ec3ecfa0e2b2e8a54841510100e}{hCost}}=0,\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_a_1_1_node_a30c7457cfa60a68ad6455cc76140c388}{fCost}}\ =\ 0);}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{struct_a_1_1_node_a6070ae8bc78bedf6957c99a011d9994f}{Node}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ other);}
+\DoxyCodeLine{00027\ \ \ \ \ std::shared\_ptr<A::Node>\ \mbox{\hyperlink{struct_a_1_1_node_aa8ff1f57cd0e8b0f885d05072352df7e}{getParent}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{struct_a_1_1_node_a923ccd2fd08766f86c2bc1c4380874fd}{setParent}}(std::shared\_ptr<A::Node>\ \mbox{\hyperlink{struct_a_1_1_node_ab14ca4041f5ec49d82bcc00a435baf0e}{parent}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{struct_a_1_1_node_a89ad92cda65c066e09e68f3c3a0bc2a4}{\string~Node}}()\ \{\}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_a_1_1_node_a4624f973045015567f82ac57a2f48b1b}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f}{operator\ ==\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_a_1_1_node_aef07d2123a380d4f86d1b9a8852cb75f}{operator\ ==\ }}(\mbox{\hyperlink{struct_a_1_1_node}{Node}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_a_1_1_node_a16b5bfcb69d3760cb97ed1d091991256}{calculateH}}(\textcolor{keywordtype}{int}\ startX,\ \textcolor{keywordtype}{int}\ startY,\ \textcolor{keywordtype}{int}\ destX,\ \textcolor{keywordtype}{int}\ destY);}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}

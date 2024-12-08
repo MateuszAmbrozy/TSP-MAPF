@@ -1,0 +1,554 @@
+\doxysection{Agent\+Input\+Widget Class Reference}
+\hypertarget{class_agent_input_widget}{}\label{class_agent_input_widget}\index{AgentInputWidget@{AgentInputWidget}}
+
+
+{\ttfamily \#include $<$agentinputwidget.\+h$>$}
+
+
+
+Inherits QWidget.
+
+
+
+Collaboration diagram for Agent\+Input\+Widget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_agent_input_widget__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{Agent\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_aeb922658dc4f76f55ad92918b260497e}{map\+Created}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} $>$ map)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a6dd4bd7e91ca139c6d98c5648b7c2b8a}{agents\+Created}} (std\+::shared\+\_\+ptr$<$ std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ $>$ agents)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_agent_input_widget_a7287f4cf38bde0da901228c537580319}{Agent\+Input\+Widget}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}}, \mbox{\hyperlink{class_interactive_agent_rect_item}{Interactive\+Agent\+Rect\+Item}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee}{graph\+Item}}, QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\mbox{\hyperlink{class_agent_input_widget_a1f443ea586023e086f0cdf0086e9f4a6}{\texorpdfstring{$\sim$}{\string~}\+Agent\+Input\+Widget}} ()
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_ae8a2e40ca424c64fa6cbf4f2f79039b2}{clear}} ()
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a71c20f31e2ce1e9dbb588d2daa761749}{load\+Map}} (int \mbox{\hyperlink{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7}{width}}, int \mbox{\hyperlink{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a}{height}}, const std\+::vector$<$ QPoint $>$ \&\mbox{\hyperlink{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708}{obstacles}}, const std\+::vector$<$ \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{Agent\+Data}} $>$ \&\mbox{\hyperlink{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2}{agents\+Data}}, const std\+::vector$<$ QPoint $>$ \&pickups\+Data, const std\+::vector$<$ QPoint $>$ \&dropoffs\+Data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938}{options}} \{ \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a7446050b848d839fe9847073ff94cfd6}{Agent}} = 0
+, \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938afe29c1262b319e6d200d32384ae636c7}{Obstacle}}
+, \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a96fd07f8244c1d8b9a38930ea4bdec97}{Pickup}}
+, \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a2ca7f66d951013c715c9364df30310de}{Dropoff}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02}{add\+Agent}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676}{add\+Pickup\+Point}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387}{add\+Dropoff\+Point}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f}{add\+Obstacle}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5}{remove\+Agent}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c}{remove\+Obstacle}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a328cd08840fb929a4f2840331369798b}{remove\+Pickup\+Point}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425}{remove\+Dropoff\+Point}} (const QPoint \&point)
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5}{create\+Map}} ()
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e}{update\+Agent\+List}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_aa3a0c8d88e5e4ec941d6b6716b9cbd1b}{set\+Scene}} (QGraphics\+Scene \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}})
+\item 
+void \mbox{\hyperlink{class_agent_input_widget_a6eddd08be0433172ddc7b4a6932e28bc}{update\+Map}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QGraphics\+Scene \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}{scene}}
+\item 
+\mbox{\hyperlink{class_interactive_agent_rect_item}{Interactive\+Agent\+Rect\+Item}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee}{graph\+Item}}
+\item 
+QGraphics\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_acda4033f18ef54ff804e3c4407b60005}{graphics\+View}}
+\item 
+QSpin\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_a42e81ca37766a0dc8b7aabf464e34354}{width\+Input}}
+\item 
+QSpin\+Box \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_a078b0fe7413ed2f618ce8d81092b679a}{height\+Input}}
+\item 
+QList\+Widget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_agent_input_widget_a75df0ddd60e2814fc28c3f210641b3f0}{agent\+List\+Widget}}
+\item 
+std\+::vector$<$ QPoint $>$ \mbox{\hyperlink{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708}{obstacles}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{Agent\+Data}} $>$ \mbox{\hyperlink{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2}{agents\+Data}}
+\item 
+int \mbox{\hyperlink{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7}{width}}
+\item 
+int \mbox{\hyperlink{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a}{height}}
+\item 
+std\+::vector$<$ QPoint $>$ \mbox{\hyperlink{class_agent_input_widget_a3e6384c7a8f56d2893aea064d1e0416a}{avaliable\+Pickup\+Points}}
+\item 
+std\+::vector$<$ QPoint $>$ \mbox{\hyperlink{class_agent_input_widget_a2dc077e2faacca944916e52401676146}{avaliable\+Dropoff\+Points}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_agent_input_widget_a443b383d08bc241d714a134c086a24f2}{Editor\+View}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938}\index{AgentInputWidget@{AgentInputWidget}!options@{options}}
+\index{options@{options}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938} 
+enum class \mbox{\hyperlink{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938}{Agent\+Input\+Widget\+::options}}\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [private]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Agent@{Agent}!AgentInputWidget@{AgentInputWidget}}\index{AgentInputWidget@{AgentInputWidget}!Agent@{Agent}}}\Hypertarget{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a7446050b848d839fe9847073ff94cfd6}\label{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938} 
+Agent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Obstacle@{Obstacle}!AgentInputWidget@{AgentInputWidget}}\index{AgentInputWidget@{AgentInputWidget}!Obstacle@{Obstacle}}}\Hypertarget{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938afe29c1262b319e6d200d32384ae636c7}\label{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938} 
+Obstacle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pickup@{Pickup}!AgentInputWidget@{AgentInputWidget}}\index{AgentInputWidget@{AgentInputWidget}!Pickup@{Pickup}}}\Hypertarget{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a96fd07f8244c1d8b9a38930ea4bdec97}\label{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938} 
+Pickup&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Dropoff@{Dropoff}!AgentInputWidget@{AgentInputWidget}}\index{AgentInputWidget@{AgentInputWidget}!Dropoff@{Dropoff}}}\Hypertarget{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938a2ca7f66d951013c715c9364df30310de}\label{class_agent_input_widget_a09435b4165c38715b3d5b8af5afbd938} 
+Dropoff&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_agent_input_widget_a7287f4cf38bde0da901228c537580319}\index{AgentInputWidget@{AgentInputWidget}!AgentInputWidget@{AgentInputWidget}}
+\index{AgentInputWidget@{AgentInputWidget}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{AgentInputWidget()}{AgentInputWidget()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a7287f4cf38bde0da901228c537580319} 
+Agent\+Input\+Widget\+::\+Agent\+Input\+Widget (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{, }\item[{\mbox{\hyperlink{class_interactive_agent_rect_item}{Interactive\+Agent\+Rect\+Item}} \texorpdfstring{$\ast$}{*}}]{graph\+Item}{, }\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a7287f4cf38bde0da901228c537580319_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a1f443ea586023e086f0cdf0086e9f4a6}\index{AgentInputWidget@{AgentInputWidget}!````~AgentInputWidget@{\texorpdfstring{$\sim$}{\string~}AgentInputWidget}}
+\index{````~AgentInputWidget@{\texorpdfstring{$\sim$}{\string~}AgentInputWidget}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AgentInputWidget()}{\string~AgentInputWidget()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a1f443ea586023e086f0cdf0086e9f4a6} 
+Agent\+Input\+Widget\+::\texorpdfstring{$\sim$}{\string~}\+Agent\+Input\+Widget (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02}\index{AgentInputWidget@{AgentInputWidget}!addAgent@{addAgent}}
+\index{addAgent@{addAgent}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{addAgent}{addAgent}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02} 
+void Agent\+Input\+Widget\+::add\+Agent (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a3e83adf11f844ce4116a09d721ea2b02_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387}\index{AgentInputWidget@{AgentInputWidget}!addDropoffPoint@{addDropoffPoint}}
+\index{addDropoffPoint@{addDropoffPoint}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{addDropoffPoint}{addDropoffPoint}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387} 
+void Agent\+Input\+Widget\+::add\+Dropoff\+Point (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ad090a0c8cda2d5089b0874ccb6527387_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f}\index{AgentInputWidget@{AgentInputWidget}!addObstacle@{addObstacle}}
+\index{addObstacle@{addObstacle}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{addObstacle}{addObstacle}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f} 
+void Agent\+Input\+Widget\+::add\+Obstacle (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a8de32f141ffcf1c008001d075c24a75f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676}\index{AgentInputWidget@{AgentInputWidget}!addPickupPoint@{addPickupPoint}}
+\index{addPickupPoint@{addPickupPoint}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{addPickupPoint}{addPickupPoint}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676} 
+void Agent\+Input\+Widget\+::add\+Pickup\+Point (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a808b4c0db26d5e19e1f359cdba1d7676_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a6dd4bd7e91ca139c6d98c5648b7c2b8a}\index{AgentInputWidget@{AgentInputWidget}!agentsCreated@{agentsCreated}}
+\index{agentsCreated@{agentsCreated}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{agentsCreated}{agentsCreated}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a6dd4bd7e91ca139c6d98c5648b7c2b8a} 
+void Agent\+Input\+Widget\+::agents\+Created (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ $>$}]{agents}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a6dd4bd7e91ca139c6d98c5648b7c2b8a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_ae8a2e40ca424c64fa6cbf4f2f79039b2}\index{AgentInputWidget@{AgentInputWidget}!clear@{clear}}
+\index{clear@{clear}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_ae8a2e40ca424c64fa6cbf4f2f79039b2} 
+void Agent\+Input\+Widget\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ae8a2e40ca424c64fa6cbf4f2f79039b2_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5}\index{AgentInputWidget@{AgentInputWidget}!createMap@{createMap}}
+\index{createMap@{createMap}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{createMap}{createMap}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5} 
+void Agent\+Input\+Widget\+::create\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a433981a5b81332122bbb3577baba5aa5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a71c20f31e2ce1e9dbb588d2daa761749}\index{AgentInputWidget@{AgentInputWidget}!loadMap@{loadMap}}
+\index{loadMap@{loadMap}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{loadMap()}{loadMap()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a71c20f31e2ce1e9dbb588d2daa761749} 
+void Agent\+Input\+Widget\+::load\+Map (\begin{DoxyParamCaption}\item[{int}]{width}{, }\item[{int}]{height}{, }\item[{const std\+::vector$<$ QPoint $>$ \&}]{obstacles}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{Agent\+Data}} $>$ \&}]{agents\+Data}{, }\item[{const std\+::vector$<$ QPoint $>$ \&}]{pickups\+Data}{, }\item[{const std\+::vector$<$ QPoint $>$ \&}]{dropoffs\+Data}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a71c20f31e2ce1e9dbb588d2daa761749_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_aeb922658dc4f76f55ad92918b260497e}\index{AgentInputWidget@{AgentInputWidget}!mapCreated@{mapCreated}}
+\index{mapCreated@{mapCreated}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{mapCreated}{mapCreated}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_aeb922658dc4f76f55ad92918b260497e} 
+void Agent\+Input\+Widget\+::map\+Created (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} $>$}]{map}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_aeb922658dc4f76f55ad92918b260497e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5}\index{AgentInputWidget@{AgentInputWidget}!removeAgent@{removeAgent}}
+\index{removeAgent@{removeAgent}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{removeAgent}{removeAgent}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5} 
+void Agent\+Input\+Widget\+::remove\+Agent (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ac00da177ecc1f4272edfe88b2a17a5b5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425}\index{AgentInputWidget@{AgentInputWidget}!removeDropoffPoint@{removeDropoffPoint}}
+\index{removeDropoffPoint@{removeDropoffPoint}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{removeDropoffPoint}{removeDropoffPoint}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425} 
+void Agent\+Input\+Widget\+::remove\+Dropoff\+Point (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a79c67cc937ac5fa1cbe18b7b6401b425_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c}\index{AgentInputWidget@{AgentInputWidget}!removeObstacle@{removeObstacle}}
+\index{removeObstacle@{removeObstacle}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{removeObstacle}{removeObstacle}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c} 
+void Agent\+Input\+Widget\+::remove\+Obstacle (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a442cfaf4a429acd87db98b417c51bd6c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a328cd08840fb929a4f2840331369798b}\index{AgentInputWidget@{AgentInputWidget}!removePickupPoint@{removePickupPoint}}
+\index{removePickupPoint@{removePickupPoint}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{removePickupPoint}{removePickupPoint}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a328cd08840fb929a4f2840331369798b} 
+void Agent\+Input\+Widget\+::remove\+Pickup\+Point (\begin{DoxyParamCaption}\item[{const QPoint \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a328cd08840fb929a4f2840331369798b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a328cd08840fb929a4f2840331369798b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_aa3a0c8d88e5e4ec941d6b6716b9cbd1b}\index{AgentInputWidget@{AgentInputWidget}!setScene@{setScene}}
+\index{setScene@{setScene}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{setScene()}{setScene()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_aa3a0c8d88e5e4ec941d6b6716b9cbd1b} 
+void Agent\+Input\+Widget\+::set\+Scene (\begin{DoxyParamCaption}\item[{QGraphics\+Scene \texorpdfstring{$\ast$}{*}}]{scene}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e}\index{AgentInputWidget@{AgentInputWidget}!updateAgentList@{updateAgentList}}
+\index{updateAgentList@{updateAgentList}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{updateAgentList}{updateAgentList}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e} 
+void Agent\+Input\+Widget\+::update\+Agent\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_ab387397ef5eadbce58a7121579e9b47e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_agent_input_widget_a6eddd08be0433172ddc7b4a6932e28bc}\index{AgentInputWidget@{AgentInputWidget}!updateMap@{updateMap}}
+\index{updateMap@{updateMap}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{updateMap()}{updateMap()}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a6eddd08be0433172ddc7b4a6932e28bc} 
+void Agent\+Input\+Widget\+::update\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_agent_input_widget_a6eddd08be0433172ddc7b4a6932e28bc_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_agent_input_widget_a443b383d08bc241d714a134c086a24f2}\index{AgentInputWidget@{AgentInputWidget}!EditorView@{EditorView}}
+\index{EditorView@{EditorView}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{EditorView}{EditorView}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a443b383d08bc241d714a134c086a24f2} 
+friend class \mbox{\hyperlink{class_editor_view}{Editor\+View}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_agent_input_widget_a75df0ddd60e2814fc28c3f210641b3f0}\index{AgentInputWidget@{AgentInputWidget}!agentListWidget@{agentListWidget}}
+\index{agentListWidget@{agentListWidget}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{agentListWidget}{agentListWidget}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a75df0ddd60e2814fc28c3f210641b3f0} 
+QList\+Widget\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::agent\+List\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2}\index{AgentInputWidget@{AgentInputWidget}!agentsData@{agentsData}}
+\index{agentsData@{agentsData}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{agentsData}{agentsData}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a8013837ca9ff86b395ac8c1afdcab0f2} 
+std\+::vector$<$\mbox{\hyperlink{struct_agent_input_widget_1_1_agent_data}{Agent\+Data}}$>$ Agent\+Input\+Widget\+::agents\+Data\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a2dc077e2faacca944916e52401676146}\index{AgentInputWidget@{AgentInputWidget}!avaliableDropoffPoints@{avaliableDropoffPoints}}
+\index{avaliableDropoffPoints@{avaliableDropoffPoints}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{avaliableDropoffPoints}{avaliableDropoffPoints}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a2dc077e2faacca944916e52401676146} 
+std\+::vector$<$QPoint$>$ Agent\+Input\+Widget\+::avaliable\+Dropoff\+Points\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a3e6384c7a8f56d2893aea064d1e0416a}\index{AgentInputWidget@{AgentInputWidget}!avaliablePickupPoints@{avaliablePickupPoints}}
+\index{avaliablePickupPoints@{avaliablePickupPoints}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{avaliablePickupPoints}{avaliablePickupPoints}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a3e6384c7a8f56d2893aea064d1e0416a} 
+std\+::vector$<$QPoint$>$ Agent\+Input\+Widget\+::avaliable\+Pickup\+Points\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_acda4033f18ef54ff804e3c4407b60005}\index{AgentInputWidget@{AgentInputWidget}!graphicsView@{graphicsView}}
+\index{graphicsView@{graphicsView}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{graphicsView}{graphicsView}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_acda4033f18ef54ff804e3c4407b60005} 
+QGraphics\+View\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::graphics\+View\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee}\index{AgentInputWidget@{AgentInputWidget}!graphItem@{graphItem}}
+\index{graphItem@{graphItem}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{graphItem}{graphItem}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_acb01161481e60476ae8ecca60643c5ee} 
+\mbox{\hyperlink{class_interactive_agent_rect_item}{Interactive\+Agent\+Rect\+Item}}\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::graph\+Item\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a}\index{AgentInputWidget@{AgentInputWidget}!height@{height}}
+\index{height@{height}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a1b7176967948bd7cfdba76699c1ed30a} 
+int Agent\+Input\+Widget\+::height\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a078b0fe7413ed2f618ce8d81092b679a}\index{AgentInputWidget@{AgentInputWidget}!heightInput@{heightInput}}
+\index{heightInput@{heightInput}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{heightInput}{heightInput}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a078b0fe7413ed2f618ce8d81092b679a} 
+QSpin\+Box\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::height\+Input\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708}\index{AgentInputWidget@{AgentInputWidget}!obstacles@{obstacles}}
+\index{obstacles@{obstacles}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{obstacles}{obstacles}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a9969d87966bcb06a56e7c809799b0708} 
+std\+::vector$<$QPoint$>$ Agent\+Input\+Widget\+::obstacles\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b}\index{AgentInputWidget@{AgentInputWidget}!scene@{scene}}
+\index{scene@{scene}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_aa298a8564d50736d456af4792e5b282b} 
+QGraphics\+Scene\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::scene\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7}\index{AgentInputWidget@{AgentInputWidget}!width@{width}}
+\index{width@{width}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_ab7c3c17fd9865bd2c30325594d19cba7} 
+int Agent\+Input\+Widget\+::width\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_agent_input_widget_a42e81ca37766a0dc8b7aabf464e34354}\index{AgentInputWidget@{AgentInputWidget}!widthInput@{widthInput}}
+\index{widthInput@{widthInput}!AgentInputWidget@{AgentInputWidget}}
+\doxysubsubsection{\texorpdfstring{widthInput}{widthInput}}
+{\footnotesize\ttfamily \label{class_agent_input_widget_a42e81ca37766a0dc8b7aabf464e34354} 
+QSpin\+Box\texorpdfstring{$\ast$}{*} Agent\+Input\+Widget\+::width\+Input\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{agentinputwidget_8h}{agentinputwidget.\+h}}\item 
+\mbox{\hyperlink{agentinputwidget_8cpp}{agentinputwidget.\+cpp}}\item 
+\mbox{\hyperlink{moc__agentinputwidget_8cpp}{moc\+\_\+agentinputwidget.\+cpp}}\end{DoxyCompactItemize}

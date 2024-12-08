@@ -264,10 +264,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\AStar\Astar.cpp" />
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\AStar\Node.cpp" />
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Agent.cpp" />
-    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Environment.cpp" />
-    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\Space-Time-AStar\SpaceTimeAStar.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\BaseEnvironment.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\CA\CooperativeA.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\CA_Environment.cpp" />
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\TSP.cpp" />
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\TaskGroup.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA\WCA_Agent.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA\WindowCooperativeA.cpp" />
+    <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\WCA_Environment.cpp" />
     <ClCompile Include="D:\All\Studia\Zajecia\Semestr_7\Inzynierka\TEST\TSP-MAPD\src\setup.cpp" />
   </ItemGroup>
   <ItemGroup>

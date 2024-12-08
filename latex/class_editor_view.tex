@@ -1,0 +1,247 @@
+\doxysection{Editor\+View Class Reference}
+\hypertarget{class_editor_view}{}\label{class_editor_view}\index{EditorView@{EditorView}}
+
+
+{\ttfamily \#include $<$editorview.\+h$>$}
+
+
+
+Inherits QWidget.
+
+
+
+Collaboration diagram for Editor\+View\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_editor_view__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_editor_view_a94e3ff5796a418a6818bbf28ae20b2b4}{toggle\+Sidebar}} ()
+\item 
+void \mbox{\hyperlink{class_editor_view_a3c5e54448245929152fa13ea6e609d93}{load\+Map}} ()
+\item 
+void \mbox{\hyperlink{class_editor_view_a0bf06d47d275aee1f59d12af57e35023}{save\+Map}} ()
+\item 
+void \mbox{\hyperlink{class_editor_view_a0bbb4fffc1eead835b0784f4f09efe5b}{clear\+Agents}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_editor_view_af57378e1c747d58e4b348a000cf775c7}{Editor\+View}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_editor_view_a95c84bb0f4b5a6d80fdc2d68f096bec8}{update\+Graph\+In\+Scene}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+QTool\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_editor_view_ae29fdc2b9a62c5a0584ece5fbb2ab668}{create\+Sidebar\+Button}} (const QString \&icon\+Path, const QString \&title, std\+::function$<$ void()$>$ on\+Click\+Function)
+\item 
+void \mbox{\hyperlink{class_editor_view_a579cc6390c3b573a17a76e3070c690c0}{set\+Created\+Graph}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} $>$ map)
+\item 
+void \mbox{\hyperlink{class_editor_view_a2723be203704ceb314c6b99803564f5b}{set\+Created\+Agents}} (std\+::shared\+\_\+ptr$<$ std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ $>$ agents)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QStacked\+Widget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_editor_view_a9a8b042c4618e037b6a81d6bf82177a3}{\+\_\+stacked\+Widget}}
+\item 
+QTool\+Button \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_editor_view_a67bf63775586c0adfe93cbad7ebaa256}{\+\_\+active\+Button}}
+\item 
+QWidget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_editor_view_ad48f5c29dc4de20f630452983dfd2a9a}{sidebar}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_agent_input_widget}{Agent\+Input\+Widget}} $>$ \mbox{\hyperlink{class_editor_view_a4b080d29ec30ce783363b2b1188901d7}{input\+Widget}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} $>$ \mbox{\hyperlink{class_editor_view_a3b290c8a75164310c22b21c09e8c7a57}{created\+Map}}
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ $>$ \mbox{\hyperlink{class_editor_view_a0fcf496561b714167030eac5a3d15b76}{created\+\_\+agents}}
+\item 
+bool \mbox{\hyperlink{class_editor_view_aa441c8037d0e11bbea7c9f640d2a96a7}{sidebar\+Visible}}
+\item 
+QProperty\+Animation \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_editor_view_ae525577548ed97240e74da534f120107}{sidebar\+Animation}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_editor_view_af57378e1c747d58e4b348a000cf775c7}\index{EditorView@{EditorView}!EditorView@{EditorView}}
+\index{EditorView@{EditorView}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{EditorView()}{EditorView()}}
+{\footnotesize\ttfamily \label{class_editor_view_af57378e1c747d58e4b348a000cf775c7} 
+Editor\+View\+::\+Editor\+View (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_editor_view_af57378e1c747d58e4b348a000cf775c7_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_editor_view_a0bbb4fffc1eead835b0784f4f09efe5b}\index{EditorView@{EditorView}!clearAgents@{clearAgents}}
+\index{clearAgents@{clearAgents}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{clearAgents}{clearAgents}}
+{\footnotesize\ttfamily \label{class_editor_view_a0bbb4fffc1eead835b0784f4f09efe5b} 
+void Editor\+View\+::clear\+Agents (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_editor_view_a0bbb4fffc1eead835b0784f4f09efe5b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_editor_view_ae29fdc2b9a62c5a0584ece5fbb2ab668}\index{EditorView@{EditorView}!createSidebarButton@{createSidebarButton}}
+\index{createSidebarButton@{createSidebarButton}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{createSidebarButton()}{createSidebarButton()}}
+{\footnotesize\ttfamily \label{class_editor_view_ae29fdc2b9a62c5a0584ece5fbb2ab668} 
+QTool\+Button \texorpdfstring{$\ast$}{*} Editor\+View\+::create\+Sidebar\+Button (\begin{DoxyParamCaption}\item[{const QString \&}]{icon\+Path}{, }\item[{const QString \&}]{title}{, }\item[{std\+::function$<$ void()$>$}]{on\+Click\+Function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_editor_view_ae29fdc2b9a62c5a0584ece5fbb2ab668_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_editor_view_a3c5e54448245929152fa13ea6e609d93}\index{EditorView@{EditorView}!loadMap@{loadMap}}
+\index{loadMap@{loadMap}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{loadMap}{loadMap}}
+{\footnotesize\ttfamily \label{class_editor_view_a3c5e54448245929152fa13ea6e609d93} 
+void Editor\+View\+::load\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_editor_view_a3c5e54448245929152fa13ea6e609d93_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_editor_view_a3c5e54448245929152fa13ea6e609d93_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_editor_view_a0bf06d47d275aee1f59d12af57e35023}\index{EditorView@{EditorView}!saveMap@{saveMap}}
+\index{saveMap@{saveMap}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{saveMap}{saveMap}}
+{\footnotesize\ttfamily \label{class_editor_view_a0bf06d47d275aee1f59d12af57e35023} 
+void Editor\+View\+::save\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{class_editor_view_a0bf06d47d275aee1f59d12af57e35023_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_editor_view_a2723be203704ceb314c6b99803564f5b}\index{EditorView@{EditorView}!setCreatedAgents@{setCreatedAgents}}
+\index{setCreatedAgents@{setCreatedAgents}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{setCreatedAgents()}{setCreatedAgents()}}
+{\footnotesize\ttfamily \label{class_editor_view_a2723be203704ceb314c6b99803564f5b} 
+void Editor\+View\+::set\+Created\+Agents (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ std\+::vector$<$ \mbox{\hyperlink{class_agent}{Agent}} $>$ $>$}]{agents}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a579cc6390c3b573a17a76e3070c690c0}\index{EditorView@{EditorView}!setCreatedGraph@{setCreatedGraph}}
+\index{setCreatedGraph@{setCreatedGraph}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{setCreatedGraph()}{setCreatedGraph()}}
+{\footnotesize\ttfamily \label{class_editor_view_a579cc6390c3b573a17a76e3070c690c0} 
+void Editor\+View\+::set\+Created\+Graph (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}} $>$}]{map}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a94e3ff5796a418a6818bbf28ae20b2b4}\index{EditorView@{EditorView}!toggleSidebar@{toggleSidebar}}
+\index{toggleSidebar@{toggleSidebar}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{toggleSidebar}{toggleSidebar}}
+{\footnotesize\ttfamily \label{class_editor_view_a94e3ff5796a418a6818bbf28ae20b2b4} 
+void Editor\+View\+::toggle\+Sidebar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_editor_view_a94e3ff5796a418a6818bbf28ae20b2b4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_editor_view_a95c84bb0f4b5a6d80fdc2d68f096bec8}\index{EditorView@{EditorView}!updateGraphInScene@{updateGraphInScene}}
+\index{updateGraphInScene@{updateGraphInScene}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{updateGraphInScene()}{updateGraphInScene()}}
+{\footnotesize\ttfamily \label{class_editor_view_a95c84bb0f4b5a6d80fdc2d68f096bec8} 
+void Editor\+View\+::update\+Graph\+In\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_editor_view_a95c84bb0f4b5a6d80fdc2d68f096bec8_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_editor_view_a67bf63775586c0adfe93cbad7ebaa256}\index{EditorView@{EditorView}!\_activeButton@{\_activeButton}}
+\index{\_activeButton@{\_activeButton}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{\_activeButton}{\_activeButton}}
+{\footnotesize\ttfamily \label{class_editor_view_a67bf63775586c0adfe93cbad7ebaa256} 
+QTool\+Button\texorpdfstring{$\ast$}{*} Editor\+View\+::\+\_\+active\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a9a8b042c4618e037b6a81d6bf82177a3}\index{EditorView@{EditorView}!\_stackedWidget@{\_stackedWidget}}
+\index{\_stackedWidget@{\_stackedWidget}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{\_stackedWidget}{\_stackedWidget}}
+{\footnotesize\ttfamily \label{class_editor_view_a9a8b042c4618e037b6a81d6bf82177a3} 
+QStacked\+Widget\texorpdfstring{$\ast$}{*} Editor\+View\+::\+\_\+stacked\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a0fcf496561b714167030eac5a3d15b76}\index{EditorView@{EditorView}!created\_agents@{created\_agents}}
+\index{created\_agents@{created\_agents}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{created\_agents}{created\_agents}}
+{\footnotesize\ttfamily \label{class_editor_view_a0fcf496561b714167030eac5a3d15b76} 
+std\+::shared\+\_\+ptr$<$std\+::vector$<$\mbox{\hyperlink{class_agent}{Agent}}$>$ $>$ Editor\+View\+::created\+\_\+agents\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a3b290c8a75164310c22b21c09e8c7a57}\index{EditorView@{EditorView}!createdMap@{createdMap}}
+\index{createdMap@{createdMap}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{createdMap}{createdMap}}
+{\footnotesize\ttfamily \label{class_editor_view_a3b290c8a75164310c22b21c09e8c7a57} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structmap_1_1_graph}{map\+::\+Graph}}$>$ Editor\+View\+::created\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_a4b080d29ec30ce783363b2b1188901d7}\index{EditorView@{EditorView}!inputWidget@{inputWidget}}
+\index{inputWidget@{inputWidget}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{inputWidget}{inputWidget}}
+{\footnotesize\ttfamily \label{class_editor_view_a4b080d29ec30ce783363b2b1188901d7} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_agent_input_widget}{Agent\+Input\+Widget}}$>$ Editor\+View\+::input\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_ad48f5c29dc4de20f630452983dfd2a9a}\index{EditorView@{EditorView}!sidebar@{sidebar}}
+\index{sidebar@{sidebar}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{sidebar}{sidebar}}
+{\footnotesize\ttfamily \label{class_editor_view_ad48f5c29dc4de20f630452983dfd2a9a} 
+QWidget\texorpdfstring{$\ast$}{*} Editor\+View\+::sidebar\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_ae525577548ed97240e74da534f120107}\index{EditorView@{EditorView}!sidebarAnimation@{sidebarAnimation}}
+\index{sidebarAnimation@{sidebarAnimation}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{sidebarAnimation}{sidebarAnimation}}
+{\footnotesize\ttfamily \label{class_editor_view_ae525577548ed97240e74da534f120107} 
+QProperty\+Animation\texorpdfstring{$\ast$}{*} Editor\+View\+::sidebar\+Animation\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_editor_view_aa441c8037d0e11bbea7c9f640d2a96a7}\index{EditorView@{EditorView}!sidebarVisible@{sidebarVisible}}
+\index{sidebarVisible@{sidebarVisible}!EditorView@{EditorView}}
+\doxysubsubsection{\texorpdfstring{sidebarVisible}{sidebarVisible}}
+{\footnotesize\ttfamily \label{class_editor_view_aa441c8037d0e11bbea7c9f640d2a96a7} 
+bool Editor\+View\+::sidebar\+Visible\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{editorview_8h}{editorview.\+h}}\item 
+\mbox{\hyperlink{editorview_8cpp}{editorview.\+cpp}}\end{DoxyCompactItemize}

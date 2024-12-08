@@ -1,0 +1,38 @@
+\doxysection{generalview.\+h}
+\hypertarget{generalview_8h_source}{}\label{generalview_8h_source}\index{generalview.h@{generalview.h}}
+\mbox{\hyperlink{generalview_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ GENERALVIEW\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ GENERALVIEW\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QRadioButton>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QHBoxLayout>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{setup_8h}{setup.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_general_view}{GeneralView}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_general_view_a388fa56794be8800963828e6a6313be1}{GeneralView}}(QWidget*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{setup_8h_a5d2559f81e8e4cb87f80f0ed93ade682}{AlgType}}\ \mbox{\hyperlink{class_general_view_a29aac86e984b6109009ddf61030a80d9}{getSelectedAlgorithm}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_general_view_a483a04d4f7b0ac7e8b1ac28128525870}{onCASelected}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_general_view_aa41096f09b8d5c8617a7f6ae6e5ccd19}{onWHCASelected}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ QRadioButton*\ \mbox{\hyperlink{class_general_view_a0838604c5a78a1304e030d35b7f35f67}{CA}};}
+\DoxyCodeLine{00036\ \ \ \ \ QRadioButton*\ \mbox{\hyperlink{class_general_view_a2b034faab781199c2770146c0accf110}{WCA}};}
+\DoxyCodeLine{00037\ \ \ \ \ QLabel*\ \mbox{\hyperlink{class_general_view_acecaf77dba82bab392b36406abadeb19}{label}};}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{setup_8h_a5d2559f81e8e4cb87f80f0ed93ade682}{AlgType}}\ \mbox{\hyperlink{class_general_view_acc7eaff31b8cbc6242e88e1f9f01b414}{selectedAlgorithm}};}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,34 @@
+\doxysection{animationscene.\+h}
+\hypertarget{animationscene_8h_source}{}\label{animationscene_8h_source}\index{animationscene.h@{animationscene.h}}
+\mbox{\hyperlink{animationscene_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ MAPFSCENE\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ MAPFSCENE\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QGraphicsScene>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{graphrectitem_8h}{graph/graphrectitem.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{agentrectitem_8h}{agentrectitem.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_base_environment_8h}{../lib/BaseEnvironment.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mapf_scene}{MapfScene}}\ :\ \textcolor{keyword}{public}\ QGraphicsScene}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{structmap_1_1_graph}{map::Graph}}\ \mbox{\hyperlink{class_mapf_scene_a57998319799732d495126a5826a0c677}{graph}};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_graph_rect_item}{GraphRectItem}}*\ \mbox{\hyperlink{class_mapf_scene_af8ed19f5736c8e74a7bf528fa8381c33}{vis\_graph}};}
+\DoxyCodeLine{00024\ \ \ \ \ std::vector<AgentRectItem*>\ \mbox{\hyperlink{class_mapf_scene_a328ee87622736c3e09f7d27bedbd5473}{vis\_agents}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_base_environment}{BaseEnvironment}}*\ \mbox{\hyperlink{class_mapf_scene_a0eca8b4873eb6c659d38a24e57890170}{environment}};}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_mapf_scene_ad7274bd84a1f40b408032795b18655a9}{MapfScene}}(\mbox{\hyperlink{class_base_environment}{BaseEnvironment}}*\ env,\ QObject*\ parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_mapf_scene_ab98bcb7a6be1afd26b782de9ed52ecdc}{\string~MapfScene}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mapf_scene_abe1732e70b1f8bae676e1d164f17ce9e}{drawEnvironment}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mapf_scene_ac125bc8cd21011d6471e5318258e34d7}{updateScene}}(\textcolor{keywordtype}{int}\ timestep);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mapf_scene_a9bb61b64b2405b613050fbb5155c197f}{updateAgentAnimationSpeed}}(\textcolor{keywordtype}{int}\ speed);}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

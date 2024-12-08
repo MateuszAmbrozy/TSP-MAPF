@@ -226,7 +226,7 @@ void EditorView::saveMap()
         QJsonObject agentObject;
         agentObject["x"] = agent.point.x();
         agentObject["y"] = agent.point.y();
-        agentObject["capacity"] = agent.capacity;
+        agentObject["capacity"] = 15;
         agentsArray.append(agentObject);  // Dodajemy agent do tablicy
     }
     mapData["agents"] = agentsArray;  // Dodajemy tablicę agentów do mapy
