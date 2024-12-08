@@ -2,7 +2,7 @@
 *.*~
 *.o
 build/
-json/
+latex/
 html/
 Doxyfile
 main.exe
