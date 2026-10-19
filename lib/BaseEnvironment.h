@@ -4,16 +4,15 @@
  * @brief Base class to for Environment and WHCA Environment
  * @version 0.1
  * @date 2024-11-08
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef BASEENVIRONMENT_H
 #define BASEENVIRONMENT_H
 #include "CA/Reservation.h"
 #include "TaskGroup.h"
 #include "TSP.h"
-//#include <windows.h>
 #include  <random>
 #include  <iterator>
 class BaseEnvironment
@@ -44,6 +43,8 @@ protected:
 public:
     BaseEnvironment(map::Graph graph, std::vector<std::pair<int, int>> avaliableDropoffs, std::vector<std::pair<int, int>> avaliablePickups);
 
+    virtual ~BaseEnvironment() = default;
+
     TaskGroup TASKGROUPGENERATOR();
     virtual void addTaskGroup(const TaskGroup& taskGroup);
     void assignTasks(std::vector<TaskGroup> tasks);
@@ -59,4 +60,4 @@ public:
     inline map::Graph getGraph() {return this->graph;}
 };
 
-#endif // BASEENVIRONMENT_H
+#endif

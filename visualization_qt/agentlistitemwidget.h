@@ -54,4 +54,4 @@ private:
     QSpinBox *spinBox;
 };
 
-#endif // AGENTLISTITEMWIDGET_H
+#endif

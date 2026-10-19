@@ -20,7 +20,6 @@
 #include "interactivegraphrectitem.h"
 #include "qgraphicssceneevent.h"
 
-// class InteractiveGraphRectItem;
 
 class InteractiveCellItem : public QGraphicsRectItem
 {
@@ -31,8 +30,8 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
 private:
-    QPoint cellPosition;  // Store the cell's grid position
-    InteractiveGraphRectItem* parentGraphItem;  // Pointer to the parent graph item
+    QPoint cellPosition;
+    InteractiveGraphRectItem* parentGraphItem;
 };
 
-#endif // INTERACTIVECELLITEM_H
+#endif

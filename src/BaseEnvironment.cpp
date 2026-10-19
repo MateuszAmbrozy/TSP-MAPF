@@ -7,7 +7,6 @@ BaseEnvironment::BaseEnvironment(map::Graph graph, std::vector<std::pair<int, in
     avaliablePickups(avaliablePickups),
     avaliableDropoff(avaliableDropoff)
 {
-    //srand(time(0));
     table = Reservation();
 }
 TaskGroup BaseEnvironment::TASKGROUPGENERATOR()
@@ -42,11 +41,10 @@ TaskGroup BaseEnvironment::TASKGROUPGENERATOR()
         dropoffTime = rand() % setup::maxStopTime;
     } else
     {
-        stopTimes = std::vector<int>(numTasks, 0); // Domyślnie 0, jeśli brak ograniczenia
+        stopTimes = std::vector<int>(numTasks, 0);
         dropoffTime = 0;
     }
 
-    // Utworzenie grupy zadań
     TaskGroup taskGroup(taskCapacity, pickupPoints, dropoffPoint, stopTimes, dropoffTime);
 
     return taskGroup;

@@ -12,7 +12,7 @@
 #define VISUALIZATIONGRAPH_H
 
 #include <QGraphicsRectItem>
-#include <QObject> // Dodajemy QObject dla mechanizmu MOC
+#include <QObject>
 #include "../../lib/Graph.h"
 
 class VisualizationGraph : public QObject, public QGraphicsRectItem {
@@ -26,4 +26,4 @@ protected:
     virtual void drawGraph(QGraphicsScene* scene) = 0;
 };
 
-#endif // VISUALIZATIONGRAPH_H
+#endif

@@ -10,7 +10,6 @@ MapfScene::MapfScene(BaseEnvironment *env, QObject *parent)
     for (const auto& agent : agents)
     {
         std::vector<map::Cell> pickups = agent.getTask().getPickupPoints();
-        //map::Cell dropoff = agent.getTask().getDropoffLocation();
 
         AgentRectItem* vis_agent = new AgentRectItem();
         vis_agent->drawAgent(this, agent);

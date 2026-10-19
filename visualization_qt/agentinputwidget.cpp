@@ -74,7 +74,7 @@ void AgentInputWidget::loadMap(int width, int height, const std::vector<QPoint>&
 
 
     std::shared_ptr<map::Graph> newMap = std::make_shared<map::Graph>(width, height);
-    graphItem = new InteractiveAgentRectItem(*newMap, nullptr);  // Create new graph item
+    graphItem = new InteractiveAgentRectItem(*newMap, nullptr);
 
 
     this->width = width;
@@ -227,7 +227,6 @@ void AgentInputWidget::createMap()
 
     agentsData.clear();
     obstacles.clear();
-    //graphItem->clear();
 
 
     std::shared_ptr<map::Graph> newMap = std::make_shared<map::Graph>(width, height);

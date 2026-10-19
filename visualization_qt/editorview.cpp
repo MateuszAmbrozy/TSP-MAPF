@@ -21,7 +21,6 @@ EditorView::EditorView(QWidget *parent) :
     layout->addWidget(sidebar, Sidebar::West);
 
 
-    // Dodanie AgentInputWidget do layoutu
     QGraphicsScene *scene = new QGraphicsScene(this);
     InteractiveAgentRectItem *graphItem = nullptr;
 
@@ -37,10 +36,10 @@ EditorView::EditorView(QWidget *parent) :
     connect(inputWidget.get(), &AgentInputWidget::agentsCreated, this,
             [this](std::shared_ptr<std::vector<Agent>> agents)
             {
-                setCreatedAgents(agents);  // Zapisz agentów
+                setCreatedAgents(agents);
             });
 
-    layout->addWidget(inputWidget.get(), Sidebar::Center);  // AgentInputWidget w centralnej części
+    layout->addWidget(inputWidget.get(), Sidebar::Center);
 
     QWidget *borderLayoutContainer = new QWidget;
     borderLayoutContainer->setLayout(layout);
@@ -66,11 +65,10 @@ EditorView::EditorView(QWidget *parent) :
     toggleButton->setText("☰");
     toggleButton->setStyleSheet("QPushButton { border: 1px solid black; }");
 
-    mainLayout->addWidget(toggleButton, 0, Qt::AlignLeft | Qt::AlignTop);  // Przycisk w lewym górnym rogu
+    mainLayout->addWidget(toggleButton, 0, Qt::AlignLeft | Qt::AlignTop);
 
     connect(toggleButton, &QPushButton::clicked, this, &EditorView::toggleSidebar);
 
-    // Wyświetl domyślny graf w scenie po otwarciu okna
     updateGraphInScene();
 }
 void EditorView::updateGraphInScene()
@@ -101,8 +99,8 @@ void EditorView::toggleSidebar()
         sidebarAnimation->setDirection(QPropertyAnimation::Forward);
     }
 
-    sidebarVisible = !sidebarVisible;  // Zmień stan paska
-    sidebarAnimation->start();  // Rozpocznij animację
+    sidebarVisible = !sidebarVisible;
+    sidebarAnimation->start();
 }
 
 QToolButton *EditorView::createSidebarButton(const QString &iconPath, const QString &title, std::function<void()> onClickFunction)
@@ -213,25 +211,21 @@ void EditorView::saveMap()
         return;
     }
 
-    // Tworzymy obiekt JSON, który będzie przechowywał dane
     QJsonObject mapData;
 
-    // Dodajemy szerokość i wysokość mapy
     mapData["width"] = inputWidget->width;
     mapData["height"] = inputWidget->height;
 
-    // Tworzymy tablicę JSON dla agentów
     QJsonArray agentsArray;
     for (const auto& agent : inputWidget->agentsData) {
         QJsonObject agentObject;
         agentObject["x"] = agent.point.x();
         agentObject["y"] = agent.point.y();
         agentObject["capacity"] = 15;
-        agentsArray.append(agentObject);  // Dodajemy agent do tablicy
+        agentsArray.append(agentObject);
     }
-    mapData["agents"] = agentsArray;  // Dodajemy tablicę agentów do mapy
+    mapData["agents"] = agentsArray;
 
-    // Tworzymy tablicę JSON dla przeszkód
     QJsonArray obstaclesArray;
     for (const auto& obstacle : inputWidget->obstacles)
     {
@@ -243,7 +237,6 @@ void EditorView::saveMap()
     mapData["obstacles"] = obstaclesArray;
 
 
-    // Tworzymy tablicę JSON dla pickupPoints
     QJsonArray avaliablePickupPointsArray;
     for (const auto& pickup : inputWidget->avaliablePickupPoints)
     {
@@ -254,7 +247,6 @@ void EditorView::saveMap()
     }
     mapData["avaliablePickups"] = avaliablePickupPointsArray;
 
-    // Dropoff points
     QJsonArray avaliableDropoffPointsArray;
     for (const auto& dropoff : inputWidget->avaliableDropoffPoints)
     {
@@ -266,15 +258,12 @@ void EditorView::saveMap()
     mapData["avaliableDropoffs"] = avaliableDropoffPointsArray;
 
 
-    // Konwersja QJsonObject do QJsonDocument
     QJsonDocument jsonDoc(mapData);
 
-    // Wybieramy miejsce do zapisu pliku
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Map"), "", tr("Map Files (*.json)"));
     if (!fileName.isEmpty()) {
         QFile file(fileName);
         if (file.open(QIODevice::WriteOnly)) {
-            // Zapisujemy dane do pliku
             file.write(jsonDoc.toJson());
             file.close();
             qDebug() << "Map data saved to" << fileName;
@@ -288,7 +277,7 @@ void EditorView::clearAgents()
 {
     if (inputWidget)
     {
-        inputWidget->clear();  // Wywołaj funkcję czyszczenia mapy
+        inputWidget->clear();
         qDebug("Cleared agents and obstacles from the map.");
     }
 }

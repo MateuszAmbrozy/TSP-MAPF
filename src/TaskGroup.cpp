@@ -23,16 +23,16 @@ std::vector<map::Cell> TaskGroup::getPickupPoints() const
 map::Cell TaskGroup::getDropoffLocation() const {
     return dropoff;
 }
-int TaskGroup::getPickupStopTime(int index) const  // Get the stop time for a specific pickup point
+int TaskGroup::getPickupStopTime(int index) const
 {
     return stop_times.at(index);
 }
-int TaskGroup::getDropoffStopTime() const  // Get the stop time for the dropoff point
+int TaskGroup::getDropoffStopTime() const
 {
 return dropoff_stop_time;
 }
 
-int TaskGroup::getNumTasks() const 
+int TaskGroup::getNumTasks() const
 {
     return pickup_points.size();
 }
@@ -53,10 +53,10 @@ map::Cell &TaskGroup::operator[](int idx)
     }
     throw std::out_of_range("Invalid pickup point index");
 }
-bool TaskGroup::operator==(const TaskGroup& other) const 
+bool TaskGroup::operator==(const TaskGroup& other) const
 {
         return pickup_points == other.pickup_points &&
-               dropoff == other.dropoff && 
+               dropoff == other.dropoff &&
                capacity == other.capacity &&
                stop_times == other.stop_times &&
                dropoff_stop_time == other.dropoff_stop_time;
@@ -69,9 +69,9 @@ std::ostream& operator<<(std::ostream& os, const TaskGroup& task)
     {
         os << "(" << task.pickup_points[i].x << ", " << task.pickup_points[i].y  << "), " << task.getPickupStopTime(i) << " -> ";
     }
-    std::cout << "\n, dropoffPoint:  (" << task.getDropoffLocation().x << ", "<< task.getDropoffLocation().y << "), tDP: " << task.getDropoffStopTime() <<", "; 
+    os << "\n, dropoffPoint:  (" << task.getDropoffLocation().x << ", "<< task.getDropoffLocation().y << "), tDP: " << task.getDropoffStopTime() <<", ";
     os << std::endl;
     return os;
-    
-    
+
+
 }

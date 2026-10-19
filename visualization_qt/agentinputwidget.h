@@ -76,4 +76,4 @@ signals:
     void agentsCreated(std::shared_ptr<std::vector<Agent>> agents);
 };
 
-#endif // AGENTINPUTWIDGET_H
+#endif

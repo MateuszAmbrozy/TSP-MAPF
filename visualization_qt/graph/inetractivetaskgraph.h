@@ -50,4 +50,4 @@ private:
     void toggleSelectionMode() override;
 };
 
-#endif // INTERACTIVETASKGRAPH_H
+#endif

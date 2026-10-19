@@ -1,9 +1,5 @@
 #include "../../lib/AStar/Node.h"
 
-//Node
-// A::Node::Node()
-//     : Cell(), parent{nullptr}, gCost{0}, hCost{0}, fCost{0}
-// {}
 A::Node::Node(int x, int y, bool isObstacle, std::shared_ptr<A::Node> parent, float gCost, float hCost, float fCost)
     : Cell(x, y, isObstacle), parent(parent),
     gCost(gCost), hCost(hCost), fCost(fCost)
@@ -52,11 +48,7 @@ void A::Node::setParent(std::shared_ptr<A::Node> parent)
 
 A::Node& A::Node::operator=(const map::Cell& other) {
     if (this == &other) return *this;
-    Cell::operator=(other);  // Use base class (map::Cell) assignment
-    // this->parent = nullptr;  // Copy the parent pointer
-    // this->fCost = 0;
-    // this->gCost = 0;
-    // this->hCost = 0;
+    Cell::operator=(other);
     
     return *this;
 }

@@ -33,7 +33,7 @@ private:
     CooperativeA sta;
 
 
-    std::vector<Agent> capacity(const TaskGroup& task) const; //wyszukuje agentow spelniajacych ograniczenie pojemnosci z agentow wakacyjnych
+    std::vector<Agent> capacity(const TaskGroup& task) const;
     std::optional<Agent> random(std::vector<Agent>& capableAgents) const;
 
 public:

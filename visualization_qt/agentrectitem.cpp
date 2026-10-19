@@ -54,7 +54,7 @@
     void AgentRectItem::setAnimationSpeed(int speed)
     {
         if (moveAnimation) {
-            moveAnimation->setDuration(speed);  // Update duration based on new speed
+            moveAnimation->setDuration(speed);
         }
     }
 

@@ -92,7 +92,6 @@ namespace std {
 template<>
 struct hash<CA::Node> {
     size_t operator()(const CA::Node& node) const {
-        // Combine hash values of all relevant members
         return hash<int>()(node.x) ^ (hash<int>()(node.y) << 1) ^ (hash<int>()(node.t) << 2);
     }
 };

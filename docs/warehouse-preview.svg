@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+<title id="title">Example warehouse scenario</title>
+<desc id="desc">A 12 by 8 grid with two robot starts, shelf obstacles, three pickup cells and two delivery cells.</desc>
+<rect width="800" height="520" rx="16" fill="#0f172a"/>
+<g font-family="sans-serif" fill="#e2e8f0">
+<text x="40" y="42" font-size="24" font-weight="bold">TSP-MAPF / Warehouse scenario</text>
+<text x="40" y="68" font-size="14" fill="#94a3b8">12 × 8 grid · two agents · four-direction movement</text>
+<rect x="40" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="40" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="84" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="128" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="172" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="260" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="304" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="348" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="392" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="436" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="480" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="92" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="136" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="180" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="224" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="268" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="312" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="356" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="524" y="400" width="42" height="42" rx="4" fill="#1e293b"/>
+<rect x="216" y="180" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="216" y="224" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="216" y="268" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="348" y="180" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="348" y="224" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="348" y="268" width="42" height="42" rx="4" fill="#334155"/>
+<rect x="172" y="180" width="42" height="42" rx="4" fill="#f59e0b"/>
+<rect x="304" y="224" width="42" height="42" rx="4" fill="#f59e0b"/>
+<rect x="392" y="268" width="42" height="42" rx="4" fill="#f59e0b"/>
+<rect x="524" y="224" width="42" height="42" rx="4" fill="#22c55e"/>
+<rect x="524" y="312" width="42" height="42" rx="4" fill="#22c55e"/>
+<rect x="40" y="92" width="42" height="42" rx="4" fill="#3b82f6"/>
+<text x="61" y="119" text-anchor="middle" font-size="18" fill="white">1</text>
+<rect x="40" y="400" width="42" height="42" rx="4" fill="#3b82f6"/>
+<text x="61" y="427" text-anchor="middle" font-size="18" fill="white">2</text>
+<rect x="600" y="112" width="18" height="18" rx="3" fill="#3b82f6"/><text x="628" y="126" font-size="14">Robot start</text>
+<rect x="600" y="160" width="18" height="18" rx="3" fill="#334155"/><text x="628" y="174" font-size="14">Shelf / obstacle</text>
+<rect x="600" y="208" width="18" height="18" rx="3" fill="#f59e0b"/><text x="628" y="222" font-size="14">Pickup</text>
+<rect x="600" y="256" width="18" height="18" rx="3" fill="#22c55e"/><text x="628" y="270" font-size="14">Dropoff</text>
+<text x="40" y="482" font-size="14" fill="#94a3b8">Map preview of examples/warehouse.json</text>
+</g></svg>

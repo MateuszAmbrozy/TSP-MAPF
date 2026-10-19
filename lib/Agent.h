@@ -24,7 +24,7 @@ private:
     TaskGroup tasks;  
     map::Cell startPos;
     std::vector<CA::Cell> path;
-    std::vector<map::Cell> illicits; //cells that agent cant enter becauese they are 
+    std::vector<map::Cell> illicits;
     bool idle;
 
 
@@ -46,7 +46,7 @@ public:
 
     void assignTask(const TaskGroup taskGroup);
     void clearTask();
-    void assignPath(std::vector<CA::Cell> path);  // Pass by reference
+    void assignPath(std::vector<CA::Cell> path);
     void clearPath();
 
     void setIdle(bool state);

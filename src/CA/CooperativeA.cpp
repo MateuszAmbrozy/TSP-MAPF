@@ -1,6 +1,5 @@
 #include "../../lib/CA/CooperativeA.h"
 #include <climits>
-//#include <qDebug>
 CooperativeA::CooperativeA(map::Graph graph)
 : A::Astar(graph)
 {}
@@ -14,7 +13,6 @@ std::vector<CA::Cell> CooperativeA::getNeighbors(const Agent& agent, map::Cell t
         CA::Cell neighbor(current.x + dir.first, current.y + dir.second, current.t + 1);
         bool containtsIllicits = std::find(illictis.begin(), illictis.end(), neighbor) != illictis.end();
 
-        // Check if the neighbor is valid and doesn't contain any illicits
         if (isValid(neighbor.x, neighbor.y) && !containtsIllicits)
         {
 
@@ -22,7 +20,7 @@ std::vector<CA::Cell> CooperativeA::getNeighbors(const Agent& agent, map::Cell t
             {
                 if (!table.wouldCauseEdgeCollision(current.x, current.y, current.t, neighbor.x, neighbor.y))
                 {
-                    neighbors.push_back(neighbor);  // Prioritize target cell even if reserved
+                    neighbors.push_back(neighbor);  // Allow the target here; check its reservations when planning the wait.
                 }
             }
             else
@@ -70,7 +68,6 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
     CA::Node startNode(currentTime, start.x, start.y, start.isObstacle);
 
     startNode.gCost = 0;
-    //double hNew = CA::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
     startNode.hCost = CA::Node::calculateH(start.x, start.y, target.x, target.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
     startNode.parent = nullptr;
@@ -93,7 +90,6 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
                 CA::Cell cell(temp->x, temp->y, temp->t);
                 path.push_back(cell);
                 temp = temp->parent;
-                //temp = dynamic_cast<CA::Node*>(temp->parent);
             }
             std::reverse(path.begin(), path.end());
 
@@ -103,7 +99,6 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
                 path.pop_back();
 
                 auto parentCell = currentCell.parent;
-                //CA::Node* parentCell = dynamic_cast<CA::Node*>(currentCell.parent);
                 if (!parentCell) {
                     std::cerr << "No parent cell to wait in. Exiting...\n";
                     return path;
@@ -117,7 +112,7 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
                 CA::Cell buf = path.back();
                 if(table.wouldCauseEdgeCollision(buf.x, buf.y, buf.t, target.x, target.y))
                 {
-                    //to do poprawy, bo jak agent wychodzi z komorki na ktora agent chce wejśc to raczej nie znajdzie tej ścieżki i zwróci else
+                    // TODO: Recheck pathfinding when another agent leaves the target cell.
                     CA::Cell waitCell(parentCell->x, parentCell->y, waitT);
                     auto alternativePath = pathToTarget(unit, waitCell, waitTime, currentTime, target, table);
 
@@ -135,17 +130,11 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
                 CA::Cell finalCell(target.x, target.y, waitT);
                 path.push_back(finalCell);
             }
-            //auto isDestinationEndTime = std::chrono::high_resolution_clock::now();
-            //auto isDestinationDuration = std::chrono::duration_cast<std::chrono::milliseconds>(isDestinationEndTime - isDestinationStartTime).count();
 
-            // Print the elapsed time
-            //std::cout << "Execution time for agent " << unit.getId() << " of partPath: " << isDestinationDuration << " millisenconds" << std::endl;
-            //std::cout<<"Iterator: " << iterator << ", openList.size(): " << openList.size() << ", closedList.size(): " << counter << " for agent: " << unit.getId() <<std::endl;
             return path;
         }
     
 
-        //closedList[currentCell.x][currentCell.y] = true;
         std::vector<CA::Cell> neighbors = getNeighbors(unit, target, currentCell, table, closedList);
 
         if(maxWaitTime == 0)
@@ -184,7 +173,6 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
             {
                     double gNew = currentCell.gCost + 1;
                     double hNew = CA::Node::calculateH(neighbor.x, neighbor.y, target.x, target.y);
-                    //double hNew = calculate(neighbor, target);
                     double fNew = gNew + hNew;
 
                     auto parentNode = std::make_shared<CA::Node>(currentCell);
@@ -220,7 +208,6 @@ std::vector<CA::Cell> CooperativeA::pathToTarget(const Agent& unit, const map::C
 
 bool CooperativeA::recursiveWaitAndReturn(const Agent& unit, const int waitTime, const map::Cell& target, CA::Cell* currentCell, CA::Cell* parentCell, int& waitT, std::vector<CA::Cell>& path, Reservation& table) {
 
-    //jesli ma rodzica i rodzic jest pusty i ruch na rodzica nie spowoduje kolizji to znajduje ścieżkę z punktu początkowego do target i konczy dzialanie
     if (parentCell && !table.isReserved(parentCell->x, parentCell->y, waitT) &&
         !table.wouldCauseEdgeCollision(currentCell->x, currentCell->y, waitT, parentCell->x, parentCell->y))
     {
@@ -243,7 +230,6 @@ bool CooperativeA::recursiveWaitAndReturn(const Agent& unit, const int waitTime,
         return recursiveWaitAndReturn(unit, waitTime, target, currentCell, parentCell, waitT, path, table);
     }
 
-    //gdy nie ma rodzica
     if (!table.isReserved(currentCell->x, currentCell->y, waitT))
     {
         path.push_back(CA::Cell(currentCell->x, currentCell->y, waitT));
@@ -264,16 +250,12 @@ bool CooperativeA::recursiveWaitAndReturn(const Agent& unit, const int waitTime,
     }
     else
     {
-        // return recursiveWaitAndReturn(unit, waitTime, target, currentCell, parentCell, waitT, path, table);
-        // std::cout << "No free neighboring cell found. Exiting...\n";
-        // waitT++;
         return false;
         
     }
 }
 
 CA::Cell CooperativeA::findAlternativeWaitingCell(const Agent& unit, const CA::Cell& cell, int currentTime, Reservation& table) {
-    //currentTime--;
     std::vector<map::Cell> illictis = unit.getIllicits();
 
     for (auto dir : setup::moves)
@@ -326,7 +308,6 @@ std::vector<CA::Cell> CooperativeA::findPath(Agent& unit, int currentTime, TaskG
 
         if(path.empty())
         {
-            //std::cout<<"ERROR::CooperativeA::findPath - not found path. Return {}.\n";
             return {};
 
         }
@@ -350,13 +331,11 @@ std::vector<CA::Cell> CooperativeA::findPath(Agent& unit, int currentTime, TaskG
         currentAgentPosition = currentTaskPosition;
     }
 
-    ///////////////// Dropoff handling
     {
         std::vector<CA::Cell> dropoffPath = pathToTarget(unit, currentAgentPosition, groupTask.getDropoffStopTime(), currentTime, groupTask.getDropoffLocation(), table);
 
         if(dropoffPath.size() == 0)
         {
-            //std::cout<<"ERROR::CooperativeA::findPath - not found path. Return {}.\n";
             return {};
 
         }
@@ -382,12 +361,10 @@ std::vector<CA::Cell> CooperativeA::findPath(Agent& unit, int currentTime, TaskG
         currentAgentPosition = dropoffPath.back();
     }
 
-    //////////////// Return to start position
     {
         std::vector<CA::Cell> returnPath = pathToTarget(unit, currentAgentPosition, 0, currentTime, startPos, table);
         if(returnPath.size() == 0)
         {
-            //std::cout<<"ERROR::CooperativeA::findPath - not found path. Return {}.\n";
             return {};
 
         }
@@ -407,7 +384,6 @@ std::vector<CA::Cell> CooperativeA::findPath(Agent& unit, int currentTime, TaskG
     }
 
     {
-        //std::cout<<"\n CALA SCIEZKA \n";
         for(size_t i=0; i<fullPath.size(); i++)
         {            
             table.reserve(fullPath[i].x, fullPath[i].y, fullPath[i].t);
@@ -416,15 +392,11 @@ std::vector<CA::Cell> CooperativeA::findPath(Agent& unit, int currentTime, TaskG
             {
                 table.reserveEdge(fullPath[i].x, fullPath[i].y, fullPath[i + 1].x, fullPath[i + 1].y, fullPath[i].t);
             }
-            //std::cout<<"(" << fullPath[i].x << "," << fullPath[i].y << ", t: " <<  fullPath[i].t << ") -> ";
         }
-        //std::cout<<std::endl;
     }
     auto endTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
 
-    // Print the elapsed time
-    //std::cout << "Execution time for agent " << unit.getId() << " of findTotalPath: " << duration << " millisenconds" << std::endl;
 
     return fullPath;
 }

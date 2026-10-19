@@ -18,7 +18,7 @@ TaskInputWidget::TaskInputWidget(QGraphicsScene *scene, InteractiveTaskRectItem 
     pointListWidget = new QListWidget(this);
     layout->addWidget(pointListWidget);
 
-    QPushButton *createTaskButton = new QPushButton("Utwórz TaskGroup", this);
+    QPushButton *createTaskButton = new QPushButton("Create task group", this);
     connect(createTaskButton, &QPushButton::clicked, this, &TaskInputWidget::createTaskGroup);
     layout->addWidget(createTaskButton);
 
@@ -92,7 +92,6 @@ void TaskInputWidget::updatePointList()
 {
     pointListWidget->clear();
 
-    // Add pickup points
     for (const auto &pointData : pickupPointData)
     {
         auto *itemWidget = new PointListItemWidget("Pickup", pointData.point, pointData.value, this);
@@ -102,7 +101,6 @@ void TaskInputWidget::updatePointList()
         pointListWidget->setItemWidget(item, itemWidget);
     }
 
-    // Add dropoff point
     if (dropoffPointData.point != QPoint())
     {
         auto *itemWidget = new PointListItemWidget("Dropoff", dropoffPointData.point, dropoffPointData.value, this);
@@ -116,16 +114,15 @@ void TaskInputWidget::updatePointList()
 void TaskInputWidget::createTaskGroup()
 {
     int capacity = capacityInput->text().toInt();
+    if (capacity <= 0) return;
 
-    // Add pickup points to the scene
     if(pickupPointData.empty())
         return;
     for (const auto &pointData : pickupPointData)
     {
         int x = pointData.point.x();
         int y = pointData.point.y();
-        int stopTime = 10;
-        //int stopTime = pointData.value;
+        int stopTime = pointData.value;
         if (x < 0 || y < 0)
         {
             return;
@@ -138,8 +135,7 @@ void TaskInputWidget::createTaskGroup()
     int x = dropoffPointData.point.x();
     int y = dropoffPointData.point.y();
     dropoffPoint = map::Cell(x, y);
-    //dropoffStopTime = dropoffPointData.value;
-    dropoffStopTime = 10;
+    dropoffStopTime = dropoffPointData.value;
 
     std::shared_ptr<TaskGroup> taskGroup = std::make_unique<TaskGroup>(capacity, pickupPoints, dropoffPoint, stopTimes, dropoffStopTime);
 

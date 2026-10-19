@@ -11,7 +11,7 @@
 #ifndef INTERACTIVEGRAPHRECTITEM_H
 #define INTERACTIVEGRAPHRECTITEM_H
 
-#include <QObject>  // Dodajemy QObject dla sygnałów i slotów
+#include <QObject>
 #include "visualizationgraph.h"
 
 class InteractiveGraphRectItem :public VisualizationGraph
@@ -32,4 +32,4 @@ protected:
     QPoint getCellFromPosition(const QPointF& position);
 };
 
-#endif // INTERACTIVEGRAPHRECTITEM_H
+#endif

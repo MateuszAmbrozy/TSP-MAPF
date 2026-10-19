@@ -6,7 +6,6 @@ InteractiveTaskRectItem::InteractiveTaskRectItem(map::Graph graph, const std::ve
 void InteractiveTaskRectItem::handleCellLeftClick(const QPoint& cellPos) {
     qDebug("InteractiveTaskRectItem::handleCellLeftClick\n");
 
-    // Check if cell is an obstacle, an agent position, or already contains a pickup/dropoff point
     if (graph.cells[cellPos.x()][cellPos.y()].isObstacle ||
         isAgentCell(cellPos) ||
         pickupPoints.contains(cellPos) ||
@@ -19,13 +18,11 @@ void InteractiveTaskRectItem::handleCellLeftClick(const QPoint& cellPos) {
         updateCellColor(cellPos.x(), cellPos.y(), cellState::PICKUP);
         emit pickupPointSelected(cellPos);
     } else {
-        // If a dropoff point already exists, remove it first
         if (currentDropoffPoint != QPoint(-1, -1)) {
             updateCellColor(currentDropoffPoint.x(), currentDropoffPoint.y(), cellState::NORMAL);
             emit dropoffPointRemoved(currentDropoffPoint);
         }
 
-        // Set the new dropoff point
         currentDropoffPoint = cellPos;
         updateCellColor(cellPos.x(), cellPos.y(), cellState::DROPOFF);
         emit dropoffPointSelected(cellPos);
@@ -42,7 +39,7 @@ void InteractiveTaskRectItem::handleCellRightClick(const QPoint& cellPos) {
     } else if (currentDropoffPoint == cellPos) {
         updateCellColor(cellPos.x(), cellPos.y(), cellState::NORMAL);
         emit dropoffPointRemoved(cellPos);
-        currentDropoffPoint = QPoint(-1, -1);  // Reset dropoff point
+        currentDropoffPoint = QPoint(-1, -1);
     }
 }
 
@@ -75,7 +72,7 @@ void InteractiveTaskRectItem::drawGraph(QGraphicsScene *scene)
 void InteractiveTaskRectItem::clear() {
     pickupPoints.clear();
     dropoffPoints.clear();
-    currentDropoffPoint = QPoint(-1, -1);  // Clear the single dropoff point
+    currentDropoffPoint = QPoint(-1, -1);
 
     int cellSize = setup::cellSize;
     QPen pen(Qt::black);
@@ -123,7 +120,6 @@ void InteractiveTaskRectItem::updateCellColor(int x, int y, cellState state) {
     update();
 }
 
-// Helper function to check if a given cell is occupied by an agent
 bool InteractiveTaskRectItem::isAgentCell(const QPoint& cellPos) const {
     for (const Agent& agent : agents) {
         if (agent.getPosition().x == cellPos.x() && agent.getPosition().y == cellPos.y()) {

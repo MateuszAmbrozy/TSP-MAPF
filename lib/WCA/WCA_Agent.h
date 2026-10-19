@@ -16,7 +16,7 @@
 
 class WCA_Agent{
 private:
-    std::vector<std::pair<map::Cell, int>> waypoints; //waypints key-position, value-stoptime
+    std::vector<std::pair<map::Cell, int>> waypoints;
     int currentWaypointIndex;
 
 public:
@@ -24,7 +24,6 @@ public:
     int W;
     int K;
     Agent agent;
-    // Metody dostępu
     std::vector<CA::Cell> getCurrentPath() const;
     int getCurrentWaypointIndex() const;
     bool atCurrentWaypoint() const;
@@ -34,7 +33,6 @@ public:
     void clearWaypoints();
     void clearCurrentWayPointIndex();
 
-    // Sprawdza, czy agent osiągnął bieżący punkt docelowy
     bool reachedCurrentWaypoint() const;
 
     void setWaypoints(const std::vector<std::pair<map::Cell, int> > &newGetWaypoints);

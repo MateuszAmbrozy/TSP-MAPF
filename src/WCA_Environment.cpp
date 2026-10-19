@@ -1,7 +1,6 @@
 #include "../lib/WCA_Environment.h"
 
 #include "../lib/setup.h"
-//#include "QDebug"
 WCA_Environment::WCA_Environment(std::vector<Agent> agents, map::Graph graph, std::vector<std::pair<int, int>> avaliablePickups, std::vector<std::pair<int, int>> avaliableDropoffs)
     : BaseEnvironment(graph, avaliablePickups, avaliableDropoffs), whca(graph)
 {
@@ -15,8 +14,8 @@ void WCA_Environment::addAgent(Agent &newAgent)
 {
     for (auto& agent : agents)
     {
-        agent.agent.addIllicitCell(newAgent.getStartPosition());  // Add newAgent's startPos to other agents
-        newAgent.addIllicitCell(agent.agent.getStartPosition());  // Add existing agents' start positions to newAgent
+        agent.agent.addIllicitCell(newAgent.getStartPosition());
+        newAgent.addIllicitCell(agent.agent.getStartPosition());
     }
     agents.push_back(WCA_Agent(Agent(newAgent)));
 }
@@ -50,9 +49,9 @@ std::optional<std::reference_wrapper<WCA_Agent>> WCA_Environment::random(std::ve
 {
     if (!capableAgents.empty()) {
         int randomNum = rand() % capableAgents.size();
-        return capableAgents.at(randomNum); // Return a reference
+        return capableAgents.at(randomNum);
     }
-    return std::nullopt; // No agent available
+    return std::nullopt;
 }
 
 
@@ -82,12 +81,10 @@ void WCA_Environment::MOVEAGENTS(int timestep)
                 map::Cell newPosition(nextPosition.x, nextPosition.y);
                 agent.agent.move(newPosition);
 
-                //std::cout<<agent.agent.getId() << ": (" << agent.agent.getPosition().x << ", " << agent.agent.getPosition().y << "), t = " << timestep << std::endl;
                 if (timestep == path.back().t)
                 {
                     if (!agent.reachedCurrentWaypoint())
                     {
-                        //agent.incrementWaypointIndex();
 
                         std::vector<CA::Cell> nextPath = whca.findNextWSteps(agent, timestep, table);
                         if (!nextPath.empty())
@@ -96,7 +93,6 @@ void WCA_Environment::MOVEAGENTS(int timestep)
                             {
                                 table.removeReservation(cell.x, cell.y, cell.t);
                                 table.removeReservation(cell.x, cell.y, cell.t + 1);
-                                //table.removeReservation(cell.x, cell.y, cell.t + 2);
                                 const auto nextCell = agent.agent.getPath().back();
                                 if (&cell != &nextCell)
                                 {
@@ -109,7 +105,6 @@ void WCA_Environment::MOVEAGENTS(int timestep)
                         else
                         {
                             agent.agent.assignPath({CA::Cell(agent.agent.getPosition(), timestep+1)});
-                            //std::cout<<"PROBLEMPROBLEMPROBLEMPROBLEMPROBLEMPROBLEMPROBLEM FOR: " << agent.agent.getId() << "\n";
                         }
                     }
                 }
@@ -121,7 +116,6 @@ void WCA_Environment::MOVEAGENTS(int timestep)
                 {
                     table.removeReservation(cell.x, cell.y, cell.t);
                     table.removeReservation(cell.x, cell.y, cell.t + 1);
-                    //table.removeReservation(cell.x, cell.y, cell.t + 2);
                     const auto nextCell = agent.agent.getPath().back();
                     if (&cell != &nextCell)
                     {
@@ -174,7 +168,6 @@ void WCA_Environment::runTimestep(int timestep, TaskGroup *task)
     }
 
 
-    // Iterate over tasks and assign to agents if possible
     for (size_t l = 0; l < task_list.size(); ++l)
     {
         const TaskGroup& taskGroup = task_list[l];
@@ -187,8 +180,6 @@ void WCA_Environment::runTimestep(int timestep, TaskGroup *task)
             {
                 WCA_Agent& selectedAgent = selectedAgentOpt->get();
                 int agentID;
-                //std::cout << "agent: (" << selectedAgent.agent.getPosition().x << ", " << selectedAgent.agent.getPosition().y << ")\n";
-                //std::cout << taskGroup << std::endl;
                 std::vector<int> order = tsp.solveTSP(selectedAgent.agent, taskGroup);
                 std::vector<std::pair<map::Cell, int>> waypoints;
 
@@ -199,9 +190,6 @@ void WCA_Environment::runTimestep(int timestep, TaskGroup *task)
                 waypoints.push_back({taskGroup.getDropoffLocation(), taskGroup.getDropoffStopTime()});
                 waypoints.push_back({selectedAgent.agent.getStartPosition(), 0});
 
-                // selectedAgent.setWaypoints(waypoints);
-                // task == nullptr ? selectedAgent.agent.assignTask(taskGroup) : selectedAgent.agent.assignTask(*task);
-                // selectedAgent.agent.setIdle(false);
 
 
 
@@ -210,7 +198,6 @@ void WCA_Environment::runTimestep(int timestep, TaskGroup *task)
                     if(agents[i].agent.getId() == selectedAgent.agent.getId())
                     {
                         agents[i].setWaypoints(waypoints);
-                        //task == nullptr ? agents[i].agent.assignTask(taskGroup) : agents[i].agent.assignTask(*task);
                         agents[i].agent.assignTask(taskGroup);
                         agents[i].agent.setIdle(false);
                         agentID = i;
@@ -231,5 +218,5 @@ void WCA_Environment::runTimestep(int timestep, TaskGroup *task)
         }
     }
 
-    MOVEAGENTS(timestep);  // Move agents based on the timestep
+    MOVEAGENTS(timestep);
 }

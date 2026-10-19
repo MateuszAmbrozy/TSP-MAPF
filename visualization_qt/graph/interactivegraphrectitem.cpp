@@ -10,7 +10,6 @@ InteractiveGraphRectItem::InteractiveGraphRectItem(map::Graph graph, QGraphicsIt
 
 void InteractiveGraphRectItem::drawGraph(QGraphicsScene *scene) {
     int cellSize = 20;
-    //QPen pen(Qt::black);
     QBrush obstacleBrush(Qt::gray);
     QBrush normalBrush(Qt::white);
 

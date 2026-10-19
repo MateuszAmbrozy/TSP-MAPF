@@ -1,8 +1,24 @@
-*.pro.user
-*.*~
+# Build output
+/build*/
+/cmake-build*/
 *.o
-build/
-latex/
-html/
-Doxyfile
-main.exe
+*.obj
+*.exe
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+CMakeUserPresets.json
+
+# Local editor and Qt Creator settings
+.vscode/
+.idea/
+*.pro.user*
+*.qtc_clangd/
+*~
+.DS_Store
+
+# Generated documentation
+/html/
+/latex/

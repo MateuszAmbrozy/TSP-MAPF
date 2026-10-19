@@ -1,0 +1,8 @@
+{
+  "width": 12,
+  "height": 8,
+  "agents": [{"x": 0, "y": 0, "capacity": 15}, {"x": 0, "y": 7, "capacity": 15}],
+  "obstacles": [{"x": 4, "y": 2}, {"x": 4, "y": 3}, {"x": 4, "y": 4}, {"x": 7, "y": 2}, {"x": 7, "y": 3}, {"x": 7, "y": 4}],
+  "avaliablePickups": [{"x": 3, "y": 2}, {"x": 6, "y": 3}, {"x": 8, "y": 4}],
+  "avaliableDropoffs": [{"x": 11, "y": 3}, {"x": 11, "y": 5}]
+}

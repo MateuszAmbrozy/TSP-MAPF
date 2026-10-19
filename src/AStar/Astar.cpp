@@ -1,7 +1,6 @@
 #include "../../lib/AStar/AStar.h"
 
 
-//Astar
 bool A::Astar::isValid(int x, int y)
 {
     return ((x >= 0) && (x < graph.width) &&
@@ -15,7 +14,7 @@ int A::Astar::lengthOfPath(std::shared_ptr<A::Node> node)
     int len = 0;
     if(!node || !node->getParent())
         return 0;
-    
+
     while (cell->getParent() != nullptr) {
         cell = cell->getParent();
         len++;
@@ -59,7 +58,10 @@ A::Astar::Astar(map::Graph graph)
 
 int A::Astar::calculate(map::Cell start, map::Cell dest)
 {
-    std::vector<std::vector<bool>> closedList(aStarGraph.size(), std::vector<bool>(aStarGraph[0].size(), false));
+    if (!isValid(start.x, start.y) || !isValid(dest.x, dest.y)) {
+        return std::numeric_limits<int>::max();
+    }
+    std::vector<std::vector<bool>> closedList(graph.width, std::vector<bool>(graph.height, false));
     std::priority_queue<Node, std::vector<Node>, CompareCells> openList;
     std::vector<Node> emptyPath;
 
@@ -69,39 +71,39 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
    }
 
    if (isDestination(start.x, start.y, dest.x, dest.y)) {
-       //std::cout << "You are the destination" << std::endl;
        return 0;
    }
 
     Node startNode(start.x, start.y, start.isObstacle);
-    
+
     startNode.gCost = 0;
     startNode.hCost = A::Node::calculateH(start.x, start.y, dest.x, dest.y);
     startNode.fCost = startNode.gCost + startNode.hCost;
-    startNode.setParent(nullptr); 
+    startNode.setParent(nullptr);
 
     openList.push(startNode);
     while (!openList.empty()) {
         Node currentCell = openList.top();
         openList.pop();
 
-        if (isDestination(currentCell.x, currentCell.y, dest.x, dest.y)) 
-        {           
+        if (isDestination(currentCell.x, currentCell.y, dest.x, dest.y))
+        {
             return lengthOfPath(std::make_shared<A::Node>(currentCell));
         }
 
+        if (closedList[currentCell.x][currentCell.y]) continue;
         closedList[currentCell.x][currentCell.y] = true;
 
-        for (int addX = -1; addX <= 1; addX++) 
+        for (int addX = -1; addX <= 1; addX++)
         {
-            for (int addY = -1; addY <= 1; addY++) 
+            for (int addY = -1; addY <= 1; addY++)
             {
-                if (std::abs(addX) == std::abs(addY)) 
+                if (std::abs(addX) == std::abs(addY))
                     continue;
 
                 std::pair<int, int> neighborPos = {currentCell.x + addX, currentCell.y + addY};
 
-                if (isValid(neighborPos.first, neighborPos.second)) 
+                if (isValid(neighborPos.first, neighborPos.second))
                 {
                     if (!closedList[neighborPos.first][neighborPos.second]) {
                         double gNew = currentCell.gCost + 1;
@@ -117,6 +119,6 @@ int A::Astar::calculate(map::Cell start, map::Cell dest)
         }
     }
 
-    std::cout << "Nie znaleziono ścieżki do celu.\n";
+    std::cout << "No path to the target found.\n";
     return std::numeric_limits<int>::max();
 }

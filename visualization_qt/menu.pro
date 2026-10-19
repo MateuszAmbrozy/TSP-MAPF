@@ -2,12 +2,11 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = settingsview
+TARGET = tsp_mapf_gui
 TEMPLATE = app
 
-CONFIG += c++14
+CONFIG += c++17
 
-# Dynamiczne dodawanie wsystkich plików .cpp z katalogów
 SOURCES += main.cpp\
     agentinputwidget.cpp \
     agentlistitemwidget.cpp \
@@ -23,7 +22,6 @@ SOURCES += main.cpp\
     graph/graphrectitem.cpp \
     graph/interactivecellitem.cpp \
     menu.cpp \
-    menuItem.cpp \
     pointlistitemwidget.cpp \
     $$files(../src/WCA/*.cpp) \
     $$files(../src/*.cpp) \
@@ -32,7 +30,6 @@ SOURCES += main.cpp\
     sidebar.cpp \
     taskinputwidget.cpp
 
-# Dynamiczne dodawanie wszystkich plików .h z katalogów
 HEADERS += \
     agentinputwidget.h \
     agentlistitemwidget.h \
@@ -48,7 +45,6 @@ HEADERS += \
     graph/graphrectitem.h \
     graph/interactivecellitem.h \
     menu.h \
-    menuItem.h \
     pointlistitemwidget.h \
     $$files(../lib/WCA/*.h) \
     $$files(../lib/*.h) \
@@ -60,11 +56,11 @@ HEADERS += \
 INCLUDEPATH += ../lib
 INCLUDEPATH += ../lib/AStar
 INCLUDEPATH += ../lib/CA
-INCLUDEpATH += ../lib/WCA
+INCLUDEPATH += ../lib/WCA
 
 FORMS    +=
 RESOURCES += default.qrc
 
-target.files = settingsview
+target.files = tsp_mapf_gui
 target.path = /usr/bin
 INSTALLS += target

@@ -4,9 +4,9 @@
  * @brief Animation Window where everytihing is diplay
  * @version 0.1
  * @date 2024-11-08
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef ANIMATIONVIEW_H
 #define ANIMATIONVIEW_H
@@ -36,6 +36,8 @@ public:
 
 private:
     MapfScene* mapfScene;
+    QWidget* taskGroupWindow = nullptr;
+    void closeTaskWindow();
     QGraphicsScene* taskGroupScene;
     TaskInputWidget *inputWidget;
     std::shared_ptr<TaskGroup> currentTaskGroup;
@@ -48,7 +50,7 @@ private:
     int animationSpeed;
 
     AlgType algorithm;
-    BaseEnvironment* environment;
+    BaseEnvironment* environment = nullptr;
 
     QPushButton* backButton;
     QHBoxLayout *mainLayout;
@@ -76,7 +78,6 @@ public slots:
     void start();
     void showTaskGroupScene();
     void loadMap();
-    //void loadTasks();
     void updateTimestep();
     void toggleSidebar();
 

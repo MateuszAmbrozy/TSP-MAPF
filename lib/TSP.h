@@ -36,5 +36,5 @@ private:
 public:
     TSP(map::Graph graph);
 
-    std::vector<int> solveTSP(Agent agent, const TaskGroup& taskGroup); // Returns the indices of taskGroup in the optimized order
+    std::vector<int> solveTSP(Agent agent, const TaskGroup& taskGroup);
 };

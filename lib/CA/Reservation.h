@@ -22,7 +22,7 @@ class Reservation
 public:
     std::unordered_map<int, std::unordered_map<int, std::unordered_map<int, bool>>> reservations;
 
-    // Rezerwacje krawędzi: klucz to ((x1, y1), t), wartość to (x2, y2) 
+    // Maps ((x, y), time) to the destination cell.
     std::unordered_map<std::pair<int, int>, std::unordered_map<int, std::pair<int, int>>, PairHash> edgeReservations;
 
 public:
@@ -75,17 +75,12 @@ public:
         }
     }
     void removeEdgeReservation(int x1, int y1, int t) {
-        // Klucz do pierwszej mapy to (x1, y1)
         auto edgeKey = std::make_pair(x1, y1);
 
-        // Sprawdzamy, czy istnieje wpis w mapie o kluczu (x1, y1)
         if (edgeReservations.count(edgeKey)) {
-            // Sprawdzamy, czy istnieje rezerwacja dla czasu t
             if (edgeReservations[edgeKey].count(t)) {
-                // Usuwamy rezerwację dla czasu t
                 edgeReservations[edgeKey].erase(t);
 
-                // Jeśli mapa czasu dla (x1, y1) jest pusta, usuwamy całe wejście
                 if (edgeReservations[edgeKey].empty()) {
                     edgeReservations.erase(edgeKey);
                 }

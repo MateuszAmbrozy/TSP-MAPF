@@ -4,9 +4,9 @@
  * @brief Implementation of Base class of Cell and Graph
  * @version 0.1
  * @date 2024-11-08
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #pragma once
 #include <vector>
@@ -30,8 +30,8 @@ namespace map{
             this->y = other.y;
             this->isObstacle = other.isObstacle;
         }
-        
-        
+
+
         bool operator == (const Cell& other) const
         {
             return (x==other.x && y==other.y && isObstacle == other.isObstacle);
@@ -39,7 +39,7 @@ namespace map{
 
         Cell& operator=(const Cell& other) {
             if (this == &other) {
-                return *this;  // Obsługa przypisania do samego siebie
+                return *this;
             }
             x = other.x;
             y = other.y;
@@ -51,11 +51,11 @@ namespace map{
     struct Graph
     {
         std::vector<std::vector<Cell>> cells;
-        int width, height;
+        int width = 0, height = 0;
 
         Graph() = default;
 
-        Graph(Graph& g)
+        Graph(const Graph& g)
         {
             this->cells = g.cells;
             this->width = g.width;
@@ -75,8 +75,8 @@ namespace map{
             :width(width), height(height)
         {
             cells.resize(width, std::vector<Cell>(height, Cell(0, 0)));
-            for (int i = 0; i < width; ++i) 
-                for (int j = 0; j < height; ++j) 
+            for (int i = 0; i < width; ++i)
+                for (int j = 0; j < height; ++j)
                     cells[i][j] = Cell(i, j, false);
         }
 

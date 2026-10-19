@@ -1,5 +1,4 @@
 #include "../lib/TSP.h"
-//TSP
 TSP::TSP(map::Graph graph)
     :astar(graph), graph(graph)
 {}

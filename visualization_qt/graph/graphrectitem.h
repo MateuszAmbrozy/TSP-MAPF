@@ -19,4 +19,4 @@ public:
     void drawGraph(QGraphicsScene* scene) override;
 };
 
-#endif // GRAPHRECTITEM_H
+#endif

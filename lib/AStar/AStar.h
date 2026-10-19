@@ -4,9 +4,9 @@
  * @brief Typical A* algorithm
  * @version 0.1
  * @date 2024-11-08
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #pragma once
 #include "../Graph.h"
@@ -14,6 +14,7 @@
 #include "../Agent.h"
 #include "Node.h"
 #include <cmath>
+#include <limits>
 #include <iostream>
 #include <numeric>
 #include <queue>
@@ -36,10 +37,10 @@ namespace A
             void copyGraph();
             bool isValid(int x, int y);
             bool isDestination(int startX, int startY, int destX, int destY);
-            
+
 
         public:
             Astar(map::Graph graph);
             int calculate(map::Cell start, map::Cell dest);
-    };   
+    };
 }

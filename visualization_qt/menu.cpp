@@ -61,7 +61,10 @@ QWidget* Menu::getViewByName(const QString &viewName) {
         return generalView;
     } else if (viewName == "Animation")
     {
-        //if (animation) delete animation;
+        if (animation) {
+            _stackedWidget->removeWidget(animation);
+            delete animation;
+        }
         animation = new AnimationView(generalView->getSelectedAlgorithm());
         return animation;
 
@@ -153,7 +156,6 @@ void Menu::setupMainLayout()
     editor = new EditorView();
     generalView = new GeneralView();
 
-    // Dodajemy BorderLayout do głównego layoutu
     QWidget *borderLayoutContainer = new QWidget;
     borderLayoutContainer->setLayout(layout);
     mainLayout->addWidget(borderLayoutContainer);
@@ -168,7 +170,7 @@ void Menu::setupMainLayout()
 
     mainLayout->addWidget(toggleButton, 0, Qt::AlignLeft | Qt::AlignTop);
     _stackedWidget->addWidget(generalView);
-    setLayout(mainLayout);  // Ustawiamy główny layout
+    setLayout(mainLayout);
     layout->setSpacing(0);
 }
 

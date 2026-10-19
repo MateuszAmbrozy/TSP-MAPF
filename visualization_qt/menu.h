@@ -1,12 +1,12 @@
 /**
  * @file settingsview.h
- * @author your name (you@domain.com)
+ * @author Mateusz Ambroży
  * @brief base function for menu bar
  * @version 0.1
  * @date 2024-11-08
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #ifndef MENU_H
 #define MENU_H
@@ -40,7 +40,7 @@ private:
     QToolButton * createSidebarButton(const QString& iconPath, const QString& title);
     QStackedWidget * _stackedWidget;
     QToolButton * _activeButton;
-    AnimationView* animation;
+    AnimationView* animation = nullptr;
     EditorView* editor;
     GeneralView* generalView;
     QWidget * sidebar;

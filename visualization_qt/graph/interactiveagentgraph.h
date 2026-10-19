@@ -54,4 +54,4 @@ private:
     void toggleSelectionMode() override;
 };
 
-#endif // INTERACTIVEAGENTGRAPH_H
+#endif
